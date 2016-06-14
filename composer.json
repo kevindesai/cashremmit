@@ -6,7 +6,13 @@
     "type": "project",
     "require": {
         "php": ">=5.5.9",
-        "laravel/framework": "5.2.*"
+        "laravel/framework": "5.2.*",
+        "infyomlabs/laravel-generator": "dev-master",
+        "laravelcollective/html": "^5.2",
+        "infyomlabs/core-templates": "dev-master",
+        "doctrine/dbal": "~2.3",
+         "infyomlabs/generator-builder": "dev-master",
+        "appzcoder/crud-generator": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
