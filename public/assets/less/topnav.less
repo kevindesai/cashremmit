@@ -1,0 +1,401 @@
+// Topnav Header Styles
+// --------------------------------------------------------------------------
+
+
+/* Drop Downs */
+
+#topnav {
+	margin: 0;
+	border:none; 
+	box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
+	&:extend(.clearfix all);
+
+
+	// Logo
+		.navbar-brand {
+			.text-hide() !important; 
+			background: url("") no-repeat top left; // Put your logo here
+			height: @navbar-height;
+			width: @navbar-brand-width;
+				@media (max-width: 885px) {
+					width: 75px;
+
+				}
+
+				
+			padding: 16px 0 !important;
+		}
+		//-- Logo Code: Start - remove/modify this as you see fit
+	    &.navbar-default .navbar-brand, &.navbar-bluegraylight .navbar-brand, &.navbar-graylight .navbar-brand {background: url("../img/logo-dark.png") no-repeat left 0 center; } // dark logo
+	    .navbar-brand {background: url("../img/logo.png") no-repeat left 0 center;} //white logo
+		//-- Logo Code: End
+
+
+	// Our Dropdown Menus don't lose styles on small screens, so we apply them again
+		.dropdown-menu {
+			background-color: @dropdown-bg;
+			border: 0px solid @dropdown-fallback-border; // IE8 fallback
+			border: 0px solid @dropdown-border;
+			border-radius: @border-radius-base;
+			.box-shadow(0 4px 9px 0 rgba(0,0,0,.24));
+		}
+
+	//Keep topnav toolbar from collapsing even in small screens
+		.navbar-nav .open .dropdown-menu {position: absolute;}
+
+
+	// Trigger Styles
+		.logo-area {
+			display: block;
+			float: left;
+			&:extend(.clearfix all);
+
+			> a, > span, > div {
+				display: block;
+				float: left;
+			}
+
+			.toolbar-trigger a {
+				display: block;
+				padding: 0;
+				border-right-width: 1px;
+				border-right-style: solid;
+				margin-right: 16px;
+				span.icon-bg {
+					display: block;
+					height: 56px;
+					width: 56px;
+					padding: 0;
+					line-height: 56px;
+					font-size: 14px;
+					text-align: center;
+					border-radius: 0px;
+					i {
+					}
+				}
+			}
+
+			ul.navbar-nav li a {
+				padding: 18px 16px;
+				font-weight: 500;
+				line-height: 20px;
+				border-left-width: 1px;
+				border-left-style: solid;
+				&:last-child {border-right-width: 1px; border-right-style: solid;}
+				&:focus, &.active {background-color: transparent;}
+			}  
+
+			@media (min-width: @screen-md-min) {
+				width: 590px;
+				height: 56px;
+				display: inline-block;
+			}	
+
+		}
+		
+	// Toolbar Icon
+		.toolbar-icon-bg {
+			> a:hover, > a:focus, > a.active {background-color: transparent;}
+			&.open > a {
+				background-color: transparent;
+				&:hover {background-color: transparent;}
+				span.icon-bg { &:hover {}}
+			}
+		}
+		.toolbar.pull-right .toolbar-icon-bg {
+			> a {
+				padding: 0;
+				border-left-width: 1px;
+				border-left-style: solid;
+				span.icon-bg {
+					display: block; 
+					padding: 0;
+					line-height: 56px;
+					font-size: 14px; 
+					text-align: center; 
+					height: 56px; 
+					width: 56px;
+					i {}
+				}
+			}
+			&:hover {
+				span.icon-bg {}
+			}
+		}
+
+	// UserInfo
+		.userinfo {
+			padding: 0;
+			min-width: 200px;
+			li.divider {margin: 0;}
+			li a {
+				&:extend(.clearfix all);
+				padding: 10px 16px;
+				color: @gray-dark;
+				i {margin-right: 16px; color: @gray-light; width: 16px; text-align: center;}
+				.badge {position: static; margin-top: 2px;}
+				&:hover, &:focus {
+					color: @gray-darker;
+					i {color: @gray;}
+				}
+			}
+		}
+
+	// Stylings for small screens
+		.navbar-nav {margin: 0;
+			&.toolbar {
+				>li {
+					float: left; 
+					margin-right: 0;
+					>a {padding: 14px 16px; font-weight: 500;}
+					&:last-child {margin-right: 0;}
+				}
+			}
+		}
+
+	// User Icon
+		a.username {
+			padding: 8px 0 !important;
+			&:extend(.clearfix all);
+			img {
+				height: 40px;
+				width: 40px;
+				float: right;
+				border-radius: 50%;
+			}
+
+		}
+		a.nav-username {
+			padding: 12px 16px !important;
+			&:extend(.clearfix all);
+			img {
+				height: 32px;
+				width: 32px;
+				border-radius: 50%;
+				float: left;
+			}
+			.badge.user-status {
+				position: absolute;
+			    top: 12px;
+			    left: 40px;
+			    right: inherit;
+			    font-size: 0;
+			    height: 8px;
+			    width: 8px;
+			    padding: 0;
+			    margin: 0;
+			}
+			span {
+				float: right;
+				margin-left: 8px;
+				line-height: 32px;
+				.label {
+					line-height: 16px;
+					margin: 8px 0 8px 4px;
+				}
+			}
+
+			@media screen and (max-width: 1035px) {
+				.hidden-sm {display: none;}
+			}
+		}
+	
+	//Badges
+		.nav .badge {
+			text-align: center;
+			text-shadow: none !important;
+		    min-width: inherit;
+			top: 12px;
+			right: 12px;
+			position: absolute;
+		}
+
+	// Toolbar Search
+		.no-border{ border-right-style: none !important;}
+		#toolbar-search {
+			float: left;
+			&.active {
+				display: block !important;
+				right: 0;
+				left: 0;
+				top: 0;
+				position: absolute;
+				z-index: 999;
+				margin: 0;
+				.input-group {
+					padding: 0 8px;
+					width: 100%;
+					@media (max-width: @screen-xs-max){
+						padding: 16px;
+					}
+				}
+		  	}
+
+			.input-group {
+				width: 200px;
+				padding: 16px;
+				.input-group-btn {
+					width: 24px;
+					height: 24px;
+					button {
+						&.active, &:active {box-shadow: none !important;}
+						transition: none !important;
+						border:none !important;
+						border-radius: 0;
+						padding: 0;
+						font-size: 14px;
+						text-align: center;
+						width: 24px;
+						i {
+							line-height: inherit;
+						}
+					}
+				}
+				.input-group-btn:last-child {
+					button {
+						border-radius: 0;
+					}
+					display: none;
+					@media (max-width: @screen-xs-max) {
+						display: table-cell;
+					}
+				}
+				.form-control {
+					height: 24px;
+					border: none;
+					padding: 0;
+					span {display: block;}
+					&:focus, &:hover {
+						box-shadow: none !important;
+						border: none;
+					}
+				}
+			}
+		}
+
+	// Topnav Dropdown
+		.topnav-dropdown-header, .topnav-dropdown-footer {
+			height: 40px;
+			line-height: 40px;
+			padding-left: 16px;
+			padding-right: 16px;
+			font-size: @font-size-small;
+			color: @gray-50;
+		}
+		.topnav-dropdown-header {
+			border-bottom: 1px solid @border-lighter;
+			span {
+				color: @gray;
+				font-weight: 600;
+				text-transform: uppercase;
+			}
+			.badge-notification{
+				color: white !important;
+			    font-size: 10px !important;
+			    height: 15px !important;
+			    line-height: 15px;
+			    width: 15px !important;
+			    background: @brand-green;
+			}
+
+			span.label {
+				&:extend(.label all);
+			}
+
+		}
+		.topnav-dropdown-footer {
+			border-top: 1px solid @border-lighter;
+			a {
+				display: block; 
+				text-align: center;
+				text-transform: uppercase;
+			}
+		}
+
+
+	// Notifications
+		.notifications {
+			padding: 0;
+
+			@media (max-width: @screen-xs-max) { //re-arrange position in small screen
+				right: 10px;
+				&::before, &::after {right: 60px;}
+			}
+
+			.scroll-pane {
+				height: 290px;
+				width: 288px;
+			}
+			.notification-heading {
+				margin: 0;
+				font-size: @font-size-base;
+				font-weight: normal;
+				line-height: @line-height-base;
+				color: @gray-dark;
+			}
+			.notification-time {
+				font-size: @font-size-small;
+				line-height: @line-height-small;
+				color: @gray-light;
+			}
+			.media {
+				margin-top: 0;
+				border-bottom: 1px solid @gray-100;
+				&:last-child {border-bottom: none;}
+			}
+			.media a {
+				display: block;
+				padding: 16px;
+				// background-color: @gray-50;
+				border-radius: @border-radius-base;
+				&:hover {background-color: @gray-50;}
+			}
+			.media-list {
+				.media-left {padding-right: 8px;}
+			}
+
+			.notification-icon {
+				height: 32px;
+				width: 32px;
+				display: block;
+				background: @gray;
+				border-radius: 16px;
+
+				i {
+					display: block;
+					text-align: center;
+					line-height: 32px;
+					width: 32px;
+					color: #fff;
+				}
+			}
+
+			.notification-success .notification-icon {background: @light-green-300}
+			.notification-info    .notification-icon {background: @cyan-300}
+			.notification-danger  .notification-icon {background: @red-300}
+			.notification-warning .notification-icon {background: @amber-300}
+			.notification-primary .notification-icon {background: @light-blue-300}
+			.notification-inverse .notification-icon {background: @gray-300}
+			.notification-teal	  .notification-icon {background: @teal-300}
+			.notification-indigo  .notification-icon {background: @indigo-300}
+
+			.notification-message {
+				.avatar {
+					height: 32px;
+					width: 32px;
+				}
+			}
+		}
+
+
+	// Active Icons
+		.icon-ti, .icon-fa {line-height: 40px;}
+
+		.icon-ti {font-size: 17px;}
+		.icon-fa {font-size: 14px;}
+
+		// Exceptions
+		.userinfo {
+			.icon-fa, .icon-ti {line-height: 17px;}
+		}
+}

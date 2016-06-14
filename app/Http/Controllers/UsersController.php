@@ -20,9 +20,8 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::paginate(15);
-        
-        
-        return view('resources/views.users.index', compact('users'));
+
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -32,7 +31,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('resources/views.users.create');
+        return view('users.create');
     }
 
     /**
@@ -61,7 +60,7 @@ class UsersController extends Controller
     {
         $user = User::findOrFail($id);
 
-        return view('resources/views.users.show', compact('user'));
+        return view('users.show', compact('user'));
     }
 
     /**
@@ -75,7 +74,7 @@ class UsersController extends Controller
     {
         $user = User::findOrFail($id);
 
-        return view('resources/views.users.edit', compact('user'));
+        return view('users.edit', compact('user'));
     }
 
     /**
