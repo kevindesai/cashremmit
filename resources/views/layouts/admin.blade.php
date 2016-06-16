@@ -12,12 +12,12 @@
 
         <link type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600,700' rel='stylesheet'>
 
-        <link href="assets/fonts/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">        <!-- Font Awesome -->
-        <link href="assets/fonts/themify-icons/themify-icons.css" type="text/css" rel="stylesheet">              <!-- Themify Icons -->
-        <link href="assets/css/styles.css" type="text/css" rel="stylesheet">                                     <!-- Core CSS with all styles -->
+        <link href="{{ url('/') }}/assets/fonts/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">        <!-- Font Awesome -->
+        <link href="{{ url('/') }}/assets/fonts/themify-icons/themify-icons.css" type="text/css" rel="stylesheet">              <!-- Themify Icons -->
+        <link href="{{ url('/') }}/assets/css/styles.css" type="text/css" rel="stylesheet">                                     <!-- Core CSS with all styles -->
 
-        <link href="assets/plugins/codeprettifier/prettify.css" type="text/css" rel="stylesheet">                <!-- Code Prettifier -->
-        <link href="assets/plugins/iCheck/skins/minimal/blue.css" type="text/css" rel="stylesheet">              <!-- iCheck -->
+        <link href="{{ url('/') }}/assets/plugins/codeprettifier/prettify.css" type="text/css" rel="stylesheet">                <!-- Code Prettifier -->
+        <link href="{{ url('/') }}/assets/plugins/iCheck/skins/minimal/blue.css" type="text/css" rel="stylesheet">              <!-- iCheck -->
 
         <!--[if lt IE 10]>
             <script src="assets/js/media.match.min.js"></script>
@@ -388,51 +388,9 @@
 <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script> -->
 
-        <script src="assets/js/jquery-1.10.2.min.js"></script> 							<!-- Load jQuery -->
-        <script src="assets/js/jqueryui-1.10.3.min.js"></script> 							<!-- Load jQueryUI -->
-        <script src="assets/js/bootstrap.min.js"></script> 								<!-- Load Bootstrap -->
-        <script src="assets/js/enquire.min.js"></script> 									<!-- Load Enquire -->
-
-        <script src="assets/plugins/velocityjs/velocity.min.js"></script>					<!-- Load Velocity for Animated Content -->
-        <script src="assets/plugins/velocityjs/velocity.ui.min.js"></script>
-
-        <script src="assets/plugins/wijets/wijets.js"></script>     						<!-- Wijet -->
-
-        <script src="assets/plugins/sparklines/jquery.sparklines.min.js"></script> 			 <!-- Sparkline -->
-
-        <script src="assets/plugins/codeprettifier/prettify.js"></script> 				<!-- Code Prettifier  -->
-        <script src="assets/plugins/bootstrap-switch/bootstrap-switch.js"></script> 		<!-- Swith/Toggle Button -->
-
-        <script src="assets/plugins/bootstrap-tabdrop/js/bootstrap-tabdrop.js"></script>  <!-- Bootstrap Tabdrop -->
-
-        <script src="assets/plugins/iCheck/icheck.min.js"></script>     					<!-- iCheck -->
-
-        <script src="assets/plugins/nanoScroller/js/jquery.nanoscroller.min.js"></script> <!-- nano scroller -->
-
-        <script src="assets/js/application.js"></script>
-        <script src="assets/demo/demo.js"></script>
-        <script src="assets/demo/demo-switcher.js"></script>
-
-        <!-- End loading site level scripts -->
-
-        <!-- Load page level scripts-->
-
-        <!-- Charts -->
-        <script src="assets/plugins/charts-flot/jquery.flot.min.js"></script>             	<!-- Flot Main File -->
-        <script src="assets/plugins/charts-flot/jquery.flot.pie.min.js"></script>             <!-- Flot Pie Chart Plugin -->
-        <script src="assets/plugins/charts-flot/jquery.flot.stack.min.js"></script>       	<!-- Flot Stacked Charts Plugin -->
-        <script src="assets/plugins/charts-flot/jquery.flot.resize.min.js"></script>          <!-- Flot Responsive -->
-        <script src="assets/plugins/charts-flot/jquery.flot.tooltip.min.js"></script> 		<!-- Flot Tooltips -->
-        <script src="assets/plugins/charts-flot/jquery.flot.spline.js"></script> 				<!-- Flot Curved Lines -->
-
-        <script src="assets/plugins/switchery/switchery.js"></script>     					<!-- Switchery -->
-        <script src="assets/plugins/form-daterangepicker/moment.min.js"></script>              <!-- Moment.js for Date Range Picker -->
-
-        <script src="assets/plugins/form-daterangepicker/daterangepicker.js"></script>     	<!-- Date Range Picker -->
-
-
-        <script src="assets/demo/demo-index.js"></script> 									<!-- Initialize scripts for this page-->
-
+        <script src="{{ url('/') }}/assets/js/jquery-1.10.2.min.js"></script> 							<!-- Load jQuery -->
+        <script src="{{ url('/') }}/assets/js/jqueryui-1.10.3.min.js"></script> 							<!-- Load jQueryUI -->
+        <script src="{{ url('/') }}/assets/js/bootstrap.min.js"></script> 	
         <!-- End loading page level scripts-->
 
     </body>
