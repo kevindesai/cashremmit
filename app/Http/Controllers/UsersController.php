@@ -19,8 +19,8 @@ class UsersController extends Controller
      */
     public function index()
     {
+        
         $users = User::paginate(15);
-
         return view('users.index', compact('users'));
     }
 
@@ -46,7 +46,7 @@ class UsersController extends Controller
 
         Session::flash('flash_message', 'User added!');
 
-        return redirect('admin/users');
+        return redirect('users');
     }
 
     /**
@@ -72,9 +72,8 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-
         $user = User::findOrFail($id);
-        
+
         return view('users.edit', compact('user'));
     }
 
@@ -93,7 +92,7 @@ class UsersController extends Controller
 
         Session::flash('flash_message', 'User updated!');
 
-        return redirect('admin/users');
+        return redirect('users');
     }
 
     /**
@@ -109,6 +108,6 @@ class UsersController extends Controller
 
         Session::flash('flash_message', 'User deleted!');
 
-        return redirect('admin/users');
+        return redirect('users');
     }
 }

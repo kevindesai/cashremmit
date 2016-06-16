@@ -3,25 +3,30 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateusersTable extends Migration
-{
+class CreateusersTable extends Migration {
 
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('users', function (Blueprint $table) {
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->string('email');
-            $table->string('password');
-            $table->string('contact');
             $table->increments('id');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->integer('unit_no');
+            $table->string('building_name');
+            $table->string('city');
+            $table->string('region');
+            $table->string('street');
+            $table->integer('post_code');
+            $table->string('country');
+            $table->date('dob');
+            $table->string('mobile_no');
+            $table->string('landline_no');
+            $table->tinyInteger('is_active')->default('1');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -30,8 +35,8 @@ class CreateusersTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::drop('users');
     }
+
 }

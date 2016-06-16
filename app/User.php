@@ -2,25 +2,28 @@
 
 namespace App;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class User extends Model
 {
     /**
-     * The attributes that are mass assignable.
+     * The database table used by the model.
      *
-     * @var array
+     * @var string
      */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    protected $table = 'Users';
 
     /**
-     * The attributes excluded from the model's JSON form.
+    * The database primary key value.
+    *
+    * @var string
+    */
+    protected $primaryKey = 'id';
+
+    /**
+     * Attributes that should be mass-assignable.
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    protected $fillable = ['first_name','last_name','unit_no','building_name','city','region','street','post_code','country','dob','mobile_no','landline_no'];
 }

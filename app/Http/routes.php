@@ -41,6 +41,9 @@ Route::group(array('prefix'=>'/templates/'),function(){
 });
 
 Route::resource('users', 'UsersController');
+Route::get('login', array('uses' => 'HomeController@showLogin'));
+// route to process the form
+Route::post('login', array('uses' => 'HomeController@doLogin'));
 
 Route::get('generator_builder', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@builder');
 

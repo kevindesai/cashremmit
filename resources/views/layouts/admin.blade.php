@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>december Admin Theme</title>
+        <title>Admin | Casn remmit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -12,13 +12,13 @@
 
         <link type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600,700' rel='stylesheet'>
 
-        <link href="{{ url('/') }}/assets/fonts/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">        <!-- Font Awesome -->
+        <link href="{{ url('/') }}/assets/fonts/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">         Font Awesome 
         <link href="{{ url('/') }}/assets/fonts/themify-icons/themify-icons.css" type="text/css" rel="stylesheet">              <!-- Themify Icons -->
         <link href="{{ url('/') }}/assets/css/styles.css" type="text/css" rel="stylesheet">                                     <!-- Core CSS with all styles -->
 
         <link href="{{ url('/') }}/assets/plugins/codeprettifier/prettify.css" type="text/css" rel="stylesheet">                <!-- Code Prettifier -->
         <link href="{{ url('/') }}/assets/plugins/iCheck/skins/minimal/blue.css" type="text/css" rel="stylesheet">              <!-- iCheck -->
-
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <!--[if lt IE 10]>
             <script src="assets/js/media.match.min.js"></script>
             <script src="assets/js/respond.min.js"></script>
@@ -71,7 +71,7 @@
                     <ul class="dropdown-menu userinfo">
                         <li><a href="#/"><i class="fa fa-user"></i><span>Profile</span></a></li>
                         <li><a href="#/"><i class="fa fa-wrench"></i><span>Account</span></a></li>
-                        <li><a href="#/"><i class="fa fa-power-off"></i><span>Sign Out</span></a></li>
+                        <li><a href="{{ url('/') }}/login"><i class="fa fa-power-off"></i><span>Sign Out</span></a></li>
                     </ul>
                 </li>
 
@@ -95,95 +95,8 @@
                                 <nav role="navigation" class="widget-body">
                                     <ul class="acc-menu">
                                         <li class="nav-separator"><span>Navigation</span></li>
-                                        <li><a href="index.html"><i class="fa fa-home"></i><span>Dashboard</span><span class="badge badge-teal">2</span></a></li>
-                                        <li><a href="../angular/app"><i class="fa fa-external-link"></i><span>Angular</span></a></li>
-                                        <li><a href="javascript:;"><i class="fa fa-columns"></i><span>Layout</span></a>
-                                            <ul class="acc-menu">
-                                                <li><a href="layout-grids.html">Grid Scaffolding</a></li>
-                                                <li><a href="layout-static-leftbar.html">Static Sidebar</a></li>
-                                                <li><a href="layout-sidebar-scroll.html">Scroll Sidebar</a></li>
-                                                <li><a href="layout-horizontal.html">Horizontal Nav</a></li>
-                                                <li><a href="layout-boxed.html">Boxed</a></li>	
-                                            </ul>
-                                        </li>
-
-                                        <li><a href="javascript:;"><i class="fa fa-flask"></i><span>UI Kit</span></a>
-                                            <ul class="acc-menu">
-                                                <li><a href="ui-typography.html">Typography</a></li>
-                                                <li><a href="ui-buttons.html">Buttons</a></li>
-                                                <li><a href="ui-modals.html">Modal</a></li>
-                                                <li><a href="ui-progress.html">Progress</a></li>
-                                                <li><a href="ui-paginations.html">Paginations</a></li>
-                                                <li><a href="ui-breadcrumbs.html">Breadcrumbs</a></li>
-                                                <li><a href="ui-labelsbadges.html">Labels &amp; Badges</a></li>
-                                                <li><a href="ui-alerts.html">Alerts</a></li>
-                                                <li><a href="ui-tabs.html">Tabs</a></li>
-                                                <li><a href="ui-wells.html">Wells</a></li>
-                                                <li><a href="ui-icons-fontawesome.html">FontAwesome Icons</a></li>
-                                                <li><a href="ui-icons-themify.html">Themify Icons</a></li>
-                                                <li><a href="ui-helpers.html">Helpers</a></li>
-                                                <li><a href="ui-imagecarousel.html">Images &amp; Carousel</a></li>
-                                            </ul>
-                                        </li>
-
-                                        <li><a href="javascript:;"><i class="fa fa-random"></i><span>Components</span></a>
-                                            <ul class="acc-menu">
-                                                <li><a href="ui-tiles.html">Tiles</a></li>
-                                                <li><a href="custom-skylo.html">Page Progress</a></li>
-                                                <li><a href="custom-bootbox.html">Bootbox</a></li>
-                                                <li><a href="custom-pines.html">Pines Notification</a></li>
-                                                <li><a href="custom-pulsate.html">Pulsate</a></li>
-                                                <li><a href="custom-knob.html">jQuery Knob</a></li>
-                                                <li><a href="custom-ionrange.html">Ion Range Slider</a></li>
-                                                <li><a href="ui-panels.html">Panels</a></li>
-                                            </ul>
-                                        </li>
-
-                                        <li><a href="javascript:;"><i class="fa fa-pencil"></i><span>Forms</span></a>
-                                            <ul class="acc-menu">
-                                                <li><a href="ui-forms.html">Form Layout</a></li>
-                                                <li><a href="form-components.html">Form Components</a></li>
-                                                <li><a href="form-pickers.html">Pickers</a></li>
-                                                <li><a href="form-wizard.html">Form Wizard</a></li>
-                                                <li><a href="form-validation.html">Form Validation</a></li>
-                                                <li><a href="form-masks.html">Form Masks</a></li>
-                                                <li><a href="form-dropzone.html">Dropzone Uploader</a></li>
-                                                <li><a href="form-summernote.html">Summernote</a></li>
-                                                <li><a href="form-markdown.html">Markdown Editor</a></li>
-                                                <li><a href="form-xeditable.html">Inline Editor</a></li>
-                                                <li><a href="form-gridforms.html">Grid Forms</a></li>
-                                            </ul>
-                                        </li>
-
-                                        <li><a href="javascript:;"><i class="fa fa-table"></i><span>Tables</span></a>
-                                            <ul class="acc-menu">
-                                                <li><a href="ui-tables.html">Basic Tables</a></li>
-                                                <li><a href="tables-responsive.html">Responsive Tables</a></li>
-                                                <li><a href="tables-editable.html">Editable Tables</a></li>
-                                                <li><a href="tables-data.html">Data Tables</a></li>
-                                                <li><a href="tables-fixedheader.html">Fixed Header Tables</a></li>
-                                            </ul>
-                                        </li>
-
-                                        <li><a href="javascript:;"><i class="fa fa-area-chart"></i><span>Analytics</span></a>
-                                            <ul class="acc-menu">
-                                                <li><a href="charts-flot.html">Flot</a></li>
-                                                <li><a href="charts-sparklines.html">Sparklines</a></li>
-                                                <li><a href="charts-morris.html">Morris.js</a></li>
-                                                <li><a href="charts-easypiechart.html">Easy Pie Chart</a></li>
-                                            </ul>
-                                        </li>
-
-                                        <li class="nav-separator"><span>Extras</span></li>
-
-                                        <li><a href="app-inbox.html"><i class="fa fa-inbox"></i><span>Inbox</span><span class="badge badge-danger">3</span></a></li>
-
-                                        <li><a href="javascript:;"><i class="fa fa-file"></i><span>Pages</span></a>
-                                            <ul class="acc-menu">
-                                                <li><a href="extras-profile.html">Profile</a></li>
-                                                <li><a href="extras-forgotpassword.html">Password Reset</a></li>
-                                            </ul>
-                                        </li>
+                                        <li><a href="{{ url('/') }}/users"><i class="fa fa-user"></i><span>Users</span></a></li>
+                             
                                     </ul>
                                 </nav>
                             </div>
@@ -209,12 +122,11 @@
                                                 <div class="col-sm-8">
                                                     <button class="btn btn-default" id="daterangepicker-d">
                                                         <i class="fa fa-calendar"></i> 
-                                                        <span><?php echo date("F j, Y", strtotime('-30 day')); ?> - <?php echo date("F j, Y"); ?></span> <b class="caret"></b>
+                                                        <span><?php echo date("F j, Y"); ?></span> <b class="caret"></b>
                                                     </button>
                                                 </div>
                                             </div>
                                         </form>
-                                        <a href="#" class="btn btn-default" style="vertical-align: top;">Settings</a>
                                     </div>
                                 </div>
                             </div>
