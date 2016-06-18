@@ -3146,3 +3146,6 @@ Stack trace:
 #36 C:\wamp64\www\cashremmit\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(99): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
 #37 C:\wamp64\www\cashremmit\public\index.php(54): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
 #38 {main}  
+[2016-06-18 03:17:43] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Maximum execution time of 30 seconds exceeded' in C:\xampp\htdocs\ang-test\vendor\composer\ClassLoader.php:354
+Stack trace:
+#0 {main}  

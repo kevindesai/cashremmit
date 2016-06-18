@@ -4,6 +4,11 @@ app.controller('AdminController', function($scope,$http){
    
 });
 
+app.controller('PaymentController', function($scope,$http){
+ console.log("test");
+   
+});
+
 app.controller('ItemController', function(dataFactory,$scope,$http){
  
   $scope.data = [];
