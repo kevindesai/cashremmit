@@ -17,6 +17,7 @@ a{text-decoration:none !important;}
 
 strong{color:#1262ff;}
 p{ font-size:16px; }
+.form-control{height:auto;}
 
 
 /****************************** start pre define classes ****************************/
@@ -83,6 +84,28 @@ p{ font-size:16px; }
 
 /****************************** end pre define classes ****************************/
 
+/*************************** start buttons css *********************************/
+
+	
+.normal-btn{padding:15px 55px 15px 55px !important; border:1px solid #95989a;
+webkit-transition: background 0.2s ease-out, color 0.2s ease-out, border-color 0.2s ease-out;
+    transition: all 0.2s ease-out;}
+
+.normal2-btn{padding:15px 35px 15px 35px !important; border:1px solid #95989a;
+webkit-transition: background 0.2s ease-out, color 0.2s ease-out, border-color 0.2s ease-out;
+    transition: all 0.2s ease-out;}
+	
+.white{border-color: #95989a;color:#fff!important;}
+.white:hover{border-color: #fff !important;color:#000 !important; background-color:#fff !important;}
+
+.yellow{border-color: #d8e028;color:#d8e028; background:transparent !important;}
+.yellow:hover{border-color: #d8e028 !important;color:#fff !important; background-color:#d8e028 !important;}
+
+.yellow-fill{border-color: #7f8c8d;color:#fff; background-color:#d8e028;}
+.yellow-fill:hover, .yellow-fill:focus{border-color: #d8e028 !important;color:#d8e028 !important; background-color:transparent !important;}
+
+/*************************** end buttons css *********************************/
+
 .navbar{border:0px; border-radius:0px; margin-bottom:0px;}
 .navbar-fixed-top, .navbar-fixed-bottom{border:0px;}
 .navbar-default{background:#175463; color:#fff;}
@@ -96,19 +119,17 @@ webkit-transition: background 0.2s ease-out, color 0.2s ease-out, border-color 0
 .singup-btn:hover{padding:12px 50px 12px 50px  !important; background:transparent; color:#95989a;}
 
 
-.banner-1{background:url('../images/banner-1.jpg'); min-height:600px; background-size:cover;}
-.banner-2{background:url('../images/banner-2.jpg'); min-height:600px; background-size:cover;}
+.bannerbox{background:url('../images/banner.jpg'); min-height:600px; background-size:cover;}
 .banner-1-content{margin-top:200px; padding-left:50px;}
 .banner-1 p{color:#1cd0e7; font-size:19px;}
-.rate{background:#175463; border:1px solid #3b92a7; width:85%; padding:0px 10px 10px 10px;}
+.rate{background:#175463; border:1px solid #3b92a7; width:90%; padding:0px 10px 10px 10px;}
 .rat-inner{width:100%; display:inline-block; margin-top:10px;}
-.rate input{width:79%;float:left; padding:12px 15px; border:1px solid #e3e3e3; font-size:26px;}
-.rate select{width:20%; float:right; background-color:#d8e028 !important; color:#fff; text-transform:uppercase; font-size:26px;
+.rate input{width:78%;float:left; padding:12px 15px; border:1px solid #e3e3e3; font-size:26px;}
+.rate select{width:21%; float:right; background-color:#d8e028 !important; color:#fff; text-transform:uppercase; font-size:26px;
  -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     padding: 12px 10px;
-    border:1px solid #e3e3e3;
     background: url("../images/drop.png") no-repeat right 5px center;}
 .banner-2-content{color:#fff; margin-top:140px; padding-left:30px;}
 .banner-2-content h2{font-size:35px;}
@@ -161,89 +182,250 @@ border-radius:50%;}
 .copy-links li a{color:#7f8c8d; font-size:14px;}
 .copy-txt2{color:#7f8c8d; font-size:14px; text-align:center;}
 
-/*********************************** responsive ***********************************/
+/*********************************** start payment transfar ***********************************/
 
-@media(max-width:980px)
-{
-.banner-1{ min-height:500px;}
-.banner-2{ min-height:500px; }
-.banner-1-content{margin-top:150px; padding-left:50px;}
-.rate{width:90%;}
-.rate input{width:75%; padding:8px 10px; font-size:22px;}
-.rate select{width:24%; font-size:22px; padding:8px 5px;}
+.banner_transfar{background-color:#175463; min-height:200px;}
+.customer-name{color:#fff; margin-top:42px; font-size:20px; text-align:right; margin-right:67px; margin-bottom:0px;}
+.customer-id{color:#fff; margin-top:2px; font-size:14px; text-align:right;}
+.customer-thumb{margin-top:30px;}
+.top-btns{float:right; list-style:none; margin-top:40px;}
+.top-btns li{float:left; margin-right:10px;}
+.top-btns li:last-child{margin-right:0px;}
+.top-btns li a{ font-size:16px;}
+.top-btns li a:hover{background:#c6de03 !important; color:#fff !important;}
+.top-btns li.active a{background:#c6de03 !important;}
 
-.banner-2-content{color:#fff; margin-top:100px; padding-left:30px;}
-.banner-2-content h2{font-size:28px;}
-.banner-2-content h3{font-size:18px; margin-bottom:15px;}
-.v-link{ padding:40px 0px;}
-.banner-2-content p{margin-top:10px;}
+.first-box{border: 2px solid #8f9294; padding:25px; }
+.first-box p{font-size:19px;color:#8f9294; }
+.first-box a{font-size:20px;}
+.first-btn{margin-top:30px;}
 
-.step-box{min-height:175px; padding:15px;}
-.number{width:30%; margin-left:auto; margin-right:auto; margin-top:-40px; border:1px solid #95989a; background-color:#fff;
-border-radius:50%;}
-.number h1{font-size:30px; margin:0px; padding:10px;}
+.second-main{margin-top:70px;}
+.second-box{border: 2px solid #8f9294; padding:25px;  }
+.second-box p{font-size:19px;color:#8f9294; }
+.second-box a{font-size:20px;}
+.second-btn{}
 
-.app-mobile{margin-bottom:-70px;}
-.app-content{margin-top:170px; padding-left:20px;}
-.app-content h1{font-size:25px; color:#fff; line-height:30px;}
-.app-content p{margin-top:30px; }
+.third-box{border: 2px solid #8f9294; padding:25px;}
+.third-box p{font-size:19px;color:#8f9294;}
+.search-box input{border: 1px solid #8f9294;width:100%; font-size:25px;
+background:#fff url('../images/search.png'); background-position:100%; background-repeat:no-repeat; 
+ padding:6px;color:#8f9294;}
+ 
+.t-box{border:2px solid #ada8a9; background:#f6f4f7;}
+.date{color:#ada8a9; font-size:12px; margin-top:42px; margin-bottom:3px;}
+.t-box p{color:#ada8a9; font-size:20px; text-align:right;margin:15px; }
+.t-box img{margin-left:20px; margin-top:3px;}
 
-.people-box{min-height:210px; }
-.avtar{margin-top: -62px;}
+.sidebar-inner{margin:23px auto; display:inline-block;}
 
-.copy-txt{text-align:center;}
-.copy-links li a{font-size:12px;}
-.copy-txt2{font-size:11px;}
-}
-@media(max-width:800px)
-{
+.side-bar-box{border:1px solid #ada8a9;}
+.sidebar-heading{background:#175463;}
+.sidebar-heading h2{color:#fff; text-transform:uppercase; margin:0px; padding:20px; font-size:20px;}
 
-.banner-1{ padding-top:20px; min-height:400px; }
-.banner-2{ padding-top:20px; min-height:400px; }
-.banner-1-content{margin-top:83px; padding-left:50px;}
-.rate{width:90%;}
-.rate input{width:70%; padding:8px 10px; font-size:18px;}
-.rate select{width:29%; font-size:18px; padding:8px 5px;}
+.rate-sidebar{background:#175463; border:1px solid #3b92a7; width:95%; padding:0px 10px 10px 10px; margin:0 auto;}
+.rat-inner-sidebar{width:100%; display:inline-block; margin-top:10px;}
+.rate-sidebar input{width:75%;float:left; padding:12px 15px; border:1px solid #e3e3e3; font-size:26px;}
+.rate-sidebar select{width:24%; float:right; background-color:#d8e028 !important; color:#fff; text-transform:uppercase; font-size:26px;
+ -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 12px 10px;
+    background: url("../images/drop.png") no-repeat right 5px center;}
+	
+.blank-div{min-height:335px;}
 
-.banner-2-content{color:#fff; margin-top:40px; padding-left:30px;}
-.banner-2-content h2{font-size:26px;}
-.banner-2-content h3{font-size:17px; margin-bottom:15px;}
-.v-link{ padding:40px 0px;}
-.banner-2-content p{margin-top:10px;}
-}
+/*********************************** end payment transfar ***********************************/
 
-@media(max-width:768px)
-{
-.banner-1{ padding-top:20px; min-height:400px; }
-.banner-2{ padding-top:20px; min-height:400px; }
-.banner-1-content{margin-top:93px; padding-left:60px;}
+/*********************************** start payment transfar - 1 ***********************************/
 
-}
-@media(max-width:450px)
-{
+.numbers-section {border:1px solid #000; border-width:1px 1px 0px 1px; border-top-left-radius:20px;border-top-right-radius:20px; padding-top:50px; padding-bottom:150px; padding-left:35px;}
+.drop-main{width:100%;}
+.dropdown{padding:15px; border:1px solid #111;
+    background: url("../images/arrow-down.png") no-repeat right 5px center; width:100%; }
+.flag{ width:40px; float:left; }
+.drop-list{width: 92%; margin:0 auto !important; left:auto !important;}
+.drop-list li a{padding:10px 18px; }
 
-.banner-1{ padding-top:20px; min-height:300px; }
-.banner-2{ padding-top:20px; min-height:300px; }
-.banner-1-content{margin-top:20px; padding-left:20px;}
-.rate{width:95%;}
-.rate input{width:70%; padding:8px 10px; font-size:16px;}
-.rate select{width:29%; font-size:16px; padding:8px 5px;}
 
-.banner-2-content{color:#fff; margin-top:30px; padding-left:30px;}
-.banner-2-content h2{font-size:22px;}
-.banner-2-content h3{font-size:17px; margin-bottom:15px;}
-.v-link{ padding:30px 0px;}
-.banner-2-content p{margin-top:10px;}
+.number-link{list-style:none; float:right; margin-bottom:-400px; margin-right:-30px;}
+.number-link li{margin-bottom:30px; width:60px; height:60px;border-radius:50%; border:1px solid #7f8c8d; text-align:center; background:#fff;}
+.number-link li a{font-size:25px; line-height:60px; color:#7f8c8d;}
+.number-link li:hover{background:#d8e028; color:#fff;}
+.number-link li:hover a{ color:#fff;}
+.number-link li.active{background:#d8e028; color:#fff;}
+.number-link li.active a{ color:#fff;}
 
-.step-box{min-height:175px; padding:15px; margin-top:80px;}
-.number{width:30%; margin-left:auto; margin-right:auto; margin-top:-55px; border:1px solid #95989a; background-color:#fff;
-border-radius:50%;}
-.number h1{font-size:47px; margin:0px; padding:15px;}
+/*********************************** end payment transfar - 1 ***********************************/
 
-.app-link{margin-bottom:20px; }
+/*********************************** start payment transfar - 2 ***********************************/
 
-.people{margin-top:50px;}
-.ml15{margin-left:0px;}
-.mr15{margin-right:0px;}
-.people-box{margin-top:50px;}
-}
+
+.summary{margin: 20px auto; width:100%; }
+.item{color:#95989a; text-align:right;font-size:20px; padding-right:8%; width:50%;}
+.item2{color:#95989a; text-align:left;font-size:20px; padding-left:8%;  width:50%;}
+.total{color:#000 !important; text-align:right;font-size:20px;padding-top:40px;padding-bottom:40px;padding-right:8%; width:50%;}
+.total2{color:#000 !important;font-size:20px;padding-top:40px; padding-bottom:40px; padding-left:8%; width:50%;}
+.title-sumary p{color:#000 !important; text-align:center;font-size:20px; margin-bottom:40px;}
+.info-title{margin-bottom:50px;}
+.info-title img{width:50px;}
+.info-title p{margin-top:15px;}
+
+.promo{margin-top:20px;}
+.promo a{padding:15px; width:100%; display:inline-block;color:#95989a; background-color:#d8e028;
+border:1px solid #95989a;font-size:22px; text-align:center;
+webkit-transition: background 0.2s ease-out, color 0.2s ease-out, border-color 0.2s ease-out;
+    transition: all 0.2s ease-out;}
+	
+.continue{margin-top:50px;}
+.continue a{padding:15px; width:100%; display:inline-block;color:#95989a; background-color:#d8e028;
+border:1px solid #95989a;font-size:26px; text-align:center;
+webkit-transition: background 0.2s ease-out, color 0.2s ease-out, border-color 0.2s ease-out;
+    transition: all 0.2s ease-out;}
+
+
+/*********************************** end payment transfar - 2 ***********************************/
+
+/*********************************** start report ***********************************/
+
+.sender-name p{font-size:21px; color:#175463;}
+.top-amount{border:1px solid #7f8c8d; background:#e4e3e5;}
+.top-amount p{color:#7f8c8d; text-align:right;margin:15px; font-size:20px;}
+.top-amount i{margin-right:50px;}
+.amt{margin-right:50px;}
+
+.sub-title p{color:#95989a; font-size:22px;}
+.new-r{margin:0px 15% 15% 15%;border:1px solid #95989a; width:100px; height:100px; text-align:center;}
+.new-r a{font-size:25px; line-height:100px; color:#95989a;}
+
+.cyr{border:1px solid #95989a;}
+.person p{text-align:center; margin:0px;}
+.person{width:20%; float:left; padding:30px 15px;}
+.avtar-icon{width:105px; height:105px; border-radius:50%; border:1px solid #95989a; background:#c6de03; margin:0 auto;}
+.avtar-icon p{line-height:105px; margin:0px;font-size:22px; color:#fff; font-weight:bold;}
+.name{font-size:19px; padding-top:10px; color:#95989a !important;}
+.actual{color:#000 !important;}
+.person i{font-size:25px; color:#257f34; margin-top:20px;}
+
+.detail-table{width:100%; border-collapse: separate;  border-spacing: 0 10px;}
+.lbl{width:60%; padding:10px;}
+.lbl p{font-size:20px; margin:0px 20px 0px 0px; text-align:right; color:#175463;}
+.lbl-2{width:40%;border:1px solid #7f8c8d; background:#e4e3e5; padding:10px;}
+.lbl-2 p{font-size:20px; margin:0px; padding-left:20px;}
+.lbl-box{width:40%;border:1px solid #7f8c8d;padding:20px; font-size:25px; text-align:center; background:#c6de03;}
+.lbl-box a{color:#fff;}
+
+.modal-content{border-radius:0px;}
+.modal-title{text-align:center; font-size:20px;}
+.form-title{font-size:18px; color:#175463; margin-top:10px; margin-bottom:10px;}
+.form-control{border-radius:0px; padding:15px 20px; font-size:20px;}
+.form-select{ -webkit-appearance: none;    -moz-appearance: none;    appearance: none;  
+    background: url("../images/arrow-down.png") no-repeat right 5px center;}
+.form-submit{width:100%; background:#c6de03; text-align:center; font-size:20px; padding:15px; color:#fff; font-weight:bold;}
+
+/*********************************** end report ***********************************/
+
+/*********************************** start screen -12 ***********************************/
+
+.acs{width:90%; margin:0 auto;}
+.change-pass{border:1px solid #95989a;padding-top:15px;padding-bottom:15px; }
+.name-id{float:left;}
+.chang-thumb{width:100px; height:100px; border:1px solid #95989a; float:left;}
+.chang-pass-btn{float:right; margin-top:20px;}
+.chang-pass-btn a{border:1px solid #111; display:inline-block; font-size:24px; padding:15px 25px 15px 25px !important;}
+.chang-pass-btn a:hover{border:1px solid #111 !important; color:#111 !important;}
+.change-pass-name{font-size:30px; margin:20px 0px 0px 20px; line-height:30px; color:#175463;}
+.cid{font-size:20px;margin:5px 0px 0px 20px; line-height:22px; color:#175463;}
+
+.change-items{border:1px solid #95989a; margin-top:30px;}
+.change-name{color:#95989a; font-size:24px; margin:0px; padding:20px;}
+.change-value{color:#175463; font-size:25px; margin:0px; padding:20px; text-transform:uppercase;}
+.change-link{text-align:right;margin:0px;  padding:20px;}
+.change-link a{color:#95989a; font-size:28px; display:inline-block;}
+
+/*********************************** end screen -12 ***********************************/
+
+/*********************************** start td ***********************************/
+
+.td-title{color:#175463;}
+.td-search input{border: 1px solid #8f9294;width:100%; font-size:18px;
+background:#fff url('../images/search.png'); background-position:100%; background-repeat:no-repeat; 
+ padding:10px;color:#8f9294;}
+.avtar-icon-td{width:150px; height:150px; border-radius:50%; border:1px solid #95989a; background:#c6de03; margin:0 auto;}
+.avtar-icon-td p{line-height:150px; margin:0px;font-size:28px; color:#fff; font-weight:bold;text-align:center;}
+.detail-td p{font-size:26px; font-weight:bold;}
+.name-td{color:#175463;}
+.amt-td{color:#000;}
+.tn-td{color:#cf1f2e;}
+.status-td p{font-size:26px; color:#66bd0a; font-weight:bold; text-align:center; line-height:150px;}
+.more-td p{font-size:26px; color:#95989a; font-weight:bold; text-align:center;}
+.icon-td{margin-bottom:0px; margin-top:20px;}
+.more-td a{color:#95989a !important;}
+.more-td p i{font-size:50px; color:#95989a; font-weight:bold; text-align:center;}
+.hr-td{margin-top:5px; margin-bottom:10px;}
+
+/*********************************** end td ***********************************/
+
+/*********************************** start bf ***********************************/
+
+.detail-td p{font-size:26px; font-weight:bold;}
+.name-bf{color:#175463; margin-bottom:3px;}
+.sub-bf{color:#95989a; margin-bottom:3px;}
+.send-bf p{text-align:right; line-height:150px;}
+.send-bf a{font-size:28px;}
+.icon-bf p{line-height:150px; color:#95989a; font-size:50px; text-align:center;}
+.icon-bf a{color:#95989a;}
+
+/*********************************** end bf ***********************************/
+
+/*********************************** end sl ***********************************/
+
+.modal-body-sl{position: relative;padding: 0px;}
+
+
+
+.sl-tab{margin-top:40px; padding:15px;}
+.nav-tabs{border:0px;}
+.nav-tabs > li{width:50%;}
+.nav-tabs > li > a{width:100%; font-size:22px; background:#175463; color:#95989a; padding:20px; text-align:center; border-radius:0px; border:0px;}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{border:0px;
+color:#fff; background:#c6de03 !important;}
+.nav-tabs > li > a:hover, .nav-tabs > li > a:focus{background:#c6de03 !important;}
+
+.sl-lg-title{font-size:26px; color:#175463; margin-bottom:30px;}
+.sl-lg{text-align:right; margin-top:0px; margin-bottom:30px;}
+.sl-lg a{font-size:20px; color:#95989a;}
+.or{font-size:20px; color:#95989a; text-align:center; margin: 30px auto;}
+
+.l-with a{text-align:center; color:#fff; font-size:28px; padding:20px 5px;}
+.l-with i{text-align:left; margin-right:20px;}
+.sl-fb{width:50%; float:left; background:#3b5998;}
+.sl-gp{width:50%; float:left; background:#f2553b;}
+.sl-msg{margin-top:20px; margin-bottom:20px;}
+.sl-msg p{color:#95989a; font-size:20px; text-align:center; }
+.sl-msg i{margin-right:10px; }
+.sl-names-1{width:50%; padding-right:10px; float:left;}
+.sl-names-2{width:50%; padding-left:10px; float:left;}
+.nm-sl{border-radius: 0px;padding: 15px 5px;font-size: 20px; width:100%; border:1px solid #e2e2e2;}
+
+/*********************************** end sl ***********************************/
+
+/*********************************** start up ***********************************/
+
+.up-title{text-align:center; font-size:18px; color:#ff0000; padding:20px;}
+.up-row{width:100%}
+.up-row  td{border:1px solid #95989a; padding:15px; color:#95989a; font-size:20px;}
+.upm-btn{margin-top:50px; text-align:center; margin-bottom:20px;}
+.up-cell-2{text-transform:uppercase; color:#555 !important;}
+.up-btn{font-size:30px;}
+
+/*********************************** end up ***********************************/
+
+/*********************************** start successs ***********************************/
+
+.s-msg{margin-top:50px;text-align:center;}
+.s-msg h1{color:#175463; font-size:35px; padding:30px;}
+.s-msg p{ color:#175463; border:1px solid #95989a; padding:15px; font-size:20px;}
+
+/*********************************** end success ***********************************/
+
