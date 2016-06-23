@@ -11,6 +11,10 @@ app.config(['$routeProvider',
                     templateUrl: 'resources/views/templates/payment_transfar.html',
                     controller: 'PaymentController'
                 }).
+                when('/payment1', {
+                    templateUrl: 'resources/views/templates/payment_transfar-1.html',
+                    controller: 'PaymentController'
+                }).
                 otherwise({
                     redirectTo: '/'
                 });
