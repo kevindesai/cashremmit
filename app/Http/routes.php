@@ -14,7 +14,7 @@
 Route::get('/', function () {
     return view('app');
 });
-
+//Route::get('/', array('uses' => 'HomeController@showLogin'));
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -41,6 +41,7 @@ Route::group(array('prefix'=>'/templates/'),function(){
 });
 
 Route::resource('users', 'UsersController');
+
 Route::get('login', array('uses' => 'HomeController@showLogin'));
 // route to process the form
 Route::post('login', array('uses' => 'HomeController@doLogin'));

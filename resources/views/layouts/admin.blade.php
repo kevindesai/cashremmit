@@ -18,17 +18,17 @@
 
         <link href="{{ url('/') }}/assets/plugins/codeprettifier/prettify.css" type="text/css" rel="stylesheet">                <!-- Code Prettifier -->
         <link href="{{ url('/') }}/assets/plugins/iCheck/skins/minimal/blue.css" type="text/css" rel="stylesheet">              <!-- iCheck -->
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <!--[if lt IE 10]>
-            <script src="assets/js/media.match.min.js"></script>
-            <script src="assets/js/respond.min.js"></script>
-            <script src="assets/js/placeholder.min.js"></script>
+            <script src="{{ url('/') }}/assets/js/media.match.min.js"></script>
+            <script src="{{ url('/') }}/assets/js/respond.min.js"></script>
+            <script src="{{ url('/') }}/assets/js/placeholder.min.js"></script>
         <![endif]-->
         <!-- The following CSS are included as plugins and can be removed if unused-->
 
-        <link href="assets/plugins/form-daterangepicker/daterangepicker-bs3.css" type="text/css" rel="stylesheet">    <!-- DateRangePicker -->
-        <link href="assets/plugins/fullcalendar/fullcalendar.css" type="text/css" rel="stylesheet"> 						<!-- FullCalendar -->
-        <link href="assets/plugins/switchery/switchery.css" type="text/css" rel="stylesheet">   							<!-- Switchery -->
+        <link href="{{ url('/') }}/assets/plugins/form-daterangepicker/daterangepicker-bs3.css" type="text/css" rel="stylesheet">    <!-- DateRangePicker -->
+        <link href="{{ url('/') }}/assets/plugins/fullcalendar/fullcalendar.css" type="text/css" rel="stylesheet"> 						<!-- FullCalendar -->
+        <link href="{{ url('/') }}/assets/plugins/switchery/switchery.css" type="text/css" rel="stylesheet">   							<!-- Switchery -->
 
     </head>
 
@@ -48,13 +48,13 @@
                 <a class="navbar-brand" href="#">Cash Remmit</a>
 
 
-<!--                <div class="toolbar-icon-bg hidden-xs" id="toolbar-search">
-                    <div class="input-group">
-                        <span class="input-group-btn"><button class="btn" type="button"><i class="fa fa-search"></i></button></span>
-                        <input type="text" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn"><button class="btn" type="button"><i class="fa fa-close"></i></button></span>
-                    </div>
-                </div>-->
+                <!--                <div class="toolbar-icon-bg hidden-xs" id="toolbar-search">
+                                    <div class="input-group">
+                                        <span class="input-group-btn"><button class="btn" type="button"><i class="fa fa-search"></i></button></span>
+                                        <input type="text" class="form-control" placeholder="Search...">
+                                        <span class="input-group-btn"><button class="btn" type="button"><i class="fa fa-close"></i></button></span>
+                                    </div>
+                                </div>-->
             </div><!-- logo-area -->
 
             <ul class="nav navbar-nav toolbar pull-right">
@@ -65,7 +65,7 @@
 
                 <li class="dropdown toolbar-icon-bg hidden-xs">
                     <a href="#" class="dropdown-toggle nav-username" data-toggle="dropdown">
-                        <img class="img-circle" src="assets/demo/avatar/avatar_06.png" alt="" /><span class="badge user-status badge-success">1</span>
+                        <img class="img-circle" src="{{ url('/') }}/assets/demo/avatar/avatar_06.png" alt="" /><span class="badge user-status badge-success">1</span>
                         <span class="hidden-sm">jon@december.com</span>
                     </a>			
                     <ul class="dropdown-menu userinfo">
@@ -79,8 +79,8 @@
                     <a href="#" class="toggle-fullscreen"><span class="icon-bg"><i class="fa fa-arrows-alt"></i></span></i></a>
                 </li>
 
-               
-                
+
+
             </ul>
 
         </header>
@@ -90,17 +90,16 @@
                 <div class="static-sidebar-wrapper sidebar-default">
                     <div class="static-sidebar">
                         <div class="sidebar">
-                         
+
                             <div class="widget stay-on-collapse" id="widget-sidebar">
                                 <nav role="navigation" class="widget-body">
                                     <ul class="acc-menu">
-                                        <li class="nav-separator"><span>Navigation</span></li>
                                         <li><a href="{{ url('/') }}/users"><i class="fa fa-user"></i><span>Users</span></a></li>
-                             
+
                                     </ul>
                                 </nav>
                             </div>
-                           
+
                         </div>
                     </div>
                 </div>
@@ -204,19 +203,19 @@
                                         <span class="report-time">1:12PM, Thursday, November 19, 2015</span>
                                         <ul class="user-avatar list-inline">
                                             <li class="">
-                                                <img src="assets/demo/avatar/avatar_01.png" class="img-responsive avatar"> 
+                                                <img src="{{ url('/') }}/assets/demo/avatar/avatar_01.png" class="img-responsive avatar"> 
                                             </li>
                                             <li class="">
-                                                <img src="assets/demo/avatar/avatar_02.png" class="img-responsive avatar"> 
+                                                <img src="{{ url('/') }}/assets/demo/avatar/avatar_02.png" class="img-responsive avatar"> 
                                             </li>
                                             <li class="">
-                                                <img src="assets/demo/avatar/avatar_03.png" class="img-responsive avatar"> 
+                                                <img src="{{ url('/') }}/assets/demo/avatar/avatar_03.png" class="img-responsive avatar"> 
                                             </li>
                                             <li class="">
-                                                <img src="assets/demo/avatar/avatar_04.png" class="img-responsive avatar"> 
+                                                <img src="{{ url('/') }}/assets/demo/avatar/avatar_04.png" class="img-responsive avatar"> 
                                             </li>
                                             <li class="">
-                                                <img src="assets/demo/avatar/avatar_05.png" class="img-responsive avatar"> 
+                                                <img src="{{ url('/') }}/assets/demo/avatar/avatar_05.png" class="img-responsive avatar"> 
                                             </li>
                                         </ul>
                                         <button class="btn btn-success"><i class="fa fa-check"></i></button>
@@ -227,19 +226,19 @@
                                         <span class="report-time">11:40AM, Sunday, November 22, 2015</span>
                                         <ul class="user-avatar list-inline">
                                             <li class="">
-                                                <img src="assets/demo/avatar/avatar_06.png" class="img-responsive avatar"> 
+                                                <img src="{{ url('/') }}/assets/demo/avatar/avatar_06.png" class="img-responsive avatar"> 
                                             </li>
                                             <li class="">
-                                                <img src="assets/demo/avatar/avatar_07.png" class="img-responsive avatar"> 
+                                                <img src="{{ url('/') }}/assets/demo/avatar/avatar_07.png" class="img-responsive avatar"> 
                                             </li>
                                             <li class="">
-                                                <img src="assets/demo/avatar/avatar_08.png" class="img-responsive avatar"> 
+                                                <img src="{{ url('/') }}/assets/demo/avatar/avatar_08.png" class="img-responsive avatar"> 
                                             </li>
                                             <li class="">
-                                                <img src="assets/demo/avatar/avatar_09.png" class="img-responsive avatar"> 
+                                                <img src="{{ url('/') }}/assets/demo/avatar/avatar_09.png" class="img-responsive avatar"> 
                                             </li>
                                             <li class="">
-                                                <img src="assets/demo/avatar/avatar_10.png" class="img-responsive avatar"> 
+                                                <img src="{{ url('/') }}/assets/demo/avatar/avatar_10.png" class="img-responsive avatar"> 
                                             </li>
                                         </ul>
                                         <button class="btn btn-default disabled"><i class="fa fa-undo"></i></button>
@@ -304,6 +303,47 @@
         <script src="{{ url('/') }}/assets/js/jqueryui-1.10.3.min.js"></script> 							<!-- Load jQueryUI -->
         <script src="{{ url('/') }}/assets/js/bootstrap.min.js"></script> 	
         <!-- End loading page level scripts-->
+        <script src="{{ url('/') }}/assets/js/enquire.min.js"></script> 									<!-- Load Enquire -->
+
+        <script src="{{ url('/') }}/assets/plugins/velocityjs/velocity.min.js"></script>					<!-- Load Velocity for Animated Content -->
+        <script src="{{ url('/') }}/assets/plugins/velocityjs/velocity.ui.min.js"></script>
+
+        <script src="{{ url('/') }}/assets/plugins/wijets/wijets.js"></script>     						<!-- Wijet -->
+
+        <script src="{{ url('/') }}/assets/plugins/sparklines/jquery.sparklines.min.js"></script> 			 <!-- Sparkline -->
+
+        <script src="{{ url('/') }}/assets/plugins/codeprettifier/prettify.js"></script> 				<!-- Code Prettifier  -->
+        <script src="{{ url('/') }}/assets/plugins/bootstrap-switch/bootstrap-switch.js"></script> 		<!-- Swith/Toggle Button -->
+
+        <script src="{{ url('/') }}/assets/plugins/bootstrap-tabdrop/js/bootstrap-tabdrop.js"></script>  <!-- Bootstrap Tabdrop -->
+
+        <script src="{{ url('/') }}/assets/plugins/iCheck/icheck.min.js"></script>     					<!-- iCheck -->
+
+        <script src="{{ url('/') }}/assets/plugins/nanoScroller/js/jquery.nanoscroller.min.js"></script> <!-- nano scroller -->
+
+        <script src="{{ url('/') }}/assets/js/application.js"></script>
+        <script src="{{ url('/') }}/assets/demo/demo.js"></script>
+        <script src="{{ url('/') }}/assets/demo/demo-switcher.js"></script>
+
+        <!-- End loading site level scripts -->
+
+        <!-- Load page level scripts-->
+
+        <!-- Charts -->
+        <script src="{{ url('/') }}/assets/plugins/charts-flot/jquery.flot.min.js"></script>             	<!-- Flot Main File -->
+        <script src="{{ url('/') }}/assets/plugins/charts-flot/jquery.flot.pie.min.js"></script>             <!-- Flot Pie Chart Plugin -->
+        <script src="{{ url('/') }}/assets/plugins/charts-flot/jquery.flot.stack.min.js"></script>       	<!-- Flot Stacked Charts Plugin -->
+        <script src="{{ url('/') }}/assets/plugins/charts-flot/jquery.flot.resize.min.js"></script>          <!-- Flot Responsive -->
+        <script src="{{ url('/') }}/assets/plugins/charts-flot/jquery.flot.tooltip.min.js"></script> 		<!-- Flot Tooltips -->
+        <script src="{{ url('/') }}/assets/plugins/charts-flot/jquery.flot.spline.js"></script> 				<!-- Flot Curved Lines -->
+
+        <script src="{{ url('/') }}/assets/plugins/switchery/switchery.js"></script>     					<!-- Switchery -->
+        <script src="{{ url('/') }}/assets/plugins/form-daterangepicker/moment.min.js"></script>              <!-- Moment.js for Date Range Picker -->
+
+        <script src="{{ url('/') }}/assets/plugins/form-daterangepicker/daterangepicker.js"></script>     	<!-- Date Range Picker -->
+
+
+        <script src="{{ url('/') }}/assets/demo/demo-index.js"></script> 									<!-- Initialize scripts for this page-->
 
     </body>
 </html>

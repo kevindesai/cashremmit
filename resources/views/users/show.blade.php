@@ -3,14 +3,14 @@
 @section('content')
 <div class="container">
 
-    <h1>User {{ $user->id }}</h1>
+    <h1>{{ $user->first_name }}</h1>
     <div class="table-responsive">
         <table class="table table-bordered table-striped table-hover">
             <tbody>
-                <tr>
+<!--                <tr>
                     <th>ID.</th><td>{{ $user->id }}</td>
-                </tr>
-                <tr><th> {{ trans('users.first_name') }} </th><td> {{ $user->first_name }} </td></tr><tr><th> {{ trans('users.last_name') }} </th><td> {{ $user->last_name }} </td></tr><tr><th> {{ trans('users.unit_no') }} </th><td> {{ $user->unit_no }} </td></tr>
+                </tr>-->
+                <tr><th> {{ trans('First Name') }} </th><td> {{ $user->first_name }} </td></tr><tr><th> {{ trans('Last Name') }} </th><td> {{ $user->last_name }} </td></tr><tr><th> {{ trans('Unit No.') }} </th><td> {{ $user->unit_no }} </td></tr>
             </tbody>
             <tfoot>
                 <tr>
