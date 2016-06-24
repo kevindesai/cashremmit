@@ -8,6 +8,26 @@ app.controller('PaymentController', function($scope,$http){
  console.log("test");
    
 });
+app.controller('ReportController', function($scope,$http){
+ console.log("ReportController");
+   
+});
+app.controller('SuccessController', function($scope,$http){
+ console.log("SuccessController");
+   
+});
+app.controller('TransfarDetailController', function($scope,$http){
+ console.log("TransfarDetailController");
+   
+});
+app.controller('AccountSettingController', function($scope,$http){
+ console.log("account-setting");
+   
+});
+app.controller('BeneficiariesController', function($scope,$http){
+ console.log("BeneficiariesController");
+   
+});
 
 app.controller('ItemController', function(dataFactory,$scope,$http){
  
