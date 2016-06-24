@@ -3363,3 +3363,6 @@ Stack trace:
 [2016-06-19 16:45:08] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'CreateUsersTable' not found' in C:\xampp\htdocs\ang-test\vendor\laravel\framework\src\Illuminate\Database\Migrations\Migrator.php:335
 Stack trace:
 #0 {main}  
+[2016-06-24 15:50:49] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'main(): Failed opening required 'resources/views/templates/index.html' (include_path='.;C:\xampp\php\PEAR')' in C:\xampp\htdocs\ang-test\storage\framework\views\e72c7ad601939a9f75b83b06d1a4e72fa1dda525.php:1
+Stack trace:
+#0 {main}  

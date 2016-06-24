@@ -15,6 +15,30 @@ app.config(['$routeProvider',
                     templateUrl: 'resources/views/templates/payment_transfar-1.html',
                     controller: 'PaymentController'
                 }).
+                when('/payment2', {
+                    templateUrl: 'resources/views/templates/payment_transfar-2.html',
+                    controller: 'PaymentController'
+                }).
+                when('/report', {
+                    templateUrl: 'resources/views/templates/report.html',
+                    controller: 'ReportController'
+                }).
+                when('/success', {
+                    templateUrl: 'resources/views/templates/success.html',
+                    controller: 'SuccessController'
+                }).
+                when('/transfarDetail', {
+                    templateUrl: 'resources/views/templates/transfar-detail.html',
+                    controller: 'TransfarDetailController'
+                }).
+                when('/accountSetting', {
+                    templateUrl: 'resources/views/templates/account-setting.html',
+                    controller: 'AccountSettingController'
+                }).
+                when('/beneficiaries', {
+                    templateUrl: 'resources/views/templates/Beneficiaries.html',
+                    controller: 'BeneficiariesController'
+                }).
                 otherwise({
                     redirectTo: '/'
                 });
