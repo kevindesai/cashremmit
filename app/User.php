@@ -25,5 +25,5 @@ class User extends Model
      *
      * @var array
      */
-    protected $fillable = ['first_name','last_name','unit_no','building_name','city','region','street','post_code','country','dob','mobile_no','landline_no'];
+    protected $fillable = ['first_name','last_name','unit_no','building_name','city','region','street','post_code','country','dob','mobile_no','landline_no','email','password'];
 }

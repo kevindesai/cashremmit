@@ -7,7 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AddPassword' => $baseDir . '/database/migrations/2016_06_25_162811_add_password.php',
-    'App\\Http\\Controllers\\UsersAPIController' => $baseDir . '/app/Http/Controllers/API/UsersAPIController.php',
+    'App\\Http\\Controllers\\API\\UsersAPIController' => $baseDir . '/app/Http/Controllers/API/UsersAPIController.php',
     'CreateRecipientMaster' => $baseDir . '/database/migrations/2016_06_19_162811_create_recipient_master.php',
     'CreateusersTable' => $baseDir . '/database/migrations/2016_06_14_164027_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
@@ -516,4 +516,5 @@ return array(
     'SebastianBergmann\\Version' => $vendorDir . '/sebastian/version/src/Version.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
+    'UpdateUserTable' => $baseDir . '/database/migrations/2016_06_25_092145_update_user_table.php',
 );

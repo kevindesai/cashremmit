@@ -225,29 +225,30 @@
 					 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					
 					<div class="sl-tab">
-
 					  <!-- Nav tabs -->
 					<div class="center-sl">
 					  <ul class="nav nav-tabs" role="tablist">
-						<li role="presentation" class="active"><a href="#login" aria-controls="login" role="tab" data-toggle="tab">Login</a></li>
-						<li role="presentation"><a href="#singup" aria-controls="singup" role="tab" data-toggle="tab">Singup</a></li>
+<!--						<li role="presentation" class="active"><a href="#login" ng-click = "setActiveTab(1)" aria-controls="login" role="tab" data-toggle="tab">Login</a></li>
+						<li role="presentation"><a href="#singup" ng-click = "setActiveTab(2)" aria-controls="singup" role="tab" data-toggle="tab">Singup</a></li>-->
+						<li ng-class ="{'active': activeTab == 1}" role="presentation" class="active"><a href="" ng-click = "setActiveTab(1)" aria-controls="login" role="tab" data-toggle="tab">Login</a></li>
+						<li ng-class ="{'active': activeTab == 2}" role="presentation"><a href="" ng-click = "setActiveTab(2)" aria-controls="singup" role="tab" data-toggle="tab">Singup</a></li>
 					  </ul>
 					</div>
 
 					  <!-- Tab panes -->
 					  <div class="tab-content">
-						<div role="tabpanel" class="tab-pane active" id="login">
+						<div role="tabpanel" ng-class ="{'tab-pane active': activeTab == 1,'tab-pane': activeTab !== 1}" id="login">
 							<div class="sl-inner">
 								<h3 class="sl-lg-title">Login to Cash Remit</h3>
 								<form>
 									<div class="form-group">
-										<input type="text" class="form-control" placeholder="Enter your email">
+										<input type="text" class="form-control" ng-model="formInfo.email" placeholder="Enter your email">
 									</div>
 									<div class="form-group">
-										<input type="password" class="form-control" placeholder="Enter your password">
+										<input type="password" class="form-control" ng-model="formInfo.password" placeholder="Enter your password">
 									</div>
 									<p class="sl-lg"><a href="#">Forgot Password?</a></p>
-									 <button type="submit" class="form-submit">Login</button>
+									 <button type="submit" ng-click="loginUser()" class="form-submit">Login</button>
 								</form>
 									<p class="or">Or login with</p>
 								<div class="l-with">
@@ -260,23 +261,23 @@
 								</div>
 							</div>
 						</div>
-						<div role="tabpanel" class="tab-pane" id="singup">
+						<div role="tabpanel" ng-class ="{'tab-pane active': activeTab == 2,'tab-pane': activeTab !== 2}" id="singup">
 							<div class="sl-inner">
 								<h3 class="sl-lg-title">Singup For Free</h3>
 								<form>
 									<div class="form-group">
-										<input type="text" class="form-control" placeholder="Enter your email">
+										<input type="text" class="form-control" ng-model="formInfo.email" placeholder="Enter your email">
 									</div>
 									<div class="form-group">
-										<input type="password" class="form-control" placeholder="Creat your password">
+										<input type="password" class="form-control" ng-model="formInfo.password" placeholder="Creat your password">
 									</div>
 									<div class="form-group sl-names-1">
-										<input type="text" class="nm-sl" placeholder="First Name">
+										<input type="text" class="nm-sl"  ng-model="formInfo.first_name" placeholder="First Name">
 									</div>
 									<div class="form-group sl-names-2">
-										<input type="text" class="nm-sl" placeholder="Last Name">
+										<input type="text" class="nm-sl" ng-model="formInfo.last_name" placeholder="Last Name">
 									</div>
-									 <button type="submit" class="form-submit">Singup</button>
+									 <button type="submit" ng-click="registerUser()" class="form-submit">Singup</button>
 								</form>
 									<p class="or">Or singup with</p>
 								<div class="l-with">

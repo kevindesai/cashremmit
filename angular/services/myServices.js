@@ -73,3 +73,31 @@ app.directive('validPasswordC', function() {
     }
   }
 });
+
+app.factory('myFactory', ['$http', function ($http) {
+
+    var urlBase = 'http://localhost:2307/Service1.svc';
+    var myFactory = {};
+
+    myFactory.getStudents = function () {
+        return $http.get(urlBase+'/GetStudents');
+    };
+
+    myFactory.addStudent = function (stud) {
+        return $http.post(urlBase + '/AddStudent', stud);
+    };
+    
+    myFactory.testMethod = function(method,url,params,header){
+      console.log('testMethod');
+        $http({
+          method  : 'POST',
+          url     : 'clone.php',
+          data    : params, //forms user object
+          headers : {'Content-Type': 'application/x-www-form-urlencoded'} 
+         })
+        
+    };
+    
+    return myFactory;
+
+}]);
