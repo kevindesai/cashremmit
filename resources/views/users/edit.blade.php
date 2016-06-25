@@ -8,16 +8,17 @@
     {!! Form::model($user, [
         'method' => 'PATCH',
         'url' => ['/users', $user->id],
-        'class' => 'form-horizontal'
+        'class' => 'form-horizontal',
+        'id'=>'myform'
     ]) !!}
 <div class="form-group ">
         {!! Form::label('first_name', trans('First Name'), ['class' => 'col-sm-3 control-label']) !!}
         <div class="col-sm-6">
-            {!! Form::text('first_name', null, ['class' => 'form-control']) !!}
+            {!! Form::text('first_name', null, ['class' => 'form-control', 'required'=>'required']) !!}
         </div>
     </div>
     <div class="form-group ">
-        {!! Form::label('last_name', trans('Last Name'), ['class' => 'col-sm-3 control-label']) !!}
+        {!! Form::label('last_name', trans('Last Name'), ['class' => 'col-sm-3 control-label', 'required'=>'required']) !!}
         <div class="col-sm-6">
             {!! Form::text('last_name', null, ['class' => 'form-control']) !!}
         </div>
@@ -37,11 +38,11 @@
     <div class="form-group">
         {!! Form::label('city', trans('City'), ['class' => 'col-sm-3 control-label']) !!}
         <div class="col-sm-6">
-            {!! Form::text('city', null, ['class' => 'form-control']) !!}
+            {!! Form::text('city', null, ['class' => 'form-control', 'required'=>'required']) !!}
         </div>
     </div>
     <div class="form-group">
-        {!! Form::label('region', trans('Region'), ['class' => 'col-sm-3 control-label']) !!}
+        {!! Form::label('region', trans('Region'), ['class' => 'col-sm-3 control-label', 'required'=>'required']) !!}
         <div class="col-sm-6">
             {!! Form::text('region', null, ['class' => 'form-control']) !!}
         </div>
@@ -55,11 +56,11 @@
     <div class="form-group">
         {!! Form::label('post_code', trans('Post Code'), ['class' => 'col-sm-3 control-label']) !!}
         <div class="col-sm-6">
-            {!! Form::text('post_code', null, ['class' => 'form-control']) !!}
+            {!! Form::text('post_code', null, ['class' => 'form-control', 'required'=>'required']) !!}
         </div>
     </div>
     <div class="form-group">
-        {!! Form::label('country', trans('Country'), ['class' => 'col-sm-3 control-label']) !!}
+        {!! Form::label('country', trans('Country'), ['class' => 'col-sm-3 control-label', 'required'=>'required']) !!}
         <div class="col-sm-6">
             {!! Form::text('country', null, ['class' => 'form-control']) !!}
         </div>
@@ -73,7 +74,7 @@
     <div class="form-group">
         {!! Form::label('mobile_no', trans('Mobile No.'), ['class' => 'col-sm-3 control-label']) !!}
         <div class="col-sm-6">
-            {!! Form::text('mobile_no', null, ['class' => 'form-control']) !!}
+            {!! Form::text('mobile_no', null, ['class' => 'form-control', 'data-parsley-type'=>'digits']) !!}
         </div>
     </div>
     <div class="form-group">
@@ -94,4 +95,23 @@
 
 
 </div>
+<script>
+    window.ParsleyConfig = {
+    	  successClass: 'has-success'
+		, errorClass: 'has-error'
+		, errorElem: '<span></span>'
+		, errorsWrapper: '<span class="help-block"></span>'
+		, errorTemplate: "<div></div>"
+		, classHandler: function(el) {
+    		return el.$element.closest(".form-group");
+		}
+	};
+    $(document).ready(function(){
+        $('#myform').parsley().validate();
+        $('#myform').submit(function(e){
+            $('#myform').parsley().validate();
+        });
+    });
+</script>
 @endsection
+
