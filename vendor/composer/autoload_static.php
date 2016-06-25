@@ -15,10 +15,11 @@ class ComposerStaticInitd52074051f27ff7ca9929fe2732642a9
         'e7223560d890eab89cda23685e711e2c' => __DIR__ . '/..' . '/psy/psysh/src/Psy/functions.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         'e23faeee409e941dc9b4c80386209c39' => __DIR__ . '/..' . '/laracasts/flash/src/Laracasts/Flash/functions.php',
+        'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
+        'e3e6115aca11dd98efa8a7e79bc8dfd0' => __DIR__ . '/..' . '/appzcoder/crud-generator/src/helpers.php',
         'a28599dc506da421718fad75955a4b9d' => __DIR__ . '/..' . '/infyomlabs/laravel-generator/src/helpers.php',
-        'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -335,6 +336,9 @@ class ComposerStaticInitd52074051f27ff7ca9929fe2732642a9
     );
 
     public static $classMap = array (
+        'AddPassword' => __DIR__ . '/../..' . '/database/migrations/2016_06_25_162811_add_password.php',
+        'App\\Http\\Controllers\\UsersAPIController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/UsersAPIController.php',
+        'CreateRecipientMaster' => __DIR__ . '/../..' . '/database/migrations/2016_06_19_162811_create_recipient_master.php',
         'CreateusersTable' => __DIR__ . '/../..' . '/database/migrations/2016_06_14_164027_create_users_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',

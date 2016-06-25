@@ -53,7 +53,7 @@
 
 5. Publish config file & generator template files.
     ```
-    php artisan vendor:publish
+    php artisan vendor:publish --provider="Appzcoder\CrudGenerator\CrudGeneratorServiceProvider"
     ```
 
 Note: You should have configured database for this operation.
@@ -96,7 +96,7 @@ php artisan crud:controller PostsController --crud-name=posts --model-name=Post 
 For model generator:
 
 ```
-php artisan crud:model Post --fillable="['title', 'body']" 
+php artisan crud:model Post --fillable="['title', 'body']"
 ```
 
 For migration generator:
@@ -153,6 +153,28 @@ These fields are supported for migration and view's form:
 * decimal
 * double
 * float
+* enum
+
+### Enum Type Field
+
+For generating enum type field follow the instructions.
+
+1. Write a command like below.
+    ```
+    php artisan crud:generate Posts --fields="title#string#required, body#text, category#enum"
+    ```
+
+2. Modify your migration like below.
+    ```php
+    $table->enum('category', ['technology', 'tips', 'health']);
+    ```
+
+3. Add **EnumTrait** to your model.
+    ```php
+    class Post extends Model
+    {
+        use EnumTrait;
+    ```
 
 ### Custom Generator's Stub Template
 
@@ -160,7 +182,7 @@ You can customize the generator's stub files/templates to achieve your need.
 
 1. Make sure you've published package's assets.
     ```
-    php artisan vendor:publish
+    php artisan vendor:publish --provider="Appzcoder\CrudGenerator\CrudGeneratorServiceProvider"
     ```
 
 2. Turn on custom_template support on **/config/crudgenerator.php**

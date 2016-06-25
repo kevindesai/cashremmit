@@ -6,6 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddPassword' => $baseDir . '/database/migrations/2016_06_25_162811_add_password.php',
+    'App\\Http\\Controllers\\UsersAPIController' => $baseDir . '/app/Http/Controllers/API/UsersAPIController.php',
     'CreateRecipientMaster' => $baseDir . '/database/migrations/2016_06_19_162811_create_recipient_master.php',
     'CreateusersTable' => $baseDir . '/database/migrations/2016_06_14_164027_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',

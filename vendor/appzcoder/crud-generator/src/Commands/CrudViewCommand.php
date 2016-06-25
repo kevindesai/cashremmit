@@ -18,7 +18,7 @@ class CrudViewCommand extends Command
                             {--view-path= : The name of the view path.}
                             {--route-group= : Prefix of the route group.}
                             {--pk=id : The name of the primary key.}
-                            {--localize=yes : Localize the view? yes|no.}';
+                            {--localize=no : Localize the view? yes|no.}';
 
     /**
      * The console command description.
@@ -65,6 +65,7 @@ class CrudViewCommand extends Command
         'timestamp' => 'datetime-local',
         'time' => 'time',
         'boolean' => 'radio',
+        'enum' => 'enum',
     ];
 
     /**
@@ -124,6 +125,13 @@ class CrudViewCommand extends Command
     protected $modelName = '';
 
     /**
+     * Name of the View Dir.
+     *
+     * @var string
+     */
+    protected $viewName = '';
+
+    /**
      * Name or prefix of the Route Group.
      *
      * @var string
@@ -176,19 +184,20 @@ class CrudViewCommand extends Command
      */
     public function handle()
     {
-        $this->crudName = $this->argument('name');
+        $this->crudName = strtolower($this->argument('name'));
         $this->crudNameCap = ucwords($this->crudName);
         $this->crudNameSingular = str_singular($this->crudName);
-        $this->modelName = ucwords($this->crudNameSingular);
+        $this->modelName = str_singular($this->argument('name'));
         $this->primaryKey = $this->option('pk');
         $this->routeGroup = ($this->option('route-group')) ? $this->option('route-group') . '/' : $this->option('route-group');
+        $this->viewName = snake_case($this->argument('name'), '-');
 
         $viewDirectory = config('view.paths')[0] . '/';
         if ($this->option('view-path')) {
             $userPath = $this->option('view-path');
-            $path = $viewDirectory . $userPath . '/' . $this->crudName . '/';
+            $path = $viewDirectory . $userPath . '/' . $this->viewName . '/';
         } else {
-            $path = $viewDirectory . $this->crudName . '/';
+            $path = $viewDirectory . $this->viewName . '/';
         }
 
         if (!File::isDirectory($path)) {
@@ -287,6 +296,7 @@ class CrudViewCommand extends Command
         File::put($newIndexFile, str_replace('%%crudName%%', $this->crudName, File::get($newIndexFile)));
         File::put($newIndexFile, str_replace('%%crudNameCap%%', $this->crudNameCap, File::get($newIndexFile)));
         File::put($newIndexFile, str_replace('%%modelName%%', $this->modelName, File::get($newIndexFile)));
+        File::put($newIndexFile, str_replace('%%viewName%%', $this->viewName, File::get($newIndexFile)));
         File::put($newIndexFile, str_replace('%%routeGroup%%', $this->routeGroup, File::get($newIndexFile)));
         File::put($newIndexFile, str_replace('%%primaryKey%%', $this->primaryKey, File::get($newIndexFile)));
     }
@@ -303,6 +313,7 @@ class CrudViewCommand extends Command
         File::put($newCreateFile, str_replace('%%crudName%%', $this->crudName, File::get($newCreateFile)));
         File::put($newCreateFile, str_replace('%%crudNameCap%%', $this->crudNameCap, File::get($newCreateFile)));
         File::put($newCreateFile, str_replace('%%modelName%%', $this->modelName, File::get($newCreateFile)));
+        File::put($newCreateFile, str_replace('%%viewName%%', $this->viewName, File::get($newCreateFile)));
         File::put($newCreateFile, str_replace('%%routeGroup%%', $this->routeGroup, File::get($newCreateFile)));
         File::put($newCreateFile, str_replace('%%formFieldsHtml%%', $this->formFieldsHtml, File::get($newCreateFile)));
 
@@ -321,6 +332,7 @@ class CrudViewCommand extends Command
         File::put($newEditFile, str_replace('%%crudNameSingular%%', $this->crudNameSingular, File::get($newEditFile)));
         File::put($newEditFile, str_replace('%%crudNameCap%%', $this->crudNameCap, File::get($newEditFile)));
         File::put($newEditFile, str_replace('%%modelName%%', $this->modelName, File::get($newEditFile)));
+        File::put($newEditFile, str_replace('%%viewName%%', $this->viewName, File::get($newEditFile)));
         File::put($newEditFile, str_replace('%%routeGroup%%', $this->routeGroup, File::get($newEditFile)));
         File::put($newEditFile, str_replace('%%formFieldsHtml%%', $this->formFieldsHtml, File::get($newEditFile)));
         File::put($newEditFile, str_replace('%%primaryKey%%', $this->primaryKey, File::get($newEditFile)));
@@ -337,11 +349,12 @@ class CrudViewCommand extends Command
     {
         File::put($newShowFile, str_replace('%%formHeadingHtml%%', $this->formHeadingHtml, File::get($newShowFile)));
         File::put($newShowFile, str_replace('%%formBodyHtmlForShowView%%', $this->formBodyHtmlForShowView, File::get($newShowFile)));
+        File::put($newShowFile, str_replace('%%crudName%%', $this->crudName, File::get($newShowFile)));
         File::put($newShowFile, str_replace('%%crudNameSingular%%', $this->crudNameSingular, File::get($newShowFile)));
         File::put($newShowFile, str_replace('%%crudNameCap%%', $this->crudNameCap, File::get($newShowFile)));
         File::put($newShowFile, str_replace('%%modelName%%', $this->modelName, File::get($newShowFile)));
         File::put($newShowFile, str_replace('%%primaryKey%%', $this->primaryKey, File::get($newShowFile)));
-        File::put($newShowFile, str_replace('%%crudName%%', $this->crudName, File::get($newShowFile)));
+        File::put($newShowFile, str_replace('%%viewName%%', $this->viewName, File::get($newShowFile)));
         File::put($newShowFile, str_replace('%%routeGroup%%', $this->routeGroup, File::get($newShowFile)));
 
     }
@@ -378,7 +391,7 @@ EOD;
     /**
      * Form field generator.
      *
-     * @param  string $item
+     * @param  array $item
      *
      * @return string
      */
@@ -395,6 +408,12 @@ EOD;
             case 'radio':
                 return $this->createRadioField($item);
                 break;
+            case 'select':
+                return $this->createSelectField($item);
+                break;
+            case 'enum':
+                return $this->createEnumField($item);
+                break;
             default: // text
                 return $this->createFormField($item);
         }
@@ -403,7 +422,7 @@ EOD;
     /**
      * Create a specific field using the form helper.
      *
-     * @param  string $item
+     * @param  array $item
      *
      * @return string
      */
@@ -420,7 +439,7 @@ EOD;
     /**
      * Create a password field using the form helper.
      *
-     * @param  string $item
+     * @param  array $item
      *
      * @return string
      */
@@ -437,7 +456,7 @@ EOD;
     /**
      * Create a generic input field using the form helper.
      *
-     * @param  string $item
+     * @param  array $item
      *
      * @return string
      */
@@ -454,7 +473,7 @@ EOD;
     /**
      * Create a yes/no radio button group using the form helper.
      *
-     * @param  string $item
+     * @param  array $item
      *
      * @return string
      */
@@ -471,5 +490,39 @@ EOD;
 EOD;
 
         return $this->wrapField($item, sprintf($field, $item['name']));
+    }
+
+    /**
+     * Create a select field using the form helper.
+     *
+     * @param  array $item
+     *
+     * @return string
+     */
+    protected function createSelectField($item)
+    {
+        $required = ($item['required'] === true) ? ", 'required' => 'required'" : "";
+
+        return $this->wrapField(
+            $item,
+            "{!! Form::select('" . $item['name'] . "', [], null, ['class' => 'form-control'$required]) !!}"
+        );
+    }
+
+    /**
+     * Create an enum field using the form helper.
+     *
+     * @param  array  $item
+     *
+     * @return string
+     */
+    protected function createEnumField($item)
+    {
+        $required = ($item['required'] === true) ? ", 'required' => 'required'" : "";
+
+        return $this->wrapField(
+            $item,
+            "{!! Form::select('" . $item['name'] . "', get_enum_values('" . $this->modelName . "', '" . $item['name'] . "'), null, ['class' => 'form-control'$required]) !!}"
+        );
     }
 }

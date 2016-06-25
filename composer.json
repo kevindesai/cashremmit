@@ -31,7 +31,8 @@
     },
     "autoload-dev": {
         "classmap": [
-            "tests/TestCase.php"
+            "tests/TestCase.php",
+            "app/Http/Controllers/API/UsersAPIController.php"
         ]
     },
     "scripts": {

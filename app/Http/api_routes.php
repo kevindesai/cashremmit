@@ -9,5 +9,5 @@
 |
 */
 
-
-
+Route::resource('users', 'UsersAPIController');
+//Route::resource('users/register', 'UsersAPIController@register');
