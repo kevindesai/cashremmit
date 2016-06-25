@@ -88,7 +88,7 @@
 
     <div class="form-group">
         <div class="col-sm-offset-3 col-sm-3">
-            {!! Form::submit('Update', ['class' => 'btn btn-primary form-control']) !!}
+            {!! Form::submit('Update', ['class' => 'btn btn-primary form-control save']) !!}
         </div>
     </div>
     {!! Form::close() !!}
@@ -107,8 +107,7 @@
 		}
 	};
     $(document).ready(function(){
-        $('#myform').parsley().validate();
-        $('#myform').submit(function(e){
+        $('.save').click(function(e){
             $('#myform').parsley().validate();
         });
     });

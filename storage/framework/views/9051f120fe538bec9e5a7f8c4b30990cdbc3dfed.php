@@ -128,14 +128,10 @@
 		}
 	};
     $(document).ready(function(){
-        $('#myform').parsley().validate();
-        $('#myform').submit(function(e){
-//            e.preventDefault();
+        //$('#myform').parsley().validate();
+        $('.save').click(function(e){
+            
             $('#myform').parsley().validate();
-//            if($(this).parsley().valid()){
-//                $(this).submit();
-//            }else{
-//            }
         });
     });
 </script>
