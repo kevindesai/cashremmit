@@ -1,5 +1,8 @@
 var app = angular.module('main-App', ['ngRoute', 'angularUtils.directives.dirPagination']);
-
+//$location.protocol() + "://" + $location.host();
+app.run(function ($rootScope,$location) {
+    $rootScope.baseurl = $location.absUrl();
+});
 app.config(['$routeProvider',
     function($routeProvider) {
         $routeProvider.

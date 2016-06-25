@@ -1,0 +1,44 @@
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body-sl ">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 pl0 pr0 visible-md-* visible-lg-* visible-sm-* hidden-xs">
+                            <img src="images/popup.jpg" class="img-responsive">
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                            <div class="sl-tab">
+                                <!-- Nav tabs -->
+                                <div class="center-sl">
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <!--						<li role="presentation" class="active"><a href="#login" ng-click = "setActiveTab(1)" aria-controls="login" role="tab" data-toggle="tab">Login</a></li>
+                                                                                        <li role="presentation"><a href="#singup" ng-click = "setActiveTab(2)" aria-controls="singup" role="tab" data-toggle="tab">Singup</a></li>-->
+                                        <li ng-class ="{'active': activeTab == 1}" role="presentation" class="active"><a href="" ng-click = "setActiveTab(1)" aria-controls="login" role="tab" data-toggle="tab">Login</a></li>
+                                        <li ng-class ="{'active': activeTab == 2}" role="presentation"><a href="" ng-click = "setActiveTab(2)" aria-controls="singup" role="tab" data-toggle="tab">Singup</a></li>
+                                    </ul>
+                                </div>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" ng-class ="{'tab-pane active': activeTab == 1,'tab-pane': activeTab !== 1}" id="login">
+                                        <login-form></login-form>
+                                    </div>
+                                    <div role="tabpanel" ng-class ="{'tab-pane active': activeTab == 2,'tab-pane': activeTab !== 2}" id="singup">
+                                        <reg-form></reg-form> 
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

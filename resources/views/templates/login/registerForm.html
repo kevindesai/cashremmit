@@ -1,0 +1,39 @@
+<div class="sl-inner">
+    <h3 class="sl-lg-title">Singup For Free</h3>
+    <form name="userForm" ng-submit="registerUser()" novalidate>
+
+        <!-- EMAIL -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }"> 
+            <input type="email" name="email" class="form-control" placeholder="Enter your email" ng-model="formInfo.email" required>
+            <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
+        </div>    
+
+        <!-- Password -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine }">
+            <input type="password" name="password" class="form-control" ng-model="formInfo.password" placeholder="Create Your Password" required>
+            <p ng-show="userForm.password.$invalid && !userForm.password.$pristine" class="help-block">Your password is required.</p>
+        </div>
+
+        <!-- USERNAME -->
+        <div class="form-group sl-names-1" ng-class="{ 'has-error' : userForm.first_name.$invalid && !userForm.first_name.$pristine }">
+            <input type="text" name="first_name" class="form-control" ng-model="formInfo.first_name" placeholder="First Name" ng-minlength="3" ng-maxlength="8" required>
+            <p ng-show="userForm.first_name.$error.minlength" class="help-block">First name is too short.</p>
+            <p ng-show="userForm.first_name.$error.maxlength" class="help-block">First name is too long.</p>
+        </div>
+        <div class="form-group sl-names-2" ng-class="{ 'has-error' : userForm.last_name.$invalid && !userForm.last_name.$pristine }">
+            <input type="text" name="last_name" class="form-control" ng-model="formInfo.last_name" placeholder="Last Name" ng-minlength="3" ng-maxlength="8" required>
+            <p ng-show="userForm.last_name.$error.minlength" class="help-block">Last name is too short.</p>
+            <p ng-show="userForm.last_name.$error.maxlength" class="help-block">Last name is too long.</p>
+        </div> 
+        <button type="submit" ng-disabled="userForm.$invalid" ng-click="registerUser()" class="btn btn-primary form-submit">Singup</button>
+    </form>
+    <p class="or">Or singup with</p>
+    <div class="l-with">
+        <a href="" class="sl-fb"><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a>
+        <a href="" class="sl-gp"><i class="fa fa-google-plus" aria-hidden="true"></i> Gmail</a>
+    </div>
+    <div class="clearfix"></div>
+    <div class="sl-msg">
+        <p><i class="fa fa-lock" aria-hidden="true"></i> 100% SECURE & AUTH AUTHORISED</p>
+    </div>
+</div>
