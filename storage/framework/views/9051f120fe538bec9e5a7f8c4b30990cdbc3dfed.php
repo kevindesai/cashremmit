@@ -1,5 +1,4 @@
 <?php $__env->startSection('content'); ?>
-<div class="container">
 
     <h1>Create New User</h1>
     <hr/>
@@ -115,7 +114,6 @@
 
 
 
-</div>
 <script>
     window.ParsleyConfig = {
     	  successClass: 'has-success'
@@ -130,7 +128,6 @@
     $(document).ready(function(){
         //$('#myform').parsley().validate();
         $('.save').click(function(e){
-            
             $('#myform').parsley().validate();
         });
     });

@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
 
     <h1>Edit User </h1>
 
@@ -94,7 +93,6 @@
     {!! Form::close() !!}
 
 
-</div>
 <script>
     window.ParsleyConfig = {
     	  successClass: 'has-success'
