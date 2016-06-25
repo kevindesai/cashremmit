@@ -9,7 +9,8 @@
         <meta name="apple-touch-fullscreen" content="yes">
         <meta name="description" content="december Admin Theme">
         <meta name="author" content="KaijuThemes">
-
+        <script src="{{ url('/') }}/assets/js/jquery-1.10.2.min.js"></script> 	
+        <script src="{{ url('/') }}/assets/plugins/form-parsley/parsley.js"></script>   
         <link type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600,700' rel='stylesheet'>
 
         <link href="{{ url('/') }}/assets/fonts/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">         Font Awesome 
@@ -299,7 +300,7 @@
 <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script> -->
 
-        <script src="{{ url('/') }}/assets/js/jquery-1.10.2.min.js"></script> 							<!-- Load jQuery -->
+        <!-- Load jQuery -->
         <script src="{{ url('/') }}/assets/js/jqueryui-1.10.3.min.js"></script> 							<!-- Load jQueryUI -->
         <script src="{{ url('/') }}/assets/js/bootstrap.min.js"></script> 	
         <!-- End loading page level scripts-->
@@ -341,6 +342,7 @@
         <script src="{{ url('/') }}/assets/plugins/form-daterangepicker/moment.min.js"></script>              <!-- Moment.js for Date Range Picker -->
 
         <script src="{{ url('/') }}/assets/plugins/form-daterangepicker/daterangepicker.js"></script>     	<!-- Date Range Picker -->
+          	<!-- Date Range Picker -->
 
 
         <script src="{{ url('/') }}/assets/demo/demo-index.js"></script> 									<!-- Initialize scripts for this page-->
