@@ -3,10 +3,10 @@ var app = angular.module('main-App', ['ngRoute', 'angularUtils.directives.dirPag
 app.run(function($rootScope, $location) {
     console.log($location.absUrl());
     $rootScope.baseurl = $location.absUrl();
-    $rootScope.baseurl = $rootScope.baseurl.replace("/#","");
-    console.log($rootScope.baseurl);
-    $rootScope.RegitrationApi = $rootScope.baseurl + 'public/api/v1/users';
-    $rootScope.loginApi = $rootScope.baseurl + 'public/api/v1/users/login';
+    $rootScope.apiUrl = $rootScope.baseurl.replace("/#","");
+    console.log($rootScope.apiUrl);
+    $rootScope.RegitrationApi = $rootScope.apiUrl + 'public/api/v1/users';
+    $rootScope.loginApi = $rootScope.apiUrl + 'public/api/v1/users/login';
 });
 app.config(['$routeProvider',
     function($routeProvider) {
