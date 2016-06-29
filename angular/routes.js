@@ -1,4 +1,6 @@
-var app = angular.module('main-App', ['ngRoute', 'angularUtils.directives.dirPagination']);
+var app = angular.module('main-App', ['ngRoute', 'angularUtils.directives.dirPagination',
+    'facebook','directive.g+signin'
+]);
 //$location.protocol() + "://" + $location.host();
 app.run(function($rootScope, $location) {
     console.log($location.absUrl());
@@ -8,6 +10,10 @@ app.run(function($rootScope, $location) {
     $rootScope.RegitrationApi = $rootScope.apiUrl + 'public/api/v1/users';
     $rootScope.loginApi = $rootScope.apiUrl + 'public/api/v1/users/login';
 });
+
+app.config(function(FacebookProvider){
+        FacebookProvider.init('1022256307853175');
+    });
 app.config(['$routeProvider',
     function($routeProvider) {
         $routeProvider.

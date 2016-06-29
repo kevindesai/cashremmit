@@ -15,9 +15,18 @@
         <button type="submit" ng-disabled="loginForm.$invalid" ng-click="loginUser()" class="btn btn-primary form-submit">Login</button>
     </form>
     <p>Or login with</p>
-    <div class="l-with">
-        <a href="" class="sl-fb"><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a>
-        <a href="" class="sl-gp"><i class="fa fa-google-plus" aria-hidden="true"></i> Gmail</a>
+    <div class="l-with"> 
+        <a href="javascript:void(0);" class="sl-fb" ng-click="fblogin()">
+            <i class="fa">Facebook</i>
+        </a>
+                           
+        <google-plus-signin clientid="230545741792-rocc0nj7fdv31vihh9ft7sscn6igbse6.apps.googleusercontent.com" autorender="false" customtargetid="my-custom-element">
+            <a href="javascript:void(0);" id="my-custom-element" class="sl-gp">
+                <i class="fa"></i>Gmail</a>
+        </google-plus-signin>
+                      
+<!--        <a href="" class="sl-fb"><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a>
+        <a href="" class="sl-gp"><i class="fa fa-google-plus" aria-hidden="true"></i> Gmail</a>-->
     </div>
     <div class="clearfix"></div>
     <div class="sl-msg">
