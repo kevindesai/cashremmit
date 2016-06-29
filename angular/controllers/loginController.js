@@ -1,6 +1,6 @@
  
 
-app.controller('AdminController', function($scope, $http, $location, myFactory, constant) {
+app.controller('AdminController', function($scope, $http, $location, myFactory,$rootScope) {
  
     $scope.activeTab = 1;
     $scope.setActiveTab = function(tabToSet) {
@@ -9,8 +9,9 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
     $scope.formInfo = {};
 
     $scope.registerUser = function() {
+        console.log($rootScope.RegitrationApi);
         var method = 'POST';
-        var url = constant.RegitrationApi;
+        var url = $rootScope.RegitrationApi;
         var data = $scope.formInfo;
         var response = myFactory.httpMethodCall(method, url, data);
         response.success(function(data) {
@@ -29,14 +30,16 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
     };
      
     $scope.loginUser = function() {
-         console.log($scope.loginInfo);
+       
         var method = 'POST';
-        var url = constant.loginApi;
+        var url = $rootScope.loginApi;
         var data = $scope.loginInfo;
         var response = myFactory.httpMethodCall(method, url, data);
         response.success(function(data) {
             // success callback
             if (data.status == 1) {
+//                $localStorage.first_name = data.data.first_name;
+//                $localStorage.last_name = data.data.first_name;
                 console.log(data);
                 $location.path('/payment');
             } else {

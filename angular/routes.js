@@ -1,7 +1,12 @@
 var app = angular.module('main-App', ['ngRoute', 'angularUtils.directives.dirPagination']);
 //$location.protocol() + "://" + $location.host();
-app.run(function ($rootScope,$location) {
+app.run(function($rootScope, $location) {
+    console.log($location.absUrl());
     $rootScope.baseurl = $location.absUrl();
+    $rootScope.baseurl = $rootScope.baseurl.replace("/#","");
+    console.log($rootScope.baseurl);
+    $rootScope.RegitrationApi = $rootScope.baseurl + 'public/api/v1/users';
+    $rootScope.loginApi = $rootScope.baseurl + 'public/api/v1/users/login';
 });
 app.config(['$routeProvider',
     function($routeProvider) {
