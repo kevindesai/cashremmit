@@ -2,11 +2,12 @@ var app = angular.module('main-App', ['ngRoute', 'angularUtils.directives.dirPag
     'facebook','directive.g+signin'
 ]);
 //$location.protocol() + "://" + $location.host();
-app.run(function($rootScope, $location) {
-    console.log($location.absUrl());
+app.run(function($rootScope, $location) { 
     $rootScope.baseurl = $location.absUrl();
     $rootScope.apiUrl = $rootScope.baseurl.replace("/#","");
-    console.log($rootScope.apiUrl);
+    if(!localStorage.getItem('user_email')){
+        $rootScope.userData = {};
+    } 
     $rootScope.RegitrationApi = $rootScope.apiUrl + 'public/api/v1/users';
     $rootScope.loginApi = $rootScope.apiUrl + 'public/api/v1/users/login';
 });
@@ -47,7 +48,7 @@ app.config(['$routeProvider',
                 }).
                 when('/accountSetting', {
                     templateUrl: 'resources/views/templates/account-setting.html',
-                    controller: 'AdminController'
+                    controller: 'AccountSettingController'
                 }).
                 when('/beneficiaries', {
                     templateUrl: 'resources/views/templates/Beneficiaries.html',
