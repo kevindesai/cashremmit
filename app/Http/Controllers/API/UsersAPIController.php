@@ -115,10 +115,20 @@ class UsersAPIController extends Controller {
 
         $user = User::findOrFail($id);
         $user->update($request->all());
-
-        Session::flash('flash_message', 'User updated!');
-
-        return redirect('users');
+        if ($user) {
+            $response = array(
+                'status' => '1',
+                'data' => $user->toArray(),
+                'message' => 'User updated successfully'
+            );
+        } else {
+            $response = array(
+                'status' => '0',
+                'data' => array(),
+                'message' => 'Some error occurs,try again letter.'
+            );
+        }
+        return json_encode($response);
     }
 
     /**
