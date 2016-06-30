@@ -40,9 +40,12 @@ class UsersAPIController extends Controller {
 //        return $this->sendResponse($user->toArray(), 'User registered successfully');
     }
 
-    public function login() {
-        $email = isset($_POST['email']) ? $_POST['email'] : '';
-        $password = isset($_POST['password']) ? $_POST['password'] : '';
+    public function login(Request $request) {
+        $input = $request->all();
+//        print_r($input);
+//        print_r($_POST);die;
+        $email = isset($input['email']) ? $input['email'] : '';
+        $password = isset($input['password']) ? $input['password'] : '';
         try {
             $user = User::where('email', $email)->first();
         } catch (Exception $e) {

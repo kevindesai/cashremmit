@@ -24,6 +24,7 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
      */
     $scope.loginUser = function() { 
         var data = $scope.loginInfo;
+        console.log($scope.loginInfo);
         $scope.loginMember(data); 
     };
     /*
@@ -67,7 +68,7 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
             // success callback
             if (data.status == 1) {
                 $scope.loginData = data.data;
-                    localStorage.setItem('user_id', $scope.loginData.user_id);
+                localStorage.setItem('user_id', $scope.loginData.user_id);
                 localStorage.setItem('user_email', $scope.loginData.email);
                 localStorage.setItem('user_token', $scope.loginData.token);
                 localStorage.setItem('first_name', $scope.loginData.first_name);
@@ -84,7 +85,12 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
         });
     }
     
-    
+    /*
+     * update User
+     */
+    $scope.updateUser = function(userData){
+        
+    }
     $scope.invalidUser = false;
     $scope.hideLoginBtn = false;
      

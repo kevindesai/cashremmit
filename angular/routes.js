@@ -22,15 +22,15 @@ app.config(['$routeProvider',
                     controller: 'AdminController'
                 }).
                 when('/payment', {
-                    templateUrl: 'resources/views/templates/payment_transfar.html',
+                    templateUrl: 'resources/views/templates/payment/payment_transfar.html',
                     controller: 'PaymentController'
                 }).
                 when('/payment1', {
-                    templateUrl: 'resources/views/templates/payment_transfar-1.html',
+                    templateUrl: 'resources/views/templates/payment/payment_transfar-1.html',
                     controller: 'PaymentController'
                 }).
                 when('/payment2', {
-                    templateUrl: 'resources/views/templates/payment_transfar-2.html',
+                    templateUrl: 'resources/views/templates/payment/payment_transfar-2.html',
                     controller: 'PaymentController'
                 }).
                 when('/report', {
@@ -47,7 +47,7 @@ app.config(['$routeProvider',
                 }).
                 when('/accountSetting', {
                     templateUrl: 'resources/views/templates/account-setting.html',
-                    controller: 'AccountSettingController'
+                    controller: 'AdminController'
                 }).
                 when('/beneficiaries', {
                     templateUrl: 'resources/views/templates/Beneficiaries.html',
