@@ -1,7 +1,6 @@
 
 
-app.controller('AdminController', function($scope, $http, $location, myFactory, $rootScope,Facebook) {
-
+app.controller('AdminController', function($scope, $http, $location, myFactory, $rootScope,Facebook) { 
     $scope.activeTab = 1;
     $scope.setActiveTab = function(tabToSet) {
         $scope.activeTab = tabToSet;
@@ -37,13 +36,13 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
         response.success(function(data) {
             // success callback
             if (data.status == 1) {
-                $scope.loginData = data.data;
-                localStorage.setItem('user_id', $scope.loginData.user_id);
-                localStorage.setItem('user_email', $scope.loginData.email);
-                localStorage.setItem('user_token', $scope.loginData.token);
-                localStorage.setItem('first_name', $scope.loginData.first_name);
-                localStorage.setItem('last_name', $scope.loginData.last_name); 
-                console.log($scope.loginData);
+                $rootScope.userData = data.data; 
+                localStorage.setItem('user_id', $rootScope.userData.user_id);
+                localStorage.setItem('user_email', $rootScope.userData.email);
+                localStorage.setItem('user_token', $rootScope.userData.token);
+                localStorage.setItem('first_name', $rootScope.userData.first_name);
+                localStorage.setItem('last_name', $rootScope.userData.last_name); 
+                console.log($rootScope.userData);
                 $location.path('/payment');
             } else {
                 console.log("else");
@@ -66,13 +65,13 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
         response.success(function(data) {
             // success callback
             if (data.status == 1) {
-                $scope.loginData = data.data;
-                    localStorage.setItem('user_id', $scope.loginData.user_id);
-                localStorage.setItem('user_email', $scope.loginData.email);
-                localStorage.setItem('user_token', $scope.loginData.token);
-                localStorage.setItem('first_name', $scope.loginData.first_name);
-                localStorage.setItem('last_name', $scope.loginData.last_name); 
-                console.log($scope.loginData);
+                $rootScope.userData = data.data;
+                    localStorage.setItem('user_id', $rootScope.userData.user_id);
+                localStorage.setItem('user_email', $rootScope.userData.email);
+                localStorage.setItem('user_token', $rootScope.userData.token);
+                localStorage.setItem('first_name', $rootScope.userData.first_name);
+                localStorage.setItem('last_name', $rootScope.userData.last_name); 
+                console.log($rootScope.userData);
                 $location.path('/payment');
             } else {
                 console.log("else");

@@ -137,7 +137,8 @@ app.controller('TransfarDetailController', function($scope, $http) {
     console.log("TransfarDetailController");
 
 });
-app.controller('AccountSettingController', function($scope, $http) {
+app.controller('AccountSettingController', function($scope, $http,$rootScope) {
+    console.log($rootScope.userData);
     console.log("account-setting");
 
 });

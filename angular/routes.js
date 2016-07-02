@@ -2,11 +2,12 @@ var app = angular.module('main-App', ['ngRoute', 'angularUtils.directives.dirPag
     'facebook','directive.g+signin'
 ]);
 //$location.protocol() + "://" + $location.host();
-app.run(function($rootScope, $location) {
-    console.log($location.absUrl());
+app.run(function($rootScope, $location) { 
     $rootScope.baseurl = $location.absUrl();
     $rootScope.apiUrl = $rootScope.baseurl.replace("/#","");
-    console.log($rootScope.apiUrl);
+    if(!localStorage.getItem('user_email')){
+        $rootScope.userData = {};
+    } 
     $rootScope.RegitrationApi = $rootScope.apiUrl + 'public/api/v1/users';
     $rootScope.loginApi = $rootScope.apiUrl + 'public/api/v1/users/login';
 });
@@ -22,15 +23,15 @@ app.config(['$routeProvider',
                     controller: 'AdminController'
                 }).
                 when('/payment', {
-                    templateUrl: 'resources/views/templates/payment_transfar.html',
+                    templateUrl: 'resources/views/templates/payment/payment_transfar.html',
                     controller: 'PaymentController'
                 }).
                 when('/payment1', {
-                    templateUrl: 'resources/views/templates/payment_transfar-1.html',
+                    templateUrl: 'resources/views/templates/payment/payment_transfar-1.html',
                     controller: 'PaymentController'
                 }).
                 when('/payment2', {
-                    templateUrl: 'resources/views/templates/payment_transfar-2.html',
+                    templateUrl: 'resources/views/templates/payment/payment_transfar-2.html',
                     controller: 'PaymentController'
                 }).
                 when('/report', {
