@@ -11,25 +11,31 @@ app.factory('userService', ['$rootScope', function($rootScope) {
          */
         userData.saveDataInSession = function(userInfo) {
             userData.userInfo = userInfo;
-            localStorage.setItem('user_id', userData.userInfo.user_id);
-            localStorage.setItem('email', userData.userInfo.email);
-            localStorage.setItem('token', userData.userInfo.token);
-            localStorage.setItem('first_name', userData.userInfo.first_name);
-            localStorage.setItem('last_name', userData.userInfo.last_name);
-            localStorage.setItem('building_name', userData.userInfo.building_name);
-            localStorage.setItem('city', userData.userInfo.city);
-            localStorage.setItem('country', userData.userInfo.country);
-            localStorage.setItem('landline_no', userData.userInfo.landline_no);
-            localStorage.setItem('mobile_no ', userData.userInfo.mobile_no);
-            localStorage.setItem('post_code', userData.userInfo.post_code);
-            localStorage.setItem('region', userData.userInfo.region);
-            localStorage.setItem('street', userData.userInfo.street);
-            localStorage.setItem('unit_no', userData.userInfo.unit_no);
+            for (var x in userData.userInfo) {
+                localStorage.setItem(x, userData.userInfo[x]);
+            }
+//            localStorage.setItem('id', userData.userInfo.id);
+//            localStorage.setItem('email', userData.userInfo.email);
+//            localStorage.setItem('token', userData.userInfo.token);
+//            localStorage.setItem('first_name', userData.userInfo.first_name);
+//            localStorage.setItem('last_name', userData.userInfo.last_name);
+//            localStorage.setItem('building_name', userData.userInfo.building_name);
+//            localStorage.setItem('city', userData.userInfo.city);
+//            localStorage.setItem('country', userData.userInfo.country);
+//            localStorage.setItem('landline_no', userData.userInfo.landline_no);
+//            localStorage.setItem('mobile_no ', userData.userInfo.mobile_no);
+//            localStorage.setItem('post_code', userData.userInfo.post_code);
+//            localStorage.setItem('region', userData.userInfo.region);
+//            localStorage.setItem('street', userData.userInfo.street);
+//            localStorage.setItem('unit_no', userData.userInfo.unit_no);
 //            console.log(userData.userInfo);
             return userData.userInfo;
         }
+        /*
+         * get all data from session
+         */
         userData.getDataFromSession = function() {
-            userData.userInfo.user_id = localStorage.getItem('user_id');
+            userData.userInfo.id = localStorage.getItem('id');
             userData.userInfo.email = localStorage.getItem('email');
             userData.userInfo.token = localStorage.getItem('token');
             userData.userInfo.first_name = localStorage.getItem('first_name');
@@ -51,41 +57,28 @@ app.factory('userService', ['$rootScope', function($rootScope) {
          * @param {type} value : value which is set to user
          * @returns {undefined} : return new updated value of that key
          */
-        userData.UpdateInfo = function(key, value) { 
-            localStorage.setItem(key, value);
-            userData.userInfo.key = value;
-            return userData.userInfo;
+//        userData.UpdateInfo = function(key, value) { 
+//            localStorage.setItem(key, value);
+//            userData.userInfo.key = value;
+//            return userData.userInfo;
+//        }
+        /*
+         * update info of user in localstorage
+         */
+        userData.UpdateInfo = function(updatedInformation) {
+//            var keys = Object.keys(updatedInformation);
+            var arr = [];
+            for (var x in updatedInformation) {
+                localStorage.setItem(x, updatedInformation[x]);
+                userData.userInfo.x = updatedInformation[x];
+                arr[x] = updatedInformation[x];
+            }
+            return arr;
         }
 
         return userData;
 
-    }]);
-
-//app.factory('userService', ['$rootScope', function ($rootScope) {
-//
-//    var service = {
-//
-//        model: {
-//            name: '',
-//            email: ''
-//        },
-//
-//        SaveState: function () {
-//            sessionStorage.userService = angular.toJson(service.model);
-//        },
-//
-//        RestoreState: function () {
-//            service.model = angular.fromJson(sessionStorage.userService);
-//        }
-//    }
-//
-//    $rootScope.$on("savestate", service.SaveState);
-//    $rootScope.$on("restorestate", service.RestoreState);
-//
-//    return service;
-//}]);
-
-
+    }]); 
 app.factory('dataFactory', function($http) {
     var myService = {
         httpRequest: function(url, method, params, dataPost, upload) {

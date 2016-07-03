@@ -23,11 +23,10 @@
                         <p class="change-name">Flat/Unit No:</p>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-10 pr0">
-                        <p class="change-value" ng-bind="userInfo.unit_no"> </p> 
+                        <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.unit_no"> </p> 
+                        <input type="text" class="change-value"  ng-model="userInfo.unit_no" ng-show="isupdate" />
                     </div>
-                    <div class="col-md-2 col-sm-2 col-xs-2 col-xs-2">
-                        <p class="change-link"><a href=""  data-toggle="modal" data-target=".update"><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
-                    </div>
+
                 </div>
 
                 <div class="row change-items">
@@ -35,11 +34,10 @@
                         <p class="change-name">Bulilding No./Name</p>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-10 pr0">
-                        <p class="change-value">revenslea court</p>
+                        <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.building_name"> </p> 
+                        <input type="text" class="change-value"  ng-model="userInfo.building_name" ng-show="isupdate" /> 
                     </div>
-                    <div class="col-md-2 col-sm-2 col-xs-2">
-                        <p class="change-link"><a href="" data-toggle="modal" data-target=".update"><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
-                    </div>
+
                 </div>
 
                 <div class="row change-items">
@@ -47,11 +45,10 @@
                         <p class="change-name">City or Suburb:</p>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-10 pr0">
-                        <p class="change-value">perth</p>
+                        <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.city"> </p> 
+                        <input type="text" class="change-value"  ng-model="userInfo.city" ng-show="isupdate" /> 
                     </div>
-                    <div class="col-md-2 col-sm-2 col-xs-2">
-                        <p class="change-link"><a href="#" data-toggle="modal" data-target=".update"><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
-                    </div>
+
                 </div>
 
                 <div class="row change-items">
@@ -59,10 +56,8 @@
                         <p class="change-name">Region:</p>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-10 pr0">
-                        <p class="change-value">WA</p>
-                    </div>
-                    <div class="col-md-2 col-sm-2 col-xs-2">
-                        <p class="change-link"><a href="" data-toggle="modal" data-target=".update"><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
+                        <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.region"> </p> 
+                        <input type="text" class="change-value"  ng-model="userInfo.region" ng-show="isupdate" /> 
                     </div>
                 </div>
 
@@ -71,10 +66,8 @@
                         <p class="change-name">Street:</p>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-10 pr0">
-                        <p class="change-value">revenslea</p>
-                    </div>
-                    <div class="col-md-2 col-sm-2 col-xs-2">
-                        <p class="change-link"><a href="" data-toggle="modal" data-target=".update"><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
+                        <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.street"> </p> 
+                        <input type="text" class="change-value" ng-model="userInfo.street" ng-show="isupdate" /> 
                     </div>
                 </div>
 
@@ -83,10 +76,8 @@
                         <p class="change-name">Postcode:</p>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-10 pr0">
-                        <p class="change-value">6147</p>
-                    </div>
-                    <div class="col-md-2 col-sm-2 col-xs-2">
-                        <p class="change-link"><a href="" data-toggle="modal" data-target=".update"><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
+                        <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.post_code"> </p> 
+                        <input type="text" class="change-value" maxlength="6" ng-model="userInfo.post_code" ng-show="isupdate" /> 
                     </div>
                 </div>
 
@@ -95,11 +86,10 @@
                         <p class="change-name">COUNTRY:</p>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-10 pr0">
-                        <p class="change-value">Australia</p>
+                        <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.country"> </p> 
+                        <input type="text" class="change-value"  ng-model="userInfo.country" ng-show="isupdate" /> 
                     </div>
-                    <div class="col-md-2 col-sm-2 col-xs-2">
-                        <p class="change-link"><a href="" data-toggle="modal" data-target=".update"><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
-                    </div>
+
                 </div>
 
                 <div class="row change-items">
@@ -107,11 +97,10 @@
                         <p class="change-name">Date of Birth:</p>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-10 pr0">
-                        <p class="change-value">22/10/1976</p>
+                        <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.dob"> </p> 
+                        <input type="date" pattern="\d{1,2}/\d{1,2}/\d{4}" class="change-value datepicker"  ng-model="userInfo.dob" ng-show="isupdate" /> 
                     </div>
-                    <div class="col-md-2 col-sm-2 col-xs-2">
-                        <p class="change-link"><a href="" data-toggle="modal" data-target=".update"><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
-                    </div>
+
                 </div>
 
                 <div class="row change-items">
@@ -119,10 +108,8 @@
                         <p class="change-name">Mobile Phone:</p>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-10 pr0">
-                        <p class="change-value">+1-457-758-4756</p>
-                    </div>
-                    <div class="col-md-2 col-sm-2 col-xs-2">
-                        <p class="change-link"><a href="" data-toggle="modal" data-target=".update"><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
+                        <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.mobile_no"> </p> 
+                        <input type="number" maxlength="10" class="change-value" ng-model="userInfo.mobile_no" ng-show="isupdate" /> 
                     </div>
                 </div>
 
@@ -131,24 +118,21 @@
                         <p class="change-name">Phone Number:</p>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-10 pr0">
-                        <p class="change-value">+1-457-758-4756</p>
+                        <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.landline_no"> </p> 
+                        <input type="text" maxlength="10" class="change-value" ng-model="userInfo.landline_no" ng-show="isupdate" /> 
                     </div>
-                    <div class="col-md-2 col-sm-2 col-xs-2">
-                        <p class="change-link"><a href="" data-toggle="modal" data-target=".update"><i class="fa fa-pencil" aria-hidden="true"></i></a></p>
-                    </div>
-                </div>
 
+                </div>
+                <div class="upm-btn">
+                    <a href="" ng-click="EditClick()" class="normal-btn yellow-fill up-btn" ng-hide="isupdate">Edit Info</a> 
+                </div>
+                <div class="upm-btn">
+                    <a href="" ng-show="isupdate" class="normal-btn yellow-fill up-btn" ng-click="updateValue(userInfo)">Update Info</a>
+                </div>
             </div>
 
         </div>	
     </div>
 
 </div>
-<my-footer></my-footer>
-
-
-<!----------------------- start model --------------------------------->
-<account-setting-update></account-setting-update>
-
-<!------------------------------ end model --------------------------------->
-
+<my-footer></my-footer> 

@@ -22,7 +22,7 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
      */
     $scope.loginUser = function() {
         var data = $scope.loginInfo;
-        // call loginMember Method
+        // call loginMember Method 
         $scope.loginMember(data);
     };
     /*
@@ -31,6 +31,7 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
     $scope.loginMember = function(SocialUserData) {
         var method = 'POST';
         var url = $rootScope.loginApi;
+         
         var response = myFactory.httpMethodCall(method, url, SocialUserData);
         response.success(function(data) {
             if (data.status == 1) {
