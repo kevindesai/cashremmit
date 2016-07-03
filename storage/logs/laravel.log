@@ -1,0 +1,9 @@
+[2016-07-03 16:04:36] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Maximum execution time of 30 seconds exceeded' in C:\xampp\htdocs\cashremmit\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php:55
+Stack trace:
+#0 {main}  
+[2016-07-03 16:10:03] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Maximum execution time of 30 seconds exceeded' in C:\xampp\htdocs\cashremmit\app\Http\Controllers\API\UsersAPIController.php:121
+Stack trace:
+#0 {main}  
+[2016-07-03 16:40:01] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Maximum execution time of 30 seconds exceeded' in C:\xampp\htdocs\cashremmit\vendor\laravel\framework\src\Illuminate\Database\Connectors\Connector.php:55
+Stack trace:
+#0 {main}  

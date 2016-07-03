@@ -11,7 +11,7 @@ app.run(function($rootScope, $location) {
 //    } 
     $rootScope.RegitrationApi = $rootScope.apiUrl + 'public/api/v1/users';
     $rootScope.loginApi = $rootScope.apiUrl + 'public/api/v1/users/login';
-    $rootScope.updateApi = $rootScope.apiUrl + 'public/api/v1/users/update';
+    $rootScope.updateApi = $rootScope.apiUrl + 'public/api/v1/users';
     console.log($rootScope.loginApi);
 });
 

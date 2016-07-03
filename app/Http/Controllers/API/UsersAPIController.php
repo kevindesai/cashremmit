@@ -115,8 +115,9 @@ class UsersAPIController extends Controller {
      * @return void
      */
     public function update($id, Request $request) {
-
+//        print_r($id);
         $user = User::findOrFail($id);
+//        print_r($user);die;
         $user->update($request->all());
         if ($user) {
             $response = array(
