@@ -1,3 +1,32 @@
+
+////https://github.com/gsklee/ngStorage
+//http://stackoverflow.com/questions/18247130/how-to-store-the-data-to-local-storage
+//http://stackoverflow.com/questions/12940974/maintain-model-of-scope-when-changing-between-views-in-angularjs/16559855#16559855
+app.factory('userService', ['$rootScope', function ($rootScope) {
+
+    var service = {
+
+        model: {
+            name: '',
+            email: ''
+        },
+
+        SaveState: function () {
+            sessionStorage.userService = angular.toJson(service.model);
+        },
+
+        RestoreState: function () {
+            service.model = angular.fromJson(sessionStorage.userService);
+        }
+    }
+
+    $rootScope.$on("savestate", service.SaveState);
+    $rootScope.$on("restorestate", service.RestoreState);
+
+    return service;
+}]);
+
+
 app.factory('dataFactory', function($http) {
     var myService = {
         httpRequest: function(url, method, params, dataPost, upload) {
