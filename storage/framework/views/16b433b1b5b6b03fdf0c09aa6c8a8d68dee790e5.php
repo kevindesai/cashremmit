@@ -1,5 +1,4 @@
 <?php $__env->startSection('content'); ?>
-<div class="container">
 
     <h1>Edit User </h1>
 
@@ -111,7 +110,7 @@
 
     <div class="form-group">
         <div class="col-sm-offset-3 col-sm-3">
-            <?php echo Form::submit('Update', ['class' => 'btn btn-primary form-control']); ?>
+            <?php echo Form::submit('Update', ['class' => 'btn btn-primary form-control save']); ?>
 
         </div>
     </div>
@@ -119,7 +118,6 @@
 
 
 
-</div>
 <script>
     window.ParsleyConfig = {
     	  successClass: 'has-success'
@@ -131,10 +129,14 @@
     		return el.$element.closest(".form-group");
 		}
 	};
-    $(document).ready(function(){
-        $('#myform').parsley().validate();
-        $('#myform').submit(function(e){
-            $('#myform').parsley().validate();
+    $(document).ready(function () {
+        $('.save').click(function (e) {
+            e.preventDefault();
+             var form = $('#myform').parsley();
+             form.validate();
+             if(form.isValid()){
+                 $('#myform').submit();
+             }
         });
     });
 </script>

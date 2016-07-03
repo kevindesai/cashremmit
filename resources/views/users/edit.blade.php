@@ -104,9 +104,14 @@
     		return el.$element.closest(".form-group");
 		}
 	};
-    $(document).ready(function(){
-        $('.save').click(function(e){
-            $('#myform').parsley().validate();
+    $(document).ready(function () {
+        $('.save').click(function (e) {
+            e.preventDefault();
+             var form = $('#myform').parsley();
+             form.validate();
+             if(form.isValid()){
+                 $('#myform').submit();
+             }
         });
     });
 </script>

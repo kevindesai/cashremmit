@@ -40,7 +40,10 @@ Route::group(array('prefix'=>'/templates/'),function(){
     }));
 });
 
-Route::resource('users', 'UsersController');
+Route::group(['middleware' => ['web']], function () {
+    Route::resource('users', 'UsersController');
+});
+//Route::resource('users', 'UsersController');
 
 Route::get('login', array('uses' => 'HomeController@showLogin'));
 // route to process the form

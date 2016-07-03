@@ -110,4 +110,22 @@
     @endif
 
 </div>
+<script>
+    window.ParsleyConfig = {
+    	  successClass: 'has-success'
+		, errorClass: 'has-error'
+		, errorElem: '<span></span>'
+		, errorsWrapper: '<span class="help-block"></span>'
+		, errorTemplate: "<div></div>"
+		, classHandler: function(el) {
+    		return el.$element.closest(".form-group");
+		}
+	};
+    $(document).ready(function(){
+        //$('#myform').parsley().validate();
+        $('.save').click(function(e){
+            $('#myform').parsley().validate();
+        });
+    });
+</script>
 @endsection

@@ -40,19 +40,19 @@ class UsersController extends Controller {
     public function store(Request $request) {
 //        echo $request->first_name;die;
         $validation = Validator::make(
-                        array(
-                    'first_name' => $request->first_name,
-                    'last_name' => $request->last_name,
-                    'email' => $request->email,
-                        ), array(
+                        $request->all(), array(
                     'first_name' => array('required', 'alpha_dash'),
                     'last_name' => array('required', 'alpha_dash'),
                     'email' => array('required', 'email'),
+                    'city' => array('required'),
+                    'post_code' => array('required'),
+                    'country' => array('required'),
                         )
         );
-
         if ($validation->fails()) {
-            return $validation->messages();
+            return redirect('users/create')
+                        ->withErrors($validation)
+                        ->withInput();
         }
 
         User::create($request->all());
@@ -97,7 +97,24 @@ class UsersController extends Controller {
      */
     public function update($id, Request $request) {
 
+        $validation = Validator::make(
+                        $request->all(), array(
+                    'first_name' => array('required', 'alpha_dash'),
+                    'last_name' => array('required', 'alpha_dash'),
+                    'email' => array('required', 'email'),
+                    'city' => array('required'),
+                    'post_code' => array('required'),
+                    'country' => array('required'),
+                        )
+        );
+        if ($validation->fails()) {
+//            return $validation->messages();
+            return redirect('users/'.$id.'/edit')
+                        ->withErrors($validation)
+                        ->withInput();
+        }
         $user = User::findOrFail($id);
+        
         $user->update($request->all());
 
         Session::flash('flash_message', 'User updated!');
