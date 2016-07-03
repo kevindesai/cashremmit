@@ -1,6 +1,7 @@
 
 
-app.controller('AdminController', function($scope, $http, $location, myFactory, $rootScope,Facebook) { 
+app.controller('AdminController', function($scope, $http, $location, myFactory, $rootScope, Facebook, userService) {
+    // tabular
     $scope.activeTab = 1;
     $scope.setActiveTab = function(tabToSet) {
         $scope.activeTab = tabToSet;
@@ -11,38 +12,30 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
      * @returns {undefined}
      */
     $scope.registerUser = function() {
-        console.log($rootScope.RegitrationApi); 
-        var data = $scope.formInfo;
-        console.log($scope.formInfo);
-//        return false;
-         $scope.addUser(data);
+        var data = $scope.formInfo;  
+        //call addUser Method
+        $scope.addUser(data);
     };
     /*
      * Normal Loginn
      * @returns {undefined}
      */
-    $scope.loginUser = function() { 
+    $scope.loginUser = function() {
         var data = $scope.loginInfo;
-        $scope.loginMember(data); 
+        // call loginMember Method
+        $scope.loginMember(data);
     };
     /*
-     * if user is new then it will be called
-     * Add user
+     * login functionality
      */
     $scope.loginMember = function(SocialUserData) {
         var method = 'POST';
         var url = $rootScope.loginApi;
-            var response = myFactory.httpMethodCall(method, url, SocialUserData);
+        var response = myFactory.httpMethodCall(method, url, SocialUserData);
         response.success(function(data) {
-            // success callback
             if (data.status == 1) {
-                $rootScope.userData = data.data; 
-                localStorage.setItem('user_id', $rootScope.userData.user_id);
-                localStorage.setItem('user_email', $rootScope.userData.email);
-                localStorage.setItem('user_token', $rootScope.userData.token);
-                localStorage.setItem('first_name', $rootScope.userData.first_name);
-                localStorage.setItem('last_name', $rootScope.userData.last_name); 
-                console.log($rootScope.userData);
+                $rootScope.userData = data.data;
+                userService.saveDataInSession(data.data);
                 $location.path('/payment');
             } else {
                 console.log("else");
@@ -53,10 +46,10 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
             console.log(error);
         });
     }
-    
+
     /*
-     * login user
-     * if user exists then it will call
+     * New User add 
+     * if user exists then it will return negative response
      */
     $scope.addUser = function(SocialUserData) {
         var method = 'POST';
@@ -66,12 +59,7 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
             // success callback
             if (data.status == 1) {
                 $rootScope.userData = data.data;
-                    localStorage.setItem('user_id', $rootScope.userData.user_id);
-                localStorage.setItem('user_email', $rootScope.userData.email);
-                localStorage.setItem('user_token', $rootScope.userData.token);
-                localStorage.setItem('first_name', $rootScope.userData.first_name);
-                localStorage.setItem('last_name', $rootScope.userData.last_name); 
-                console.log($rootScope.userData);
+                userService.saveDataInSession(data.data);
                 $location.path('/payment');
             } else {
                 console.log("else");
@@ -82,11 +70,11 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
             console.log(error);
         });
     }
-    
-    
+
+
     $scope.invalidUser = false;
     $scope.hideLoginBtn = false;
-     
+
     $scope.callforgotPassword = function() {
         //console.log($scope.forgot);
         var arr = {};
@@ -118,7 +106,7 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
     }
     $scope.loginStatus = 'disconnected';
     $scope.facebookIsReady = false;
-    $scope.user = null; 
+    $scope.user = null;
     $scope.fblogin = function() {
 
         Facebook.login(function(response) {
@@ -170,7 +158,7 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
         GooData.first_name = $scope.userDataGoogle.Za;
         GooData.last_name = $scope.userDataGoogle.Na;
         GooData.email = $scope.userDataGoogle.hg;
-        GooData.gmail_token_id = $scope.userDataGoogle.Ka   ;
+        GooData.gmail_token_id = $scope.userDataGoogle.Ka;
         console.log(GooData);
 //        return false;
         $scope.addUser(GooData);
@@ -179,7 +167,7 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
         // User has not authorized the G+ App!
         console.log('Not signed into Google Plus.');
     });
-     
-    
+
+
 
 }); 

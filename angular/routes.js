@@ -47,7 +47,7 @@ app.config(['$routeProvider',
                     controller: 'TransfarDetailController'
                 }).
                 when('/accountSetting', {
-                    templateUrl: 'resources/views/templates/account-setting.html',
+                    templateUrl: 'resources/views/templates/account-setting/account-setting.html',
                     controller: 'AccountSettingController'
                 }).
                 when('/beneficiaries', {

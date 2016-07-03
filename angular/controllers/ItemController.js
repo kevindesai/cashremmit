@@ -1,126 +1,4 @@
- /*
-  * AdminController added in loginController file
-  */
-//app.controller('AdminController', function($scope, $http, $location, myFactory, constant, $log) {
-//
-////    $log.info($location.absUrl());
-////$log.info($location.protocol() + "://" + $location.host() + ":" + $location.port());
-//    // tabluar for the angular with bootstrap
-//    $scope.activeTab = 1;
-//    $scope.setActiveTab = function(tabToSet) {
-//        $scope.activeTab = tabToSet;
-//    };
-//    $scope.formInfo = {};
-//
-//    $scope.registerUser = function() {
-//        var method = 'POST';
-//        var url = constant.RegitrationApi;
-//        var data = $scope.formInfo;
-//        var response = myFactory.httpMethodCall(method, url, data);
-//        response.success(function(data) {
-//            // success callback
-//            if (data.status == 1) {
-//                $location.path('/payment');
-//                console.log(data);
-//            } else {
-//                console.log("else");
-//                console.log(data);
-//            }
-//        });
-//        response.error(function(error) {
-//            console.log(error);
-//        });
-//    };
-//    $scope.reference = function() {
-//
-//
-//        console.log("test");
-//        console.log($scope.formInfo);
-//        $http({
-//            method: 'POST',
-//            url: 'http://localhost/ang-test/public/api/v1/users',
-//            data: $scope.formInfo, //forms user object
-////            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-//        })
-//                .then(
-//                        function(response) {
-//                            // success callback
-//                            if (response.status == 1) {
-//                                console.log(response);
-//                            } else {
-//                                console.log("else");
-//                                console.log(response);
-//                            }
-//                        },
-//                        function(response) {
-//                            // failure callback
-//                        }
-//                );
-////                .success(function(response) {
-////                    if (response.status == 1) {
-////                        console.log(response);
-////                    } else {
-////                        console.log("else");
-////                        console.log(response);
-////                    }
-////                })
-////                .error(function(data) {
-////                    return data;
-////                });
-//    };
-//    $scope.loginUser = function() {
-//        console.log($scope.formInfo);
-//        $http({
-//            method: 'POST',
-//            url: 'http://localhost/ang-test/public/api/v1/users',
-//            data: $scope.formInfo, //forms user object
-//            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-//        })
-//                .success(function(data) {
-//                    console.log(data);
-//                    if (data.errors) {
-//                        // Showing errors.
-//                        $scope.errorName = data.errors.name;
-//                        $scope.errorUserName = data.errors.username;
-//                        $scope.errorEmail = data.errors.email;
-//                    } else {
-//                        $scope.message = data.message;
-//                    }
-//                })
-//                .error(function(data) {
-//                    return data;
-//                });
-//    };
-//
-//    ////     myFactory.testMethod();
-//    //      // create a blank object to handle form data.
-//    //        $scope.user = {};
-//    //        
-//    //       
-//    //      // calling our submit function.
-//    //        $scope.submitForm = function() {
-//    //        // Posting data to php file
-//    //        $http({
-//    //          method  : 'POST',
-//    //          url     : 'clone.php',
-//    //          data    : $scope.user, //forms user object
-//    //          headers : {'Content-Type': 'application/x-www-form-urlencoded'} 
-//    //         })
-//    //          .success(function(data) {
-//    //            if (data.errors) {
-//    //              // Showing errors.
-//    //              $scope.errorName = data.errors.name;
-//    //              $scope.errorUserName = data.errors.username;
-//    //              $scope.errorEmail = data.errors.email;
-//    //            } else {
-//    //              $scope.message = data.message;
-//    //            }
-//    //          })
-//    //          .error(function(data){
-//    //              return data;
-//    //          });
-//    //        };
-//}); 
+
 app.controller('PaymentController', function($scope, $http) {
     console.log("test");
 
@@ -137,11 +15,11 @@ app.controller('TransfarDetailController', function($scope, $http) {
     console.log("TransfarDetailController");
 
 });
-app.controller('AccountSettingController', function($scope, $http,$rootScope) {
-    console.log($rootScope.userData);
-    console.log("account-setting");
-
-});
+//app.controller('AccountSettingController', function($scope, $http, $rootScope) {
+//    console.log($rootScope.userData);
+//    console.log("account-setting");
+//
+//});
 app.controller('BeneficiariesController', function($scope, $http) {
     console.log("BeneficiariesController");
 

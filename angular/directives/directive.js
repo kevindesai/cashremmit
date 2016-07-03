@@ -35,3 +35,10 @@ app.directive("loginForm", function($timeout)
       templateUrl: 'resources/views/templates/login/loginForm.html',
     }
   });
+app.directive("accountSettingUpdate", function($timeout)
+  {
+    return {
+    	restrict: 'E',
+      templateUrl: 'resources/views/templates/account-setting/account-setting-modal.html',
+    }
+  });
