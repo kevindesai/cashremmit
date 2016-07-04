@@ -13,7 +13,7 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
      */
     $scope.registerUser = function() {
         var data = $scope.formInfo;  
-         $('#myModal').modal('hide');
+         
         //call addUser Method
         $scope.addUser(data);
     };
@@ -24,7 +24,7 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
     $scope.loginUser = function() {
         var data = $scope.loginInfo;
         // call loginMember Method 
-        $('#myModal').modal('hide');
+        
         $scope.loginMember(data);
     };
     /*
@@ -39,10 +39,10 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
             if (data.status == 1) {
                 $rootScope.userData = data.data;
                 userService.saveDataInSession(data.data);
+                $('#myModal').modal('hide');
                 $location.path('/payment');
-            } else {
-                console.log("else");
-                console.log(data);
+            } else if(data.status==0) {
+                $scope.invalidlogin=true;
             }
         });
         response.error(function(error) {
@@ -63,6 +63,7 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
             if (data.status == 1) {
                 $rootScope.userData = data.data;
                 userService.saveDataInSession(data.data);
+                $('#myModal').modal('hide');
                 $location.path('/payment');
             } else {
                 console.log("else");
