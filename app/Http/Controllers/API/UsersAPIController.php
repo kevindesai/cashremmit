@@ -15,12 +15,38 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Session;
 use Response;
+use Validator;
 
 class UsersAPIController extends Controller {
 
     public function store(Request $request) {
         $input = $request->all();
 
+        $validation = Validator::make(
+                        $request->all(), array(
+                    'first_name' => array('required', 'alpha_dash'),
+                    'last_name' => array('required', 'alpha_dash'),
+                    'email' => array('required', 'email','unique:users'),
+                    'city' => array('required'),
+                    'post_code' => array('required'),
+                    'country' => array('required'),
+                    'password' => array('required'),
+                        )
+        );
+        $data = array();
+        if ($validation->fails()) {
+            $response = array(
+                'status' => '0',
+                'data' => $validation->messages(),
+                'message' => 'Validation error'
+            );
+            return json_encode($response);
+             
+        }
+        $input = $request->all();
+        if (isset($input['password'])) {
+            $input['password'] = base64_encode($input['password']);
+        }
         $user = User::create($input);
 
         if ($user) {
@@ -42,8 +68,6 @@ class UsersAPIController extends Controller {
 
     public function login(Request $request) {
         $input = $request->all();
-//        print_r($input);
-//        print_r($_POST);die;
         $email = isset($input['email']) ? $input['email'] : '';
         $password = isset($input['password']) ? $input['password'] : '';
         try {
@@ -51,17 +75,23 @@ class UsersAPIController extends Controller {
         } catch (Exception $e) {
             
         }
-//        print_r($user->toArray());
         $response = [
-                'status' => 0,
-                'message' => 'invalid username or password'
-            ];
+            'status' => 0,
+            'message' => 'Username does not exist'
+        ];
         if (isset($user) && $user) {
-            $response = [
-                'status' => 1,
-                'message' => 'Login successful',
-                'data' => $user->toArray()
-            ];
+            if (base64_decode($user->password) == $password) {
+                $response = [
+                    'status' => 1,
+                    'message' => 'Login successful',
+                    'data' => $user->toArray()
+                ];
+            } else {
+                $response = [
+                    'status' => 0,
+                    'message' => 'Invalid password'
+                ];
+            }
         }
         return json_encode($response);
     }
@@ -115,10 +145,12 @@ class UsersAPIController extends Controller {
      * @return void
      */
     public function update($id, Request $request) {
-//        print_r($id);
         $user = User::findOrFail($id);
-//        print_r($user);die;
-        $user->update($request->all());
+        $inputs = $request->all();
+        if (isset($inputs['password'])) {
+            $inputs['password'] = base64_encode($inputs['password']);
+        }
+        $user->update($inputs);
         if ($user) {
             $response = array(
                 'status' => '1',
