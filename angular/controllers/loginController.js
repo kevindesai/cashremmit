@@ -13,6 +13,7 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
      */
     $scope.registerUser = function() {
         var data = $scope.formInfo;  
+         $('#myModal').modal('hide');
         //call addUser Method
         $scope.addUser(data);
     };
@@ -23,6 +24,7 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
     $scope.loginUser = function() {
         var data = $scope.loginInfo;
         // call loginMember Method 
+        $('#myModal').modal('hide');
         $scope.loginMember(data);
     };
     /*

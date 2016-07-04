@@ -15,7 +15,7 @@ app.run(function($rootScope, $location) {
     console.log($rootScope.loginApi);
 });
 
-app.config(function(FacebookProvider){
+app.config(function(FacebookProvider){//205637772980180
         FacebookProvider.init('1022256307853175');
     });
 app.config(['$routeProvider',
