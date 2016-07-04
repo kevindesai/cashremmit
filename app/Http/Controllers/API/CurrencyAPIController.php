@@ -16,6 +16,8 @@ use Session;
 use Response;
 use Validator;
 use Exception;
+
+
 class CurrencyAPIController extends Controller {
 
     public function Convert(Request $request) {
