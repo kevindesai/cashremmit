@@ -27,9 +27,9 @@ class UsersAPIController extends Controller {
                     'first_name' => array('required', 'alpha_dash'),
                     'last_name' => array('required', 'alpha_dash'),
                     'email' => array('required', 'email','unique:users'),
-                    'city' => array('required'),
-                    'post_code' => array('required'),
-                    'country' => array('required'),
+//                    'city' => array('required'),
+//                    'post_code' => array('required'),
+//                    'country' => array('required'),
                     'password' => array('required'),
                         )
         );
