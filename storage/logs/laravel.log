@@ -340,3 +340,15 @@ Stack trace:
 #35 C:\wamp64\www\cashremmit\public\index.php(54): Illuminate\Foundation\Http\Kernel->handle()
 #36 C:\wamp64\www\cashremmit\public\index.php(0): {main}()
 #37 {main}  
+[2016-07-04 18:29:42] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Maximum execution time of 30 seconds exceeded' in D:\xampp\htdocs\cashremmit\app\Http\Controllers\API\CurrencyAPIController.php:44
+Stack trace:
+#0 {main}  
+[2016-07-04 18:32:22] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Maximum execution time of 30 seconds exceeded' in D:\xampp\htdocs\cashremmit\app\Http\Controllers\API\CurrencyAPIController.php:44
+Stack trace:
+#0 {main}  
+[2016-07-04 18:32:37] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Maximum execution time of 30 seconds exceeded' in D:\xampp\htdocs\cashremmit\app\Http\Controllers\API\CurrencyAPIController.php:44
+Stack trace:
+#0 {main}  
+[2016-07-04 18:32:39] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Maximum execution time of 30 seconds exceeded' in D:\xampp\htdocs\cashremmit\app\Http\Controllers\API\CurrencyAPIController.php:44
+Stack trace:
+#0 {main}  

@@ -6,6 +6,48 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
     $scope.setActiveTab = function(tabToSet) {
         $scope.activeTab = tabToSet;
     };
+    $scope.fromCur='AUD';
+    $scope.toCur='NGN';
+    $scope.convertCurFromto = function(){
+        var method = 'POST';
+        var url = $rootScope.CurrencyApi;
+        var curData = {};
+        curData.amount = $scope.fromAmount;
+        curData.from = $scope.fromCur;
+        curData.to = $scope.toCur;
+        var response = myFactory.httpMethodCall(method, url, curData);
+        response.success(function(data) {
+            if (data.status == 1) {
+                $scope.toAmount = data.converted;
+            } else if(data.status==0) {
+                
+            }
+        });
+        response.error(function(error) {
+            console.log(error);
+        });
+    }
+    $scope.convertCurtoFrom = function(){
+        var method = 'POST';
+        var url = $rootScope.CurrencyApi;
+        var curData = {};
+        curData.amount = $scope.toAmount;
+        curData.from = $scope.toCur;
+        curData.to = $scope.fromCur;
+        var response = myFactory.httpMethodCall(method, url, curData);
+        response.success(function(data) {
+            if (data.status == 1) {
+                $scope.fromAmount = data.converted;
+            } else if(data.status==0) {
+                
+            }
+        });
+        response.error(function(error) {
+            console.log(error);
+        });
+    }
+    
+
     $scope.formInfo = {};
     /*
      * Normal Registration
@@ -33,7 +75,7 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
     $scope.loginMember = function(SocialUserData) {
         var method = 'POST';
         var url = $rootScope.loginApi;
-         
+         $scope.invalidusername=false;
         var response = myFactory.httpMethodCall(method, url, SocialUserData);
         response.success(function(data) {
             if (data.status == 1) {
@@ -42,7 +84,7 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
                 $('#myModal').modal('hide');
                 $location.path('/payment');
             } else if(data.status==0) {
-                $scope.invalidlogin=true;
+                $scope.invalidusername=true;
             }
         });
         response.error(function(error) {
@@ -55,6 +97,7 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
      * if user exists then it will return negative response
      */
     $scope.addUser = function(SocialUserData) {
+        $scope.registrationerrors=false;
         var method = 'POST';
         var url = $rootScope.RegitrationApi;
         var response = myFactory.httpMethodCall(method, url, SocialUserData);
@@ -65,9 +108,10 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
                 userService.saveDataInSession(data.data);
                 $('#myModal').modal('hide');
                 $location.path('/payment');
-            } else {
-                console.log("else");
-                console.log(data);
+            } else if(data.status==0) {
+                console.log(data.data.email);
+                $scope.registrationerrors=true;
+                $scope.errormessage=data.data.email[0];
             }
         });
         response.error(function(error) {
@@ -171,7 +215,6 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
         // User has not authorized the G+ App!
         console.log('Not signed into Google Plus.');
     });
-
 
 
 }); 

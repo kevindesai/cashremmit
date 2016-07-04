@@ -1,5 +1,7 @@
 <div class="sl-inner">
     <h3 class="sl-lg-title">Login to Cash Remit</h3>
+    
+    <div class="alert alert-danger" role="alert" ng-if="invalidusername">Invalid Username OR Password</div>
     <form name="loginForm" novalidate>
         <div class="form-group" ng-class="{ 'has-error' : loginForm.email.$invalid && !loginForm.email.$pristine }"> 
             <input type="email" name="email" class="form-control" placeholder="Enter your email" ng-model="loginInfo.email">

@@ -30,16 +30,16 @@
 				<div class="rate">
 					<div class="rat-inner">
 					    <label for="">You want to send..</label>
-						<input type="text" placeholder="1000" value="">
-						<select>
-							<option>aud</option>
+                                            <input type="text" ng-model="fromAmount" ng-change="convertCurFromto()" placeholder="1000">
+						<select ng-model="fromCur">
+                                                    <option value="AUD">aud</option>
 						<select>
 					</div>
 					<div class="rat-inner">
 					    <label for="">Recipiant will get...</label>
-						<input type="text" placeholder="234,000">
-						   <select>
-							<option>ngn</option>
+                                            <input type="text" ng-model="toAmount" ng-change="convertCurtoFrom()" placeholder="234,000">
+                                            <select ng-model="toCur">
+							<option value='NGN'>ngn</option>
 						 <select>
 					</div>
 					<div class="exchangeDes">
