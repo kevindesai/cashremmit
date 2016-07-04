@@ -11,3 +11,4 @@
 
 Route::resource('users', 'UsersAPIController');
 Route::post('users/login', 'UsersAPIController@login');
+Route::post('currency/convert', 'CurrencyAPIController@convert');
