@@ -1,22 +1,10 @@
 <!-- <div my-method></div> -->
 <my-header></my-header>
 <div class="container steps mt5 mb5">
-<div class="row">
-	<div class="col-md-7 col-sm-7">
-		<div class="row">
-			<div class="col-md-12 col-sm-12">
-				<div class="first-box">
-					<div class="row">
-						<div class="col-md-8 pl0">
-							<p>Payment process takes just mins to hit your receievers account.</p>
-						</div>
-						<div class="col-md-4 pl0 pr0">
-							<div class="pull-right first-btn"><a href="#" class="normal2-btn yellow-fill">Send Money</a></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+  <div class="row">
+	 <div class="col-md-7 col-sm-7">
+		
+
 		<div class="row second-main">
 			<div class="col-md-12 col-sm-12">
 				<div class="second-box">
@@ -33,25 +21,31 @@
 		</div>
 	</div>
 	
-	<div class="col-md-5 col-sm-5 visible-sm-* visible-lg-* visible-md-* hidden-xs">
+	<div class="col-md-5 col-sm-5 ">
 		<div class="side-bar-box">
 			<div class="sidebar-heading">
 				<h2>Transfer calculator</h2>
 			</div>
 			<div class="sidebar-inner">
 				<div class="rate-sidebar">
-					<div class="rat-inner-sidebar">
-						<input type="text" placeholder="Send" value="">
-						<select>
-							<option>aud</option>
-						<select>
-					</div>
 					<div class="rat-inner">
-						<input type="text" placeholder="Recieve">
-						<select>
-							<option>ngn</option>
-						<select>
-					</div>
+								<label for="">You want to send..</label>
+								<input type="text" placeholder="1000" value="">
+								<select>
+									<option>aud</option>
+								<select>
+							</div>
+							<div class="rat-inner">
+								<label for="">Recipiant will get...</label>
+								<input type="text" placeholder="234,000">
+								   <select>
+									<option>ngn</option>
+								 <select>
+							</div>
+							<div class="exchangeDes">
+							   <p>Our Exchange Rate AUS 1 = NGN 234</p>
+							  
+							</div>
 				</div>
 			</div>
 		</div>
@@ -94,54 +88,41 @@
 			</div>
 			</div>
 			
-			<div class="col-md-5 col-sm-5 visible-sm-* visible-lg-* visible-md-* hidden-xs">
-				<div class="side-bar-box ">
-					<div class="sidebar-heading">
-						<h2> &nbsp;</h2>
+			<div class="col-md-5 col-sm-5 ">
+				<div class="side-bar-box">
+						<div class="sidebar-heading">
+							<h2>Payment Summary</h2>
+						</div>
+							<table class="summary">
+								<tr>
+									<td colspan="2" class="title-sumary"><p>Exchange rate 1 = 212.37</p></td>
+								<tr>
+								<tr>
+									<td class="item">Send Amount</td>
+									<td class="item2">AUD 1000.00</td>
+								</tr>
+								<tr>
+									<td class="item">Transfer Fees</td>
+									<td class="item2">AUD 8.50</td>
+								</tr>
+
+								<tr>
+									<td class="total">Total Amount</td>
+									<td class="total2">NGN 1,008.55</td>
+								</tr>
+							</table>
 					</div>
-					<div class="sidebar-inner">
-						<div class="blank-div"></div>
+					<div class="continue">
+						<a href="#">Continue</a>
 					</div>
-				</div>
+					
 			</div>
 	</div>
-	
-	<div class="row hidden-sm hidden-md hidden-lg visible-xs-*">
-		<div class="col-md-5 col-sm-5 ">
-			<div class="side-bar-box">
-				<div class="sidebar-heading">
-					<h2>Transfer calculator</h2>
-				</div>
-				<div class="sidebar-inner mt4 mb4">
-					<div class="rate-sidebar">
-						<div class="rat-inner-sidebar">
-							<input type="text" placeholder="Send" value="">
-							<select>
-								<option>aud</option>
-							<select>
-						</div>
-						<div class="rat-inner">
-							<input type="text" placeholder="Recieve">
-							<select>
-								<option>ngn</option>
-							<select>
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			<div class="side-bar-box mt3">
-				<div class="sidebar-heading">
-					<h2> &nbsp;</h2>
-				</div>
-				<div class="sidebar-inner">
-					<div style="min-height:375px;"></div>
-				</div>
-			</div>
-		</div>
-	</div>
+
 	
 </div>
+
+
 <my-footer></my-footer>
 
 
