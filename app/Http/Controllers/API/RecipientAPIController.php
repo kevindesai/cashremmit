@@ -10,27 +10,29 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\User;
+use App\RecipientMaster;
 use Session;
 use Response;
 use Validator;
+use Exception;
 
-class UsersAPIController extends Controller {
+class RecipientAPIController extends Controller {
 
     public function store(Request $request) {
         $input = $request->all();
-
         $validation = Validator::make(
                         $request->all(), array(
                     'first_name' => array('required', 'alpha_dash'),
                     'last_name' => array('required', 'alpha_dash'),
-                    'email' => array('required', 'email','unique:users'),
-//                    'city' => array('required'),
-//                    'post_code' => array('required'),
-//                    'country' => array('required'),
-                    'password' => array('required'),
+                    'city_name' => array('required'),
+                    'country_name' => array('required'),
+                    'bank_name' => array('required'),
+                    'account_number' => array('required'),
+                    'bank_code' => array('required'),
+                    'user_id' => array('required', 'exists:users,id'),
                         )
         );
         $data = array();
@@ -41,19 +43,14 @@ class UsersAPIController extends Controller {
                 'message' => 'Validation error'
             );
             return json_encode($response);
-             
         }
-        $input = $request->all();
-        if (isset($input['password'])) {
-            $input['password'] = base64_encode($input['password']);
-        }
-        $user = User::create($input);
+        $user = RecipientMaster::create($input);
 
         if ($user) {
             $response = array(
                 'status' => '1',
                 'data' => $user->toArray(),
-                'message' => 'User registered successfully'
+                'message' => 'Recipient added successfully'
             );
         } else {
             $response = array(
@@ -66,42 +63,10 @@ class UsersAPIController extends Controller {
 //        return $this->sendResponse($user->toArray(), 'User registered successfully');
     }
 
-    public function login(Request $request) {
-        $input = $request->all();
-        $email = isset($input['email']) ? $input['email'] : '';
-        $password = isset($input['password']) ? $input['password'] : '';
-        try {
-            $user = User::where('email', $email)->first();
-        } catch (Exception $e) {
-            
-        }
-        $response = [
-            'status' => 0,
-            'message' => 'Username does not exist'
-        ];
-        if (isset($user) && $user) {
-            if (base64_decode($user->password) == $password) {
-                $data = $user->toArray();
-                $data['customer_id'] = User::getCustomerID($user->id);
-                $response = [
-                    'status' => 1,
-                    'message' => 'Login successful',
-                    'data' => $data
-                ];
-            } else {
-                $response = [
-                    'status' => 0,
-                    'message' => 'Invalid password'
-                ];
-            }
-        }
-        return json_encode($response);
-    }
-
     public function index() {
 
-        $users = User::paginate(15);
-        return view('users.index', compact('users'));
+        $users = RecipientMaster::paginate(15);
+//        return view('users.index', compact('users'));
     }
 
     /**
@@ -121,9 +86,20 @@ class UsersAPIController extends Controller {
      * @return void
      */
     public function show($id) {
-        $user = User::findOrFail($id);
-
-        return view('users.show', compact('user'));
+        $recipients = RecipientMaster::where('user_id', $id)->get();
+        $response = array(
+            'status' => '0',
+            'message' => 'No data found'
+        );
+        $recipients = $recipients->toArray();
+        if (!empty($recipients)) {
+            $response = array(
+                'status' => '1',
+                'message' => 'data found',
+                'data'=>$recipients
+            );
+        }
+        echo json_encode($response);
     }
 
     /**
@@ -147,17 +123,37 @@ class UsersAPIController extends Controller {
      * @return void
      */
     public function update($id, Request $request) {
-        $user = User::findOrFail($id);
+        $recipient = RecipientMaster::findOrFail($id);
         $inputs = $request->all();
-        if (isset($inputs['password'])) {
-            $inputs['password'] = base64_encode($inputs['password']);
+
+        $validation = Validator::make(
+                        $request->all(), array(
+                    'first_name' => array('required', 'alpha_dash'),
+                    'last_name' => array('required', 'alpha_dash'),
+                    'city_name' => array('required'),
+                    'country_name' => array('required'),
+                    'bank_name' => array('required'),
+                    'account_number' => array('required'),
+                    'bank_code' => array('required'),
+                    'user_id' => array('required', 'exists:users,id'),
+                        )
+        );
+        $data = array();
+        if ($validation->fails()) {
+            $response = array(
+                'status' => '0',
+                'data' => $validation->messages(),
+                'message' => 'Validation error'
+            );
+            return json_encode($response);
         }
-        $user->update($inputs);
-        if ($user) {
+
+        $recipient->update($inputs);
+        if ($recipient) {
             $response = array(
                 'status' => '1',
-                'data' => $user->toArray(),
-                'message' => 'User updated successfully'
+                'data' => $recipient->toArray(),
+                'message' => 'Recipient updated successfully'
             );
         } else {
             $response = array(
@@ -177,13 +173,20 @@ class UsersAPIController extends Controller {
      * @return void
      */
     public function destroy($id) {
-        User::destroy($id);
+        $response = array(
+            'status' => '0',
+            'message' => 'Not deleted, Try again letter.'
+        );
+        if (RecipientMaster::destroy($id)) {
+            $response = array(
+                'status' => '1',
+                'message' => 'Deleted successfully'
+            );
+        }
+        return json_encode($response);
 
-        Session::flash('flash_message', 'User deleted!');
 
         return redirect('users');
     }
-    
-    
 
 }

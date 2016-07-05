@@ -49,7 +49,7 @@ Route::get('login', array('uses' => 'HomeController@showLogin'));
 // route to process the form
 Route::post('login', array('uses' => 'HomeController@doLogin'));
 
-Route::get('generator_builder', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@builder');
+Route::get('gii', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@builder');
 
 Route::get('field_template', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@fieldTemplate');
 
