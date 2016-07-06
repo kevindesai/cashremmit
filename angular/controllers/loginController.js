@@ -2,6 +2,7 @@
 
 app.controller('AdminController', function($scope, $http, $location, myFactory, $rootScope, Facebook, userService) {
     // tabular
+    $rootScope.isLogin=false;
     $scope.activeTab = 1;
     $scope.setActiveTab = function(tabToSet) {
         $scope.activeTab = tabToSet;
@@ -80,6 +81,7 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
         response.success(function(data) {
             if (data.status == 1) {
                 $rootScope.userData = data.data;
+                $rootScope.isLogin=true;
                 userService.saveDataInSession(data.data);
                 $('#myModal').modal('hide');
                 $location.path('/payment');

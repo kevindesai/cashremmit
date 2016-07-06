@@ -1,8 +1,28 @@
-
-app.controller('PaymentController', function($scope, $http) {
-    console.log("test");
-
-});
+app.controller('commonController', ['$scope','$location' ,'$http', '$rootScope', 'userService', 'myFactory',
+    function($scope,$location, $http, $rootScope, userService, myFactory){
+     if(localStorage.getItem('id') !=undefined){
+         $scope.isLogin=true;
+     }else{
+         $location.path('/');11111
+     }   
+    $scope.doLogout = function(){
+            localStorage.removeItem('id');
+            localStorage.removeItem('email');
+            localStorage.removeItem('token');
+            localStorage.removeItem('first_name');
+            localStorage.removeItem('last_name');
+            localStorage.removeItem('building_name');
+            localStorage.removeItem('city');
+            localStorage.removeItem('country');
+            localStorage.removeItem('landline_no');
+            localStorage.removeItem('mobile_no');
+            localStorage.removeItem('post_code');
+            localStorage.removeItem('region');
+            localStorage.removeItem('street');
+            localStorage.removeItem('unit_no');
+            $location.path('/');
+    }
+}]);
 app.controller('ReportController', function($scope, $http) {
     console.log("ReportController");
 

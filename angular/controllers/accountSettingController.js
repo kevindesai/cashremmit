@@ -2,7 +2,6 @@ app.controller('AccountSettingController', ['$scope', '$http', '$rootScope', 'us
     function($scope, $http, $rootScope, userService, myFactory) {
         userService.getDataFromSession();
         $scope.userInfo = userService.userInfo;
-
         $scope.isupdate = false;
 
         $scope.EditClick = function() {
@@ -16,7 +15,7 @@ app.controller('AccountSettingController', ['$scope', '$http', '$rootScope', 'us
             userData._method = "PUT";
             var url = $rootScope.updateApi;
             url = url + "/" + userService.userInfo.id;
-
+            
             var response = myFactory.httpMethodCall(method, url, userData);
             console.log(response);
             response.success(function(data) {

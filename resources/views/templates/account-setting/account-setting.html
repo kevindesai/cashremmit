@@ -15,7 +15,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6 ">
-                        <div class="chang-pass-btn"><a href="" class="normal-btn yellow-fill">Change Password</a></div>
+                        <div class="chang-pass-btn"><a href="" class="normal-btn yellow-fill" data-toggle="modal" data-target=".update">Change Password</a></div>
                     </div>
                 </div>
                 <div class="row change-items">
@@ -135,4 +135,38 @@
     </div>
 
 </div>
-<my-footer></my-footer> 
+<my-footer></my-footer>
+<div class="modal fade update" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+		<div class="row">
+			<div class="col-md-12 col-sm-12">
+				<div class="update-inner">
+					<div class="row">
+						<div class="col-md-12 col-sm-12">
+							<table class="up-row">
+								<tr>
+									<td class="up-cell-1">New Password:</td>
+                                                                        <td>
+                                                                            <input type="password" class="change-value" required="required" ng-model="userInfo.password"/></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+						<div class="upm-btn">
+							<a  class="normal-btn yellow-fill up-btn" data-dismiss="modal" ng-click="updateValue(userInfo)">Save</a>
+						</div>
+				</div>
+			</div>
+		</div>
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+<!------------------------------ end model --------------------------------->
