@@ -96,6 +96,8 @@
                                 <nav role="navigation" class="widget-body">
                                     <ul class="acc-menu">
                                         <li><a href="<?php echo e(url('/')); ?>/users"><i class="fa fa-user"></i><span>Users</span></a></li>
+                                        <li><a href="<?php echo e(url('/')); ?>/country"><i class="fa fa-bookmark"></i><span>Country</span></a></li>
+                                        <li><a href="<?php echo e(url('/')); ?>/rate/list"><i class="fa fa-bookmark"></i><span>Manage Rate</span></a></li>
 
                                     </ul>
                                 </nav>

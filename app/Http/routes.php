@@ -43,6 +43,10 @@ Route::group(array('prefix'=>'/templates/'),function(){
 Route::group(['middleware' => ['web']], function () {
     Route::resource('users', 'UsersController');
 });
+Route::group(['middleware' => ['web']], function () {
+    Route::resource('country', 'CountryController');
+    Route::get('rate/list', 'CountryController@rateList');
+});
 //Route::resource('users', 'UsersController');
 
 Route::get('login', array('uses' => 'HomeController@showLogin'));

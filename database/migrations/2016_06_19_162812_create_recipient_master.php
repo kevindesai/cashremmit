@@ -35,6 +35,6 @@ class CreateRecipientMaster extends Migration
      */
     public function down()
     {
-        Schema::drop('recepient_master');
+        Schema::drop('recipientmaster');
     }
 }
