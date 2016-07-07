@@ -9,6 +9,25 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
     };
     $scope.fromCur='AUD';
     $scope.toCur='NGN';
+    $scope.fromAmount=1;
+    var method = 'POST';
+        var url = $rootScope.CurrencyApi;
+    var curData = {};
+        curData.amount = $scope.fromAmount;
+        curData.from = $scope.fromCur;
+        curData.to = $scope.toCur;
+        var response = myFactory.httpMethodCall(method, url, curData);
+        response.success(function(data) {
+            if (data.status == 1) {
+                $scope.toAmount = data.converted;
+            } else if(data.status==0) {
+                
+            }
+        });
+        response.error(function(error) {
+            console.log(error);
+        });
+    
     $scope.convertCurFromto = function(){
         var method = 'POST';
         var url = $rootScope.CurrencyApi;

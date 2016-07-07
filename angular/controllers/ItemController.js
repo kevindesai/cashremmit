@@ -2,8 +2,12 @@ app.controller('commonController', ['$scope','$location' ,'$http', '$rootScope',
     function($scope,$location, $http, $rootScope, userService, myFactory){
      if(localStorage.getItem('id') !=undefined){
          $scope.isLogin=true;
+         //console.log(localStorage.getItem('first_name'));
+         $scope.globaluserId = localStorage.getItem('id');
+         $scope.globalName = localStorage.getItem('first_name');
+            $scope.globalLastName = localStorage.getItem('last_name');
      }else{
-         $location.path('/');11111
+         $location.path('/');
      }   
     $scope.doLogout = function(){
             localStorage.removeItem('id');
