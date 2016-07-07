@@ -98,6 +98,7 @@
                                         <li><a href="{{ url('/') }}/users"><i class="fa fa-user"></i><span>Users</span></a></li>
                                         <li><a href="{{ url('/') }}/country"><i class="fa fa-bookmark"></i><span>Country</span></a></li>
                                         <li><a href="{{ url('/') }}/rate/list"><i class="fa fa-bookmark"></i><span>Manage Rate</span></a></li>
+                                        <li><a href="{{ url('/') }}/promossion"><i class="fa fa-bookmark"></i><span>Promossion</span></a></li>
 
                                     </ul>
                                 </nav>

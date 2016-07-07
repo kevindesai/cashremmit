@@ -108,7 +108,6 @@
     <div class="col-sm-6">
         {!! Form::text('mobile_no', null, ['class' => 'form-control', 'data-parsley-type'=>'digits']) !!}
         {!! $errors->first('mobile_no', ' <span class="help-block">:message</span>') !!}
-
     </div>
 </div>
 

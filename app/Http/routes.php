@@ -42,9 +42,8 @@ Route::group(array('prefix'=>'/templates/'),function(){
 
 Route::group(['middleware' => ['web']], function () {
     Route::resource('users', 'UsersController');
-});
-Route::group(['middleware' => ['web']], function () {
     Route::resource('country', 'CountryController');
+    Route::resource('promossion', 'PromossionController');
     Route::get('rate/list', 'CountryController@rateList');
 });
 //Route::resource('users', 'UsersController');

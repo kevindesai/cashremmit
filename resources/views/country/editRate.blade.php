@@ -14,13 +14,18 @@
 </div>
 @endif
 
-{!! Form::open(['url' => 'country', 'class' => 'form-horizontal','id'=>'myform']) !!}
+{!! Form::model($currency, [
+'method' => 'PATCH',
+'url' => ['/country', $currency->id],
+'class' => 'form-horizontal',
+'id'=>'myform'
+]) !!}
 
 @include('country._rateForm')
 
 <div class="form-group">
     <div class="col-sm-offset-3 col-sm-3">
-        {!! Form::submit('Create', ['class' => 'btn btn-primary form-control save']) !!}
+        {!! Form::submit('Update', ['class' => 'btn btn-primary form-control save']) !!}
     </div>
 </div>
 {!! Form::close() !!}
