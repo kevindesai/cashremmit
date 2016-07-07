@@ -94,7 +94,7 @@ class PromossionController extends Controller {
         
         $validation = Validator::make(
                         $request->all(), array(
-                    'code' => array('required','unique:promossions'),
+                    'code' => array('required','unique:promossions,code,'.$id),
                         )
         );
         $input = $request->all();
