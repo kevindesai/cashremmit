@@ -42,6 +42,7 @@ class PromossionController extends Controller {
         $validation = Validator::make(
                         $request->all(), array(
                     'code' => array('required','unique:promossions'),
+                            'discount' => array('required', 'regex:/^\d*(\.\d{2})?$/')
                         )
         );
         if ($validation->fails()) {

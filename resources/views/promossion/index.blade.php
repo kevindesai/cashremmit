@@ -8,7 +8,7 @@
         <table class="table table-bordered table-striped table-hover">
             <thead>
                 <tr>
-                    <th>S.No</th><th> {{ trans('Code') }} </th><th> {{ trans('Is Enable') }} </th><th>Actions</th>
+                    <th>S.No</th><th> {{ trans('Code') }} </th><th> {{ trans('Discount') }} </th><th> {{ trans('Is Enable') }} </th><th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -17,7 +17,8 @@
                 {{-- */$x++;/* --}}
                 <tr>
                     <td>{{ $x }}</td>
-                    <td>{{ $item->code }}</td><td>{{ $item->is_enable }}</td>
+                    <td>{{ $item->code }}</td><td>{{ $item->discount }}</td><td>{{ $item->is_enable }}</td>
+                    
                     <td>
                         <a href="{{ url('/promossion/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
                         {!! Form::open([
