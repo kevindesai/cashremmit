@@ -356,8 +356,8 @@ background:#fff url('../images/search.png'); background-position:100%; backgroun
 .person p{text-align:center; margin:0px;}
 .person{width: 20%;float:left;padding:30px 15px;cursor: pointer;}
 .avtar-icon{width: 90px;height: 90px;border-radius:50%;border:1px solid #95989a;background:#c6de03;margin:0 auto;}
-.avtar-icon p{line-height: 87px;margin:0px;font-size:22px;color:#fff;font-weight:bold;}
-.name{font-size:19px; padding-top:10px; color:#95989a !important;}
+.avtar-icon p{line-height: 87px;margin:0px;font-size:22px;color:#fff;font-weight:bold; text-transform: uppercase}
+.name{font-size:19px; padding-top:10px; color:#95989a !important; text-transform: capitalize}
 .actual{color:#000 !important;}
 .person i{font-size:25px; color:#257f34; margin-top:20px;}
 
@@ -519,7 +519,7 @@ input:focus, textarea:focus, keygen:focus, select:focus {
     outline: none;
 }
 
-label {
+/*label {
     display: inline-block;
     max-width: 100%;
     margin-bottom: 5px;
@@ -530,7 +530,7 @@ label {
     color: #175463;
 	z-index: 1000;
 left: 0px;
-}
+}*/
 
 hr {
     margin-top: 20px;

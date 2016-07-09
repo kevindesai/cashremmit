@@ -86,7 +86,7 @@ class RecipientAPIController extends Controller {
      * @return void
      */
     public function show($id) {
-        $recipients = RecipientMaster::where('user_id', $id)->get();
+        $recipients = RecipientMaster::where('user_id', $id)->orderBy('id', 'desc')->get();
         $response = array(
             'status' => '0',
             'message' => 'No data found'

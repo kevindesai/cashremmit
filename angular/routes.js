@@ -13,6 +13,8 @@ app.run(function($rootScope, $location) {
     $rootScope.loginApi = $rootScope.apiUrl + 'public/api/v1/users/login';
     $rootScope.updateApi = $rootScope.apiUrl + 'public/api/v1/users';
     $rootScope.CurrencyApi = $rootScope.apiUrl +'public/api/v1/currency/convert';
+    $rootScope.addBenefiery = $rootScope.apiUrl +'public/api/v1/recipient';
+    $rootScope.getBenefiery = $rootScope.apiUrl +'public/api/v1/recipient';
 });
 
 app.config(function(FacebookProvider){//205637772980180
@@ -29,7 +31,7 @@ app.config(['$routeProvider',
                     templateUrl: 'resources/views/templates/payment/payment_transfar.html',
                     controller: 'PaymentController'
                 }).
-                when('/payment1', {
+                when('/payment2', {
                     templateUrl: 'resources/views/templates/payment/payment_transfar-1.html',
                     controller: 'PaymentController'
                 }).
@@ -37,7 +39,7 @@ app.config(['$routeProvider',
                     templateUrl: 'resources/views/templates/payment/payment_transfar-2.html',
                     controller: 'PaymentController'
                 }).
-                when('/report', {
+                when('/paybeneficiary', {
                     templateUrl: 'resources/views/templates/report.html',
                     controller: 'ReportController'
                 }).

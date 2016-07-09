@@ -42,3 +42,9 @@ app.directive("accountSettingUpdate", function($timeout)
       templateUrl: 'resources/views/templates/account-setting/account-setting-modal.html',
     }
   });
+app.directive('lettersOnly', function() {
+  return {
+    replace: true,
+    template: '<input replace="[^a-zA-Z]" with="">'
+  };
+});  

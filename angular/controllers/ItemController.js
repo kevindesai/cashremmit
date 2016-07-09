@@ -27,10 +27,56 @@ app.controller('commonController', ['$scope','$location' ,'$http', '$rootScope',
             $location.path('/');
     }
 }]);
-app.controller('ReportController', function($scope, $http) {
-    console.log("ReportController");
+app.controller('ReportController', ['$scope', '$http', '$rootScope', 'userService', 'myFactory','$location',
+    function ($scope, $http, $rootScope, userService, myFactory,$location) {
+        $scope.ToAmount = localStorage.getItem('ToamounT')
+         $scope.ToCur=localStorage.getItem('ToCUR')
+        $scope.globalName = localStorage.getItem('first_name');
+            $scope.globalLastName = localStorage.getItem('last_name');
+            $scope.setActiveBenif = function(activeData,indexes){
+                $scope.isActive = indexes;
+                $scope.benifData = activeData;
+            }
+     $scope.refreshbeif = function(){
+         $scope.isActive = 0;
+         $scope.user_id = localStorage.getItem('id');
+            method = "GET";
+            url = $rootScope.getBenefiery+'/'+$scope.user_id;
+    var methodData = {"_method":"GET"};        
+    var response = myFactory.httpMethodCall(method, url, methodData);
+            response.success(function (data) {
+                console.log(data);
+                if(data.status==1 && data.message=="data found"){
+                    $scope.userBefif = data.data;
+                    $scope.benifData = data.data[0];
+                }
+            });
+            response.error(function (error) {
+                console.log(error);
+            });
+     }
+        
+        $scope.refreshbeif();
+            
+    $scope.addbenif = function(benifdata){
+            $scope.benifData = $scope.benif;
+            $scope.benifData.user_id = localStorage.getItem('id');
+            method = "POST";
+            url = $rootScope.addBenefiery;
+            var response = myFactory.httpMethodCall(method, url, $scope.benifData);
+            response.success(function (data) {
+                console.log(data);
+                if(data.status==1){
+                    $scope.refreshbeif();
+                    $('#myModal').modal('hide');
+                }
+            });
+            response.error(function (error) {
+                console.log(error);
+            });
+        }
 
-});
+}]);
 app.controller('SuccessController', function($scope, $http) {
     console.log("SuccessController");
 

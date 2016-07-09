@@ -68,7 +68,7 @@ class CurrencyAPIController extends Controller {
             $curRate = Currencyrate::where(['to' => $input['to'], 'from' => $input['from']])->first();
             
             if($curRate && !isset($input['web']))
-                $converted += $curRate->rate;
+                $converted += $curRate->rate*$amount;
             $response = array(
                 'status' => '1',
                 'original' => number_format(round($amount, 3), 2),
