@@ -67,13 +67,13 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\AdminUser::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+//         'users' => [
+//             'driver' => 'database',
+//             'table' => 'adminuser',
+//         ],
     ],
 
     /*
@@ -95,13 +95,13 @@ return [
     |
     */
 
-    'passwords' => [
-        'users' => [
-            'provider' => 'users',
-            'email' => 'auth.emails.password',
-            'table' => 'password_resets',
-            'expire' => 60,
-        ],
-    ],
+//    'passwords' => [
+//        'users' => [
+//            'provider' => 'users',
+//            'email' => 'auth.emails.password',
+//            'table' => 'password_resets',
+//            'expire' => 60,
+//        ],
+//    ],
 
 ];
