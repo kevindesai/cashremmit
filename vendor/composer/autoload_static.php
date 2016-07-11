@@ -337,8 +337,13 @@ class ComposerStaticInitd52074051f27ff7ca9929fe2732642a9
 
     public static $classMap = array (
         'AddPassword' => __DIR__ . '/../..' . '/database/migrations/2016_06_25_162811_add_password.php',
-        'App\\Http\\Controllers\\UsersAPIController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/UsersAPIController.php',
-        'CreateRecipientMaster' => __DIR__ . '/../..' . '/database/migrations/2016_06_19_162811_create_recipient_master.php',
+        'AdminUserSeeder' => __DIR__ . '/../..' . '/database/seeds/AdminUserSeeder.php',
+        'App\\Http\\Controllers\\API\\UsersAPIController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/UsersAPIController.php',
+        'CreateAdminUsers' => __DIR__ . '/../..' . '/database/migrations/2016_07_06_162814_create_admin_users.php',
+        'CreateCountry' => __DIR__ . '/../..' . '/database/migrations/2016_07_06_162812_create_country.php',
+        'CreateCurrencyrate' => __DIR__ . '/../..' . '/database/migrations/2016_07_06_162813_create_currencyrate.php',
+        'CreatePromossions' => __DIR__ . '/../..' . '/database/migrations/2016_07_06_162813_create_promossions.php',
+        'CreateRecipientMaster' => __DIR__ . '/../..' . '/database/migrations/2016_06_19_162812_create_recipient_master.php',
         'CreateusersTable' => __DIR__ . '/../..' . '/database/migrations/2016_06_14_164027_create_users_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
@@ -846,6 +851,7 @@ class ComposerStaticInitd52074051f27ff7ca9929fe2732642a9
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
         'TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
+        'UpdateUserTable' => __DIR__ . '/../..' . '/database/migrations/2016_06_25_092145_update_user_table.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

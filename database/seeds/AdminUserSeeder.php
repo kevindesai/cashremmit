@@ -1,6 +1,7 @@
 <?php
 //namespace 
 use Illuminate\Database\Seeder;
+use App\AdminUser as AU;
 
 class AdminUserSeeder extends Seeder {
 
@@ -10,14 +11,14 @@ class AdminUserSeeder extends Seeder {
      * @return void
      */
     public function run() {
-//         $this->call(AdminUserSeeder::class);
+        // $this->call(AdminUserSeeder::class);
         DB::table('adminuser')->delete();
 
-        \App\AdminUser::create(array(
+        AU::create(array(
             'name' => 'Admin',
             'is_active' => '1',
-            'email' => 'admin@admin.com',
-            'password' => base64_encode('admin'),
+            'email' => 'admin@gmail.com',
+            'password' =>  Hash::make('admin'),
         ));
     }
 

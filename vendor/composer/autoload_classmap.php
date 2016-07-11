@@ -7,8 +7,13 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AddPassword' => $baseDir . '/database/migrations/2016_06_25_162811_add_password.php',
+    'AdminUserSeeder' => $baseDir . '/database/seeds/AdminUserSeeder.php',
     'App\\Http\\Controllers\\API\\UsersAPIController' => $baseDir . '/app/Http/Controllers/API/UsersAPIController.php',
-    'CreateRecipientMaster' => $baseDir . '/database/migrations/2016_06_19_162811_create_recipient_master.php',
+    'CreateAdminUsers' => $baseDir . '/database/migrations/2016_07_06_162814_create_admin_users.php',
+    'CreateCountry' => $baseDir . '/database/migrations/2016_07_06_162812_create_country.php',
+    'CreateCurrencyrate' => $baseDir . '/database/migrations/2016_07_06_162813_create_currencyrate.php',
+    'CreatePromossions' => $baseDir . '/database/migrations/2016_07_06_162813_create_promossions.php',
+    'CreateRecipientMaster' => $baseDir . '/database/migrations/2016_06_19_162812_create_recipient_master.php',
     'CreateusersTable' => $baseDir . '/database/migrations/2016_06_14_164027_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',

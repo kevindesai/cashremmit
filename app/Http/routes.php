@@ -40,7 +40,11 @@ Route::group(array('prefix'=>'/templates/'),function(){
     }));
 });
 
-Route::group(['middleware' => ['web']], function () {
+Route::group(['middleware' => ['web'],'prefix'=>'admin','namespace'=>'admin'], function () {
+Route::get('login', array('uses' => 'HomeController@showLogin'));
+Route::post('login', array('uses' => 'HomeController@doLogin'));
+});
+Route::group(['middleware' => ['web','auth'],'prefix'=>'admin','namespace'=>'admin'], function () {
     Route::resource('users', 'UsersController');
     Route::resource('country', 'CountryController');
     Route::resource('promossion', 'PromossionController');
@@ -48,9 +52,9 @@ Route::group(['middleware' => ['web']], function () {
 });
 //Route::resource('users', 'UsersController');
 
-Route::get('login', array('uses' => 'HomeController@showLogin'));
+
 // route to process the form
-Route::post('login', array('uses' => 'HomeController@doLogin'));
+
 
 Route::get('gii', '\InfyOm\GeneratorBuilder\Controllers\GeneratorBuilderController@builder');
 

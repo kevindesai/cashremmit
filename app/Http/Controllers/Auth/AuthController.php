@@ -45,7 +45,8 @@ class AuthController extends Controller {
      */
     public function showLogin()
     {
-        return view('login');
+
+        return view('admin.login');
     }
  
     /**
@@ -57,20 +58,23 @@ class AuthController extends Controller {
     public function doLogin(LoginRequest $request)
     {
         $userData =  $request->only('email', 'password');
-        $userData['password']=  base64_encode($userData['password']);
-//        print_r(Auth::validate($request->only('email', 'password')));die;
-//        if ($this->auth->attempt($userData,true))
-//        {
-//            return redirect('/users');
-//        }
+//        $userData['password']=  base64_encode($userData['password']);
+       //print_r(Auth::validate($userData));die;
+
+        if ($this->auth->attempt($userData,true))
+        {
+
+            return redirect('/admin/users');
+        }
+
         
 //        print_r($userData['email']);
-        $aduser =AdminUser::where(['email'=>$userData['email'],'password'=>  $userData['password']])->first();
-        if($aduser){
+//        $aduser =AdminUser::where(['email'=>$userData['email'],'password'=>  $userData['password']])->first();
+//        if($aduser){
 //            $this->auth->login($aduser);
-            return redirect('/users');
-        } 
-        return redirect('/login')->withErrors([
+//            return redirect('/admin/users');
+//        } 
+        return redirect('/admin/login')->withErrors([
             'email' => 'The credentials you entered did not match our records. Try again?',
         ]);
     }
@@ -84,7 +88,7 @@ class AuthController extends Controller {
     {
         $this->auth->logout();
  
-        return redirect('/');
+        return redirect('/admin/login');
     }
  
 }
