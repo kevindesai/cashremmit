@@ -65,15 +65,15 @@ return [
     */
 
     'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\AdminUser::class,
-        ],
+//        'users' => [
+//            'driver' => 'eloquent',
+//            'model' => App\AdminUser::class,
+//        ],
 
-//         'users' => [
-//             'driver' => 'database',
-//             'table' => 'adminuser',
-//         ],
+         'users' => [
+             'driver' => 'database',
+             'table' => 'adminuser',
+         ],
     ],
 
     /*

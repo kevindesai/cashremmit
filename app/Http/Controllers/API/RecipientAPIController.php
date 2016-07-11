@@ -9,7 +9,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\User;
@@ -18,8 +18,8 @@ use Session;
 use Response;
 use Validator;
 use Exception;
-
-class RecipientAPIController extends Controller {
+use JWTAuth;
+class RecipientAPIController extends Api {
 
     public function store(Request $request) {
         $input = $request->all();
@@ -45,7 +45,8 @@ class RecipientAPIController extends Controller {
             return json_encode($response);
         }
         $user = RecipientMaster::create($input);
-
+        
+        
         if ($user) {
             $response = array(
                 'status' => '1',
