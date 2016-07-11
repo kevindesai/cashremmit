@@ -10,6 +10,10 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
     $scope.fromCur='AUD';
     $scope.toCur='NGN';
     $scope.fromAmount=1;
+    $scope.DefaultfromAmount = 1;
+    localStorage.setItem('FromamounT',$scope.DefaultfromAmount);
+    localStorage.setItem('FromCUR',$scope.fromCur);
+    localStorage.setItem('ToCUR',$scope.toCur);
     var method = 'POST';
         var url = $rootScope.CurrencyApi;
     var curData = {};
@@ -20,6 +24,8 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
         response.success(function(data) {
             if (data.status == 1) {
                 $scope.toAmount = data.converted;
+                $scope.DefaulttoAmount = data.converted;
+                localStorage.setItem('ToamounT',data.converted);
             } else if(data.status==0) {
                 
             }
