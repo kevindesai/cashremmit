@@ -50,7 +50,7 @@ class UsersController extends Controller {
                         )
         );
         if ($validation->fails()) {
-            return redirect('users/create')
+            return redirect('admin/users/create')
                         ->withErrors($validation)
                         ->withInput();
         }
@@ -59,7 +59,7 @@ class UsersController extends Controller {
 
         Session::flash('flash_message', 'User added!');
 
-        return redirect('users');
+        return redirect('admin/users');
     }
 
     /**
@@ -109,7 +109,7 @@ class UsersController extends Controller {
         );
         if ($validation->fails()) {
 //            return $validation->messages();
-            return redirect('users/'.$id.'/edit')
+            return redirect('admin/users/'.$id.'/edit')
                         ->withErrors($validation)
                         ->withInput();
         }
@@ -119,7 +119,7 @@ class UsersController extends Controller {
 
         Session::flash('flash_message', 'User updated!');
 
-        return redirect('users');
+        return redirect('admin/users');
     }
 
     /**
@@ -134,7 +134,7 @@ class UsersController extends Controller {
 
         Session::flash('flash_message', 'User deleted!');
 
-        return redirect('users');
+        return redirect('admin/users');
     }
 
 }

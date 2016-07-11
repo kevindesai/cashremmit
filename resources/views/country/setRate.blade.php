@@ -14,7 +14,7 @@
 </div>
 @endif
 
-{!! Form::open(['url' => 'country', 'class' => 'form-horizontal','id'=>'myform']) !!}
+{!! Form::open(['url' => 'admin/country', 'class' => 'form-horizontal','id'=>'myform']) !!}
 
 @include('country._rateForm')
 

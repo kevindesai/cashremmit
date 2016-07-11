@@ -46,7 +46,7 @@ class PromossionController extends Controller {
                         )
         );
         if ($validation->fails()) {
-            return redirect('promossion/create')
+            return redirect('admin/promossion/create')
                         ->withErrors($validation)
                         ->withInput();
         }
@@ -55,7 +55,7 @@ class PromossionController extends Controller {
 
         Session::flash('flash_message', 'Promossion added!');
 
-        return redirect('promossion');
+        return redirect('admin/promossion');
     }
 
     /**
@@ -100,7 +100,7 @@ class PromossionController extends Controller {
         );
         $input = $request->all();
         if ($validation->fails()) {
-            return redirect('promossion/'.$id.'/edit')
+            return redirect('admin/promossion/'.$id.'/edit')
                         ->withErrors($validation)
                         ->withInput();
         }
@@ -113,7 +113,7 @@ class PromossionController extends Controller {
 
         Session::flash('flash_message', 'Promossion updated!');
 
-        return redirect('promossion');
+        return redirect('admin/promossion');
     }
 
     /**
@@ -128,7 +128,7 @@ class PromossionController extends Controller {
 
         Session::flash('flash_message', 'Promossion deleted!');
 
-        return redirect('promossion');
+        return redirect('admin/promossion');
     }
 
 }

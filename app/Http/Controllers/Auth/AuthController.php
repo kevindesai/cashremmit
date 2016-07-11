@@ -58,22 +58,11 @@ class AuthController extends Controller {
     public function doLogin(LoginRequest $request)
     {
         $userData =  $request->only('email', 'password');
-//        $userData['password']=  base64_encode($userData['password']);
-       //print_r(Auth::validate($userData));die;
-
         if ($this->auth->attempt($userData,true))
         {
 
             return redirect('/admin/users');
         }
-
-        
-//        print_r($userData['email']);
-//        $aduser =AdminUser::where(['email'=>$userData['email'],'password'=>  $userData['password']])->first();
-//        if($aduser){
-//            $this->auth->login($aduser);
-//            return redirect('/admin/users');
-//        } 
         return redirect('/admin/login')->withErrors([
             'email' => 'The credentials you entered did not match our records. Try again?',
         ]);

@@ -14,7 +14,7 @@
     </div>
 @endif
 
-{!! Form::open(['url' => '/promossion', 'class' => 'form-horizontal','id'=>'myform']) !!}
+{!! Form::open(['url' => '/admin/promossion', 'class' => 'form-horizontal','id'=>'myform']) !!}
 @include('promossion._form')
 
 <div class="form-group">

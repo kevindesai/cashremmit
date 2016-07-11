@@ -16,7 +16,7 @@
 
 {!! Form::model($currency, [
 'method' => 'PATCH',
-'url' => ['/country', $currency->id],
+'url' => ['/admin/country', $currency->id],
 'class' => 'form-horizontal',
 'id'=>'myform'
 ]) !!}

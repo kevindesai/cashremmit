@@ -72,7 +72,7 @@
                     <ul class="dropdown-menu userinfo">
                         <li><a href="#/"><i class="fa fa-user"></i><span>Profile</span></a></li>
                         <li><a href="#/"><i class="fa fa-wrench"></i><span>Account</span></a></li>
-                        <li><a href="<?php echo e(url('/')); ?>/login"><i class="fa fa-power-off"></i><span>Sign Out</span></a></li>
+                        <li><a href="<?php echo e(url('/')); ?>/admin/logout"><i class="fa fa-power-off"></i><span>Sign Out</span></a></li>
                     </ul>
                 </li>
 
@@ -95,10 +95,10 @@
                             <div class="widget stay-on-collapse" id="widget-sidebar">
                                 <nav role="navigation" class="widget-body">
                                     <ul class="acc-menu">
-                                        <li><a href="<?php echo e(url('/')); ?>/users"><i class="fa fa-user"></i><span>Users</span></a></li>
-                                        <li><a href="<?php echo e(url('/')); ?>/country"><i class="fa fa-bookmark"></i><span>Country</span></a></li>
-                                        <li><a href="<?php echo e(url('/')); ?>/rate/list"><i class="fa fa-bookmark"></i><span>Manage Rate</span></a></li>
-                                        <li><a href="<?php echo e(url('/')); ?>/promossion"><i class="fa fa-bookmark"></i><span>Promossion</span></a></li>
+                                        <li><a href="<?php echo e(url('/')); ?>/admin/users"><i class="fa fa-user"></i><span>Users</span></a></li>
+                                        <li><a href="<?php echo e(url('/')); ?>/admin/country"><i class="fa fa-bookmark"></i><span>Country</span></a></li>
+                                        <li><a href="<?php echo e(url('/')); ?>/admin/rate/list"><i class="fa fa-bookmark"></i><span>Manage Rate</span></a></li>
+                                        <li><a href="<?php echo e(url('/')); ?>/admin/promossion"><i class="fa fa-bookmark"></i><span>Promossion</span></a></li>
 
                                     </ul>
                                 </nav>

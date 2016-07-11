@@ -16,7 +16,7 @@
 
 {!! Form::model($promossion, [
 'method' => 'PATCH',
-'url' => ['/promossion', $promossion->id],
+'url' => ['/admin/promossion', $promossion->id],
 'class' => 'form-horizontal',
 'id'=>'myform'
 ]) !!}

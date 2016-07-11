@@ -46,7 +46,7 @@ class CountryController extends Controller {
                         )
         );
         if ($validation->fails()) {
-            return redirect('country/create')
+            return redirect('admin/country/create')
                             ->withErrors($validation)
                             ->withInput();
         }
@@ -58,7 +58,7 @@ class CountryController extends Controller {
             $chk->update($request->all());
         }
         Session::flash('flash_message', 'Rate Saved!');
-        return redirect('rate/list');
+        return redirect('admin/rate/list');
     }
 
     public function edit($id) {
@@ -78,7 +78,7 @@ class CountryController extends Controller {
                         )
         );
         if ($validation->fails()) {
-            return redirect('country' . $id . '/edit')
+            return redirect('admin/country' . $id . '/edit')
                             ->withErrors($validation)
                             ->withInput();
         }
@@ -90,14 +90,14 @@ class CountryController extends Controller {
             $chk->update($request->all());
         }
         Session::flash('flash_message', 'Rate Saved!');
-        return redirect('rate/list');
+        return redirect('admin/rate/list');
     }
     public function destroy($id) {
         Currencyrate::destroy($id);
 
         Session::flash('flash_message', 'Rate deleted!');
 
-        return redirect('rate/list');
+        return redirect('admin/rate/list');
     }
 
 }

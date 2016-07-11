@@ -5,7 +5,7 @@
     <div class="col-md-6">
         <h1>
             Country Rate
-            <a href="{{ url('/country/create') }}" class="btn btn-primary btn-xs" title="Add Rate"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a>
+            <a href="{{ url('/admin/country/create') }}" class="btn btn-primary btn-xs" title="Add Rate"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a>
         </h1>
     </div>
     <div class="col-md-6">
@@ -42,10 +42,10 @@
                     <td>{{ $item->to }}</td>
                     <td>{{ $item->rate }}</td>
                     <td>
-                        <a href="{{ url('/country/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit User"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
+                        <a href="{{ url('/admin/country/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit User"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
                         {!! Form::open([
                             'method'=>'DELETE',
-                            'url' => ['/country', $item->id],
+                            'url' => ['/admin/country', $item->id],
                             'style' => 'display:inline'
                         ]) !!}
                             {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete" />', array(

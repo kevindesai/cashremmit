@@ -1,7 +1,7 @@
 <?php $__env->startSection('content'); ?>
 <div class="container table table-responsive">
 
-    <h1>Users <a href="<?php echo e(url('/users/create')); ?>" class="btn btn-primary btn-xs" title="Add New User"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
+    <h1>Users <a href="<?php echo e(url('/admin/users/create')); ?>" class="btn btn-primary btn-xs" title="Add New User"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
             <thead>
@@ -17,11 +17,11 @@
                     <td><?php echo e($x); ?></td>
                     <td><?php echo e($item->first_name); ?></td><td><?php echo e($item->last_name); ?></td><td><?php echo e($item->unit_no); ?></td>
                     <td>
-                        <a href="<?php echo e(url('/users/' . $item->id)); ?>" class="btn btn-success btn-xs" title="View User"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
-                        <a href="<?php echo e(url('/users/' . $item->id . '/edit')); ?>" class="btn btn-primary btn-xs" title="Edit User"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
+                        <a href="<?php echo e(url('/admin/users/' . $item->id)); ?>" class="btn btn-success btn-xs" title="View User"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
+                        <a href="<?php echo e(url('/admin/users/' . $item->id . '/edit')); ?>" class="btn btn-primary btn-xs" title="Edit User"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
                         <?php echo Form::open([
                             'method'=>'DELETE',
-                            'url' => ['/users', $item->id],
+                            'url' => ['/admin/users', $item->id],
                             'style' => 'display:inline'
                         ]); ?>
 

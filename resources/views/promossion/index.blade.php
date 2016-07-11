@@ -3,7 +3,7 @@
 @section('content')
 <div class="container table table-responsive">
 
-    <h1>Promossion <a href="{{ url('/promossion/create') }}" class="btn btn-primary btn-xs" title="Add New "><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
+    <h1>Promossion <a href="{{ url('/admin/promossion/create') }}" class="btn btn-primary btn-xs" title="Add New "><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
             <thead>
@@ -20,10 +20,10 @@
                     <td>{{ $item->code }}</td><td>{{ $item->discount }}</td><td>{{ $item->is_enable }}</td>
                     
                     <td>
-                        <a href="{{ url('/promossion/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
+                        <a href="{{ url('/admin/promossion/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
                         {!! Form::open([
                             'method'=>'DELETE',
-                            'url' => ['/promossion', $item->id],
+                            'url' => ['/admin/promossion', $item->id],
                             'style' => 'display:inline'
                         ]) !!}
                             {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete" />', array(
