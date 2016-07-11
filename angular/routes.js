@@ -2,7 +2,7 @@ var app = angular.module('main-App', ['ngRoute', 'angularUtils.directives.dirPag
     'facebook','directive.g+signin'
 ]);
 //$location.protocol() + "://" + $location.host();
-app.run(function($rootScope, $location) { 
+app.run(function($rootScope, $location,$route) { 
     $rootScope.baseurl = $location.absUrl();
 //    $rootScope.apiUrl = $rootScope.baseurl.replace("/#","");
     $rootScope.apiUrl = $rootScope.baseurl.split("#")[0];
@@ -15,6 +15,16 @@ app.run(function($rootScope, $location) {
     $rootScope.CurrencyApi = $rootScope.apiUrl +'public/api/v1/currency/convert';
     $rootScope.addBenefiery = $rootScope.apiUrl +'public/api/v1/recipient';
     $rootScope.getBenefiery = $rootScope.apiUrl +'public/api/v1/recipient';
+    $rootScope.deleteBenefiery = $rootScope.apiUrl +'public/api/v1/recipient';
+    
+    $rootScope.$on('$locationChangeStart', function(ev, next, current) {
+    var nextPath = $location.path(),
+      nextRoute = $route.routes[nextPath];
+    //$log.info(nextRoute);
+    if (nextRoute && nextRoute.auth && localStorage.getItem("id") == null) {
+      $location.path("/");
+    }
+  });
 });
 
 app.config(function(FacebookProvider){//205637772980180
@@ -25,39 +35,50 @@ app.config(['$routeProvider',
         $routeProvider.
                 when('/', {
                     templateUrl: 'resources/views/templates/home.html',
-                    controller: 'AdminController'
+                    controller: 'AdminController',
+                    auth: false
+                    
                 }).
                 when('/payment', {
                     templateUrl: 'resources/views/templates/payment/payment_transfar.html',
-                    controller: 'PaymentController'
+                    controller: 'PaymentController',
+                    auth: false
                 }).
                 when('/payment2', {
                     templateUrl: 'resources/views/templates/payment/payment_transfar-1.html',
-                    controller: 'PaymentController'
+                    controller: 'PaymentController',
+                    auth: false
                 }).
                 when('/payment2', {
                     templateUrl: 'resources/views/templates/payment/payment_transfar-2.html',
-                    controller: 'PaymentController'
+                    controller: 'PaymentController',
+                    auth: false
                 }).
                 when('/paybeneficiary', {
                     templateUrl: 'resources/views/templates/report.html',
-                    controller: 'ReportController'
+                    controller: 'ReportController',
+                    auth: true
                 }).
                 when('/success', {
                     templateUrl: 'resources/views/templates/success.html',
-                    controller: 'SuccessController'
+                    controller: 'SuccessController',
+                    auth: true
+                    
                 }).
                 when('/transfarDetail', {
                     templateUrl: 'resources/views/templates/transfar-detail.html',
-                    controller: 'TransfarDetailController'
+                    controller: 'TransfarDetailController',
+                    auth: true
                 }).
                 when('/accountSetting', {
                     templateUrl: 'resources/views/templates/account-setting/account-setting.html',
-                    controller: 'AccountSettingController'
+                    controller: 'AccountSettingController',
+                    auth: true
                 }).
                 when('/beneficiaries', {
                     templateUrl: 'resources/views/templates/Beneficiaries.html',
-                    controller: 'BeneficiariesController'
+                    controller: 'BeneficiariesController',
+                    auth: true
                 }).
                 otherwise({
                     redirectTo: '/'
