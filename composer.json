@@ -12,7 +12,8 @@
         "infyomlabs/core-templates": "dev-master",
         "doctrine/dbal": "~2.3",
          "infyomlabs/generator-builder": "dev-master",
-        "appzcoder/crud-generator": "^1.0"
+        "appzcoder/crud-generator": "^1.0",
+        "tymon/jwt-auth": "^0.5.9"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

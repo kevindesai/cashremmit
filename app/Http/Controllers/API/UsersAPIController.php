@@ -16,6 +16,9 @@ use Carbon\Carbon;
 use Session;
 use Response;
 use Validator;
+use JWTAuth;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Hash;
 
 class UsersAPIController extends Controller {
 
@@ -26,7 +29,7 @@ class UsersAPIController extends Controller {
                         $request->all(), array(
                     'first_name' => array('required', 'alpha_dash'),
                     'last_name' => array('required', 'alpha_dash'),
-                    'email' => array('required', 'email','unique:users'),
+                    'email' => array('required', 'email', 'unique:users'),
 //                    'city' => array('required'),
 //                    'post_code' => array('required'),
 //                    'country' => array('required'),
@@ -41,11 +44,10 @@ class UsersAPIController extends Controller {
                 'message' => 'Validation error'
             );
             return json_encode($response);
-             
         }
         $input = $request->all();
         if (isset($input['password'])) {
-            $input['password'] = base64_encode($input['password']);
+            $input['password'] = Hash::make($input['password']);
         }
         $user = User::create($input);
 
@@ -79,14 +81,19 @@ class UsersAPIController extends Controller {
             'status' => 0,
             'message' => 'Username does not exist'
         ];
+
         if (isset($user) && $user) {
-            if (base64_decode($user->password) == $password) {
+            Config::set('auth.providers.users.table', 'users');
+            if ($token = JWTAuth::attempt($input)) {
+                
                 $data = $user->toArray();
                 $data['customer_id'] = User::getCustomerID($user->id);
+
                 $response = [
                     'status' => 1,
                     'message' => 'Login successful',
-                    'data' => $data
+                    'data' => $data,
+                    'token' => $token
                 ];
             } else {
                 $response = [
@@ -183,7 +190,5 @@ class UsersAPIController extends Controller {
 
         return redirect('users');
     }
-    
-    
 
 }
