@@ -6443,3 +6443,9 @@ Stack trace:
 #16 C:\wamp64\www\cashremmit\vendor\laravel\framework\src\Illuminate\Foundation\Console\Kernel.php(107): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
 #17 C:\wamp64\www\cashremmit\artisan(36): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
 #18 {main}  
+[2016-07-12 00:57:39] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Maximum execution time of 30 seconds exceeded' in D:\xampp\htdocs\cashremmit\app\Http\Controllers\API\CurrencyAPIController.php:61
+Stack trace:
+#0 {main}  
+[2016-07-12 00:57:39] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Maximum execution time of 30 seconds exceeded' in D:\xampp\htdocs\cashremmit\app\Http\Controllers\API\CurrencyAPIController.php:61
+Stack trace:
+#0 {main}  

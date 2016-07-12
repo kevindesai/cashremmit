@@ -1,14 +1,23 @@
 app.controller('commonController', ['$scope', '$location', '$http', '$rootScope', 'userService', 'myFactory',
     function ($scope, $location, $http, $rootScope, userService, myFactory) {
-        if (localStorage.getItem('id') != undefined) {
+        $scope.activeTab = 1;
+    $scope.setActiveTab = function(tabToSet) {
+        $scope.activeTab = tabToSet;
+    };
+    
+        if (localStorage.getItem('id') != undefined || localStorage.getItem('id') != null) {
+            ///$scope.isLogin = "true";
             $scope.isLogin = true;
+            $rootScope.isLogin = true;
             //console.log(localStorage.getItem('first_name'));
             $scope.globaluserId = localStorage.getItem('id');
             $scope.globalName = localStorage.getItem('first_name');
             $scope.globalLastName = localStorage.getItem('last_name');
-        } else {
-            $location.path('/');
-        }
+        }else{
+            $scope.isLogin = false;
+            $rootScope.isLogin = false;
+        } 
+        
         $scope.doLogout = function () {
             localStorage.removeItem('id');
             localStorage.removeItem('email');
@@ -85,11 +94,20 @@ app.controller('TransfarDetailController', function ($scope, $http) {
     console.log("TransfarDetailController");
 
 });
-//app.controller('AccountSettingController', function($scope, $http, $rootScope) {
-//    console.log($rootScope.userData);
-//    console.log("account-setting");
-//
-//});
+app.controller('PaymentDetailsController', ['$scope', '$http', '$rootScope', 'userService', 'myFactory', '$location',
+    function ($scope, $http, $rootScope, userService, myFactory, $location) {
+    $scope.userId = localStorage.getItem('id');
+    $scope.isLogin=true;
+    if($scope.userId == null || $scope.userId == undefined){
+        $scope.isLogin = false;
+    }
+    $scope.fromAmount=localStorage.getItem('FromamounT');
+    $scope.fromCur=localStorage.getItem('FromCUR');
+    $scope.toCur=localStorage.getItem('ToCUR');
+    $scope.toAmount=localStorage.getItem('ToamounT');
+    
+
+}]);
 app.controller('BeneficiariesController', ['$scope', '$http', '$rootScope', 'userService', 'myFactory', '$location',
     function ($scope, $http, $rootScope, userService, myFactory, $location) {
         $scope.refreshbeif = function () {

@@ -37,6 +37,7 @@ Route::group(array('prefix' => '/templates/'), function() {
 });
 
 Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'admin'], function () {
+    Route::get('', array('uses' => 'HomeController@showLogin'));
     Route::get('login', array('uses' => 'HomeController@showLogin'));
     Route::post('login', array('uses' => 'HomeController@doLogin'));
     Route::get('logout', array('uses' => 'HomeController@getLogout'));

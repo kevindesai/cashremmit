@@ -48,25 +48,26 @@
 								<tr>
 								<tr>
 									<td class="item">Send Amount</td>
-									<td class="item2">AUD1000.00</td>
+									<td class="item2">{{fromCur}} {{fromAmount}}</td>
 								</tr>
 								<tr>
 									<td class="item">Transfer Charges</td>
-									<td class="item2">AUD8.50.00</td>
+									<td class="item2">AUD 0.00</td>
 								</tr>
 								<tr>
 									<td class="total">Total Amount</td>
-									<td class="total2">NGN 1,008.55</td>
+									<td class="total2">{{toCur}} {{toAmount}}</td>
 								</tr>
 							</table>
 					</div>
 					
 					<div class="promo">
-						<a href="#">Active Promo Code</a>
+						<a href="javascript:void(0);">Active Promo Code</a>
 					</div>
 					
 					<div class="continue">
-						<a href="#">Continue</a>
+						<a data-backdrop="static" data-toggle="modal" data-target="#myModal" ng-if="isLogin==false">Continue</a>
+						<a href="#/paybeneficiary" ng-if="isLogin==true">Continue</a>
 					</div>
 					
 				</div>

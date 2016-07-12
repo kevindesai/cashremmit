@@ -49,9 +49,9 @@ app.config(['$routeProvider',
                     controller: 'PaymentController',
                     auth: false
                 }).
-                when('/payment2', {
+                when('/paymentdetails', {
                     templateUrl: 'resources/views/templates/payment/payment_transfar-2.html',
-                    controller: 'PaymentController',
+                    controller: 'PaymentDetailsController',
                     auth: false
                 }).
                 when('/paybeneficiary', {

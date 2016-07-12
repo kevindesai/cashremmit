@@ -7,9 +7,10 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
     $scope.setActiveTab = function(tabToSet) {
         $scope.activeTab = tabToSet;
     };
+    $scope.gotopage = "";
     $scope.fromCur='AUD';
     $scope.toCur='NGN';
-    $scope.fromAmount=1;
+    
     $scope.DefaultfromAmount = 1;
     localStorage.setItem('FromamounT',$scope.DefaultfromAmount);
     localStorage.setItem('FromCUR',$scope.fromCur);
@@ -17,7 +18,7 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
     var method = 'POST';
         var url = $rootScope.CurrencyApi;
     var curData = {};
-        curData.amount = $scope.fromAmount;
+        curData.amount = $scope.DefaultfromAmount;
         curData.from = $scope.fromCur;
         curData.to = $scope.toCur;
         var response = myFactory.httpMethodCall(method, url, curData);
@@ -35,16 +36,23 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
         });
     
     $scope.convertCurFromto = function(){
+        if($scope.fromAmount != "0"){
+            $scope.gotopage = "#/paymentdetails";
+        }
         var method = 'POST';
         var url = $rootScope.CurrencyApi;
         var curData = {};
         curData.amount = $scope.fromAmount;
         curData.from = $scope.fromCur;
         curData.to = $scope.toCur;
+        localStorage.setItem('FromamounT',$scope.fromAmount);
+    localStorage.setItem('FromCUR',$scope.fromCur);
+    localStorage.setItem('ToCUR',$scope.toCur);
         var response = myFactory.httpMethodCall(method, url, curData);
         response.success(function(data) {
             if (data.status == 1) {
                 $scope.toAmount = data.converted;
+                 localStorage.setItem('ToamounT',data.converted);
             } else if(data.status==0) {
                 
             }
@@ -54,16 +62,24 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
         });
     }
     $scope.convertCurtoFrom = function(){
+        if($scope.fromAmount != "0"){
+            $scope.gotopage = "#/paymentdetails";
+        }
         var method = 'POST';
         var url = $rootScope.CurrencyApi;
         var curData = {};
         curData.amount = $scope.toAmount;
         curData.from = $scope.toCur;
         curData.to = $scope.fromCur;
+        
+    localStorage.setItem('FromCUR',$scope.fromCur);
+    localStorage.setItem('ToCUR',$scope.toCur);
+    localStorage.setItem('ToamounT',$scope.toAmount);
         var response = myFactory.httpMethodCall(method, url, curData);
         response.success(function(data) {
             if (data.status == 1) {
                 $scope.fromAmount = data.converted;
+                localStorage.setItem('FromamounT',$scope.fromAmount);
             } else if(data.status==0) {
                 
             }

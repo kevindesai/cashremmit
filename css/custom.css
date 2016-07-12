@@ -519,7 +519,7 @@ input:focus, textarea:focus, keygen:focus, select:focus {
     outline: none;
 }
 
-/*label {
+.homepagelable label {
     display: inline-block;
     max-width: 100%;
     margin-bottom: 5px;
@@ -530,7 +530,7 @@ input:focus, textarea:focus, keygen:focus, select:focus {
     color: #175463;
 	z-index: 1000;
 left: 0px;
-}*/
+}
 
 hr {
     margin-top: 20px;
