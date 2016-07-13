@@ -15,14 +15,6 @@ class Api extends BaseController {
         ValidatesRequests;
 
     public $_user;
-//    public function __construct(Request $request) {
-//        $input = $request->all();
-//        $this->_user = JWTAuth::toUser($input['token']);
-//    }
-
-//    public function validateAPI($input){
-//        $this->_user = JWTAuth::toUser($input['token']);
-//    }
 
     public $_headding;
 

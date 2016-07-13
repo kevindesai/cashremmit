@@ -19,7 +19,14 @@ use Response;
 use Validator;
 use Exception;
 use JWTAuth;
+
 class RecipientAPIController extends Api {
+
+    private $_auth;
+
+    public function __construct() {
+        $this->_auth = JWTAuth::toUser(JWTAuth::getToken());
+    }
 
     public function store(Request $request) {
         $input = $request->all();
@@ -32,9 +39,11 @@ class RecipientAPIController extends Api {
                     'bank_name' => array('required'),
                     'account_number' => array('required'),
                     'bank_code' => array('required'),
+                    'email' => array('email'),
                     'user_id' => array('required', 'exists:users,id'),
                         )
         );
+        $input['user_id'] = $this->_auth->id;
         $data = array();
         if ($validation->fails()) {
             $response = array(
@@ -45,8 +54,8 @@ class RecipientAPIController extends Api {
             return json_encode($response);
         }
         $user = RecipientMaster::create($input);
-        
-        
+
+
         if ($user) {
             $response = array(
                 'status' => '1',
@@ -87,7 +96,7 @@ class RecipientAPIController extends Api {
      * @return void
      */
     public function show($id) {
-        $recipients = RecipientMaster::where('user_id', $id)->orderBy('id', 'desc')->get();
+        $recipients = RecipientMaster::where('user_id', $this->_auth->id)->orderBy('id', 'desc')->get();
         $response = array(
             'status' => '0',
             'message' => 'No data found'
@@ -97,7 +106,7 @@ class RecipientAPIController extends Api {
             $response = array(
                 'status' => '1',
                 'message' => 'data found',
-                'data'=>$recipients
+                'data' => $recipients
             );
         }
         echo json_encode($response);
@@ -136,9 +145,11 @@ class RecipientAPIController extends Api {
                     'bank_name' => array('required'),
                     'account_number' => array('required'),
                     'bank_code' => array('required'),
+                    'email' => array('email'),
                     'user_id' => array('required', 'exists:users,id'),
                         )
         );
+        $inputs['user_id'] = $this->_auth->id;
         $data = array();
         if ($validation->fails()) {
             $response = array(
@@ -185,9 +196,6 @@ class RecipientAPIController extends Api {
             );
         }
         return json_encode($response);
-
-
-        return redirect('users');
     }
 
 }

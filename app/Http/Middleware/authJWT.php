@@ -20,6 +20,7 @@ class authJWT {
         try {
             $user = JWTAuth::toUser($request->input('token'));
         } catch (Exception $e) {
+//            print_r($e->getMessage());
             if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException) {
                 return response()->json(['status' => -1, 'error' => 'Token is Invalid']);
             } else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException) {
