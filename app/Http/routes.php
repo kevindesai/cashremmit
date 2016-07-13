@@ -44,6 +44,11 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'admi
 });
 Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin', 'namespace' => 'admin'], function () {
     Route::resource('users', 'UsersController');
+    Route::get('profile', 'UsersController@Profile');
+    Route::get('profile/edit', 'UsersController@ProfileEdit');
+    Route::patch('profile/update', 'UsersController@ProfileUpdate');
+    Route::get('password', 'UsersController@Password');
+    Route::post('password', 'UsersController@ChangePassword');
     Route::resource('country', 'CountryController');
     Route::resource('promossion', 'PromossionController');
     Route::get('rate/list', 'CountryController@rateList');

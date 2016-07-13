@@ -5,11 +5,12 @@ namespace App\Http\Controllers\admin;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\AdminUser;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Session;
 use Validator;
-
+use Illuminate\Support\Facades\Hash;
 class UsersController extends Controller {
 
     /**
@@ -51,8 +52,8 @@ class UsersController extends Controller {
         );
         if ($validation->fails()) {
             return redirect('admin/users/create')
-                        ->withErrors($validation)
-                        ->withInput();
+                            ->withErrors($validation)
+                            ->withInput();
         }
 
         User::create($request->all());
@@ -108,13 +109,12 @@ class UsersController extends Controller {
                         )
         );
         if ($validation->fails()) {
-//            return $validation->messages();
-            return redirect('admin/users/'.$id.'/edit')
-                        ->withErrors($validation)
-                        ->withInput();
+            return redirect('admin/users/' . $id . '/edit')
+                            ->withErrors($validation)
+                            ->withInput();
         }
         $user = User::findOrFail($id);
-        
+
         $user->update($request->all());
 
         Session::flash('flash_message', 'User updated!');
@@ -137,4 +137,56 @@ class UsersController extends Controller {
         return redirect('admin/users');
     }
 
+    public function Profile() {
+        $user = \Illuminate\Support\Facades\Auth::user();
+        return view('users.profile', compact('user'));
+    }
+    public function ProfileEdit() {
+        $user = AdminUser::findOrFail(\Illuminate\Support\Facades\Auth::user()->id);
+        return view('users.profileEdit', compact('user'));
+    }
+    public function ProfileUpdate(Request $request) {
+        $validation = Validator::make(
+                        $request->all(), array(
+                    'name' => array('required', 'alpha_dash'),
+                    'email' => array('required', 'email'),
+                        )
+        );
+        if ($validation->fails()) {
+            return redirect('admin/profile/edit')
+                            ->withErrors($validation)
+                            ->withInput();
+        }
+        
+        $user = \Illuminate\Support\Facades\Auth::user();
+        $users = AdminUser::findOrFail($user->id);
+
+        $users->update($request->all());
+        return redirect('admin/profile');
+    }
+    public function Password() {
+        return view('users.password');
+    }
+    public function ChangePassword(Request $request) {
+        $input = $request->all();
+        $validation = Validator::make(
+                        $input, array(
+                     'password' => array('required','confirmed'),
+//                     'confirmed' => array('required','confirmed')
+                        )
+        );
+        
+//        if ($validation->fails()) {
+//            return redirect('admin/password')
+//                            ->withErrors($validation)
+//                            ->withInput();
+//        }
+        
+        $user = \Illuminate\Support\Facades\Auth::user();
+        $users = AdminUser::findOrFail($user->id);
+        $data['password'] = Hash::make($input['password']);
+                
+        $users->update($data);
+        return redirect('admin/password');
+    }
 }

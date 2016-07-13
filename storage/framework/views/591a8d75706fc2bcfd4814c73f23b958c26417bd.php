@@ -67,11 +67,11 @@
                 <li class="dropdown toolbar-icon-bg hidden-xs">
                     <a href="#" class="dropdown-toggle nav-username" data-toggle="dropdown">
                         <img class="img-circle" src="<?php echo e(url('/')); ?>/assets/demo/avatar/avatar_06.png" alt="" /><span class="badge user-status badge-success">1</span>
-                        <span class="hidden-sm">jon@december.com</span>
+                        <span class="hidden-sm"><?php echo e(Auth::user()->name); ?></span>
                     </a>			
                     <ul class="dropdown-menu userinfo">
-                        <li><a href="#/"><i class="fa fa-user"></i><span>Profile</span></a></li>
-                        <li><a href="#/"><i class="fa fa-wrench"></i><span>Account</span></a></li>
+                        <li><a href="<?php echo e(url('/')); ?>/admin/profile"><i class="fa fa-user"></i><span>Profile</span></a></li>
+                        <li><a href="<?php echo e(url('/')); ?>/admin/password"><i class="fa fa-wrench"></i><span>Change Password</span></a></li>
                         <li><a href="<?php echo e(url('/')); ?>/admin/logout"><i class="fa fa-power-off"></i><span>Sign Out</span></a></li>
                     </ul>
                 </li>
