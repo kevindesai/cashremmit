@@ -120,10 +120,15 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
          $scope.invalidusername=false;
         var response = myFactory.httpMethodCall(method, url, SocialUserData);
         response.success(function(data) {
+            
             if (data.status == 1) {
+                
                 $rootScope.userData = data.data;
                 $rootScope.isLogin=true;
                 userService.saveDataInSession(data.data);
+                localStorage.setItem('token',data.token);
+                //localStorage.getItem('token');
+               
                 $('#myModal').modal('hide');
                 $location.path('/payment');
             } else if(data.status==0) {

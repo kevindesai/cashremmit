@@ -4,7 +4,7 @@ app.controller('commonController', ['$scope', '$location', '$http', '$rootScope'
     $scope.setActiveTab = function(tabToSet) {
         $scope.activeTab = tabToSet;
     };
-    
+   // console.log(localStorage.getItem('id'));
         if (localStorage.getItem('id') != undefined || localStorage.getItem('id') != null) {
             ///$scope.isLogin = "true";
             $scope.isLogin = true;
@@ -38,6 +38,9 @@ app.controller('commonController', ['$scope', '$location', '$http', '$rootScope'
     }]);
 app.controller('ReportController', ['$scope', '$http', '$rootScope', 'userService', 'myFactory', '$location',
     function ($scope, $http, $rootScope, userService, myFactory, $location) {
+        userService.getDataFromSession();
+        $scope.userInfo = userService.userInfo;
+        
         $scope.ToAmount = localStorage.getItem('ToamounT')
         $scope.ToCur = localStorage.getItem('ToCUR')
         $scope.globalName = localStorage.getItem('first_name');
@@ -48,16 +51,19 @@ app.controller('ReportController', ['$scope', '$http', '$rootScope', 'userServic
         }
         $scope.refreshbeif = function () {
             $scope.isActive = 0;
+            $scope.NoBenif=0;
             $scope.user_id = localStorage.getItem('id');
             method = "GET";
             url = $rootScope.getBenefiery + '/' + $scope.user_id;
-            var methodData = {"_method": "GET"};
+            var methodData = {"_method": "GET",'token':$scope.userInfo.token};
             var response = myFactory.httpMethodCall(method, url, methodData);
             response.success(function (data) {
                 console.log(data);
                 if (data.status == 1 && data.message == "data found") {
                     $scope.userBefif = data.data;
                     $scope.benifData = data.data[0];
+                }else{
+                    $scope.NoBenif = 1;
                 }
             });
             response.error(function (error) {
@@ -69,7 +75,8 @@ app.controller('ReportController', ['$scope', '$http', '$rootScope', 'userServic
 
         $scope.addbenif = function (benifdata) {
             $scope.benifData = $scope.benif;
-            $scope.benifData.user_id = localStorage.getItem('id');
+            $scope.benifData.user_id = $scope.userInfo.id;
+            //$scope.benifData.token = $scope.userInfo.token;
             method = "POST";
             url = $rootScope.addBenefiery;
             var response = myFactory.httpMethodCall(method, url, $scope.benifData);
@@ -84,6 +91,7 @@ app.controller('ReportController', ['$scope', '$http', '$rootScope', 'userServic
                 console.log(error);
             });
         }
+        
 
     }]);
 app.controller('SuccessController', function ($scope, $http) {
@@ -94,6 +102,16 @@ app.controller('TransfarDetailController', function ($scope, $http) {
     console.log("TransfarDetailController");
 
 });
+app.controller('SelectPaymentController', ['$scope', '$http', '$rootScope', 'userService', 'myFactory', '$location',
+    function ($scope, $http, $rootScope, userService, myFactory, $location) {
+    console.log("TransfarDetailController");
+    $scope.ToAmount = localStorage.getItem('ToamounT')
+        $scope.ToCur = localStorage.getItem('ToCUR')
+        $scope.globalName = localStorage.getItem('first_name');
+        $scope.globalLastName = localStorage.getItem('last_name');
+
+
+}]);
 app.controller('PaymentDetailsController', ['$scope', '$http', '$rootScope', 'userService', 'myFactory', '$location',
     function ($scope, $http, $rootScope, userService, myFactory, $location) {
     $scope.userId = localStorage.getItem('id');
@@ -110,6 +128,7 @@ app.controller('PaymentDetailsController', ['$scope', '$http', '$rootScope', 'us
 }]);
 app.controller('BeneficiariesController', ['$scope', '$http', '$rootScope', 'userService', 'myFactory', '$location',
     function ($scope, $http, $rootScope, userService, myFactory, $location) {
+        
         $scope.refreshbeif = function () {
             $scope.isActive = 0;
             $scope.user_id = localStorage.getItem('id');

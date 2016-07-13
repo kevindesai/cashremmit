@@ -1,145 +1,149 @@
 	
-	<style>
-		.dropdown{text-align:left; border-color:#95989a;}
-		.dropdown span{color:#95989a; font-size:20px;padding-left:10px;}
-		.dropdown-menu{top:15.5%; width:95%;}
-		.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus{background:#fff;}
-		.drop-list li a{color:#95989a; font-size:20px;}
-		.drop-list li a span{padding-left:10px;}
-	</style>
+<style>
+    .dropdown{text-align:left; border-color:#95989a;}
+    .dropdown span{color:#95989a; font-size:20px;padding-left:10px;}
+    .dropdown-menu{top:15.5%; width:95%;}
+    .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus{background:#fff;}
+    .drop-list li a{color:#95989a; font-size:20px;}
+    .drop-list li a span{padding-left:10px;}
+</style>
 
 <my-header></my-header>
 <div class="container mt3 mb5">
 
-<div class="row">
-	<div class="col-md-12 col-sm-12 ">
-		<div class="sender-name">
-			<p>Sender Name : {{globalName}} {{globalLastName}}</p>
-		</div>
-		<div class="top-amount">
-			<p><span class="amt">{{ToCur}} {{ToAmount}}</span> <i class="fa fa-pencil" aria-hidden="true"></i></p>
-		</div>
-		
-		<div class="row mt5">
-			<div class="col-md-3 col-sm-3">
-				<div class="sub-title">
-					<p>Add New Recipient</p>
-					<div class="new-r"><a data-toggle="modal" data-target="#myModal"><i class="fa fa-plus" aria-hidden="true"></i></a></div>
-				</div>
-			</div>
-			<div class="col-md-9 col-sm-9">
-				<div class="sub-title ">
-					<p>Choose Your Recipient</p>
-				</div>
-					<div class="cyr row ml0 mr0">
-						<div class="person" ng-repeat="perdata in userBefif" ng-click="setActiveBenif(perdata,$index)">
-							<div class="avtar-icon">
-								<p>{{ perdata.first_name | limitTo:1 }}{{ perdata.last_name | limitTo:1 }}</p>
-							</div>
-							<p class="name actual">{{perdata.first_name}} {{perdata.last_name}}</p>
-                                                        <p><i class="fa fa-check" ng-show="$index==isActive"></i></p>
-						</div>
-						
-						
-						
-					</div>
-					
-				<div class="row mt2">
-					<div class="col-md-12">
-						<div>
-							<table class="detail-table">
-								<tr>
-									<td class="lbl"><p>Recipient Full Name:</p></td>
-									<td class="lbl-2"><p>{{benifData.first_name}} {{benifData.last_name}}</p></td>
-								<tr>
-								<tr>
-									<td class="lbl"><p>Bank:</p></td>
-									<td class="lbl-2"><p>{{benifData.bank_name}}</p></td>
-								<tr>
-								<tr>
-									<td class="lbl"><p>Account Number:</p></td>
-									<td class="lbl-2"><p>{{benifData.account_number}}</p></td>
-								<tr>
-								<tr>
-									<td class="lbl"><p>City/Town:</p></td>
-									<td class="lbl-2"><p>{{benifData.city_name}}</p></td>
-								<tr>
-								<tr>
-									<td class="lbl"><p>Mobile Number:</p></td>
-									<td class="lbl-2"><p>{{benifData.mobile_no}}</p></td>
-								<tr>
-								<tr>
-									<td class="lbl"><p>&nbsp;</p></td>
-									<td class="lbl-box"><a href="#">Make Payment</a></td>
-								<tr>
-							</table>
-						</div>
-					</div>
-				</div>
-				
-			</div>
-		</div>
-		
-	</div>	
-</div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 ">
+            <div class="sender-name">
+                <p>Sender Name : {{globalName}} {{globalLastName}}</p>
+            </div>
+            <div class="top-amount">
+                <p><span class="amt">{{ToCur}} {{ToAmount}}</span> <i class="fa fa-pencil" aria-hidden="true"></i></p>
+            </div>
+
+            <div class="row mt5">
+                <div class="col-md-3 col-sm-3">
+                    <div class="sub-title">
+                        <p>Add New Recipient</p>
+                        <div class="new-r"><a data-toggle="modal" data-target="#myModal"><i class="fa fa-plus" aria-hidden="true"></i></a></div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9">
+                    <div class="sub-title ">
+                        <p>Choose Your Recipient</p>
+                    </div>
+                    <div class="cyr row ml0 mr0">
+                        <div class="person" ng-repeat="perdata in userBefif" ng-click="setActiveBenif(perdata, $index)" ng-if="NoBenif == 0">
+                            <div class="avtar-icon">
+                                <p>{{ perdata.first_name | limitTo:1 }}{{ perdata.last_name | limitTo:1 }}</p>
+                            </div>
+                            <p class="name actual">{{perdata.first_name}} {{perdata.last_name}}</p>
+                            <p><i class="fa fa-check" ng-show="$index == isActive"></i></p>
+                        </div>
+
+                        <div  ng-if="NoBenif == 1" class="sub-title text-center ">
+                            <p>No Beneficiary. Please add one.</p>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="row mt2">
+                        <div class="col-md-12">
+                            <div>
+                                <table class="detail-table">
+                                    <tr>
+                                        <td class="lbl"><p>Recipient Full Name:</p></td>
+                                        <td class="lbl-2"><p>{{benifData.first_name}} {{benifData.last_name}}</p></td>
+                                    <tr>
+                                    <tr>
+                                        <td class="lbl"><p>Bank:</p></td>
+                                        <td class="lbl-2"><p>{{benifData.bank_name}}</p></td>
+                                    <tr>
+                                    <tr>
+                                        <td class="lbl"><p>Account Number:</p></td>
+                                        <td class="lbl-2"><p>{{benifData.account_number}}</p></td>
+                                    <tr>
+                                    <tr>
+                                        <td class="lbl"><p>City/Town:</p></td>
+                                        <td class="lbl-2"><p>{{benifData.city_name}}</p></td>
+                                    <tr>
+                                    <tr>
+                                        <td class="lbl"><p>Mobile Number:</p></td>
+                                        <td class="lbl-2"><p>{{benifData.mobile_no}}</p></td>
+                                    <tr>
+                                    <tr>
+                                        <td class="lbl"><p>&nbsp;</p></td>
+                                        <td class="lbl-box"  ng-if="NoBenif == 0"><a href="#/selectpayment">Make Payment</a></td>
+                                    <tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>	
+    </div>
 
 
 </div>
 <!----------------------- start model --------------------------------->
-	
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Add New Recipient</h4>
-      </div>
-      <div class="modal-body">
-		<form id="formbenif" >
-			  <div class="form-group">
-				<label class="form-title">Choose from country</label>
-                                <select name="country" class="form-control" ng-model="benif.country_name" required="required">
-                                    <option value="Australia">Australia</option>
-                                </select>
-			  </div>
-			  <div class="form-group">
-				<label class="form-title">Recipient Detail</label>
-                                <input type="text" class="form-control" ng-model="benif.first_name" placeholder="First Name" required="required" ng-pattern="/^[a-zA-Z]*$/">
-                          </div>
-			  <div class="form-group">
-				<input type="text" class="form-control" ng-model="benif.last_name" placeholder="Last Name" required="required" ng-pattern="/^[a-zA-Z]*$/">
-			  </div>
-			  <div class="form-group">
-				<input type="text" class="form-control" ng-model="benif.city_name" placeholder="City/Town" required="required" ng-pattern="/^[a-zA-Z]*$/">
-			  </div>
-			  <div class="form-group">
-                              <input type="text" class="form-control" placeholder="Mobile Number" ng-model="benif.mobile_no" required="required">
-			  </div>
-			   <div class="form-group">
-				<label class="form-title">Bank Detail</label>
-				<select class="form-control form-select" ng-model="benif.bank_name" required="required">
-                                    <option value="ICICI Bank">ICIC Bank</option>
-					<option value="HDFC Bank">HDFC Bank</option>
-					
-				</select>
-			  </div>
-			  <div class="form-group">
-				<input type="text" class="form-control" placeholder="Account Number" ng-model="benif.account_number" required="required" number>
-			  </div>
-			   <div class="form-group">
-				<input type="text" class="form-control" placeholder="Bank Code" ng-model="benif.bank_code" required="required" number>
-			  </div>
-			  <button type="submit" class="form-submit" ng-click="addbenif(benif)">Submit</button>s
-			</form>
-      </div>
-     
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add New Recipient</h4>
+            </div>
+            <div class="modal-body">
+                <form id="formbenif" >
+                    <div class="form-group">
+                        <label class="form-title">Choose from country</label>
+                        <select name="country" class="form-control" ng-model="benif.country_name" required="required">
+                            <option value="Australia">Australia</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-title">Recipient Detail</label>
+                        <input type="text" class="form-control" ng-model="benif.first_name" placeholder="First Name" required="required" ng-pattern="/^[a-zA-Z]*$/">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" ng-model="benif.last_name" placeholder="Last Name" required="required" ng-pattern="/^[a-zA-Z]*$/">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" ng-model="benif.city_name" placeholder="City/Town" required="required" ng-pattern="/^[a-zA-Z]*$/">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Mobile Number" ng-model="benif.mobile_no" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-title">Bank Detail</label>
+                        <select class="form-control form-select" ng-model="benif.bank_name" required="required">
+                            <option value="ICICI Bank">ICIC Bank</option>
+                            <option value="HDFC Bank">HDFC Bank</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Account Number" ng-model="benif.account_number" required="required" number>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Bank Code" ng-model="benif.bank_code" required="required" number>
+                    </div>
+                    <button type="submit" class="form-submit" ng-click="addbenif(benif)">Submit</button>s
+                </form>
+            </div>
+
+        </div>
     </div>
-  </div>
 </div>
 <script>
-    $(document).ready(function(){
-        $("formbenif").validate();
-    })
+            $(document).ready(function () {
+                $("formbenif").validate();
+            })
 </script>
 <!------------------------------ end model --------------------------------->
 <my-footer></my-footer>	

@@ -80,6 +80,11 @@ app.config(['$routeProvider',
                     controller: 'BeneficiariesController',
                     auth: true
                 }).
+                when('/selectpayment', {
+                    templateUrl: 'resources/views/templates/payment/choosePayment.html',
+                    controller: 'SelectPaymentController',
+                    auth: true
+                }).
                 otherwise({
                     redirectTo: '/'
                 });

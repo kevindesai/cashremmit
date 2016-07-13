@@ -577,6 +577,50 @@ a.navbar-brand img {
     background: #f1f1f1;
 }
 .tm-hr{top:10px; margin:0px;}
+.banner-1-content .rat-inner {
+    width: 100%;
+    display: inline-block;
+    margin-left: 9px;
+    position: relative;
+    top: 15px;
+}
+
+.banner_transfar .navbar-brand {
+    position: absolute;
+    top: 24px;
+}
+
+.selectPayment .row p {
+    background: #f6f6f6;
+    padding: 10px;
+}
+
+.selectPayment h2 {
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.col-md-4.col-sm-4.poliPay,.cardPay {
+    border: 1px solid #ccc;
+    padding: 0;
+    margin-right: 20px;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.selectPayment span.fa {
+    position: absolute;
+    top: 2px;
+    right: 0;
+    padding-right: 8px;
+    line-height: 38px;
+    font-size: 30px;
+    color: #a2ba28;
+}
+
+.poliPay img {
+    width: 142px;
+}
 
 
 

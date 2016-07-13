@@ -4,30 +4,41 @@ app.controller('PaymentController', ['$scope', '$http', '$rootScope', 'userServi
         $scope.userInfo = userService.userInfo;
         $scope.isupdate = false;
         $scope.isLogin = $rootScope.isLogin;
-        console.log($rootScope.isLogin);
+        //console.log($scope.userInfo);
+        if (localStorage.getItem('id') != undefined || localStorage.getItem('id') != null) {
+            ///$scope.isLogin = "true";
+            $scope.isLogin = true;
+            $rootScope.isLogin = true;
+            //console.log(localStorage.getItem('first_name'));
+            $scope.globaluserId = localStorage.getItem('id');
+            $scope.globalName = localStorage.getItem('first_name');
+            $scope.globalLastName = localStorage.getItem('last_name');
+        }else{
+            $scope.isLogin = false;
+            $rootScope.isLogin = false;
+        } 
         /*
          * update information of user
          */
         $scope.fromCur = 'AUD';
         $scope.toCur = 'NGN';
-        $scope.DefaultfromAmount = 1;
-        $scope.fromAmount = 1;
-        localStorage.setItem('FromamounT',$scope.DefaultfromAmount);
-            localStorage.setItem('FromCUR',$scope.fromCur);
-            localStorage.setItem('ToCUR',$scope.toCur);
+        localStorage.setItem('FromCUR',$scope.fromCur);
+        localStorage.setItem('ToCUR',$scope.toCur);
             
-        var method = 'POST';
+        $scope.defaultCurConvert = function(){
+            var method = 'POST';
             var url = $rootScope.CurrencyApi;
         var curData={};
-        curData.amount = $scope.DefaultfromAmount;
+            $scope.DefaultfromAmount = 1;
+            curData.amount = $scope.DefaultfromAmount;
             curData.from = $scope.fromCur;
             curData.to = $scope.toCur;
             var response = myFactory.httpMethodCall(method, url, curData);
             response.success(function (data) {
                 if (data.status == 1) {
+                    
                     $scope.DefaulttoAmount = data.converted;
-                    $scope.toAmount = data.converted;
-                    localStorage.setItem('ToamounT',data.converted);
+                    console.log($scope.DefaulttoAmount);
                 } else if (data.status == 0) {
 
                 }
@@ -35,6 +46,8 @@ app.controller('PaymentController', ['$scope', '$http', '$rootScope', 'userServi
             response.error(function (error) {
                 console.log(error);
             });
+        }
+        $scope.defaultCurConvert();
         $scope.convertCurFromto = function () {
             var method = 'POST';
             var url = $rootScope.CurrencyApi;
@@ -63,6 +76,7 @@ app.controller('PaymentController', ['$scope', '$http', '$rootScope', 'userServi
             var method = 'POST';
             var url = $rootScope.CurrencyApi;
             var curData = {};
+            $scope.toAmount = ($scope.toAmount == undefined) ? 1 : $scope.toAmount;
             curData.amount = $scope.toAmount;
             localStorage.setItem('ToamounT',$scope.toAmount);
             curData.from = $scope.toCur;
@@ -83,7 +97,11 @@ app.controller('PaymentController', ['$scope', '$http', '$rootScope', 'userServi
             });
         }
         $scope.goToSelectBen = function(){
+            if($scope.toAmount > 0 && $scope.fromAmount >0){
             $location.path('/paybeneficiary');
+            }else{
+                return false;
+            }
         }
         
     }]);
