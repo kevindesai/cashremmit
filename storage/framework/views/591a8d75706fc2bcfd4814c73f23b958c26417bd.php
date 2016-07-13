@@ -99,6 +99,7 @@
                                         <li><a href="<?php echo e(url('/')); ?>/admin/country"><i class="fa fa-bookmark"></i><span>Country</span></a></li>
                                         <li><a href="<?php echo e(url('/')); ?>/admin/rate/list"><i class="fa fa-bookmark"></i><span>Manage Rate</span></a></li>
                                         <li><a href="<?php echo e(url('/')); ?>/admin/promossion"><i class="fa fa-bookmark"></i><span>Promossion</span></a></li>
+                                        <li><a href="<?php echo e(url('/')); ?>/admin/banks"><i class="fa fa-bookmark"></i><span>Banks</span></a></li>
 
                                     </ul>
                                 </nav>

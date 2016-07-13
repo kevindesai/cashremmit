@@ -78,7 +78,7 @@ class CountryController extends Controller {
                         )
         );
         if ($validation->fails()) {
-            return redirect('admin/country' . $id . '/edit')
+            return redirect('admin/country/' . $id . '/edit')
                             ->withErrors($validation)
                             ->withInput();
         }
