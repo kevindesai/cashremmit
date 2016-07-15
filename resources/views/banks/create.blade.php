@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
+<div class="">
 
     <h1>Create New bank</h1>
     <hr/>

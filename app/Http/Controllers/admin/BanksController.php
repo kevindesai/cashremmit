@@ -43,9 +43,7 @@ class BanksController extends Controller {
         $inputs = $request->all();
         $validation = Validator::make(
                         $inputs, array(
-                    'name' => array('required'),
-                    'branch' => array('required'),
-                    'bank_code' => array('required'),
+                    'name' => array('required', 'unique:banks,name,null,id,country_id,'.$inputs['country_id']),
                     'country_id' => array('required'),
                         )
         );
@@ -54,8 +52,20 @@ class BanksController extends Controller {
                             ->withErrors($validation)
                             ->withInput();
         }
+        $attr = array();
+        if (isset($inputs['attr']) && isset($inputs['validation']) && !empty($inputs['attr'])) {
+            foreach ($inputs['attr'] as $k => $at) {
+                if ($at != "" && isset($inputs['validation'][$k]) && $inputs['validation'][$k] != "") {
+                    $attr[] = [
+                        'name' => $at,
+                        'validation' => $inputs['validation'][$k]
+                    ];
+                }
+            }
+        }
+        $inputs['attributes'] = json_encode($attr);
 
-        Bank::create($request->all());
+        Bank::create($inputs);
 
         Session::flash('flash_message', 'Bank added!');
 
@@ -100,9 +110,7 @@ class BanksController extends Controller {
         $inputs = $request->all();
         $validation = Validator::make(
                         $inputs, array(
-                    'name' => array('required'),
-                    'branch' => array('required'),
-                    'bank_code' => array('required'),
+                    'name' => array('required', 'unique:banks,name,'.$id.',id,country_id,'.$inputs['country_id']),
                     'country_id' => array('required'),
                         )
         );
@@ -111,9 +119,20 @@ class BanksController extends Controller {
                             ->withErrors($validation)
                             ->withInput();
         }
-
+        $attr = array();
+        if (isset($inputs['attr']) && isset($inputs['validation']) && !empty($inputs['attr'])) {
+            foreach ($inputs['attr'] as $k => $at) {
+                if ($at != "" && isset($inputs['validation'][$k]) && $inputs['validation'][$k] != "") {
+                    $attr[] = [
+                        'name' => $at,
+                        'validation' => $inputs['validation'][$k]
+                    ];
+                }
+            }
+        }
+        $inputs['attributes'] = json_encode($attr);
         $bank = Bank::findOrFail($id);
-        $bank->update($request->all());
+        $bank->update($inputs);
 
         Session::flash('flash_message', 'Bank updated!');
 

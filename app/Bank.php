@@ -25,7 +25,7 @@ class Bank extends Model {
      *
      * @var array
      */
-    protected $fillable = ['name', 'country_id', 'branch', 'bank_code'];
+    protected $fillable = ['name', 'country_id', 'attributes'];
 
     public function country() {
         return $this->belongsTo('App\Country');

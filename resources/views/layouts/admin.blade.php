@@ -11,6 +11,7 @@
         <meta name="author" content="KaijuThemes">
         <script src="{{ url('/') }}/assets/js/jquery-1.10.2.min.js"></script> 	
         <script src="{{ url('/') }}/assets/plugins/form-parsley/parsley.js"></script>   
+        <script src="{{ url('/') }}/js/relcopy.js"></script>   
         <link type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600,700' rel='stylesheet'>
 
         <link href="{{ url('/') }}/assets/fonts/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">         Font Awesome 

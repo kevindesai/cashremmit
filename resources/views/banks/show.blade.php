@@ -4,7 +4,7 @@
 <div class="">
 
     <h1>{{ $bank->name }}
-        <a href="{{ url('banks/' . $bank->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit bank"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
+        <a href="{{ url('/admin/banks/' . $bank->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit bank"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
         {!! Form::open([
             'method'=>'DELETE',
             'url' => ['banks', $bank->id],

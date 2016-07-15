@@ -9,7 +9,7 @@
             <thead>
                 <tr>
                     <th>S.No</th>
-                    <th> Country </th><th> Name </th><th> Branch </th><th>Actions</th>
+                    <th> Country </th><th> Name </th><th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,7 +20,6 @@
                     <td>{{ $x }}</td>
                     <td>{{ $item->country->country_name }}</td>
                     <td>{{ $item->name }}</td>
-                    <td>{{ $item->branch }}</td>
                     <td>
                         <a href="{{ url('/admin/banks/' . $item->id) }}" class="btn btn-success btn-xs" title="View bank"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
                         <a href="{{ url('/admin/banks/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit bank"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
