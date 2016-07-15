@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\API;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -17,87 +17,66 @@ use Session;
 use Validator;
 use App\Country;
 use App\Currencyrate;
+use App\Bank;
 
-class CountryController extends Controller {
+class CountryAPIController extends Controller {
 
     public function index() {
-        $country = Country::paginate(20);
-        return view('country.index', compact('country'));
-    }
-
-    public function rateList() {
-        $rate = Currencyrate::paginate(20);
-        $country = Country::lists('currency_code', 'currency_code');
-        return view('country.rateList', compact('rate', 'country'));
-    }
-
-    public function create() {
-        $country = Country::lists('currency_code', 'currency_code');
-        return view('country.setRate', compact('country'));
-    }
-
-    public function store(Request $request) {
-        $inputs = $request->all();
-        $validation = Validator::make(
-                        $inputs, array(
-                    'from' => array('required'),
-                    'to' => array('required'),
-                    'rate' => array('required'),
-                        )
+        $country = Country::all();
+        $response = array(
+            'status' => '0',
+            'message' => 'No data found'
         );
-        if ($validation->fails()) {
-            return redirect('admin/country/create')
-                            ->withErrors($validation)
-                            ->withInput();
+        $country = $country->toArray();
+        if (!empty($country)) {
+            $response = array(
+                'status' => '1',
+                'message' => 'data found',
+                'data' => $country
+            );
         }
-
-        $chk = Currencyrate::where(['to' => $inputs['to'], 'from' => $inputs['from']])->first();
-        if (!$chk) {
-            Currencyrate::create($request->all());
-        } else {
-            $chk->update($request->all());
-        }
-        Session::flash('flash_message', 'Rate Saved!');
-        return redirect('admin/rate/list');
+        return json_encode($response);
     }
 
-    public function edit($id) {
-        $currency = Currencyrate::findOrFail($id);
-        $country = Country::lists('currency_code', 'currency_code');
-        return view('country.editRate', compact('currency', 'country'));
-    }
-
-    public function update($id, Request $request) {
-
-        $inputs = $request->all();
-        $validation = Validator::make(
-                        $inputs, array(
-                    'from' => array('required'),
-                    'to' => array('required'),
-                    'rate' => array('required'),
-                        )
+    public function getBanks($id) {
+        $banks = Bank::where('country_id', $id)->get();
+        $response = array(
+            'status' => '0',
+            'message' => 'No data found'
         );
-        if ($validation->fails()) {
-            return redirect('admin/country/' . $id . '/edit')
-                            ->withErrors($validation)
-                            ->withInput();
+        $banks = $banks->toArray();
+        if (!empty($banks)) {
+            
+            $response = array(
+                'status' => '1',
+                'message' => 'data found',
+                'data' => $banks
+            );
         }
-
-        $chk = Currencyrate::where(['to' => $inputs['to'], 'from' => $inputs['from']])->first();
-        if (!$chk) {
-            Currencyrate::create($request->all());
-        } else {
-            $chk->update($request->all());
-        }
-        Session::flash('flash_message', 'Rate Saved!');
-        return redirect('admin/rate/list');
+        return json_encode($response);
     }
-    public function destroy($id) {
-        Currencyrate::destroy($id);
-
-        Session::flash('flash_message', 'Rate deleted!');
-
-        return redirect('admin/rate/list');
+    public function getBankDetail($id) {
+        
+        $banks = Bank::find($id);
+        $response = array(
+            'status' => '0',
+            'message' => 'No data found'
+        );
+        
+        $banks = $banks->toArray();
+        if (!empty($banks)) {
+            if(is_array(json_decode($banks['attributes'], true))){
+                $banks['attributes'] = json_decode($banks['attributes'], true);
+            }else{
+                $banks['attributes'] = [];
+            }
+            $response = array(
+                'status' => '1',
+                'message' => 'data found',
+                'data' => $banks
+            );
+        }
+        return json_encode($response);
     }
 
 }
