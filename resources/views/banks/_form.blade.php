@@ -77,5 +77,4 @@
     $(document).ready(function () {
         $('a.copy').relCopy({append: removeLink});
     });
-
 </script>

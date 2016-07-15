@@ -352,5 +352,6 @@
 
         <script src="{{ url('/') }}/assets/demo/demo-index.js"></script> 									<!-- Initialize scripts for this page-->
 
+        @yield('script')
     </body>
 </html>

@@ -118,7 +118,9 @@
 </div>
 {!! Form::close() !!}
 
+@endsection
 
+@section('script')
 <script>
     window.ParsleyConfig = {
         successClass: 'has-success'

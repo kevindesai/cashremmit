@@ -26,26 +26,3 @@
         <span id="convertedValue" class="form-control">0.00</span>
     </div>
 </div>
-
-<script>
-    $(document).ready(function () {
-        $('.fromVal').change();
-    });
-    $('.fromVal,.toVal').change(function () {
-        var ajaxdata = {};
-        ajaxdata['from'] = $('.fromVal').val();
-        ajaxdata['to'] = $('.toVal').val();
-        ajaxdata['amount'] = '1';
-        ajaxdata['web'] = '1';
-        $.ajax({
-            type: "POST",
-            url: "{{ url('/api/v1/currency/convert') }}",
-            data: ajaxdata,
-            dataType: 'json',
-            success: function (data) {
-                $('#convertedValue').html(data.converted);
-            }
-        });
-    });
-
-</script>

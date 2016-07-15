@@ -352,5 +352,6 @@
 
         <script src="<?php echo e(url('/')); ?>/assets/demo/demo-index.js"></script> 									<!-- Initialize scripts for this page-->
 
+        <?php echo $__env->yieldContent('script'); ?>
     </body>
 </html>
