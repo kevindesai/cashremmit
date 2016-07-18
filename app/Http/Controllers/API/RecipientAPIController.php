@@ -38,7 +38,6 @@ class RecipientAPIController extends Api {
                     'country_name' => array('required'),
                     'bank_name' => array('required'),
                     'account_number' => array('required'),
-                    'bank_code' => array('required'),
                     'email' => array('email'),
                     'user_id' => array('required', 'exists:users,id'),
                         )
@@ -53,6 +52,10 @@ class RecipientAPIController extends Api {
             );
             return json_encode($response);
         }
+        if(isset($input['attributes']) && is_array($input['attributes'])){
+            $input['attributes'] = json_encode($input['attributes']);
+        }
+        
         $user = RecipientMaster::create($input);
 
 
@@ -144,7 +147,6 @@ class RecipientAPIController extends Api {
                     'country_name' => array('required'),
                     'bank_name' => array('required'),
                     'account_number' => array('required'),
-                    'bank_code' => array('required'),
                     'email' => array('email'),
                     'user_id' => array('required', 'exists:users,id'),
                         )

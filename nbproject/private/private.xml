@@ -2,16 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/wamp64/www/cashremmit/app/Http/api_routes.php</file>
-            <file>file:/C:/wamp64/www/cashremmit/app/Http/Controllers/API/UsersAPIController.php</file>
-            <file>file:/C:/wamp64/www/cashremmit/database/migrations/2016_07_13_162814_create_bank.php</file>
-            <file>file:/C:/wamp64/www/cashremmit/database/migrations/2016_07_15_162811_update_bank.php</file>
-            <file>file:/C:/wamp64/www/cashremmit/app/Http/Controllers/API/CountryAPIController.php</file>
-            <file>file:/C:/wamp64/www/cashremmit/resources/views/banks/_form.blade.php</file>
-            <file>file:/C:/wamp64/www/cashremmit/app/Http/Controllers/admin/BanksController.php</file>
-            <file>file:/C:/wamp64/www/cashremmit/app/Bank.php</file>
-            <file>file:/C:/wamp64/www/cashremmit/app/Http/Controllers/API/RecipientAPIController.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
