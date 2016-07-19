@@ -11,7 +11,7 @@ class Currencyrate extends Model
      *
      * @var string
      */
-    protected $table = 'Currencyrate';
+    protected $table = 'currencyrate';
 
     /**
     * The database primary key value.

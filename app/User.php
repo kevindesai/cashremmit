@@ -10,7 +10,7 @@ class User extends Model
      *
      * @var string
      */
-    protected $table = 'Users';
+    protected $table = 'users';
 
     /**
     * The database primary key value.

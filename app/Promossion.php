@@ -11,7 +11,7 @@ class Promossion extends Model
      *
      * @var string
      */
-    protected $table = 'Promossions';
+    protected $table = 'promossions';
 
     /**
     * The database primary key value.

@@ -11,7 +11,7 @@ class RecipientMaster extends Model
      *
      * @var string
      */
-    protected $table = 'RecipientMaster';
+    protected $table = 'recipientmaster';
 
     /**
     * The database primary key value.
