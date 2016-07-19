@@ -16,6 +16,9 @@ app.run(function($rootScope, $location,$route) {
     $rootScope.addBenefiery = $rootScope.apiUrl +'public/api/v1/recipient';
     $rootScope.getBenefiery = $rootScope.apiUrl +'public/api/v1/recipient';
     $rootScope.deleteBenefiery = $rootScope.apiUrl +'public/api/v1/recipient';
+    $rootScope.getCountry = $rootScope.apiUrl+'api/v1/country';
+    $rootScope.getBanks = $rootScope.apiUrl+'api/v1/banks';
+    $rootScope.getbankdetail = $rootScope.apiUrl+'api/v1/bankdetail';
     
     $rootScope.$on('$locationChangeStart', function(ev, next, current) {
     var nextPath = $location.path(),

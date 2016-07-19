@@ -36,11 +36,10 @@ app.controller('commonController', ['$scope', '$location', '$http', '$rootScope'
             $location.path('/');
         }
     }]);
-app.controller('ReportController', ['$scope', '$http', '$rootScope', 'userService', 'myFactory', '$location',
-    function ($scope, $http, $rootScope, userService, myFactory, $location) {
+app.controller('ReportController', ['$scope', '$http', '$rootScope', 'userService', 'myFactory', '$location','$document',
+    function ($scope, $http, $rootScope, userService, myFactory, $location,$document) {
         userService.getDataFromSession();
         $scope.userInfo = userService.userInfo;
-        
         $scope.ToAmount = localStorage.getItem('ToamounT')
         $scope.ToCur = localStorage.getItem('ToCUR')
         $scope.globalName = localStorage.getItem('first_name');
@@ -54,7 +53,7 @@ app.controller('ReportController', ['$scope', '$http', '$rootScope', 'userServic
             $scope.NoBenif=0;
             $scope.user_id = localStorage.getItem('id');
             method = "GET";
-            url = $rootScope.getBenefiery + '/' + $scope.user_id;
+            url = $rootScope.getBenefiery + '/' + $scope.user_id+"?token="+$scope.userInfo.token;
             var methodData = {"_method": "GET",'token':$scope.userInfo.token};
             var response = myFactory.httpMethodCall(method, url, methodData);
             response.success(function (data) {
@@ -70,13 +69,74 @@ app.controller('ReportController', ['$scope', '$http', '$rootScope', 'userServic
                 console.log(error);
             });
         }
-
         $scope.refreshbeif();
-
+        $scope.getCountry = function (){
+           method = "GET";
+            url = $rootScope.getCountry;
+            methodData ={};
+            var response = myFactory.httpMethodCall(method, url, methodData);
+            response.success(function (data) {
+                if(data.status==1){
+                    $scope.countryList = data.data;
+                    
+                }else{
+                    $scope.countryList ={};
+                }
+                
+            });
+            response.error(function (error) {
+                console.log(error);
+            }); 
+        }
+        $scope.getCountry();
+        $scope.getBanks = function(countryIdName){
+            var dataArr = countryIdName.split("_");
+            $scope.CountryId = dataArr[0];
+            $scope.country_name = dataArr[1];
+            method = "GET";
+            url = $rootScope.getBanks+"/"+$scope.CountryId;
+            methodData ={};
+            var response = myFactory.httpMethodCall(method, url, methodData);
+            response.success(function (data) {
+                if(data.status==1){
+               $scope.Banks = data.data;     
+                    
+                }else{
+                    $scope.Banks ={};
+                }
+                
+            });
+            response.error(function (error) {
+                console.log(error);
+            });
+        }
+        $scope.getBankDetails=function(bankselect){
+            var dataArr = bankselect.split("_");
+            $scope.BankId = dataArr[0];
+            $scope.bank_name = dataArr[1];
+            method = "GET";
+            url = $rootScope.getbankdetail+"/"+$scope.BankId;
+            methodData ={};
+            var response = myFactory.httpMethodCall(method, url, methodData);
+            response.success(function (data) {
+                console.log(data)
+                if(data.status==1){
+               $scope.BankDetails = data.data;     
+                    
+                }else{
+                    $scope.BankDetails ={};
+                }
+                
+            });
+            response.error(function (error) {
+                console.log(error);
+            });
+        }
         $scope.addbenif = function (benifdata) {
             $scope.benifData = $scope.benif;
             $scope.benifData.user_id = $scope.userInfo.id;
-            //$scope.benifData.token = $scope.userInfo.token;
+            $scope.benifData.token = $scope.userInfo.token;
+            $scope.benifData.attributes = JSON.stringify($scope.benifData.attributes);
             method = "POST";
             url = $rootScope.addBenefiery;
             var response = myFactory.httpMethodCall(method, url, $scope.benifData);

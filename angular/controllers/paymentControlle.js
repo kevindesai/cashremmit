@@ -97,7 +97,9 @@ app.controller('PaymentController', ['$scope', '$http', '$rootScope', 'userServi
             });
         }
         $scope.goToSelectBen = function(){
-            if($scope.toAmount > 0 && $scope.fromAmount >0){
+            
+            if($scope.toAmount != undefined && $scope.fromAmount != undefined){
+                
             $location.path('/paybeneficiary');
             }else{
                 return false;
