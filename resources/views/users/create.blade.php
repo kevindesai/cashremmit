@@ -14,7 +14,7 @@
     </div>
 @endif
 
-{!! Form::open(['url' => '/users', 'class' => 'form-horizontal','id'=>'myform']) !!}
+{!! Form::open(['url' => '/admin/users', 'class' => 'form-horizontal','id'=>'myform']) !!}
 
 <div class="form-group ">
     {!! Form::label('first_name', trans('First Name'), ['class' => 'col-sm-3 control-label']) !!}

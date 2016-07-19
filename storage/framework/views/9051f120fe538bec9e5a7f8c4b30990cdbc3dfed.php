@@ -12,7 +12,7 @@
     </div>
 <?php endif; ?>
 
-<?php echo Form::open(['url' => '/users', 'class' => 'form-horizontal','id'=>'myform']); ?>
+<?php echo Form::open(['url' => '/admin/users', 'class' => 'form-horizontal','id'=>'myform']); ?>
 
 
 <div class="form-group ">

@@ -14,7 +14,7 @@
         <script src="<?php echo e(url('/')); ?>/js/relcopy.js"></script>   
         <link type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600,700' rel='stylesheet'>
 
-        <link href="<?php echo e(url('/')); ?>/assets/fonts/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">         Font Awesome 
+        <link href="<?php echo e(url('/')); ?>/assets/fonts/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">          
         <link href="<?php echo e(url('/')); ?>/assets/fonts/themify-icons/themify-icons.css" type="text/css" rel="stylesheet">              <!-- Themify Icons -->
         <link href="<?php echo e(url('/')); ?>/assets/css/styles.css" type="text/css" rel="stylesheet">                                     <!-- Core CSS with all styles -->
 
@@ -302,6 +302,7 @@
 
         <!-- Load site level scripts -->
 
+        <?php echo $__env->yieldContent('script'); ?>
 <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script> -->
 
@@ -352,6 +353,6 @@
 
         <script src="<?php echo e(url('/')); ?>/assets/demo/demo-index.js"></script> 									<!-- Initialize scripts for this page-->
 
-        <?php echo $__env->yieldContent('script'); ?>
+        
     </body>
 </html>

@@ -14,7 +14,7 @@
 
 <?php echo Form::model($user, [
 'method' => 'PATCH',
-'url' => ['/users', $user->id],
+'url' => ['/admin/users', $user->id],
 'class' => 'form-horizontal',
 'id'=>'myform'
 ]); ?>
@@ -143,7 +143,6 @@
 
         <?php echo $errors->first('mobile_no', ' <span class="help-block">:message</span>'); ?>
 
-
     </div>
 </div>
 
@@ -156,7 +155,9 @@
 <?php echo Form::close(); ?>
 
 
+<?php $__env->stopSection(); ?>
 
+<?php $__env->startSection('script'); ?>
 <script>
     window.ParsleyConfig = {
         successClass: 'has-success'
