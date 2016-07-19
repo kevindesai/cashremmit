@@ -129,7 +129,7 @@
                         <input type="text" class="form-control" placeholder="Account Number" ng-model="benif.account_number" required="required" number>
                     </div>
                     <div class="form-group" ng-repeat="bankDe in BankDetails.attributes">
-                        <input type="text" class="form-control" placeholder="{{bankDe.name}}" ng-model="benif.atttributes[bankDe.name]" required="required" number>
+                        <input type="text" class="form-control" placeholder="{{bankDe.name}}" ng-model="benif.attributes[bankDe.name]" required="required" number>
                     </div>
                     <button type="submit" class="form-submit" ng-click="addbenif(benif)">Submit</button>
                 </form>

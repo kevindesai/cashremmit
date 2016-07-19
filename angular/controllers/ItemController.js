@@ -133,10 +133,13 @@ app.controller('ReportController', ['$scope', '$http', '$rootScope', 'userServic
             });
         }
         $scope.addbenif = function (benifdata) {
-            $scope.benifData = $scope.benif;
+        	$scope.benifData = $scope.benif;
             $scope.benifData.user_id = $scope.userInfo.id;
             $scope.benifData.token = $scope.userInfo.token;
             $scope.benifData.attributes = JSON.stringify($scope.benifData.attributes);
+            var dataArr = $scope.benifData.bank_name.split("_");
+            $scope.BankId = dataArr[0];
+            $scope.benifData.bank_name = dataArr[1];
             method = "POST";
             url = $rootScope.addBenefiery;
             var response = myFactory.httpMethodCall(method, url, $scope.benifData);
@@ -188,12 +191,13 @@ app.controller('PaymentDetailsController', ['$scope', '$http', '$rootScope', 'us
 }]);
 app.controller('BeneficiariesController', ['$scope', '$http', '$rootScope', 'userService', 'myFactory', '$location',
     function ($scope, $http, $rootScope, userService, myFactory, $location) {
-        
+        userService.getDataFromSession();
+        $scope.userInfo = userService.userInfo;
         $scope.refreshbeif = function () {
             $scope.isActive = 0;
             $scope.user_id = localStorage.getItem('id');
             method = "GET";
-            url = $rootScope.getBenefiery + '/' + $scope.user_id;
+            url = $rootScope.getBenefiery + '/' + $scope.user_id+'?token='+$scope.userInfo.token;
             var methodData = {"_method": "GET"};
             var response = myFactory.httpMethodCall(method, url, methodData);
             response.success(function (data) {
@@ -211,7 +215,7 @@ app.controller('BeneficiariesController', ['$scope', '$http', '$rootScope', 'use
         $scope.deleteBenif = function (id) {
             $scope.user_id = localStorage.getItem('id');
             method = "POST";
-            url = $rootScope.deleteBenefiery + '/' + id;
+            url = $rootScope.deleteBenefiery + '/' + id+'?token='+$scope.userInfo.token;
             var methodData = {"_method": "DELETE"};
             var response = myFactory.httpMethodCall(method, url, methodData);
             response.success(function (data) {
