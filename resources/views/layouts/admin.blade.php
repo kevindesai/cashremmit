@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Admin | Casn remmit</title>
+        <title>Admin | Cash remmit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -119,7 +119,7 @@
 
                             </ol>
                             <div class="page-heading">            
-                                <h1>Dashboard</h1>
+                                <!--<h1>Dashboard</h1>
                                 <div class="options">
                                     <div class="btn-toolbar">
                                         <form action="" class="form-horizontal row-border" style="display: inline-block;">
@@ -133,7 +133,7 @@
                                             </div>
                                         </form>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="container-fluid">
 
@@ -146,7 +146,7 @@
                     <footer role="contentinfo">
                         <div class="clearfix">
                             <ul class="list-unstyled list-inline pull-left">
-                                <li><h6 style="margin: 0;">&copy; 2015 december</h6></li>
+                                <li><h6 style="margin: 0;">&copy; Cash Remmit</h6></li>
                             </ul>
                             <button class="pull-right btn btn-link btn-xs hidden-print" id="back-to-top"><i class="fa fa-arrow-up"></i></button>
                         </div>

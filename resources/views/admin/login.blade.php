@@ -10,7 +10,7 @@
         <div class="col-md-4 col-md-offset-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h2>Login Form admin</h2>
+                    <h2>Login</h2>
                 </div>
                 <div class="panel-body">
 
@@ -41,7 +41,7 @@
                 </div>
                 <div class="panel-footer">
                     <div class="clearfix">
-                        <a href="extras-registration.html" class="btn btn-default pull-left">Register</a>
+                        <!--<a href="extras-registration.html" class="btn btn-default pull-left">Register</a>-->
                         <!--<a href="extras-login.html" class="btn btn-primary pull-right">Login</a>-->
                           {!!Form::submit('Login',['class'=>'btn btn-primary pull-right'])!!}
                         <!--<button name="submit" class="btn btn-primary pull-right">Login</button>-->
@@ -50,10 +50,10 @@
                 </div>
             </div>
 
-            <div class="text-center">
+            <!--<div class="text-center">
                 <a href="#" class="btn btn-label btn-social btn-facebook mb-md"><i class="ti ti-facebook"></i>Connect with Facebook</a>
                 <a href="#" class="btn btn-label btn-social btn-twitter mb-md"><i class="ti ti-twitter"></i>Connect with Twitter</a>
-            </div>
+            </div> -->
         </div>
         {!!Form::close()!!}
     </div>
