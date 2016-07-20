@@ -7,37 +7,46 @@
 				<div class="row">
 					<div class="col-md-12">
 						<ul class="number-link">
-							<li class="active" ><a style="color:#227d32;" href="payment_transfar-1.html"><i class="fa fa-check" aria-hidden="true"></i></a></li>
-							<li class="active"><a href="#">2</a></li>
+							<li class="active"><a href="#">1</a></li>
+							<li><a href="#">2</a></li>
 							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
 						</ul>
 					</div>
 				</div>
 			<div class="row">
-				<div class="col-md-5 col-sm-5">
-					<p>Choose from country</p>
-						<div class="drop-main">
-						  <button class="btn btn-default dropdown-toggle dropdown" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-							<img src="images/country.png" class="img-responsive flag">
-						  </button>
-						  <ul class="dropdown-menu drop-list" aria-labelledby="dropdownMenu1">
-							<li><a href="#"><img src="images/country.png" class="img-responsive flag"></a></li>
-							<li><a href="#"><img src="images/country.png" class="img-responsive flag"></a></li>
-							<li><a href="#"><img src="images/country.png" class="img-responsive flag"></a></li>
-						  </ul>
-						</div>
-				</div>
-				
-				<div class="col-md-offset-1 col-sm-offset-1 col-md-5 col-sm-5">
-					<div class="row info-title">
-						<div class="col-md-3 col-sm-2 pl0 pr0 col-xs-2">
-							<img src="images/right-mark.png" class="img-responsive">
-						</div>
-						<div class="col-md-9 col-sm-10 col-xs-10">
-							<p>Send destination is supported</p>
+				<div class="col-md-5 col-sm-5 visible-sm-* visible-lg-* visible-md-* hidden-xs">
+						<div class="side-bar-box">
+							<div class="sidebar-heading">
+								<h2>Transfer calculator</h2>
+							</div>
+							<div class="sidebar-inner">
+								<div class="rate-sidebar">
+									<div class="rat-inner-sidebar">
+									   <label for="">You want to send..</label>
+										 <input type="text" ng-model="fromAmount" ng-change="convertCurFromto()" placeholder="1000">
+											<select ng-model="fromCur">
+                                                    <option value="AUD">aud</option>
+                                                    <option value="INR">INR</option>
+                                                    <option value="USD">USD</option>
+											</select>
+									</div>
+									<div class="rat-inner">
+									   <label for="">Recipiant will get...</label>
+										<input type="text" ng-model="toAmount" ng-change="convertCurtoFrom()" placeholder="234,000">
+                                            <select ng-model="toCur">
+												<option value='NGN'>ngn</option>
+												<option value="AUD">aud</option>
+                                                    <option value="INR">INR</option>
+                                                    <option value="USD">USD</option>
+											</select>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
+				
+				<div class="col-md-offset-1 col-sm-offset-1 col-md-5 col-sm-5">
+					
 					<div class="side-bar-box">
 						<div class="sidebar-heading">
 							<h2>Payment Summary</h2>

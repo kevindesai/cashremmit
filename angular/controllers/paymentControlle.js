@@ -16,14 +16,14 @@ app.controller('PaymentController', ['$scope', '$http', '$rootScope', 'userServi
         }else{
             $scope.isLogin = false;
             $rootScope.isLogin = false;
-        } 
+        }
+        
         /*
          * update information of user
          */
-        $scope.fromCur = 'AUD';
-        $scope.toCur = 'NGN';
-        localStorage.setItem('FromCUR',$scope.fromCur);
-        localStorage.setItem('ToCUR',$scope.toCur);
+        
+        $scope.fromCur = (localStorage.getItem('FromCUR') != null)?localStorage.getItem('FromCUR'):'AUD';
+        $scope.toCur = (localStorage.getItem('ToCUR') != null)?localStorage.getItem('ToCUR'):'NGN';
             
         $scope.defaultCurConvert = function(){
             var method = 'POST';
@@ -48,6 +48,10 @@ app.controller('PaymentController', ['$scope', '$http', '$rootScope', 'userServi
             });
         }
         $scope.defaultCurConvert();
+        
+        $scope.fromAmount=localStorage.getItem('FromamounT');
+        $scope.toAmount=localStorage.getItem('ToamounT');
+        
         $scope.convertCurFromto = function () {
             var method = 'POST';
             var url = $rootScope.CurrencyApi;
@@ -72,6 +76,8 @@ app.controller('PaymentController', ['$scope', '$http', '$rootScope', 'userServi
                 console.log(error);
             });
         }
+        
+        
         $scope.convertCurtoFrom = function () {
             var method = 'POST';
             var url = $rootScope.CurrencyApi;

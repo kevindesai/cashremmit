@@ -24,7 +24,7 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
         var response = myFactory.httpMethodCall(method, url, curData);
         response.success(function(data) {
             if (data.status == 1) {
-                $scope.toAmount = data.converted;
+                ///$scope.toAmount = data.converted;
                 $scope.DefaulttoAmount = data.converted;
                 localStorage.setItem('ToamounT',data.converted);
             } else if(data.status==0) {
@@ -61,6 +61,8 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
             console.log(error);
         });
     }
+    $scope.fromAmount=1000;
+    $scope.convertCurFromto();
     $scope.convertCurtoFrom = function(){
         if($scope.fromAmount != "0"){
             $scope.gotopage = "#/paymentdetails";

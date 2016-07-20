@@ -135,9 +135,9 @@ webkit-transition: background 0.2s ease-out, color 0.2s ease-out, border-color 0
 .rat-inner{
     width: 100%;
     display: inline-block;
-    margin-left: 6px;
+    margin-left: -6px;
     position: relative;
-    top: 10px;
+    top: 17px;
  }
 
 .rate input {
@@ -227,8 +227,8 @@ border-radius:50%;}
 /*********************************** start payment transfar ***********************************/
 
 .banner_transfar{background-color:#175463; min-height:200px;}
-.customer-name{color:#fff; margin-top:42px; font-size:20px; text-align:right; margin-right:67px; margin-bottom:0px;}
-.customer-id{color:#fff; margin-top:2px; font-size:14px; text-align:right;}
+.customer-name{color:#fff; margin-top:42px; font-size:20px; text-align:right; margin-right:67px; margin-bottom:0px; text-transform: capitalize;}
+.customer-id{color:#fff; margin-top:2px; font-size:14px; text-align:right; text-transform: uppercase;}
 .customer-thumb{margin-top:30px;}
 .top-btns{float:right; list-style:none; margin-top:40px;}
 .top-btns li{float:left; margin-right:10px;}
@@ -388,8 +388,8 @@ background:#fff url('../images/search.png'); background-position:100%; backgroun
 .chang-pass-btn{float:right; margin-top:20px;}
 .chang-pass-btn a{border:1px solid #111; display:inline-block; font-size:24px; padding:15px 25px 15px 25px !important;}
 .chang-pass-btn a:hover{border:1px solid #111 !important; color:#111 !important;}
-.change-pass-name{font-size:30px; margin:20px 0px 0px 20px; line-height:30px; color:#175463;}
-.cid{font-size:20px;margin:5px 0px 0px 20px; line-height:22px; color:#175463;}
+.change-pass-name{font-size:30px; margin:20px 0px 0px 20px; line-height:30px; color:#175463; text-transform: capitalize;}
+.cid{font-size:20px;margin:5px 0px 0px 20px; line-height:22px; color:#175463; text-transform: uppercase;}
 
 .change-items{border:1px solid #95989a; margin-top:30px;}
 .change-name{color:#95989a; font-size:24px; margin:0px; padding:20px;}
@@ -519,7 +519,7 @@ input:focus, textarea:focus, keygen:focus, select:focus {
     outline: none;
 }
 
-.homepagelable label {
+ label {
     display: inline-block;
     max-width: 100%;
     margin-bottom: 5px;
