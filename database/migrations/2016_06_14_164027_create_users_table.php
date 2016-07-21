@@ -25,7 +25,7 @@ class CreateusersTable extends Migration {
             $table->date('dob');
             $table->string('mobile_no');
             $table->string('landline_no');
-            $table->tinyInteger('is_active')->default('1');
+            $table->tinyInteger('is_active')->default('0');
             $table->timestamps();
         });
     }

@@ -30,9 +30,6 @@ class UsersAPIController extends Controller {
                     'first_name' => array('required', 'alpha_dash'),
                     'last_name' => array('required', 'alpha_dash'),
                     'email' => array('required', 'email', 'unique:Users'),
-//                    'city' => array('required'),
-//                    'post_code' => array('required'),
-//                    'country' => array('required'),
                     'password' => array('required'),
                         )
         );
@@ -46,6 +43,7 @@ class UsersAPIController extends Controller {
             return json_encode($response);
         }
         $input = $request->all();
+        $input['is_active'] = 1;
         if (isset($input['password'])) {
             $input['password'] = Hash::make($input['password']);
         }
