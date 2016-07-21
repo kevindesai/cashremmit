@@ -30,16 +30,22 @@
                     <div class="rate-sidebar">
                         <div class="rat-inner">
                             <label for="">You want to send..</label>
-                            <input type="text" ng-model="fromAmount" ng-change="convertCurFromto()" placeholder="1000">
-                            <select ng-model="fromCur">
+                            <input type="text" ng-model="fromAmount" ng-change="convertCurFromto(fromAmount)" >
+                            <select ng-model="fromCur" ng-change="convertCurFromto(fromAmount)">
                                 <option value="AUD">aud</option>
+                                <option value="USD">usd</option>
+                                <option value="INR">inr</option>
+                                <option value="NGN">ngn</option>
                             </select>
                         </div>
                         <div class="rat-inner">
                             <label for="">Recipiant will get...</label>
-                            <input type="text" ng-model="toAmount" ng-change="convertCurtoFrom()" placeholder="234,000">
-                            <select ng-model="toCur">
-                                <option value='NGN'>ngn</option>
+                            <input type="text" ng-model="toAmount" ng-change="convertCurtoFrom(toAmount)" >
+                            <select ng-model="toCur" ng-change="convertCurFromto(fromAmount)">
+                                <option value="AUD">aud</option>
+                                <option value="USD">usd</option>
+                                <option value="INR">inr</option>
+                                <option value="NGN">ngn</option>
                             </select>
                         </div>
                         <div class="exchangeDes">

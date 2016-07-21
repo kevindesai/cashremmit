@@ -22,86 +22,65 @@ app.controller('PaymentController', ['$scope', '$http', '$rootScope', 'userServi
          * update information of user
          */
         
-        $scope.fromCur = (localStorage.getItem('FromCUR') != null)?localStorage.getItem('FromCUR'):'AUD';
-        $scope.toCur = (localStorage.getItem('ToCUR') != null)?localStorage.getItem('ToCUR'):'NGN';
-            
-        $scope.defaultCurConvert = function(){
-            var method = 'POST';
-            var url = $rootScope.CurrencyApi;
-        var curData={};
-            $scope.DefaultfromAmount = 1;
-            curData.amount = $scope.DefaultfromAmount;
-            curData.from = $scope.fromCur;
-            curData.to = $scope.toCur;
-            var response = myFactory.httpMethodCall(method, url, curData);
-            response.success(function (data) {
-                if (data.status == 1) {
-                    
-                    $scope.DefaulttoAmount = data.converted;
-                    console.log($scope.DefaulttoAmount);
-                } else if (data.status == 0) {
-
-                }
-            });
-            response.error(function (error) {
-                console.log(error);
-            });
+    $scope.fromAmount=localStorage.getItem('FromamounT');
+    $scope.fromCur=localStorage.getItem('FromCUR');
+    $scope.toCur=localStorage.getItem('ToCUR');
+    $scope.toAmount=localStorage.getItem('ToamounT');
+    
+    $scope.convertDefault = function (url, fromCur, ToCur, defaultfromamount) {
+        $scope.DefaultfromAmount = defaultfromamount;
+        var DefalutconRes = myFactory.currencyConvert(url, fromCur, ToCur, defaultfromamount);
+        DefalutconRes.success(function (data) {
+            if (data.status == 1) {
+                $scope.DefaulttoAmount = data.converted;
+            } else {
+                $scope.DefaulttoAmount = '';
+            }
+        });
+    }
+    $scope.convertCurFromto = function (fromAmount) {
+        
+        if (fromAmount != "0") {
+            $scope.gotopage = "#/paymentdetails";
         }
-        $scope.defaultCurConvert();
-        
-        $scope.fromAmount=localStorage.getItem('FromamounT');
-        $scope.toAmount=localStorage.getItem('ToamounT');
-        
-        $scope.convertCurFromto = function () {
-            var method = 'POST';
-            var url = $rootScope.CurrencyApi;
-            var curData = {};
-            $scope.fromAmount = ($scope.fromAmount == undefined) ? 1 : $scope.fromAmount;
-            curData.amount = $scope.fromAmount;
-            curData.from = $scope.fromCur;
-            curData.to = $scope.toCur;
-            localStorage.setItem('FromamounT',$scope.fromAmount);
-            localStorage.setItem('FromCUR',$scope.fromCur);
-            localStorage.setItem('ToCUR',$scope.toCur);
-            var response = myFactory.httpMethodCall(method, url, curData);
-            response.success(function (data) {
-                if (data.status == 1) {
-                    $scope.toAmount = data.converted;
-                    localStorage.setItem('ToamounT',data.converted);
-                } else if (data.status == 0) {
+        var url = $rootScope.CurrencyApi;
+        $scope.convertDefault(url, $scope.fromCur, $scope.toCur, 1);
+        var FromconRes = myFactory.currencyConvert(url, $scope.fromCur, $scope.toCur, fromAmount);
+        FromconRes.success(function (data) {
+            if (data.status == 1) {
+                $scope.toAmount = data.converted;
+                localStorage.setItem('ToamounT', $scope.toAmount);
+            } else {
+                $scope.toAmount = '';
+            }
+        });
+        localStorage.setItem('FromamounT', fromAmount);
+        localStorage.setItem('FromCUR', $scope.fromCur);
+        localStorage.setItem('ToCUR', $scope.toCur);
 
-                }
-            });
-            response.error(function (error) {
-                console.log(error);
-            });
-        }
-        
-        
-        $scope.convertCurtoFrom = function () {
-            var method = 'POST';
-            var url = $rootScope.CurrencyApi;
-            var curData = {};
-            $scope.toAmount = ($scope.toAmount == undefined) ? 1 : $scope.toAmount;
-            curData.amount = $scope.toAmount;
-            localStorage.setItem('ToamounT',$scope.toAmount);
-            curData.from = $scope.toCur;
-            curData.to = $scope.fromCur;
-            localStorage.setItem('FromCUR',$scope.fromCur);
-            localStorage.setItem('ToCUR',$scope.toCur);
-            var response = myFactory.httpMethodCall(method, url, curData);
-            response.success(function (data) {
-                if (data.status == 1) {
-                    $scope.fromAmount = data.converted;
-                    localStorage.setItem('FromamounT',data.converted);
-                } else if (data.status == 0) {
 
-                }
-            });
-            response.error(function (error) {
-                console.log(error);
-            });
+    }
+    $scope.convertCurFromto($scope.fromAmount);
+    $scope.convertCurtoFrom = function (toAmount) {
+        if (toAmount != "0") {
+            $scope.gotopage = "#/paymentdetails";
         }
+
+        var url = $rootScope.CurrencyApi;
+        $scope.convertDefault(url, $scope.fromCur, $scope.toCur, 1);
+        var ToconRes = myFactory.currencyConvert(url, $scope.toCur, $scope.fromCur,toAmount);
+        ToconRes.success(function (data) {
+            if (data.status == 1) {
+                $scope.fromAmount = data.converted;
+                localStorage.setItem('FromamounT', $scope.fromAmount);
+            } else {
+                $scope.fromAmount = '';
+            }
+        });
+        localStorage.setItem('ToamounT', $scope.toAmount);
+        localStorage.setItem('FromCUR', $scope.fromCur);
+        localStorage.setItem('ToCUR', $scope.toCur);
+    }
         $scope.goToSelectBen = function(){
             
             if($scope.toAmount != undefined && $scope.fromAmount != undefined){

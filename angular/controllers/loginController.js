@@ -1,105 +1,84 @@
 
 
-app.controller('AdminController', function($scope, $http, $location, myFactory, $rootScope, Facebook, userService) {
-    // tabular
-    $rootScope.isLogin=false;
-    $scope.activeTab = 1;
-    $scope.setActiveTab = function(tabToSet) {
-        $scope.activeTab = tabToSet;
-    };
-    $scope.gotopage = "";
-    $scope.fromCur='AUD';
-    $scope.toCur='NGN';
+app.controller('AdminController', function ($scope, $http, $location, myFactory, $rootScope, Facebook, userService) {
     
-    $scope.DefaultfromAmount = 1;
-    localStorage.setItem('FromamounT',$scope.DefaultfromAmount);
-    localStorage.setItem('FromCUR',$scope.fromCur);
-    localStorage.setItem('ToCUR',$scope.toCur);
-    var method = 'POST';
-        var url = $rootScope.CurrencyApi;
-    var curData = {};
-        curData.amount = $scope.DefaultfromAmount;
-        curData.from = $scope.fromCur;
-        curData.to = $scope.toCur;
-        var response = myFactory.httpMethodCall(method, url, curData);
-        response.success(function(data) {
+    $scope.gotopage = "";
+    $scope.fromCur = 'AUD';
+    $scope.toCur = 'NGN';
+    var url = $rootScope.CurrencyApi;
+    $scope.convertDefault = function (url, fromCur, ToCur, defaultfromamount) {
+        $scope.DefaultfromAmount = defaultfromamount;
+        var DefalutconRes = myFactory.currencyConvert(url, fromCur, ToCur, defaultfromamount);
+        DefalutconRes.success(function (data) {
             if (data.status == 1) {
-                ///$scope.toAmount = data.converted;
                 $scope.DefaulttoAmount = data.converted;
-                localStorage.setItem('ToamounT',data.converted);
-            } else if(data.status==0) {
-                
+            } else {
+                $scope.DefaulttoAmount = '';
             }
         });
-        response.error(function(error) {
-            console.log(error);
-        });
-    
-    $scope.convertCurFromto = function(){
-        if($scope.fromAmount != "0"){
+    }
+    $scope.convertCurFromto = function (fromAmount) {
+        
+        if (fromAmount != "0") {
             $scope.gotopage = "#/paymentdetails";
         }
-        var method = 'POST';
         var url = $rootScope.CurrencyApi;
-        var curData = {};
-        curData.amount = $scope.fromAmount;
-        curData.from = $scope.fromCur;
-        curData.to = $scope.toCur;
-        localStorage.setItem('FromamounT',$scope.fromAmount);
-    localStorage.setItem('FromCUR',$scope.fromCur);
-    localStorage.setItem('ToCUR',$scope.toCur);
-        var response = myFactory.httpMethodCall(method, url, curData);
-        response.success(function(data) {
+        $scope.convertDefault(url, $scope.fromCur, $scope.toCur, 1);
+        var FromconRes = myFactory.currencyConvert(url, $scope.fromCur, $scope.toCur, fromAmount);
+        FromconRes.success(function (data) {
             if (data.status == 1) {
                 $scope.toAmount = data.converted;
-                 localStorage.setItem('ToamounT',data.converted);
-            } else if(data.status==0) {
-                
+                localStorage.setItem('ToamounT', $scope.toAmount);
+            } else {
+                $scope.toAmount = '';
             }
         });
-        response.error(function(error) {
-            console.log(error);
-        });
+        localStorage.setItem('FromamounT', fromAmount);
+        localStorage.setItem('FromCUR', $scope.fromCur);
+        localStorage.setItem('ToCUR', $scope.toCur);
+
+
     }
-    $scope.fromAmount=1000;
-    $scope.convertCurFromto();
-    $scope.convertCurtoFrom = function(){
-        if($scope.fromAmount != "0"){
+    $scope.fromAmount = 1000;
+    $scope.convertCurFromto($scope.fromAmount);
+    $scope.convertCurtoFrom = function (toAmount) {
+        if (toAmount != "0") {
             $scope.gotopage = "#/paymentdetails";
         }
-        var method = 'POST';
+
         var url = $rootScope.CurrencyApi;
-        var curData = {};
-        curData.amount = $scope.toAmount;
-        curData.from = $scope.toCur;
-        curData.to = $scope.fromCur;
-        
-    localStorage.setItem('FromCUR',$scope.fromCur);
-    localStorage.setItem('ToCUR',$scope.toCur);
-    localStorage.setItem('ToamounT',$scope.toAmount);
-        var response = myFactory.httpMethodCall(method, url, curData);
-        response.success(function(data) {
+        $scope.convertDefault(url, $scope.fromCur, $scope.toCur, 1);
+        var ToconRes = myFactory.currencyConvert(url, $scope.toCur, $scope.fromCur,toAmount);
+        ToconRes.success(function (data) {
             if (data.status == 1) {
                 $scope.fromAmount = data.converted;
-                localStorage.setItem('FromamounT',$scope.fromAmount);
-            } else if(data.status==0) {
-                
+                localStorage.setItem('FromamounT', $scope.fromAmount);
+            } else {
+                $scope.fromAmount = '';
             }
         });
-        response.error(function(error) {
-            console.log(error);
-        });
+        localStorage.setItem('ToamounT', $scope.toAmount);
+        localStorage.setItem('FromCUR', $scope.fromCur);
+        localStorage.setItem('ToCUR', $scope.toCur);
     }
-    
+});
 
+app.controller('LoginController', function ($scope, $http, $location, myFactory, $rootScope, Facebook, userService) {
+
+// tabular
+    $rootScope.isLogin = false;
+    $scope.activeTab = 1;
+    $scope.setActiveTab = function (tabToSet) {
+        $scope.activeTab = tabToSet;
+    };
     $scope.formInfo = {};
     /*
      * Normal Registration
      * @returns {undefined}
      */
-    $scope.registerUser = function() {
-        var data = $scope.formInfo;  
-         
+    $scope.registerUser = function () {
+        var data = $scope.formInfo;
+
         //call addUser Method
         $scope.addUser(data);
     };
@@ -107,37 +86,37 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
      * Normal Loginn
      * @returns {undefined}
      */
-    $scope.loginUser = function() {
+    $scope.loginUser = function () {
         var data = $scope.loginInfo;
         // call loginMember Method 
-        
+
         $scope.loginMember(data);
     };
     /*
      * login functionality
      */
-    $scope.loginMember = function(SocialUserData) {
+    $scope.loginMember = function (SocialUserData) {
         var method = 'POST';
         var url = $rootScope.loginApi;
-         $scope.invalidusername=false;
+        $scope.invalidusername = false;
         var response = myFactory.httpMethodCall(method, url, SocialUserData);
-        response.success(function(data) {
-            
+        response.success(function (data) {
+
             if (data.status == 1) {
-                
+
                 $rootScope.userData = data.data;
-                $rootScope.isLogin=true;
+                $rootScope.isLogin = true;
                 userService.saveDataInSession(data.data);
-                localStorage.setItem('token',data.token);
+                localStorage.setItem('token', data.token);
                 //localStorage.getItem('token');
-               
+
                 $('#myModal').modal('hide');
                 $location.path('/payment');
-            } else if(data.status==0) {
-                $scope.invalidusername=true;
+            } else if (data.status == 0) {
+                $scope.invalidusername = true;
             }
         });
-        response.error(function(error) {
+        response.error(function (error) {
             console.log(error);
         });
     }
@@ -146,25 +125,25 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
      * New User add 
      * if user exists then it will return negative response
      */
-    $scope.addUser = function(SocialUserData) {
-        $scope.registrationerrors=false;
+    $scope.addUser = function (SocialUserData) {
+        $scope.registrationerrors = false;
         var method = 'POST';
         var url = $rootScope.RegitrationApi;
         var response = myFactory.httpMethodCall(method, url, SocialUserData);
-        response.success(function(data) {
+        response.success(function (data) {
             // success callback
             if (data.status == 1) {
                 $rootScope.userData = data.data;
                 userService.saveDataInSession(data.data);
                 $('#myModal').modal('hide');
                 $location.path('/payment');
-            } else if(data.status==0) {
+            } else if (data.status == 0) {
                 console.log(data.data.email);
-                $scope.registrationerrors=true;
-                $scope.errormessage=data.data.email[0];
+                $scope.registrationerrors = true;
+                $scope.errormessage = data.data.email[0];
             }
         });
-        response.error(function(error) {
+        response.error(function (error) {
             console.log(error);
         });
     }
@@ -173,7 +152,7 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
     $scope.invalidUser = false;
     $scope.hideLoginBtn = false;
 
-    $scope.callforgotPassword = function() {
+    $scope.callforgotPassword = function () {
         //console.log($scope.forgot);
         var arr = {};
         arr.email = $scope.forgot.email;
@@ -183,7 +162,7 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
                 method: 'POST',
                 url: constant.callforgotPassword,
                 data: JSON.stringify(arr),
-            }).then(function(response) {
+            }).then(function (response) {
                 if (response.status == 200) {
                     $scope.responsemessage = response.data.message;
                 }
@@ -205,9 +184,9 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
     $scope.loginStatus = 'disconnected';
     $scope.facebookIsReady = false;
     $scope.user = null;
-    $scope.fblogin = function() {
+    $scope.fblogin = function () {
 
-        Facebook.login(function(response) {
+        Facebook.login(function (response) {
             $scope.loginStatus = response.status;
             if ($scope.loginStatus == "connected") {
                 $scope.facebookUserData = response;
@@ -219,18 +198,18 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
         }, {scope: 'email, public_profile', return_scopes: true});
     };
 
-    $scope.removeAuth = function() {
+    $scope.removeAuth = function () {
         Facebook.api({
             method: 'Auth.revokeAuthorization'
-        }, function(response) {
-            Facebook.getLoginStatus(function(response) {
+        }, function (response) {
+            Facebook.getLoginStatus(function (response) {
                 $scope.loginStatus = response.status;
             });
         });
     };
 
-    $scope.api = function() {
-        Facebook.api('/me', {locale: 'en_US', fields: 'first_name,last_name,email,gender'}, function(response) {
+    $scope.api = function () {
+        Facebook.api('/me', {locale: 'en_US', fields: 'first_name,last_name,email,gender'}, function (response) {
             $scope.user = response;
             var FB = {};
             FB.firstName = response.first_name;
@@ -241,14 +220,14 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
         });
     };
 
-    $scope.$watch(function() {
+    $scope.$watch(function () {
         return Facebook.isReady();
-    }, function(newVal) {
+    }, function (newVal) {
         if (newVal) {
             $scope.facebookIsReady = true;
         }
     });
-    $scope.$on('event:google-plus-signin-success', function(event, authResult) {
+    $scope.$on('event:google-plus-signin-success', function (event, authResult) {
         // User successfully authorized the G+ App!
         $scope.userDataGoogle = authResult.wc;
         console.log($scope.userDataGoogle);
@@ -261,7 +240,7 @@ app.controller('AdminController', function($scope, $http, $location, myFactory, 
 //        return false;
         $scope.addUser(GooData);
     });
-    $scope.$on('event:google-plus-signin-failure', function(event, authResult) {
+    $scope.$on('event:google-plus-signin-failure', function (event, authResult) {
         // User has not authorized the G+ App!
         console.log('Not signed into Google Plus.');
     });

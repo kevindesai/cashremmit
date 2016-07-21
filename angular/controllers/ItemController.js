@@ -1,5 +1,5 @@
-app.controller('commonController', ['$scope', '$location', '$http', '$rootScope', 'userService', 'myFactory',
-    function ($scope, $location, $http, $rootScope, userService, myFactory) {
+app.controller('commonController', ['$scope', '$location', '$http', '$rootScope', 'userService', 'myFactory','$window',
+    function ($scope, $location, $http, $rootScope, userService, myFactory,$window) {
         $scope.activeTab = 1;
     $scope.setActiveTab = function(tabToSet) {
         $scope.activeTab = tabToSet;
@@ -33,6 +33,10 @@ app.controller('commonController', ['$scope', '$location', '$http', '$rootScope'
             localStorage.removeItem('region');
             localStorage.removeItem('street');
             localStorage.removeItem('unit_no');
+            localStorage.removeItem('FromamounT');
+            localStorage.removeItem('FromCUR');
+            localStorage.removeItem('ToCUR');
+            localStorage.removeItem('ToamounT');
             $location.path('/');
         }
     }]);
@@ -61,7 +65,11 @@ app.controller('ReportController', ['$scope', '$http', '$rootScope', 'userServic
                 if (data.status == 1 && data.message == "data found") {
                     $scope.userBefif = data.data;
                     $scope.benifData = data.data[0];
-                }else{
+                }else if(data.status == -1){
+                    
+                    $scope.doLogout();
+                }
+                else{
                     $scope.NoBenif = 1;
                 }
             });
@@ -144,10 +152,13 @@ app.controller('ReportController', ['$scope', '$http', '$rootScope', 'userServic
             url = $rootScope.addBenefiery;
             var response = myFactory.httpMethodCall(method, url, $scope.benifData);
             response.success(function (data) {
-                console.log(data);
+                
                 if (data.status == 1) {
                     $scope.refreshbeif();
                     $('#myModal').modal('hide');
+                }else if(data.status == -1){
+                    
+                    $scope.doLogout();
                 }
             });
             response.error(function (error) {
@@ -186,77 +197,61 @@ app.controller('PaymentDetailsController', ['$scope', '$http', '$rootScope', 'us
     $scope.fromCur=localStorage.getItem('FromCUR');
     $scope.toCur=localStorage.getItem('ToCUR');
     $scope.toAmount=localStorage.getItem('ToamounT');
-    $scope.defaultCurConvert = function(){
-            var method = 'POST';
-            var url = $rootScope.CurrencyApi;
-            var curData={};
-            $scope.DefaultfromAmount = 1;
-            curData.amount = $scope.DefaultfromAmount;
-            curData.from = $scope.fromCur;
-            curData.to = $scope.toCur;
-            var response = myFactory.httpMethodCall(method, url, curData);
-            response.success(function (data) {
-                if (data.status == 1) {
-                    
-                    $scope.DefaulttoAmount = data.converted;
-                    console.log($scope.DefaulttoAmount);
-                } else if (data.status == 0) {
-
-                }
-            });
-            response.error(function (error) {
-                console.log(error);
-            });
+    $scope.convertDefault = function (url, fromCur, ToCur, defaultfromamount) {
+        $scope.DefaultfromAmount = defaultfromamount;
+        var DefalutconRes = myFactory.currencyConvert(url, fromCur, ToCur, defaultfromamount);
+        DefalutconRes.success(function (data) {
+            if (data.status == 1) {
+                $scope.DefaulttoAmount = data.converted;
+            } else {
+                $scope.DefaulttoAmount = '';
+            }
+        });
+    }
+    $scope.convertCurFromto = function (fromAmount) {
+        
+        if (fromAmount != "0") {
+            $scope.gotopage = "#/paymentdetails";
         }
-        $scope.defaultCurConvert();
-     $scope.convertCurFromto = function () {
-            var method = 'POST';
-            var url = $rootScope.CurrencyApi;
-            var curData = {};
-            $scope.fromAmount = ($scope.fromAmount == undefined) ? 1 : $scope.fromAmount;
-            curData.amount = $scope.fromAmount;
-            curData.from = $scope.fromCur;
-            curData.to = $scope.toCur;
-            localStorage.setItem('FromamounT',$scope.fromAmount);
-            localStorage.setItem('FromCUR',$scope.fromCur);
-            localStorage.setItem('ToCUR',$scope.toCur);
-            var response = myFactory.httpMethodCall(method, url, curData);
-            response.success(function (data) {
-                if (data.status == 1) {
-                    $scope.toAmount = data.converted;
-                    localStorage.setItem('ToamounT',data.converted);
-                } else if (data.status == 0) {
+        var url = $rootScope.CurrencyApi;
+        $scope.convertDefault(url, $scope.fromCur, $scope.toCur, 1);
+        var FromconRes = myFactory.currencyConvert(url, $scope.fromCur, $scope.toCur, fromAmount);
+        FromconRes.success(function (data) {
+            if (data.status == 1) {
+                $scope.toAmount = data.converted;
+                localStorage.setItem('ToamounT', $scope.toAmount);
+            } else {
+                $scope.toAmount = '';
+            }
+        });
+        localStorage.setItem('FromamounT', fromAmount);
+        localStorage.setItem('FromCUR', $scope.fromCur);
+        localStorage.setItem('ToCUR', $scope.toCur);
 
-                }
-            });
-            response.error(function (error) {
-                console.log(error);
-            });
-        }
-        $scope.convertCurtoFrom = function () {
-            var method = 'POST';
-            var url = $rootScope.CurrencyApi;
-            var curData = {};
-            $scope.toAmount = ($scope.toAmount == undefined) ? 1 : $scope.toAmount;
-            curData.amount = $scope.toAmount;
-            localStorage.setItem('ToamounT',$scope.toAmount);
-            curData.from = $scope.toCur;
-            curData.to = $scope.fromCur;
-            localStorage.setItem('FromCUR',$scope.fromCur);
-            localStorage.setItem('ToCUR',$scope.toCur);
-            var response = myFactory.httpMethodCall(method, url, curData);
-            response.success(function (data) {
-                if (data.status == 1) {
-                    $scope.fromAmount = data.converted;
-                    localStorage.setItem('FromamounT',data.converted);
-                } else if (data.status == 0) {
 
-                }
-            });
-            response.error(function (error) {
-                console.log(error);
-            });
+    }
+    $scope.convertCurFromto($scope.fromAmount);
+    $scope.convertCurtoFrom = function (toAmount) {
+        if (toAmount != "0") {
+            $scope.gotopage = "#/paymentdetails";
         }
+
+        var url = $rootScope.CurrencyApi;
+        $scope.convertDefault(url, $scope.fromCur, $scope.toCur, 1);
+        var ToconRes = myFactory.currencyConvert(url, $scope.toCur, $scope.fromCur,toAmount);
+        ToconRes.success(function (data) {
+            if (data.status == 1) {
+                $scope.fromAmount = data.converted;
+                localStorage.setItem('FromamounT', $scope.fromAmount);
+            } else {
+                $scope.fromAmount = '';
+            }
+        });
+        localStorage.setItem('ToamounT', $scope.toAmount);
+        localStorage.setItem('FromCUR', $scope.fromCur);
+        localStorage.setItem('ToCUR', $scope.toCur);
+    }
+
 
 }]);
 app.controller('BeneficiariesController', ['$scope', '$http', '$rootScope', 'userService', 'myFactory', '$location',
@@ -275,6 +270,9 @@ app.controller('BeneficiariesController', ['$scope', '$http', '$rootScope', 'use
                 if (data.status == 1 && data.message == "data found") {
                     $scope.userBefif = data.data;
                     $scope.benifData = data.data[0];
+                }else if(data.status == -1){
+                    
+                    $scope.doLogout();
                 }
             });
             response.error(function (error) {
@@ -289,9 +287,12 @@ app.controller('BeneficiariesController', ['$scope', '$http', '$rootScope', 'use
             var methodData = {"_method": "DELETE"};
             var response = myFactory.httpMethodCall(method, url, methodData);
             response.success(function (data) {
-                console.log(data);
+               
                 if (data.status == 1) {
                     $scope.refreshbeif();
+                }else if(data.status == -1){
+                    
+                    $scope.doLogout();
                 }
             });
             response.error(function (error) {
@@ -320,78 +321,4 @@ app.directive('modalDialog', function () {
         templateUrl: 'resources/views/templates/signUpLoginPopup.html',
 //    template: ""
     };
-});
-app.controller('ItemController', function (dataFactory, $scope, $http) {
-
-    $scope.data = [];
-    $scope.libraryTemp = {};
-    $scope.totalItemsTemp = {};
-
-    $scope.totalItems = 0;
-    $scope.pageChanged = function (newPage) {
-        getResultsPage(newPage);
-    };
-
-    getResultsPage(1);
-    function getResultsPage(pageNumber) {
-        if (!$.isEmptyObject($scope.libraryTemp)) {
-            dataFactory.httpRequest('/items?search=' + $scope.searchText + '&page=' + pageNumber).then(function (data) {
-                $scope.data = data.data;
-                $scope.totalItems = data.total;
-            });
-        } else {
-            dataFactory.httpRequest('/items?page=' + pageNumber).then(function (data) {
-                $scope.data = data.data;
-                $scope.totalItems = data.total;
-            });
-        }
-    }
-
-    $scope.searchDB = function () {
-        if ($scope.searchText.length >= 3) {
-            if ($.isEmptyObject($scope.libraryTemp)) {
-                $scope.libraryTemp = $scope.data;
-                $scope.totalItemsTemp = $scope.totalItems;
-                $scope.data = {};
-            }
-            getResultsPage(1);
-        } else {
-            if (!$.isEmptyObject($scope.libraryTemp)) {
-                $scope.data = $scope.libraryTemp;
-                $scope.totalItems = $scope.totalItemsTemp;
-                $scope.libraryTemp = {};
-            }
-        }
-    }
-
-    $scope.saveAdd = function () {
-        dataFactory.httpRequest('items', 'POST', {}, $scope.form).then(function (data) {
-            $scope.data.push(data);
-            $(".modal").modal("hide");
-        });
-    }
-
-    $scope.edit = function (id) {
-        dataFactory.httpRequest('items/' + id + '/edit').then(function (data) {
-            console.log(data);
-            $scope.form = data;
-        });
-    }
-
-    $scope.saveEdit = function () {
-        dataFactory.httpRequest('items/' + $scope.form.id, 'PUT', {}, $scope.form).then(function (data) {
-            $(".modal").modal("hide");
-            $scope.data = apiModifyTable($scope.data, data.id, data);
-        });
-    }
-
-    $scope.remove = function (item, index) {
-        var result = confirm("Are you sure delete this item?");
-        if (result) {
-            dataFactory.httpRequest('items/' + item.id, 'DELETE').then(function (data) {
-                $scope.data.splice(index, 1);
-            });
-        }
-    }
-
 });
