@@ -230,7 +230,7 @@ border-radius:50%;}
 .customer-name{color:#fff; margin-top:42px; font-size:20px; text-align:right; margin-right:67px; margin-bottom:0px; text-transform: capitalize;}
 .customer-id{color:#fff; margin-top:2px; font-size:14px; text-align:right; text-transform: uppercase;}
 .customer-thumb{margin-top:30px;}
-.top-btns{float:right; list-style:none; margin-top:40px;}
+.top-btns{float:right; list-style:none; margin-top:20px;}
 .top-btns li{float:left; margin-right:10px;}
 .top-btns li:last-child{margin-right:0px;}
 .top-btns li a{ font-size:16px;}
@@ -621,17 +621,5 @@ a.navbar-brand img {
 .poliPay img {
     width: 142px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.logout{ width:80px; line-height:20px; visibility:hidden; float:right; height:20px; font-size:12px; margin-top:5px; text-align:center; color:#333; background:#fff; border-radius:15px;}
+.customerimg:hover .logout{ visibility:visible;}

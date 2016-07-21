@@ -5,8 +5,9 @@
 				<p class="customer-name">{{globalName}} {{globalLastName}}</p>
 				<p class="customer-id">Customer Id : CR_{{ globalName | limitTo:1 }}{{ globalLastName | limitTo:1 }}{{"000000"+globaluserId.slice(-6)}}</p>
 			</div>
-			<div class="col-md-1 col-sm-2 pl0">
+			<div class="col-md-1 col-sm-2 pl0 customerimg">
 				<img src="images/p-3.jpg" class="img-responsive img-circle customer-thumb">
+                <a ng-click='doLogout()' class="logout">logout</a>
 			</div>
 		</div>
 		<div class="row">
@@ -15,7 +16,7 @@
 					<li><a href="#/transfarDetail" class="normal-btn white">Transfer Details</a></li>
 					<li><a href="#/beneficiaries" class="normal-btn white">Beneficiaries</a></li>
 					<li><a href="#/accountSetting" class="normal-btn white">Accounts & Settings</a></li>
-					<li ng-if="isLogin==true"><a class="normal-btn white" ng-click='doLogout()'>Logout</a></li>
+					<!--<li ng-if="isLogin==true"><a class="normal-btn white" ng-click='doLogout()'>Logout</a></li>-->
                                         
 				</ul>
 			</div>
