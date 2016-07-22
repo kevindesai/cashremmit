@@ -178,7 +178,9 @@ app.controller('TransfarDetailController', function ($scope, $http) {
 });
 app.controller('SelectPaymentController', ['$scope', '$http', '$rootScope', 'userService', 'myFactory', '$location',
     function ($scope, $http, $rootScope, userService, myFactory, $location) {
-    console.log("TransfarDetailController");
+    userService.getDataFromSession();
+    $scope.userInfo = userService.userInfo;    
+    
     $scope.ToAmount = localStorage.getItem('ToamounT')
         $scope.ToCur = localStorage.getItem('ToCUR')
         $scope.globalName = localStorage.getItem('first_name');
