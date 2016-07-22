@@ -19,8 +19,7 @@ class CreateBank extends Migration {
             $table->increments('id');
             $table->integer('country_id');                       
             $table->string('name');                       
-            $table->string('branch');            
-            $table->string('bank_code');
+            $table->text('attributes');
             $table->timestamps();
         });
     }
