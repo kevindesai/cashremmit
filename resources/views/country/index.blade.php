@@ -14,6 +14,7 @@
                     <th> {{ trans('Country Code') }} </th>
                     <th> {{ trans('Currency Name') }} </th>
                     <th>{{ trans('Currency Code') }}</th>
+                    <th>{{ trans('Transfer Rate') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,6 +27,10 @@
                     <td>{{ $item->country_code }}</td>
                     <td>{{ $item->currency_name }}</td>
                     <td>{{ $item->currency_code }}</td>
+                    <td>
+                         <a href="{{ url('/admin/transferrate/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Transfer Rate">
+                             Transfer Rate</a>
+                    </td>
                     
                 </tr>
             @endforeach

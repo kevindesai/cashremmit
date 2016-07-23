@@ -45,6 +45,7 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'admi
 Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin', 'namespace' => 'admin'], function () {
     Route::resource('users', 'UsersController');
     Route::resource('banks', 'BanksController');
+    Route::resource('transferrate', 'TransferRateController');
     Route::get('profile', 'UsersController@Profile');
     Route::get('profile/edit', 'UsersController@ProfileEdit');
     Route::patch('profile/update', 'UsersController@ProfileUpdate');
