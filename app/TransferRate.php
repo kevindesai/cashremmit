@@ -26,4 +26,7 @@ class TransferRate extends Model
      * @var array
      */
     protected $fillable = ['country_id', 'currency_code','from','to','rate'];
+    public function country() {
+        return $this->belongsTo('App\Country','country_id');
+    }
 }

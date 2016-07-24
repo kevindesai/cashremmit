@@ -18,8 +18,55 @@ use Validator;
 use App\Country;
 use App\Currencyrate;
 use App\Bank;
+use App\TransferRate;
+use App\Promossion;
 
 class CountryAPIController extends Controller {
+
+    public function transferrate(Request $request) {
+        $inputs = $request->all();
+        $transferrate = TransferRate::whereHas('country', function($q) use($inputs) {
+                    $q->where(['country.country_name' => $inputs['country_name'], 'country.currency_code' => $inputs['currency_code']]);
+                })->where('from', '<=', (float) $inputs['amount'])->where('to', '>=', (float) $inputs['amount'])->first();
+        $response = [
+            'status' => 1,
+            'transfer_rate' => 0
+        ];
+        if ($transferrate) {
+            $response = [
+                'status' => 1,
+                'transfer_rate' => $transferrate->rate
+            ];
+        }
+        return json_encode($response);
+    }
+
+    public function checkPromossion(Request $request) {
+        $inputs = $request->all();
+        $promossion = Promossion::where(['code' => $inputs['code']])->first();
+        $response = [
+            'status' => 0,
+            'discount' => 0,
+            'message' => 'invalid'
+        ];
+        if ($promossion) {
+            
+            if ($promossion->is_enable == '1') {
+                $response = [
+                    'status' => 1,
+                    'discount' => $promossion->discount,
+                    'message' => 'valid'
+                ];
+            } else {
+                $response = [
+                    'status' => 0,
+                    'discount' => 0,
+                    'message' => 'expired'
+                ];
+            }
+        }
+        return json_encode($response);
+    }
 
     public function index() {
         $country = Country::all();
@@ -46,7 +93,7 @@ class CountryAPIController extends Controller {
         );
         $banks = $banks->toArray();
         if (!empty($banks)) {
-            
+
             $response = array(
                 'status' => '1',
                 'message' => 'data found',
@@ -55,19 +102,20 @@ class CountryAPIController extends Controller {
         }
         return json_encode($response);
     }
+
     public function getBankDetail($id) {
-        
+
         $banks = Bank::find($id);
         $response = array(
             'status' => '0',
             'message' => 'No data found'
         );
-        
+
         $banks = $banks->toArray();
         if (!empty($banks)) {
-            if(is_array(json_decode($banks['attributes'], true))){
+            if (is_array(json_decode($banks['attributes'], true))) {
                 $banks['attributes'] = json_decode($banks['attributes'], true);
-            }else{
+            } else {
                 $banks['attributes'] = [];
             }
             $response = array(
