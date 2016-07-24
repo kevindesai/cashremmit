@@ -44,5 +44,17 @@ class Country extends Model {
         }
         return $data;
     }
+    public function scopeSearchByKeyword($query, $keyword)
+    {
+        if ($keyword!='') {
+            $query->where(function ($query) use ($keyword) {
+                $query->where("country_name", "LIKE","%$keyword%")
+                    ->orWhere("country_code", "LIKE", "%$keyword%")
+                    ->orWhere("currency_name", "LIKE", "%$keyword%")
+                    ->orWhere("currency_code", "LIKE", "%$keyword%");
+            });
+        }
+        return $query;
+    }
 
 }

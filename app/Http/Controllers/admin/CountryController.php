@@ -17,12 +17,14 @@ use Session;
 use Validator;
 use App\Country;
 use App\Currencyrate;
+use Illuminate\Support\Facades\Input;
 
 class CountryController extends Controller {
 
     public function index() {
-        $country = Country::paginate(20);
-        return view('country.index', compact('country'));
+        $searchTerm = Input::get('search', '');
+        $country = Country::SearchByKeyword($searchTerm)->paginate(20);
+        return view('country.index', compact('country','searchTerm'));
     }
 
     public function rateList() {
