@@ -19,6 +19,7 @@ Route::get('banks/{id}', 'CountryAPIController@getBanks');
 Route::get('bankdetail/{id}', 'CountryAPIController@getBankDetail');
 Route::post('transferrate', 'CountryAPIController@transferrate');
 Route::post('checkpromossion', 'CountryAPIController@checkPromossion');
+Route::post('getcountrybycurrency','CountryAPIController@getCountryByCurrency');
 
 Route::group(['middleware' => 'jwt-auth'], function () {
     Route::resource('recipient', 'RecipientAPIController');

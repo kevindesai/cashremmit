@@ -126,5 +126,24 @@ class CountryAPIController extends Controller {
         }
         return json_encode($response);
     }
+    public function getCountryByCurrency(Request $request){
+        $inputs = $request->all();
+        $countries = Country::where(array("currency_code"=>$inputs["currency_code"]))->get();
+        if(!empty($countries)){
+            $countries = $countries->toArray();
+        $response = array(
+                'status' => '1',
+                'message' => 'data found',
+                'data' => $countries
+            );
+        
+        }else{
+            $response = array(
+            'status' => '0',
+            'message' => 'No data found'
+        );
+        }
+         return json_encode($response);
+    }
 
 }
