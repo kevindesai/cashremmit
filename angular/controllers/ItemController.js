@@ -37,6 +37,8 @@ app.controller('commonController', ['$scope', '$location', '$http', '$rootScope'
             localStorage.removeItem('FromCUR');
             localStorage.removeItem('ToCUR');
             localStorage.removeItem('ToamounT');
+            localStorage.removeItem('discount');
+            localStorage.removeItem('couponCode');
             $location.path('/');
         }
     }]);
@@ -307,6 +309,31 @@ app.controller('PaymentDetailsController', ['$scope', '$http', '$rootScope', 'us
         localStorage.setItem('ToCUR', $scope.toCur);
     }
     
+    $scope.addPromocode = function(promocode){
+        console.log(promocode);
+            method = "POST";
+            url = $rootScope.checkPromocode;
+            Reqdata = {"code":promocode};
+            var response = myFactory.httpMethodCall(method, url,Reqdata);
+            response.success(function (data) {
+                if (data.status == 1) {
+                    $scope.discount = data.discount;
+                    localStorage.setItem('discount',data.discount);
+                    localStorage.setItem('couponCode',promocode);
+                    
+            
+                }else if(data.status == 0){
+                    $scope.invalidPromocode=true;
+                }
+            });
+            response.error(function (error) {
+                $scope.invalidPromocode=true;
+                console.log(error);
+                
+            });
+            
+            
+    }
     
     
     //$scope.getcharge($scope.fromCur,$scope.fromAmount);

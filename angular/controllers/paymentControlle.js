@@ -1,5 +1,6 @@
 app.controller('PaymentController', ['$scope', '$http', '$rootScope', 'userService', 'myFactory','$location','$q',
     function ($scope, $http, $rootScope, userService, myFactory,$location,$q) {
+        
         userService.getDataFromSession();
         $scope.userInfo = userService.userInfo;
         $scope.isupdate = false;
@@ -13,6 +14,8 @@ app.controller('PaymentController', ['$scope', '$http', '$rootScope', 'userServi
             $scope.globaluserId = localStorage.getItem('id');
             $scope.globalName = localStorage.getItem('first_name');
             $scope.globalLastName = localStorage.getItem('last_name');
+            $scope.discount = localStorage.getItem('discount');
+
         }else{
             $scope.isLogin = false;
             $rootScope.isLogin = false;

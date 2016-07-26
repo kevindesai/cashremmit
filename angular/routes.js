@@ -19,8 +19,9 @@ app.run(function($rootScope, $location,$route) {
     $rootScope.getCountry = $rootScope.apiUrl+'api/v1/country';
     $rootScope.getBanks = $rootScope.apiUrl+'api/v1/banks';
     $rootScope.getbankdetail = $rootScope.apiUrl+'api/v1/bankdetail';
-    $rootScope.getCountryByCurrency = $rootScope.apiUrl+'api/v1/getcountrybycurrency'
-    $rootScope.gettransferrate = $rootScope.apiUrl+'api/v1/transferrate'
+    $rootScope.getCountryByCurrency = $rootScope.apiUrl+'api/v1/getcountrybycurrency';
+    $rootScope.gettransferrate = $rootScope.apiUrl+'api/v1/transferrate';
+    $rootScope.checkPromocode = $rootScope.apiUrl+'api/v1/checkpromossion';
     
     $rootScope.$on('$locationChangeStart', function(ev, next, current) {
     var nextPath = $location.path(),

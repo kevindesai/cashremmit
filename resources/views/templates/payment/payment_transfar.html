@@ -111,7 +111,10 @@
                         <td class="item">Transfer Fees</td>
                         <td class="item2">{{fromCur}} {{transfer_rate}}</td>
                     </tr>
-
+                    <tr ng-if="discount">
+                        <td class="item">Discount</td>
+                        <td class="item2">{{discount}}</td>
+                    </tr>
                     <tr>
                         <td class="total">Total Amount</td>
                         <td class="total2">{{toCur}} {{toAmount}}</td>
