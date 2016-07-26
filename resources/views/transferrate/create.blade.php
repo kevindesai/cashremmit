@@ -1,20 +1,32 @@
 @extends('layouts.admin')
+@section('header')
+<h1>Manage Transfer Rate</h1>
+
+@endsection
 
 @section('content')
 
-<h1>Manage Transfer Rate</h1>
 <hr/>
 @if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
 @endif
 
 {!! Form::open(['url' => '/admin/transferrate', 'class' => 'form-horizontal','id'=>'myform']) !!}
+
+<div class="form-group {{ $errors->has('country_id') ? 'has-error' : ''}}">
+    {!! Form::label('country_id', 'Country', ['class' => 'col-sm-3 control-label']) !!}
+    <div class="col-sm-6">
+        {{ Form::select('country_id', $country, null,['class' => 'form-control']) }}
+        {!! $errors->first('country_id', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+
 @include('transferrate._form')
 
 <div class="form-group">
@@ -41,11 +53,11 @@
     $(document).ready(function () {
         $('.save').click(function (e) {
             e.preventDefault();
-             var form = $('#myform').parsley();
-             form.validate();
-             if(form.isValid()){
-                 $('#myform').submit();
-             }
+            var form = $('#myform').parsley();
+            form.validate();
+            if (form.isValid()) {
+                $('#myform').submit();
+            }
         });
     });
 </script>

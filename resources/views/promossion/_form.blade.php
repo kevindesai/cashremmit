@@ -17,7 +17,7 @@
     {!! Form::label('is_enable', trans('Is Enable'), ['class' => 'col-sm-3 control-label', 'required'=>'required']) !!}
     <div class="col-sm-6">
         {{ Form::checkbox('is_enable','1',null) }}
-        
+
         {!! $errors->first('is_enable', ' <span class="help-block">:message</span>') !!}
     </div>
 </div>

@@ -1,7 +1,10 @@
+<?php $__env->startSection('header'); ?>
+<h1>Users <a href="<?php echo e(url('/admin/users/create')); ?>" class="btn btn-primary btn-xs" title="Add New User"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
+
+<?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
 <div class="container table table-responsive">
 
-    <h1>Users <a href="<?php echo e(url('/admin/users/create')); ?>" class="btn btn-primary btn-xs" title="Add New User"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
             <thead>
@@ -10,8 +13,8 @@
                 </tr>
             </thead>
             <tbody>
-            <?php /* */$x=0;/* */ ?>
-            <?php foreach($users as $item): ?>
+                <?php /* */$x=0;/* */ ?>
+                <?php foreach($users as $item): ?>
                 <?php /* */$x++;/* */ ?>
                 <tr>
                     <td><?php echo e($x); ?></td>
@@ -20,23 +23,23 @@
                         <a href="<?php echo e(url('/admin/users/' . $item->id)); ?>" class="btn btn-success btn-xs" title="View User"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
                         <a href="<?php echo e(url('/admin/users/' . $item->id . '/edit')); ?>" class="btn btn-primary btn-xs" title="Edit User"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
                         <?php echo Form::open([
-                            'method'=>'DELETE',
-                            'url' => ['/admin/users', $item->id],
-                            'style' => 'display:inline'
+                        'method'=>'DELETE',
+                        'url' => ['/admin/users', $item->id],
+                        'style' => 'display:inline'
                         ]); ?>
 
-                            <?php echo Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete User" />', array(
-                                    'type' => 'submit',
-                                    'class' => 'btn btn-danger btn-xs',
-                                    'title' => 'Delete User',
-                                    'onclick'=>'return confirm("Confirm delete?")'
-                            ));; ?>
+                        <?php echo Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete User" />', array(
+                        'type' => 'submit',
+                        'class' => 'btn btn-danger btn-xs',
+                        'title' => 'Delete User',
+                        'onclick'=>'return confirm("Confirm delete?")'
+                        ));; ?>
 
                         <?php echo Form::close(); ?>
 
                     </td>
                 </tr>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
             </tbody>
         </table>
         <div class="pagination"> <?php echo $users->render(); ?> </div>

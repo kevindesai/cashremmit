@@ -1,8 +1,13 @@
 @extends('layouts.admin')
 
+@section('header')
+<h1>Manage Rate</h1>
+@endsection
+
+
 @section('content')
 
-<h1>Manage Rate</h1>
+
 <hr/>
 @if (count($errors) > 0)
 <div class="alert alert-danger">

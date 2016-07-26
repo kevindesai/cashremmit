@@ -1,17 +1,20 @@
 @extends('layouts.admin')
+@section('header')
+<h1>Create New Promossion</h1>
+
+@endsection
 
 @section('content')
 
-<h1>Create New Promossion</h1>
 <hr/>
 @if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
 @endif
 
 {!! Form::open(['url' => '/admin/promossion', 'class' => 'form-horizontal','id'=>'myform']) !!}
@@ -41,11 +44,11 @@
     $(document).ready(function () {
         $('.save').click(function (e) {
             e.preventDefault();
-             var form = $('#myform').parsley();
-             form.validate();
-             if(form.isValid()){
-                 $('#myform').submit();
-             }
+            var form = $('#myform').parsley();
+            form.validate();
+            if (form.isValid()) {
+                $('#myform').submit();
+            }
         });
     });
 </script>

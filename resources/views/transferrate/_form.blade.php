@@ -1,13 +1,4 @@
 
-<div class="form-group ">
-    {!! Form::label('to', trans('Country'), ['class' => 'col-sm-3 control-label']) !!}
-    <div class="col-sm-6">
-        <div class="form-control">
-            <?php echo $country->country_name; ?>
-            {!! Form::hidden('currency_code', $country->currency_code, ['class' => 'form-control', 'required'=>'required']) !!}
-        </div>
-    </div>
-</div>
 <div class="container table table-responsive">
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
@@ -15,7 +6,7 @@
                 <tr>
                     <th> {{ trans('From') }} </th>
                     <th> {{ trans('To') }} </th>
-                    <th> {{ trans('Rate')." (" . $country->currency_code.")" }} </th>
+                    <th> {{ trans('Rate') }} </th>
                 </tr>
             </thead>
             <tbody>

@@ -76,15 +76,15 @@
                         </div>
 
                         <div class="promo">
-                            <a href="javascript:void(0);" ng-hide="showPromoText" ng-click="showPromoText=true">Active Promo Code</a>
+                            <a href="javascript:void(0);" ng-hide="showPromoText" ng-click="showPromoText = true">Active Promo Code</a>
                         </div>
                         <div class="promotext" ng-if="showPromoText">
                             <div class="form-group has-success has-feedback">
-                            <div class="input-group">
-                                <input type="text" ng-model="promocode" class="form-control" id="inputGroupSuccess1" aria-describedby="inputGroupSuccess1Status">
-                                <span class="input-group-addon"><a href="javascript:void(0);" ng-click="addPromocode(promocode)">Apply</a></span>
+                                <div class="input-group">
+                                    <input type="text" ng-model="promocode" class="form-control" id="inputGroupSuccess1" aria-describedby="inputGroupSuccess1Status">
+                                    <span class="input-group-addon"><a href="javascript:void(0);" ng-click="addPromocode(promocode)">Apply</a></span>
+                                </div>
                             </div>
-                          </div>
                             <p class="has-error error er" ng-if="invalidPromocode">Invalid Promocode. Please try again with new code.</p>  
                         </div>
 

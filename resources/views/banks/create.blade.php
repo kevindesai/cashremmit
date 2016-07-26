@@ -1,9 +1,14 @@
 @extends('layouts.admin')
 
+@section('header')
+<h1>Create New bank</h1>
+
+@endsection
+
+
 @section('content')
 <div class="">
 
-    <h1>Create New bank</h1>
     <hr/>
 
     {!! Form::open(['url' => 'admin/banks', 'class' => 'form-horizontal']) !!}

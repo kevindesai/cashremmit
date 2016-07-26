@@ -42,9 +42,9 @@
                         if ($k != '0') {
                             ?>
                             <a class="remove col-md-2 btn btn-danger" href="#" onclick="$(this).parent().slideUp(function () {
-                                                    $(this).remove()
-                                                });
-                                                return false">remove</a>
+                                        $(this).remove()
+                                    });
+                                    return false">remove</a>
                                <?php
                            }
                            ?>

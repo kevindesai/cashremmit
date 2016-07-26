@@ -1,14 +1,17 @@
+<?php $__env->startSection('header'); ?>
+<h1>Edit User </h1>
+
+<?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
 
-<h1>Edit User </h1>
 <?php if(count($errors) > 0): ?>
-    <div class="alert alert-danger">
-        <ul>
-            <?php foreach($errors->all() as $error): ?>
-                <li><?php echo e($error); ?></li>
-            <?php endforeach; ?>
-        </ul>
-    </div>
+<div class="alert alert-danger">
+    <ul>
+        <?php foreach($errors->all() as $error): ?>
+        <li><?php echo e($error); ?></li>
+        <?php endforeach; ?>
+    </ul>
+</div>
 <?php endif; ?>
 
 

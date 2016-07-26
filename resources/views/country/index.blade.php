@@ -1,9 +1,14 @@
 @extends('layouts.admin')
 
+@section('header')
+
+<h1>Country</h1>
+@endsection
+
+
 @section('content')
 <div class="container table table-responsive">
 
-    <h1>Country</h1>
     <form>
 
         <div class="col-md-2 pull-right">
@@ -23,7 +28,7 @@
                     <th> {{ trans('Country Code') }} </th>
                     <th> {{ trans('Currency Name') }} </th>
                     <th>{{ trans('Currency Code') }}</th>
-                    <th>{{ trans('Transfer Rate') }}</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -36,11 +41,6 @@
                     <td>{{ $item->country_code }}</td>
                     <td>{{ $item->currency_name }}</td>
                     <td>{{ $item->currency_code }}</td>
-                    <td>
-                        <a href="{{ url('/admin/transferrate/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Transfer Rate">
-                            Transfer Rate</a>
-                    </td>
-
                 </tr>
                 @endforeach
             </tbody>

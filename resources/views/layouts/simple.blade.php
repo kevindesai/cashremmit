@@ -40,7 +40,7 @@
         <script src="{{ url('/') }}/assets/js/jquery-1.10.2.min.js"></script> 							<!-- Load jQuery -->
         <script src="{{ url('/') }}/assets/js/jqueryui-1.10.3.min.js"></script> 							<!-- Load jQueryUI -->
         <script src="{{ url('/') }}/assets/js/bootstrap.min.js"></script> 
- 								<!-- Load Bootstrap -->
+        <!-- Load Bootstrap -->
         <script src="{{ url('/') }}/assets/js/enquire.min.js"></script> 									<!-- Load Enquire -->
 
         <script src="{{ url('/') }}/assets/plugins/velocityjs/velocity.min.js"></script>					<!-- Load Velocity for Animated Content -->

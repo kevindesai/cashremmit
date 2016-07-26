@@ -43,7 +43,7 @@
                     <div class="clearfix">
                         <!--<a href="extras-registration.html" class="btn btn-default pull-left">Register</a>-->
                         <!--<a href="extras-login.html" class="btn btn-primary pull-right">Login</a>-->
-                          {!!Form::submit('Login',['class'=>'btn btn-primary pull-right'])!!}
+                        {!!Form::submit('Login',['class'=>'btn btn-primary pull-right'])!!}
                         <!--<button name="submit" class="btn btn-primary pull-right">Login</button>-->
                         <!--<input type="submit" name="submit" value="Login" class="btn btn-primary pull-right" />-->
                     </div>

@@ -101,6 +101,7 @@
                                         <li><a href="{{ url('/') }}/admin/rate/list"><i class="fa fa-bookmark"></i><span>Manage Rate</span></a></li>
                                         <li><a href="{{ url('/') }}/admin/promossion"><i class="fa fa-bookmark"></i><span>Promossion</span></a></li>
                                         <li><a href="{{ url('/') }}/admin/banks"><i class="fa fa-bookmark"></i><span>Banks</span></a></li>
+                                        <li><a href="{{ url('/') }}/admin/transferrate"><i class="fa fa-bookmark"></i><span>Transfer Rate</span></a></li>
 
                                     </ul>
                                 </nav>
@@ -112,28 +113,29 @@
                 <div class="static-content-wrapper">
                     <div class="static-content">
                         <div class="page-content">
-                            <ol class="breadcrumb">
-
-                                <li class=""><a href="index.html">Home</a></li>
-                                <li class="active"><a href="index.html">Dashboard</a></li>
-
-                            </ol>
+                            <!--                            <ol class="breadcrumb">
+                            
+                                                            <li class=""><a href="index.html">Home</a></li>
+                                                            <li class="active"><a href="index.html">Dashboard</a></li>
+                            
+                                                        </ol>-->
                             <div class="page-heading">            
-                                <!--<h1>Dashboard</h1>
-                                <div class="options">
-                                    <div class="btn-toolbar">
-                                        <form action="" class="form-horizontal row-border" style="display: inline-block;">
-                                            <div class="form-group hidden-xs">
-                                                <div class="col-sm-8">
-                                                    <button class="btn btn-default" id="daterangepicker-d">
-                                                        <i class="fa fa-calendar"></i> 
-                                                        <span><?php echo date("F j, Y"); ?></span> <b class="caret"></b>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div> -->
+                                <!--<h1>Dashboard</h1>-->
+                                @yield('header')
+                                <!--                                <div class="options">
+                                                                    <div class="btn-toolbar">
+                                                                        <form action="" class="form-horizontal row-border" style="display: inline-block;">
+                                                                            <div class="form-group hidden-xs">
+                                                                                <div class="col-sm-8">
+                                                                                    <button class="btn btn-default" id="daterangepicker-d">
+                                                                                        <i class="fa fa-calendar"></i> 
+                                                                                        <span><?php echo date("F j, Y"); ?></span> <b class="caret"></b>
+                                                                                    </button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div> -->
                             </div>
                             <div class="container-fluid">
 
@@ -348,11 +350,11 @@
         <script src="{{ url('/') }}/assets/plugins/form-daterangepicker/moment.min.js"></script>              <!-- Moment.js for Date Range Picker -->
 
         <script src="{{ url('/') }}/assets/plugins/form-daterangepicker/daterangepicker.js"></script>     	<!-- Date Range Picker -->
-          	<!-- Date Range Picker -->
+        <!-- Date Range Picker -->
 
 
         <script src="{{ url('/') }}/assets/demo/demo-index.js"></script> 									<!-- Initialize scripts for this page-->
 
-        
+
     </body>
 </html>

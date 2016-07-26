@@ -1,12 +1,17 @@
 @extends('layouts.admin')
 
+@section('header')
+<h1>
+    Country Rate
+    <a href="{{ url('/admin/country/create') }}" class="btn btn-primary btn-xs" title="Add Rate"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a>
+</h1>
+@endsection
+
+
 @section('content')
 <div class="container table table-responsive">
     <div class="col-md-6">
-        <h1>
-            Country Rate
-            <a href="{{ url('/admin/country/create') }}" class="btn btn-primary btn-xs" title="Add Rate"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a>
-        </h1>
+
     </div>
     <div class="col-md-6">
         <div class="col-md-4">
@@ -44,16 +49,16 @@
                     <td>
                         <a href="{{ url('/admin/country/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit User"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
                         {!! Form::open([
-                            'method'=>'DELETE',
-                            'url' => ['/admin/country', $item->id],
-                            'style' => 'display:inline'
+                        'method'=>'DELETE',
+                        'url' => ['/admin/country', $item->id],
+                        'style' => 'display:inline'
                         ]) !!}
-                            {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete" />', array(
-                                    'type' => 'submit',
-                                    'class' => 'btn btn-danger btn-xs',
-                                    'title' => 'Delete ',
-                                    'onclick'=>'return confirm("Confirm delete?")'
-                            ));!!}
+                        {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete" />', array(
+                        'type' => 'submit',
+                        'class' => 'btn btn-danger btn-xs',
+                        'title' => 'Delete ',
+                        'onclick'=>'return confirm("Confirm delete?")'
+                        ));!!}
                         {!! Form::close() !!}
                     </td>
                 </tr>
@@ -65,7 +70,7 @@
 
 </div>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('.fromVal').change();
     });
     $('.fromVal,.toVal').change(function () {
@@ -75,11 +80,11 @@
         ajaxdata['amount'] = '1';
         ajaxdata['web'] = '1';
         $.ajax({
-            type : "POST",
+            type: "POST",
             url: "{{ url('/api/v1/currency/convert') }}",
             data: ajaxdata,
-            dataType : 'json',
-            success : function(data){
+            dataType: 'json',
+            success: function (data) {
                 $('#convertedValue').html(data.converted);
             }
         });

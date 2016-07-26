@@ -1,17 +1,19 @@
 @extends('layouts.admin')
+@section('header')
+<h1>Create New User</h1>
 
+@endsection
 @section('content')
 
-<h1>Create New User</h1>
 <hr/>
 @if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
 @endif
 
 {!! Form::open(['url' => '/admin/users', 'class' => 'form-horizontal','id'=>'myform']) !!}
@@ -56,7 +58,7 @@
     <div class="col-sm-6">
         {!! Form::text('city', null, ['class' => 'form-control', 'required'=>'required']) !!}
         {!! $errors->first('city', ' <span class="help-block">:message</span>') !!}
-        
+
     </div>
 </div>
 <div class="form-group">
@@ -64,7 +66,7 @@
     <div class="col-sm-6">
         {!! Form::text('region', null, ['class' => 'form-control']) !!}
         {!! $errors->first('region', ' <span class="help-block">:message</span>') !!}
-        
+
     </div>
 </div>
 <div class="form-group">
@@ -72,7 +74,7 @@
     <div class="col-sm-6">
         {!! Form::textarea('street', null, ['class' => 'form-control']) !!}
         {!! $errors->first('street', ' <span class="help-block">:message</span>') !!}
-        
+
     </div>
 </div>
 <div class="form-group">
@@ -80,7 +82,7 @@
     <div class="col-sm-6">
         {!! Form::text('post_code', null, ['class' => 'form-control', 'required'=>'required']) !!}
         {!! $errors->first('post_code', ' <span class="help-block">:message</span>') !!}
-        
+
     </div>
 </div>
 <div class="form-group">
@@ -88,7 +90,7 @@
     <div class="col-sm-6">
         {!! Form::text('country', null, ['class' => 'form-control']) !!}
         {!! $errors->first('country', ' <span class="help-block">:message</span>') !!}
-        
+
     </div>
 </div>
 <div class="form-group">
@@ -96,7 +98,7 @@
     <div class="col-sm-6">
         {!! Form::date('dob', null, ['class' => 'form-control']) !!}
         {!! $errors->first('dob', ' <span class="help-block">:message</span>') !!}
-        
+
     </div>
 </div>
 <div class="form-group">
@@ -104,7 +106,7 @@
     <div class="col-sm-6">
         {!! Form::text('mobile_no', null, ['class' => 'form-control', 'data-parsley-type'=>'digits']) !!}
         {!! $errors->first('mobile_no', ' <span class="help-block">:message</span>') !!}
-        
+
     </div>
 </div>
 <div class="form-group">
@@ -112,7 +114,7 @@
     <div class="col-sm-6">
         {!! Form::text('landline_no', null, ['class' => 'form-control']) !!}
         {!! $errors->first('landline_no', ' <span class="help-block">:message</span>') !!}
-        
+
     </div>
 </div>
 
@@ -141,11 +143,11 @@
     $(document).ready(function () {
         $('.save').click(function (e) {
             e.preventDefault();
-             var form = $('#myform').parsley();
-             form.validate();
-             if(form.isValid()){
-                 $('#myform').submit();
-             }
+            var form = $('#myform').parsley();
+            form.validate();
+            if (form.isValid()) {
+                $('#myform').submit();
+            }
         });
     });
 </script>

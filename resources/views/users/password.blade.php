@@ -1,16 +1,18 @@
 @extends('layouts.admin')
+@section('header')
+<h1>Change Password </h1>
 
+@endsection
 @section('content')
 
-<h1>Change Password </h1>
 @if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
 @endif
 
 

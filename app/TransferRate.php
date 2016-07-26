@@ -29,4 +29,14 @@ class TransferRate extends Model
     public function country() {
         return $this->belongsTo('App\Country','country_id');
     }
+    public function scopeSearchByKeyword($query, $keyword)
+    {
+        if ($keyword!='') {
+            $query->whereHas('country',function ($query) use ($keyword) {
+                $query->where("country.country_name", "LIKE","%$keyword%")
+                    ->orWhere("country.currency_code", "LIKE", "%$keyword%");
+            });
+        }
+        return $query;
+    }
 }

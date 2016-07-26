@@ -1,16 +1,19 @@
 @extends('layouts.admin')
+@section('header')
+<h1>Transfer Rate</h1>
+
+@endsection
 
 @section('content')
 
-<h1>Transfer Rate</h1>
 @if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
 @endif
 
 
@@ -20,6 +23,18 @@
 'class' => 'form-horizontal',
 'id'=>'myform'
 ]) !!}
+
+
+<div class="form-group ">
+    {!! Form::label('to', trans('Country'), ['class' => 'col-sm-3 control-label']) !!}
+    <div class="col-sm-6">
+        <div class="form-control">
+            <?php echo $country->country_name . "(" . $country->currency_code . ")"; ?>
+            {!! Form::hidden('currency_code', $country->currency_code, ['class' => 'form-control', 'required'=>'required']) !!}
+        </div>
+    </div>
+</div>
+
 @include('transferrate._form')
 <div class="form-group">
     <div class="col-sm-offset-3 col-sm-3">

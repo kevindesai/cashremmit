@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Session;
 use Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 class TransferRateController extends Controller {
 
@@ -20,7 +21,9 @@ class TransferRateController extends Controller {
      * @return void
      */
     public function index() {
-        
+        $searchTerm = Input::get('search', '');
+        $transferrate = TransferRate::SearchByKeyword($searchTerm)->paginate(16);
+        return view('transferrate.index', compact('transferrate','searchTerm'));
     }
 
     /**
@@ -29,7 +32,13 @@ class TransferRateController extends Controller {
      * @return void
      */
     public function create() {
-        
+        $country = Country::select(
+                        DB::raw("CONCAT(country_name ,'(', currency_code,')') AS country_name, id")
+                )->lists('country_name', 'id');
+
+//                Country::lists("CONCAT(country_name , ' ',currency_code )  country_name", 'id');
+        $transferrates = [];
+        return view('transferrate.create', compact('country', 'transferrates'));
     }
 
     /**
@@ -38,7 +47,22 @@ class TransferRateController extends Controller {
      * @return void
      */
     public function store(Request $request) {
-        
+        $input = $request->all();
+        $insData = [];
+        $country = Country::find($input['country_id']);
+        foreach ($input['from'] as $k => $v) {
+            if ($input['from'][$k] != '' && $input['to'][$k] != '' && $input['rate'][$k] != '') {
+                $temp['from'] = $input['from'][$k];
+                $temp['to'] = $input['to'][$k];
+                $temp['rate'] = $input['rate'][$k];
+                $temp['country_id'] = $country->id;
+                $temp['currency_code'] = $country->currency_code;
+                $insData[] = $temp;
+            }
+        }
+        $transferrates = DB::table('transferrate')->where(['country_id' => $country->id])->delete();
+        DB::table('transferrate')->insert($insData);
+        return redirect('admin/transferrate');
     }
 
     /**
@@ -90,7 +114,7 @@ class TransferRateController extends Controller {
 
         Session::flash('flash_message', 'Rate updated!');
 
-        return redirect('admin/country');
+        return redirect('admin/transferrate');
     }
 
     /**
