@@ -1,0 +1,37 @@
+<div class="sl-inner">
+    <h3 class="sl-lg-title">Login to Cash Remit</h3>
+
+    <div class="alert alert-danger" role="alert" ng-if="invalidusername">Invalid Username OR Password</div>
+    <form name="loginForm" novalidate>
+        <div class="form-group" ng-class="{ 'has-error' : loginForm.email.$invalid && !loginForm.email.$pristine }"> 
+            <input type="email" name="email" class="form-control" placeholder="Enter your email" ng-model="loginInfo.email">
+            <p ng-show="loginForm.email.$invalid && !loginForm.email.$pristine" class="help-block">Enter a valid email.</p>
+        </div>    
+
+        <!-- Password -->
+        <div class="form-group" ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine }">
+            <input type="password" name="password" class="form-control" ng-model="loginInfo.password" placeholder="Create Your Password" required>
+            <p ng-show="loginForm.password.$invalid && !loginForm.password.$pristine" class="help-block">Your password is required.</p>
+        </div>
+        <p class="sl-lg"><a href="">Forgot Password?</a></p>
+        <button type="submit" ng-disabled="loginForm.$invalid" ng-click="loginUser()" class="btn btn-primary form-submit">Login</button>
+    </form>
+    <p>Or login with</p>
+    <div class="l-with"> 
+        <a href="javascript:void(0);" class="sl-fb" ng-click="fblogin()">
+            <i class="fa">Facebook</i>
+        </a>
+
+        <google-plus-signin clientid="230545741792-rocc0nj7fdv31vihh9ft7sscn6igbse6.apps.googleusercontent.com" autorender="false" customtargetid="my-custom-element">
+            <a href="javascript:void(0);" id="my-custom-element" class="sl-gp">
+                <i class="fa"></i>Gmail</a>
+        </google-plus-signin>
+
+        <!--        <a href="" class="sl-fb"><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a>
+                <a href="" class="sl-gp"><i class="fa fa-google-plus" aria-hidden="true"></i> Gmail</a>-->
+    </div>
+    <div class="clearfix"></div>
+    <div class="sl-msg">
+        <p><i class="fa fa-lock" aria-hidden="true"></i> 100% SECURE & AUTH AUTHORISED</p>
+    </div>
+</div>

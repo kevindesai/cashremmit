@@ -610,9 +610,9 @@ a.navbar-brand img {
 
 .selectPayment span.fa {
     position: absolute;
-    top: 2px;
+    top: 6px;
     right: 0;
-    padding-right: 8px;
+    padding-right: 26px;
     line-height: 38px;
     font-size: 30px;
     color: #a2ba28;
@@ -623,3 +623,43 @@ a.navbar-brand img {
 }
 .logout{ width:80px; line-height:20px; visibility:hidden; float:right; height:20px; font-size:12px; margin-top:5px; text-align:center; color:#333; background:#fff; border-radius:15px;}
 .customerimg:hover .logout{ visibility:visible;}
+
+
+
+label.col-sm-3.control-label {
+    color: #175463;
+    /* border: solid; */
+    text-align: left;
+    padding: 5px 0;
+    font-size: 18px;
+}
+
+.col-sm-9.MainForm {
+    width: 50%;
+    position: relative;
+}
+
+.selectPayment select {
+    -webkit-appearance: none;
+}
+
+.expiryMonth, .expiryYear {
+    width: 50%;
+}
+
+.MainForm.SecCode {
+    width: 25%;
+}
+
+.selectPayment .btn-success {
+    background-color: #c6de03;
+    border-color: #d8e028;
+    width: 25%;
+    padding: 16px;
+    position: relative;
+    top: -26px;
+    left: 17px;
+    color: #175463;
+    font-size: 19px;
+}
+

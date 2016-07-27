@@ -91,6 +91,11 @@ app.config(['$routeProvider',
                     controller: 'SelectPaymentController',
                     auth: true
                 }).
+                 when('/selectpayment1', {
+                    templateUrl: 'resources/views/templates/payment/creditCardPay.html',
+                    controller: 'SelectPaymentController',
+                    auth: true
+                }).
                 otherwise({
                     redirectTo: '/'
                 });
