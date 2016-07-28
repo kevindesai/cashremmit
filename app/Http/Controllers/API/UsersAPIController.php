@@ -29,7 +29,7 @@ class UsersAPIController extends Controller {
                         $request->all(), array(
                     'first_name' => array('required', 'alpha_dash'),
                     'last_name' => array('required', 'alpha_dash'),
-                    'email' => array('required', 'email', 'unique:Users'),
+                    'email' => array('required', 'email', 'unique:users'),
                     'password' => array('required'),
                         )
         );
@@ -81,7 +81,7 @@ class UsersAPIController extends Controller {
         ];
 
         if (isset($user) && $user) {
-            Config::set('auth.providers.users.table', 'Users');
+            Config::set('auth.providers.users.table', 'users');
             if ($token = JWTAuth::attempt($input)) {
                 
                 $data = $user->toArray();

@@ -39,7 +39,7 @@ class RecipientAPIController extends Api {
                     'bank_name' => array('required'),
                     'account_number' => array('required'),
                     'email' => array('email'),
-                    'user_id' => array('required', 'exists:Users,id'),
+                    'user_id' => array('required', 'exists:users,id'),
                         )
         );
         $input['user_id'] = $this->_auth->id;
