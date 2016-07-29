@@ -662,4 +662,15 @@ label.col-sm-3.control-label {
     color: #175463;
     font-size: 19px;
 }
-
+#formbenif label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: bold;
+    position: relative !important;
+    margin-left: 0px !important;
+    margin-top: 8px;
+    color: #175463;
+	z-index: 1000;
+left: 0px;
+}

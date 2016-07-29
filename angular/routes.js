@@ -9,13 +9,13 @@ app.run(function($rootScope, $location,$route) {
 //    if(!localStorage.getItem('user_email')){
 //        $rootScope.userData = {};
 //    } 
-    $rootScope.RegitrationApi = $rootScope.apiUrl + 'public/api/v1/users';
-    $rootScope.loginApi = $rootScope.apiUrl + 'public/api/v1/users/login';
-    $rootScope.updateApi = $rootScope.apiUrl + 'public/api/v1/users';
-    $rootScope.CurrencyApi = $rootScope.apiUrl +'public/api/v1/currency/convert';
-    $rootScope.addBenefiery = $rootScope.apiUrl +'public/api/v1/recipient';
-    $rootScope.getBenefiery = $rootScope.apiUrl +'public/api/v1/recipient';
-    $rootScope.deleteBenefiery = $rootScope.apiUrl +'public/api/v1/recipient';
+    $rootScope.RegitrationApi = $rootScope.apiUrl + 'api/v1/users';
+    $rootScope.loginApi = $rootScope.apiUrl + 'api/v1/users/login';
+    $rootScope.updateApi = $rootScope.apiUrl + 'api/v1/users';
+    $rootScope.CurrencyApi = $rootScope.apiUrl +'api/v1/currency/convert';
+    $rootScope.addBenefiery = $rootScope.apiUrl +'api/v1/recipient';
+    $rootScope.getBenefiery = $rootScope.apiUrl +'api/v1/recipient';
+    $rootScope.deleteBenefiery = $rootScope.apiUrl +'api/v1/recipient';
     $rootScope.getCountry = $rootScope.apiUrl+'api/v1/country';
     $rootScope.getBanks = $rootScope.apiUrl+'api/v1/banks';
     $rootScope.getbankdetail = $rootScope.apiUrl+'api/v1/bankdetail';

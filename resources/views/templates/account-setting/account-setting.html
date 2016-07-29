@@ -11,7 +11,7 @@
                         <img src="images/p-3.jpg" class="img-circle chang-thumb">
                         <div class="name-id">
                             <p class="change-pass-name">{{userInfo.first_name}} {{userInfo.last_name}}</p>
-                            <p class="cid">Customer ID : CR_{{ userInfo.first_name | limitTo:1 }}{{ userInfo.last_name | limitTo:1 }}{{"000000" + userInfo.last_name.id.slice(-6)}}</p>
+                            <p class="cid">Customer ID : CR_{{ userInfo.first_name | limitTo:1 }}{{ userInfo.last_name | limitTo:1 }}_{{"000000" + userInfo.last_name.id.slice(-6)}}</p>
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-6 ">

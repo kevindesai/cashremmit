@@ -1,5 +1,5 @@
 <div class="sl-inner">
-    <h3 class="sl-lg-title">Singup For Free</h3>
+    <h3 class="sl-lg-title">Signup For Free</h3>
     <div class="alert alert-danger" role="alert" ng-if="registrationerrors">{{errormessage}}</div>
     <form name="userForm" novalidate>
 
@@ -26,9 +26,9 @@
             <p ng-show="userForm.last_name.$error.minlength" class="help-block">Last name is too short.</p>
             <p ng-show="userForm.last_name.$error.maxlength" class="help-block">Last name is too long.</p>
         </div> 
-        <button type="submit" ng-disabled="userForm.$invalid" ng-click="registerUser()" class="btn btn-primary form-submit">Singup</button>
+        <button type="submit" ng-disabled="userForm.$invalid" ng-click="registerUser()" class="btn btn-primary form-submit">Sign Up</button>
     </form>
-    <p>Or singup with</p>
+    <p>Or Signup with</p>
     <div class="l-with">
         <a href="" class="sl-fb"><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a>
         <a href="" class="sl-gp"><i class="fa fa-google-plus" aria-hidden="true"></i> Gmail</a>
