@@ -19,6 +19,7 @@ app.controller('commonController', ['$scope', '$location', '$http', '$rootScope'
         } 
         
         $scope.doLogout = function () {
+            
             localStorage.removeItem('id');
             localStorage.removeItem('email');
             localStorage.removeItem('token');
@@ -39,6 +40,9 @@ app.controller('commonController', ['$scope', '$location', '$http', '$rootScope'
             localStorage.removeItem('ToamounT');
             localStorage.removeItem('discount');
             localStorage.removeItem('couponCode');
+            $scope.isLogin = false;
+            $rootScope.isLogin = false;
+            $scope.$apply;
             $location.path('/');
         }
     }]);

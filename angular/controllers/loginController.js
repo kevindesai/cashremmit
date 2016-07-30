@@ -66,7 +66,7 @@ app.controller('AdminController', function ($scope, $http, $location, myFactory,
 app.controller('LoginController', function ($scope, $http, $location, myFactory, $rootScope, Facebook, userService) {
 
 // tabular
-    $rootScope.isLogin = false;
+//    $rootScope.isLogin = false;
     $scope.activeTab = 1;
     $scope.setActiveTab = function (tabToSet) {
         $scope.activeTab = tabToSet;
