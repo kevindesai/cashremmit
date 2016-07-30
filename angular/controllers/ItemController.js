@@ -143,7 +143,9 @@ app.controller('ReportController', ['$scope', '$http', '$rootScope', 'userServic
             });
         }
         $scope.addbenif = function (benifdata) {
-        	$scope.benifData = $scope.benif;
+            
+            if($scope.benif != undefined){
+            $scope.benifData = $scope.benif;
             $scope.benifData.user_id = $scope.userInfo.id;
             $scope.benifData.token = $scope.userInfo.token;
             $scope.benifData.attributes = JSON.stringify($scope.benifData.attributes);
@@ -166,6 +168,7 @@ app.controller('ReportController', ['$scope', '$http', '$rootScope', 'userServic
             response.error(function (error) {
                 console.log(error);
             });
+        }
         }
         
 

@@ -1,44 +1,43 @@
-<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="LoginController">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content centered">
+      <div class="main-area">
+         <div class="centered">
 
-            <div class="modal-body-sl ">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6 pl0 pr0 visible-md-* visible-lg-* visible-sm-* hidden-xs">
+            <section class="cards MainReg_container">
+
+              <div class="card Promo_photo">
+                    <a href="#">
+                        <figure class="thumbnailLogin">
                             <img src="images/popup.jpg" class="img-responsive">
-                        </div>
-                        <div class="col-md-6 col-sm-6">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </figure>
+                      </a>
+                 </div><!-- .card -->
 
-                            <div class="sl-tab">
-                                <!-- Nav tabs -->
-                                <div class="center-sl">
-                                    <ul class="nav nav-tabs" role="tablist">
-                                        <!--						<li role="presentation" class="active"><a href="#login" ng-click = "setActiveTab(1)" aria-controls="login" role="tab" data-toggle="tab">Login</a></li>
-                                                                                        <li role="presentation"><a href="#singup" ng-click = "setActiveTab(2)" aria-controls="singup" role="tab" data-toggle="tab">Singup</a></li>-->
-                                        <li ng-class ="{'active': activeTab == 1}" role="presentation" class="active"><a href="" ng-click = "setActiveTab(1)" aria-controls="login" role="tab" data-toggle="tab">Login</a></li>
+                <div class="card Login_signup">
+                    <ul class="tabs" id="tabs">
+                       <ul class="nav nav-tabs" role="tablist">
+					<li ng-class ="{'active': activeTab == 1}" role="presentation" class="active"><a href="" ng-click = "setActiveTab(1)" aria-controls="login" role="tab" data-toggle="tab">Login</a></li>
                                         <li ng-class ="{'active': activeTab == 2}" role="presentation"><a href="" ng-click = "setActiveTab(2)" aria-controls="singup" role="tab" data-toggle="tab">Signup</a></li>
-                                    </ul>
-                                </div>
+					   </ul>
+                    </ul>
 
-                                <!-- Tab panes -->
-                                <div class="tab-content">
-                                    <div role="tabpanel" ng-class ="{'tab-pane active': activeTab == 1,'tab-pane': activeTab !== 1}" id="login">
+                <div id="cardSignin" class="tab-content">         
+                   <div role="tabpanel" ng-class ="{'tab-pane active': activeTab == 1,'tab-pane': activeTab !== 1}" id="login">
                                         <login-form></login-form>
-                                    </div>
-                                    <div role="tabpanel" ng-class ="{'tab-pane active': activeTab == 2,'tab-pane': activeTab !== 2}" id="singup">
+                    </div>
+            
+            <!--   Singup Landing Page -->
+              <div role="tabpanel" ng-class ="{'tab-pane active': activeTab == 2,'tab-pane': activeTab !== 2}" id="singup">
                                         <reg-form></reg-form> 
                                     </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+                 </div><!--  End od flip ID -->
+               </div>
+            </section><!-- .cards -->
+           
+        </div><!-- .centered -->
+        
     </div>
+    </div>
+  </div>
 </div>

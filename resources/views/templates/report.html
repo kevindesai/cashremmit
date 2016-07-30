@@ -98,39 +98,51 @@
                 <h4 class="modal-title" id="myModalLabel">Add New Recipient</h4>
             </div>
             <div class="modal-body">
-                <form id="formbenif" >
-                    <div class="form-group">
+                <form id="formbenif" name="formbenif" novalidate >
+                    <div class="form-group" ng-class="{ 'has-error' : formbenif.country_name.$invalid && formbenif.$submitted }">
                         <label class="form-title">Choose country</label>
-                        <select name="country" class="form-control" ng-model="benif.country_name" id="country" required="required" ng-change="getBanks(benif.country_name)">
+                        <select name="country_name" class="form-control" ng-model="benif.country_name" id="country_name" ng-change="getBanks(benif.country_name)" required>
                             <option ng-repeat="country in countryList" value="{{country.id}}_{{country.country_name}}">{{country.country_name}}</option>
                         </select>
+                        <p ng-show="formbenif.country_name.$invalid && formbenif.$submitted" class="help-block">Please select country.</p>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{ 'has-error' : formbenif.first_name.$invalid && formbenif.$submitted }">
                         <label class="form-title">Recipient Detail</label>
-                        <input type="text" class="form-control" ng-model="benif.first_name" placeholder="First Name" required="required" ng-pattern="/^[a-zA-Z]*$/">
+                        <input type="text" class="form-control" ng-model="benif.first_name" name="first_name" placeholder="First Name" ng-required="true" ng-pattern="/^[a-zA-Z]*$/">
+                        <p ng-show="formbenif.first_name.$error.required && formbenif.$submitted" class="help-block">Please enter name.</p>
+                        <p ng-show="formbenif.first_name.$error.pattern && formbenif.$submitted" class="help-block">Please enter valid name.</p>
                     </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" ng-model="benif.last_name" placeholder="Last Name" required="required" ng-pattern="/^[a-zA-Z]*$/">
+                    <div class="form-group" ng-class="{ 'has-error' : formbenif.last_name.$invalid && formbenif.$submitted }">
+                        <input type="text" class="form-control" ng-model="benif.last_name" placeholder="Last Name" name="last_name" required="required" ng-pattern="/^[a-zA-Z]*$/">
+                        <p ng-show="formbenif.last_name.$error.required && formbenif.$submitted" class="help-block">Please enter name.</p>
+                        <p ng-show="formbenif.last_name.$error.pattern && formbenif.$submitted" class="help-block">Please enter valid name.</p>
                     </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" ng-model="benif.city_name" placeholder="City/Town" required="required" ng-pattern="/^[a-zA-Z]*$/">
+                    <div class="form-group" ng-class="{ 'has-error' : formbenif.city_name.$invalid && formbenif.$submitted }">
+                        <input type="text" class="form-control" ng-model="benif.city_name" name="city_name" placeholder="City/Town" required="required" ng-pattern="/^[a-zA-Z]*$/">
+                        <p ng-show="formbenif.city_name.$error.required && formbenif.$submitted" class="help-block">Please enter city.</p>
+                        <p ng-show="formbenif.city_name.$error.pattern && formbenif.$submitted" class="help-block">Please enter valid city name.</p>
                     </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Mobile Number" ng-model="benif.mobile_no" required="required">
+                    <div class="form-group" ng-class="{ 'has-error' : formbenif.mobile_no.$invalid && formbenif.$submitted }">
+                        <input type="text" class="form-control" placeholder="Mobile Number" ng-model="benif.mobile_no" name="mobile_no" required="required">
+                        <p ng-show="formbenif.mobile_no.$error.required && formbenif.$submitted" class="help-block">Please enter mobile number.</p>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{ 'has-error' : formbenif.bank_name.$invalid && formbenif.$submitted }">
                         <label class="form-title">Bank Detail</label>
-                        <select class="form-control form-select" ng-model="benif.bank_name" required="required" ng-change="getBankDetails(benif.bank_name)">
+                        <select class="form-control form-select" ng-model="benif.bank_name" name="bank_name" required="required" ng-change="getBankDetails(benif.bank_name)">
                             <option ng-repeat="Bank in Banks" value="{{Bank.id}}_{{Bank.name}}">{{Bank.name}}</option>
 
                         </select>
+                        <p ng-show="formbenif.bank_name.$error.required && formbenif.$submitted" class="help-block">Please select bank.</p>
                     </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Account Number" ng-model="benif.account_number" required="required" number>
+                    <div class="form-group" ng-class="{ 'has-error' : formbenif.account_number.$invalid && formbenif.$submitted }">
+                        <input type="text" class="form-control" placeholder="Account Number" ng-model="benif.account_number" name="account_number" required="required" number>
+                        <p ng-show="formbenif.account_number.$error.required && formbenif.$submitted" class="help-block">Please enter account number.</p>
                     </div>
-                    <div class="form-group" ng-repeat="bankDe in BankDetails.attributes">
-                        <input type="text" class="form-control" placeholder="{{bankDe.name}}" ng-model="benif.attributes[bankDe.name]" required="required" number>
+                    <div class="form-group" ng-repeat="bankDe in BankDetails.attributes" >
+                        <input type="text" dynamic-name="bankDe.name" class="form-control" placeholder="{{bankDe.name}}" ng-model="benif.attributes[bankDe.name]"  required="required">
+                        <p ng-show="myformbenif.BankDetails.attributes[$index].name.$invalid && formbenif.$submitted" class="help-block">Please enter {{bankDe.name}}.</p>
                     </div>
+                    
                     <button type="submit" class="form-submit" ng-click="addbenif(benif)">Submit</button>
                 </form>
             </div>

@@ -1,4 +1,4 @@
-<div class="banner_transfar" ng-controller="commonController" ng-if="isLogin == true">
+<div class="banner_transfar"  ng-if="isLogin == true">
     <div class="container">
         <div class="row">
             <div class="col-md-offset-8 col-md-3 col-sm-offset-7  col-sm-3 ">
@@ -23,7 +23,7 @@
         </div>
     </div>
 </div>
-<nav class="navbar navbar-default " ng-controller="commonController" ng-if="isLogin == false">
+<nav class="navbar navbar-default " ng-if="isLogin == false">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -39,8 +39,8 @@
             <ul class="nav navbar-nav navbar-right ">
                 <li><a href="javascript:void(0);">Need help</a></li>
                 <li><a href="javascript:void(0);">Business</a></li>
-                <li><a data-backdrop="static" data-toggle="modal" data-target="#myModal">Login</a></li>
-                <li class=""><a class="singup-btn" data-backdrop="static" data-toggle="modal" data-target="#myModal">Signup</a></li>
+                <li><a  data-toggle="modal" data-target="#myModal">Login</a></li>
+                <li class=""><a class="singup-btn"  data-toggle="modal" data-target="#myModal">Signup</a></li>
             </ul>
         </div>
     </div>
