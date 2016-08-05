@@ -23,6 +23,7 @@ Route::post('getcountrybycurrency','CountryAPIController@getCountryByCurrency');
 
 Route::group(['middleware' => 'jwt-auth'], function () {
     Route::resource('recipient', 'RecipientAPIController');
+    Route::resource('poliinit', 'PoliAPIController@initiatetransaction');
 });
 
 

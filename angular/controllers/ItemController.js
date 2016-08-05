@@ -185,15 +185,41 @@ app.controller('TransfarDetailController', function ($scope, $http) {
     console.log("TransfarDetailController");
 
 });
-app.controller('SelectPaymentController', ['$scope', '$http', '$rootScope', 'userService', 'myFactory', '$location',
-    function ($scope, $http, $rootScope, userService, myFactory, $location) {
+app.controller('SelectPaymentController', ['$scope', '$http','$window', '$rootScope', 'userService', 'myFactory', '$location','$q','$compile',
+    function ($scope, $http, $window, $rootScope, userService, myFactory, $location, $q,$compile) {
     userService.getDataFromSession();
     $scope.userInfo = userService.userInfo;    
     
-    $scope.ToAmount = localStorage.getItem('ToamounT')
-        $scope.ToCur = localStorage.getItem('ToCUR')
+    $scope.fromAmount=localStorage.getItem('FromamounT');
+    $scope.fromCur=localStorage.getItem('FromCUR');
+    $scope.toCur=localStorage.getItem('ToCUR');
+    $scope.toAmount=localStorage.getItem('ToamounT');
         $scope.globalName = localStorage.getItem('first_name');
         $scope.globalLastName = localStorage.getItem('last_name');
+    $scope.initiatePoli = function(){
+        //var deferred = $q.defer();
+        method = "POST";
+        url = $rootScope.initpoli;
+        Reqdata = {"CurrencyCode":$scope.fromCur,"amount":$scope.fromAmount,"token":$scope.userInfo.token};
+        var response = myFactory.httpMethodCall(method, url,Reqdata);
+        response.success(function (data) {
+                //console.log(data.NavigateURL);
+                    if(data.Success==true){
+                        if(data.ErrorCode ==0){
+                        $scope.navigateUrl = data.NavigateURL;
+                        $scope.TransactionRefNo = data.TransactionRefNo;
+          //               deferred.resolve('request successful');
+                           $window.open($scope.navigateUrl, '_new');
+                        }
+                    }
+            //        deferred.resolve('request successful');
+                
+            });
+            response.error(function (error) {
+                console.log(error);
+              //  deferred.reject('ERROR');
+            });
+    }    
 
 
 }]);
