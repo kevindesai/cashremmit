@@ -24,7 +24,11 @@
             <thead>
                 <tr>
                     <th>S.No</th>
-                    <th> {{ trans('Country Name') }} </th>
+                    <th> 
+                        {{ trans('Country Name') }} 
+                        
+                        
+                    </th>
                     <th> {{ trans('Country Code') }} </th>
                     <th> {{ trans('Currency Name') }} </th>
                     <th>{{ trans('Currency Code') }}</th>
@@ -37,7 +41,9 @@
                 {{-- */$x++;/* --}}
                 <tr>
                     <td>{{ $x }}</td>
-                    <td>{{ $item->country_name }}</td>
+                    <td>{{ $item->country_name }}
+                        <img src="{{ $item->logo24 }}" alt="{{ $item->country_code }}" />
+                    </td>
                     <td>{{ $item->country_code }}</td>
                     <td>{{ $item->currency_name }}</td>
                     <td>{{ $item->currency_code }}</td>
