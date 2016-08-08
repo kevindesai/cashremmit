@@ -1,6 +1,71 @@
 
 
-app.controller('AdminController', function ($scope, $http, $location, myFactory, $rootScope, Facebook, userService) {
+app.controller('AdminController', function ($scope, $http, $location, myFactory, $rootScope, Facebook, userService,countrylistService) {
+//    $scope.countryList={};
+//    var countryList = countrylistService;
+//    countryList.success(function(data){
+//        if(data.status==1){
+//            var countryList = data.data;
+//        }
+//        var tmpcountry =[];
+//        angular.forEach(countryList,function(value,key){
+//            var obj ={};
+//            obj.code = value.currency_code;
+//            obj.name = value.currency_name;
+//            //obj.currency_flag = value.logo16;
+//            
+//            tmpcountry.push(obj);
+//        },tmpcountry);
+//        $scope.currenciesWithNames = tmpcountry;
+//        console.log($scope.currenciesWithNames);
+//    });
+    
+    //demo code
+    $scope.currencyChangeCount = 0;
+            $scope.currencyCodeChangeCount = 0;
+
+            $scope.currencies = [
+                {code: 'EUR', symbol: '€'},
+                {code: 'USD', symbol: '$'},
+                {code: 'GBP', symbol: '£'}
+            ];
+
+            $scope.currenciesWithNames = [
+                {code: 'EUR', symbol: '€', name: 'Euro'},
+                {code: 'USD', symbol: '$', name: 'US Dollar'},
+                {code: 'GBP', symbol: '£', name: 'British Pound'}
+            ];
+    $scope.selectedCurrency9 = {code: 'GBP', symbol: '£'};
+     $scope.currencyCodes = [
+                'EUR', 'AUD', 'BGN', 'BRL', 'CAD', 'CHF', 'CNY', 'CZK', 'DKK', 'GBP', 'GEL', 'HKD', 'HUF', 'INR', 'MYR',
+                'MXN', 'NOK', 'NZD', 'PLN', 'RON', 'SEK', 'SGD', 'THB', 'NGN', 'PKR', 'TRY', 'USD',
+                'ZAR', 'JPY', 'PHP', 'MAD', 'COP', 'AED', 'IDR', 'CLP', 'UAH', 'RUB', 'KRW', 'LKR'
+            ];
+
+            $scope.someCurrencyCodes = ['EUR', 'AUD', 'BGN', 'BRL'];
+
+            $scope.codeMapper = function(code) {
+                return {code: code};
+            };
+
+            $scope.codeExtractor = function(currency) {
+                return currency.code;
+            };
+
+            $scope.changedHandler = function() {
+                $scope.currencyChangeCount += 1;
+            };
+
+            $scope.changedCodeHandler = function() {
+                $scope.currencyCodeChangeCount += 1;
+            };
+
+            $scope.otherClicked = function() {
+                window.alert("Other clicked");
+            };
+    
+    // demo code over
+    
     
     $scope.gotopage = "";
     $scope.fromCur = 'AUD';

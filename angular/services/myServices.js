@@ -110,3 +110,15 @@ app.service('myFactory', ['$http', function($http) {
         return myFactory;
 
     }]);
+app.factory('countrylistService',['$rootScope','$http',function($rootScope,$http){
+        var countryData ={};
+        var httpData = $http({
+                method:"GET",
+                url:$rootScope.getCountry,
+                
+            });
+        return httpData;
+        //console.log(countryData);
+        
+        
+}]);

@@ -1,5 +1,5 @@
 var app = angular.module('main-App', ['ngRoute', 'angularUtils.directives.dirPagination',
-    'facebook','directive.g+signin'
+    'facebook','directive.g+signin','tw-currency-select'
 ]);
 //$location.protocol() + "://" + $location.host();
 app.run(function($rootScope, $location,$route) { 

@@ -15,17 +15,23 @@
 
         <!-- Bootstrap core CSS -->
         <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/bootstrap-select.css" rel="stylesheet">
         <link href="css/font-awesome.css" rel="stylesheet">
         <link href="css/custom.css" rel="stylesheet">
         <link href="css/loginBox.css" rel="stylesheet">
         <link href="css/responsive.css" rel="stylesheet">
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
         <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
+        <link href="angular/directives/tw-currency-select/dist/tw-currency-select.css" rel="stylesheet">
         <!-- Custom styles for this template -->
 
         <script src="js/ie-emulation-modes-warning.js"></script> 
-
+        <!-- Bootstrap core JavaScript
+       ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.js"></script>
         <!-- Angular JS -->
         <script src="angular/lib/angular.js"></script>  
         <script src="angular/lib/angular-route.js"></script>
@@ -37,6 +43,7 @@
         <script src="angular/services/myServices.js"></script>
         <script src="angular/directives/directive.js"></script>
         <script src="angular/helper/myHelper.js"></script>
+        <script src="angular/directives/tw-currency-select/dist/tw-currency-select.js"></script>
 
         <!-- App Controller -->
         <script src="angular/controllers/ItemController.js"></script>
@@ -52,11 +59,7 @@
     <body ng-app="main-App">
         <ng-view></ng-view>
     <!-- Scripts -->
-    <!-- Bootstrap core JavaScript
-       ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
 </body>
