@@ -509,7 +509,8 @@ app.controller('AdminController', function ($scope, $http, $location, myFactory,
         "code": "ZWD"
     }]
 
-    $scope.selectedCurrency9 = {code: 'GBP', symbol: '£'};
+    $scope.fromCurDrop = {code: 'AUD', symbol: '$'};
+    $scope.toCurDrop = {code: 'NGN', symbol: '$'};
      $scope.currencyCodes = [
                 'EUR', 'AUD', 'BGN', 'BRL', 'CAD', 'CHF', 'CNY', 'CZK', 'DKK', 'GBP', 'GEL', 'HKD', 'HUF', 'INR', 'MYR',
                 'MXN', 'NOK', 'NZD', 'PLN', 'RON', 'SEK', 'SGD', 'THB', 'NGN', 'PKR', 'TRY', 'USD',
@@ -528,10 +529,18 @@ app.controller('AdminController', function ($scope, $http, $location, myFactory,
 
             $scope.changedHandler = function() {
                 $scope.currencyChangeCount += 1;
+                
             };
 
-            $scope.changedCodeHandler = function() {
+            $scope.changedfromCodeHandler = function() {
                 $scope.currencyCodeChangeCount += 1;
+                $scope.fromCur = $scope.fromCurDrop.code;
+                $scope.convertCurFromto($scope.fromAmount);
+            };
+            $scope.changedtoCodeHandler = function() {
+                $scope.currencyCodeChangeCount += 1;
+                $scope.toCur = $scope.toCurDrop.code;
+               $scope.convertCurFromto($scope.fromAmount);
             };
 
             $scope.otherClicked = function() {
@@ -649,7 +658,9 @@ app.controller('LoginController', function ($scope, $http, $location, myFactory,
                 localStorage.setItem('token', data.token);
                 //localStorage.getItem('token');
 
-                $('#myModal').modal('hide');
+                angular.element('#myModal').modal('hide');
+                angular.element('body').removeClass('modal-open');
+                angular.element('.modal-backdrop').remove();
                 $location.path('/payment');
             } else if (data.status == 0) {
                 $scope.invalidusername = true;
@@ -674,7 +685,10 @@ app.controller('LoginController', function ($scope, $http, $location, myFactory,
             if (data.status == 1) {
                 $rootScope.userData = data.data;
                 userService.saveDataInSession(data.data);
-                $('#myModal').modal('hide');
+                
+                angular.element('#myModal').modal('hide');
+                angular.element('body').removeClass('modal-open');
+                angular.element('.modal-backdrop').remove();
                 $location.path('/payment');
             } else if (data.status == 0) {
                 console.log(data.data.email);
