@@ -92,9 +92,29 @@ app.config(['$routeProvider',
                     controller: 'SelectPaymentController',
                     auth: true
                 }).
-                 when('/selectpayment1', {
+                when('/selectpayment1', {
                     templateUrl: 'resources/views/templates/payment/creditCardPay.html',
                     controller: 'SelectPaymentController',
+                    auth: true
+                }).
+                when('/polisuccess', {
+                    templateUrl: 'resources/views/templates/payment/polisuccess.html',
+                    controller: 'PoliPaymentController',
+                    auth: true
+                }).
+                when('/polifailure', {
+                    templateUrl: 'resources/views/templates/payment/polifailure.html',
+                    controller: 'PoliPaymentController',
+                    auth: true
+                }).
+                when('/policancelled', {
+                    templateUrl: 'resources/views/templates/payment/policancelled.html',
+                    controller: 'PoliPaymentController',
+                    auth: true
+                }).
+                when('/polinudge', {
+                    templateUrl: 'resources/views/templates/payment/polinudge.html',
+                    controller: 'PoliPaymentController',
                     auth: true
                 }).
                 otherwise({

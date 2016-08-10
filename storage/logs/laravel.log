@@ -15590,3 +15590,81 @@ Stack trace:
 #41 C:\wamp64\www\cashremmit\public\index.php(54): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
 #42 C:\wamp64\www\cashremmit\index.php(21): require_once('C:\\wamp64\\www\\c...')
 #43 {main}  
+[2016-08-10 07:12:08] local.ERROR: exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'root'@'localhost' (using password: NO)' in /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php:55
+Stack trace:
+#0 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php(55): PDO->__construct('mysql:host=loca...', 'root', '', Array)
+#1 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Database/Connectors/MySqlConnector.php(24): Illuminate\Database\Connectors\Connector->createConnection('mysql:host=loca...', Array, Array)
+#2 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Database/Connectors/ConnectionFactory.php(61): Illuminate\Database\Connectors\MySqlConnector->connect(Array)
+#3 [internal function]: Illuminate\Database\Connectors\ConnectionFactory->Illuminate\Database\Connectors\{closure}()
+#4 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Database/Connection.php(908): call_user_func(Object(Closure))
+#5 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Database/Connection.php(776): Illuminate\Database\Connection->getPdo()
+#6 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Database/Connection.php(661): Illuminate\Database\Connection->reconnectIfMissingConnection()
+#7 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Database/Connection.php(342): Illuminate\Database\Connection->run('select * from i...', Array, Object(Closure))
+#8 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Database/Schema/MySqlBuilder.php(21): Illuminate\Database\Connection->select('select * from i...', Array)
+#9 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Database/Migrations/DatabaseMigrationRepository.php(141): Illuminate\Database\Schema\MySqlBuilder->hasTable('migrations')
+#10 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php(404): Illuminate\Database\Migrations\DatabaseMigrationRepository->repositoryExists()
+#11 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(103): Illuminate\Database\Migrations\Migrator->repositoryExists()
+#12 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateCommand.php(58): Illuminate\Database\Console\Migrations\MigrateCommand->prepareDatabase()
+#13 [internal function]: Illuminate\Database\Console\Migrations\MigrateCommand->fire()
+#14 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Container/Container.php(507): call_user_func_array(Array, Array)
+#15 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Console/Command.php(169): Illuminate\Container\Container->call(Array)
+#16 /var/www/html/angdemo/vendor/symfony/console/Command/Command.php(256): Illuminate\Console\Command->execute(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#17 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Console/Command.php(155): Symfony\Component\Console\Command\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#18 /var/www/html/angdemo/vendor/symfony/console/Application.php(791): Illuminate\Console\Command->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#19 /var/www/html/angdemo/vendor/symfony/console/Application.php(186): Symfony\Component\Console\Application->doRunCommand(Object(Illuminate\Database\Console\Migrations\MigrateCommand), Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#20 /var/www/html/angdemo/vendor/symfony/console/Application.php(117): Symfony\Component\Console\Application->doRun(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#21 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(107): Symfony\Component\Console\Application->run(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#22 /var/www/html/angdemo/artisan(36): Illuminate\Foundation\Console\Kernel->handle(Object(Symfony\Component\Console\Input\ArgvInput), Object(Symfony\Component\Console\Output\ConsoleOutput))
+#23 {main}  
+[2016-08-10 08:16:23] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected ')'' in /var/www/html/angdemo/app/Http/Controllers/API/PoliAPIController.php:239
+Stack trace:
+#0 {main}  
+[2016-08-10 08:17:10] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Cannot use object of type stdClass as array' in /var/www/html/angdemo/app/Http/Controllers/API/PoliAPIController.php:239
+Stack trace:
+#0 {main}  
+[2016-08-10 08:22:34] local.ERROR: exception 'ErrorException' with message 'Object of class Illuminate\Routing\UrlGenerator could not be converted to string' in /var/www/html/angdemo/app/Http/Controllers/API/PoliAPIController.php:215
+Stack trace:
+#0 /var/www/html/angdemo/app/Http/Controllers/API/PoliAPIController.php(215): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(4096, 'Object of class...', '/var/www/html/a...', 215, Array)
+#1 [internal function]: App\Http\Controllers\API\PoliAPIController->initiatetransaction(Object(Illuminate\Http\Request))
+#2 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(80): call_user_func_array(Array, Array)
+#3 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(146): Illuminate\Routing\Controller->callAction('initiatetransac...', Array)
+#4 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(94): Illuminate\Routing\ControllerDispatcher->call(Object(App\Http\Controllers\API\PoliAPIController), Object(Illuminate\Routing\Route), 'initiatetransac...')
+#5 [internal function]: Illuminate\Routing\ControllerDispatcher->Illuminate\Routing\{closure}(Object(Illuminate\Http\Request))
+#6 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(52): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#7 [internal function]: Illuminate\Routing\Pipeline->Illuminate\Routing\{closure}(Object(Illuminate\Http\Request))
+#8 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(103): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#9 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(96): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#10 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(54): Illuminate\Routing\ControllerDispatcher->callWithinStack(Object(App\Http\Controllers\API\PoliAPIController), Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request), 'initiatetransac...')
+#11 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Routing/Route.php(174): Illuminate\Routing\ControllerDispatcher->dispatch(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request), 'App\\Http\\Contro...', 'initiatetransac...')
+#12 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Routing/Route.php(140): Illuminate\Routing\Route->runController(Object(Illuminate\Http\Request))
+#13 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Routing/Router.php(724): Illuminate\Routing\Route->run(Object(Illuminate\Http\Request))
+#14 [internal function]: Illuminate\Routing\Router->Illuminate\Routing\{closure}(Object(Illuminate\Http\Request))
+#15 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(52): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#16 /var/www/html/angdemo/app/Http/Middleware/authJWT.php(32): Illuminate\Routing\Pipeline->Illuminate\Routing\{closure}(Object(Illuminate\Http\Request))
+#17 [internal function]: App\Http\Middleware\authJWT->handle(Object(Illuminate\Http\Request), Object(Closure))
+#18 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(136): call_user_func_array(Array, Array)
+#19 [internal function]: Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#20 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(32): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#21 [internal function]: Illuminate\Routing\Pipeline->Illuminate\Routing\{closure}(Object(Illuminate\Http\Request))
+#22 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(103): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#23 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Routing/Router.php(726): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#24 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Routing/Router.php(699): Illuminate\Routing\Router->runRouteWithinStack(Object(Illuminate\Routing\Route), Object(Illuminate\Http\Request))
+#25 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Routing/Router.php(675): Illuminate\Routing\Router->dispatchToRoute(Object(Illuminate\Http\Request))
+#26 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(246): Illuminate\Routing\Router->dispatch(Object(Illuminate\Http\Request))
+#27 [internal function]: Illuminate\Foundation\Http\Kernel->Illuminate\Foundation\Http\{closure}(Object(Illuminate\Http\Request))
+#28 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(52): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#29 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Foundation/Http/Middleware/CheckForMaintenanceMode.php(44): Illuminate\Routing\Pipeline->Illuminate\Routing\{closure}(Object(Illuminate\Http\Request))
+#30 [internal function]: Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode->handle(Object(Illuminate\Http\Request), Object(Closure))
+#31 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(136): call_user_func_array(Array, Array)
+#32 [internal function]: Illuminate\Pipeline\Pipeline->Illuminate\Pipeline\{closure}(Object(Illuminate\Http\Request))
+#33 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Routing/Pipeline.php(32): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#34 [internal function]: Illuminate\Routing\Pipeline->Illuminate\Routing\{closure}(Object(Illuminate\Http\Request))
+#35 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php(103): call_user_func(Object(Closure), Object(Illuminate\Http\Request))
+#36 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(132): Illuminate\Pipeline\Pipeline->then(Object(Closure))
+#37 /var/www/html/angdemo/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(99): Illuminate\Foundation\Http\Kernel->sendRequestThroughRouter(Object(Illuminate\Http\Request))
+#38 /var/www/html/angdemo/public/index.php(54): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#39 /var/www/html/angdemo/index.php(21): require_once('/var/www/html/a...')
+#40 {main}  
+[2016-08-10 08:23:43] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Maximum execution time of 30 seconds exceeded' in /var/www/html/angdemo/app/Http/Controllers/API/PoliAPIController.php:215
+Stack trace:
+#0 {main}  
