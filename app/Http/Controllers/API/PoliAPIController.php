@@ -126,4 +126,21 @@ class PoliAPIController extends Api {
         curl_close($ch);
     }
 
+    public function getTransactions(){
+        $this->_auth = JWTAuth::toUser(JWTAuth::getToken());
+        $transactions = \App\Transactions::where('user_id', $this->_auth->id)->orderBy('id', 'desc')->get();
+        $response = array(
+            'status' => '0',
+            'message' => 'No data found'
+        );
+        $transactions = $transactions->toArray();
+        if (!empty($transactions)) {
+            $response = array(
+                'status' => '1',
+                'message' => 'data found',
+                'data' => $transactions
+            );
+        }
+        echo json_encode($response);
+    }
 }

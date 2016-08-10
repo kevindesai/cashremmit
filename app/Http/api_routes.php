@@ -30,6 +30,7 @@ Route::get('poli/nudge/{id}', 'PoliAPIController@nudge');
 Route::group(['middleware' => 'jwt-auth'], function () {
     Route::resource('recipient', 'RecipientAPIController');
     Route::post('poliinit', 'PoliAPIController@initiatetransaction');
+    Route::get('transactions', 'PoliAPIController@getTransactions');
 });
 
 

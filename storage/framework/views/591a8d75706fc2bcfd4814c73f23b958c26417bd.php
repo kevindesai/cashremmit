@@ -102,6 +102,7 @@
                                         <li><a href="<?php echo e(url('/')); ?>/admin/promossion"><i class="fa fa-bookmark"></i><span>Promossion</span></a></li>
                                         <li><a href="<?php echo e(url('/')); ?>/admin/banks"><i class="fa fa-bookmark"></i><span>Banks</span></a></li>
                                         <li><a href="<?php echo e(url('/')); ?>/admin/transferrate"><i class="fa fa-bookmark"></i><span>Transfer Rate</span></a></li>
+                                        <li><a href="<?php echo e(url('/')); ?>/admin/transactions"><i class="fa fa-bookmark"></i><span>Transactions</span></a></li>
 
                                     </ul>
                                 </nav>

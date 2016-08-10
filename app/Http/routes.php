@@ -53,6 +53,7 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin', 'namespace' 
     Route::post('password', 'UsersController@ChangePassword');
     Route::resource('country', 'CountryController');
     Route::resource('promossion', 'PromossionController');
+    Route::resource('transactions', 'TransactionController');
     Route::get('rate/list', 'CountryController@rateList');
 });
 // route to process the form

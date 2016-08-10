@@ -26,4 +26,7 @@ class Transactions extends Model
      * @var array
      */
     protected $fillable = ['recipient_id','user_id','amount','response','status','currency_code'];
+    public function user() {
+        return $this->belongsTo('App\User','user_id');
+    }
 }
