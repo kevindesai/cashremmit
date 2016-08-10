@@ -43,7 +43,7 @@ app.controller('commonController', ['$scope', '$location', '$http', '$rootScope'
             $scope.isLogin = false;
             $rootScope.isLogin = false;
             $scope.$apply;
-            $location.path('/');
+            $location.path('/home');
         }
     }]);
 app.controller('ReportController', ['$scope', '$http', '$rootScope', 'userService', 'myFactory', '$location','$document',
@@ -163,7 +163,9 @@ app.controller('ReportController', ['$scope', '$http', '$rootScope', 'userServic
                 
                 if (data.status == 1) {
                     $scope.refreshbeif();
-                    $('#myModal').modal('hide');
+                angular.element('#myModal').modal('hide');
+                angular.element('body').removeClass('modal-open');
+                angular.element('.modal-backdrop').remove();
                 }else if(data.status == -1){
                     
                     $scope.doLogout();

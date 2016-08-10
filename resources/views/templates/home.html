@@ -10,31 +10,33 @@
                         <div class="rat-inner">
                             <label for="">You want to send..</label>
                             <input type="text" ng-model="fromAmount" ng-change="convertCurFromto(fromAmount)" placeholder="1000">
-                           <currency-select
-            search-placeholder="Search..."
-            hide-name-selected="true"
-            none-selected-text="Nothing selected"
-            ng-model="selectedCurrency9"
-            currencies="currenciesWithNames">
-    </currency-select>
+                            <currency-select
+                                search-placeholder="Search..."
+                                hide-name-selected="true"
+                                none-selected-text="Nothing selected"
+                                ng-model="fromCurDrop"
+                                ng-change="changedfromCodeHandler()"
+                                currencies="currenciesWithNames">
+                            </currency-select>
 
                         </div>
                         <div class="rat-inner">
                             <label for="">Recipiant will get...</label>
                             <input type="text" ng-model="toAmount" ng-change="convertCurtoFrom(toAmount)" placeholder="234,000">
-<!--                            <select ng-model="toCur" ng-change="convertCurFromto(fromAmount)">
-                                <option value="AUD">aud</option>
-                                <option value="USD">usd</option>
-                                <option value="INR">inr</option>
-                                <option value="NGN">ngn</option>
-                            </select>-->
-<currency-select
-            search-placeholder="Search..."
-            hide-name-selected="true"
-            none-selected-text="Nothing selected"
-            ng-model="selectedCurrency9"
-            currencies="currenciesWithNames">
-    </currency-select>
+                            <!--                            <select ng-model="toCur" ng-change="convertCurFromto(fromAmount)">
+                                                            <option value="AUD">aud</option>
+                                                            <option value="USD">usd</option>
+                                                            <option value="INR">inr</option>
+                                                            <option value="NGN">ngn</option>
+                                                        </select>-->
+                            <currency-select
+                                search-placeholder="Search..."
+                                hide-name-selected="true"
+                                none-selected-text="Nothing selected"
+                                ng-model="toCurDrop"
+                                ng-change="changedtoCodeHandler()"
+                                currencies="currenciesWithNames">
+                            </currency-select>
                         </div>
                         <div class="exchangeDes">
                             <p>Our Exchange Rate {{fromCur}} {{DefaultfromAmount}} = {{toCur}} {{DefaulttoAmount}}</p>
