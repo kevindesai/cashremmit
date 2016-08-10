@@ -1,3 +1,4 @@
+
 <?php
 
 /*
@@ -31,6 +32,7 @@ class PoliAPIController extends Api {
     public function success($id) {
         $trensaction = \App\Transactions::find($id);
         $trensaction->status = 'success';
+        $trensaction->response = $_REQUEST['token'];
         $trensaction->save();
         echo "<pre>";
         print_r($_REQUEST);
@@ -40,6 +42,7 @@ class PoliAPIController extends Api {
     public function failure($id) {
         $trensaction = \App\Transactions::find($id);
         $trensaction->status = 'failure';
+        $trensaction->response = $_REQUEST['token'];
         $trensaction->save();
         $url = url('/').'/#/polifailure';
         return redirect($url);
@@ -47,6 +50,7 @@ class PoliAPIController extends Api {
     public function cancelled($id) {
         $trensaction = \App\Transactions::find($id);
         $trensaction->status = 'cancelled';
+        $trensaction->response = $_REQUEST['token'];
         $trensaction->save();
         $url = url('/').'/#/policancelled';
         return redirect($url);
@@ -54,6 +58,7 @@ class PoliAPIController extends Api {
     public function nudge($id) {
         $trensaction = \App\Transactions::find($id);
         $trensaction->status = 'nudge';
+        $trensaction->response = $_REQUEST['token'];
         $trensaction->save();
         $url = url('/').'/#/polinudge';
         return redirect($url);
