@@ -49,14 +49,16 @@ class PoliAPIController extends Api {
     public function success($id) {
         $trensaction = \App\Transactions::find($id);
         $trensaction->status = 'success';
-        echo $token = $_REQUEST['token'];
+        $token = $_REQUEST['token'];
         $res = array(
             'token'=>$token,
             'data' => $this->getTransactionDetail($token)
         );
+//        echo "<pre>";
+//        print_r($res);
         $trensaction->response = json_encode($res);
         $trensaction->save();
-        
+//        die;
         $toemail = $trensaction->user->email;
         $data = array(
             'name' => $trensaction->username,
@@ -110,7 +112,7 @@ class PoliAPIController extends Api {
         $baseUrl = url('/');
         $inputs = $request->all();
         $beginTransaction = array(
-            'recipient_id' => $inputs["recipient_id"]=21,
+            'recipient_id' => $inputs["recipient_id"],
             'user_id' => $this->_auth->id,
             'amount' => $inputs["amount"],
             'status' => 'pending',
