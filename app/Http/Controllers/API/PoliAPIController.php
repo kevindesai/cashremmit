@@ -17,6 +17,7 @@ use Response;
 use Validator;
 use Exception;
 use JWTAuth;
+use Mail;
 
 class PoliAPIController extends Api {
 
@@ -31,6 +32,23 @@ class PoliAPIController extends Api {
         $trensaction->status = 'success';
         $trensaction->response = $_REQUEST['token'];
         $trensaction->save();
+
+        $toemail = $trensaction->user->email;
+        $data = array(
+        'name' => $trensaction->user->first_name,
+        'rec_name' => $trensaction->receptient->first_name . " ". $trensaction->receptient->last_name,
+        'currency' => $trensaction->currency_code,
+        'amount' => $trensaction->amount,
+        );
+
+        Mail::send('emails.successtransfer', $data, function ($message) {
+
+            $message->from('ravi@atoatechnologies.com', 'Cash Remit');
+
+            $message->to($toemail)->subject('Cashremit Transfer successfull');
+
+        });
+
         echo "<pre>";
         print_r($_REQUEST);
         $url = url('/').'/#/polisuccess';

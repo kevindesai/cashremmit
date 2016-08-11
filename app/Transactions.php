@@ -29,4 +29,7 @@ class Transactions extends Model
     public function user() {
         return $this->belongsTo('App\User','user_id');
     }
+    public function receptient() {
+        return $this->belongsTo('App\RecipientMaster','recipient_id');
+    }	
 }
