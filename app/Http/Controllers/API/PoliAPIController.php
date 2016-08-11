@@ -1,13 +1,10 @@
-
 <?php
-
+namespace App\Http\Controllers\API;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-namespace App\Http\Controllers\API;
 
 use App\Http\Requests;
 use App\Http\Controllers\Api;
@@ -70,7 +67,7 @@ class PoliAPIController extends Api {
         $baseUrl = url('/');
         $inputs = $request->all();
         $beginTransaction = array(
-            'recipient_id'=>'',
+            'recipient_id'=>$inputs["recipient_id"],
             'user_id'=>$this->_auth->id,
             'amount'=>$inputs["amount"],
             'status'=>'pending',

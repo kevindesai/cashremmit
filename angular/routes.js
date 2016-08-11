@@ -23,6 +23,7 @@ app.run(function($rootScope, $location,$route) {
     $rootScope.gettransferrate = $rootScope.apiUrl+'api/v1/transferrate';
     $rootScope.checkPromocode = $rootScope.apiUrl+'api/v1/checkpromossion';    
     $rootScope.initpoli = $rootScope.apiUrl+'api/v1/poliinit';
+    $rootScope.getTxn = $rootScope.apiUrl+'api/v1/transactions';
     
     $rootScope.$on('$locationChangeStart', function(ev, next, current) {
     var nextPath = $location.path(),

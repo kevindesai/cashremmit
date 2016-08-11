@@ -9,32 +9,8 @@
             <div class="td-search">
                 <input type="text" placeholder="Search for transaction">
             </div>
-
-            <div class="row mt3">
-                <div class="col-md-2 col-sm-2">
-                    <div class="avtar-icon-td">
-                        <p>EU</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-4">
-                    <div class="detail-td">
-                        <p class="name-td">Edith Ugwumba</p>
-                        <p class="amt-td">Amount: $1,008.55</p>
-                        <p class="tn-td">TN: EZ0003562873</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-3">
-                    <div class="status-td"><p>Completed</p></div>
-                </div>
-                <div class="col-md-2 col-sm-3">
-                    <div class="more-td">
-                        <p class="icon-td"><a href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></p>
-                        <p><a href="#">More Details</a></p>
-                    </div>
-                </div>
-            </div>
-            <hr class="hr-td"></hr>
-
+            <div class="mt3"></div>
+            <div ng-repeat="trans in transfer">
             <div class="row">
                 <div class="col-md-2 col-sm-2">
                     <div class="avtar-icon-td">
@@ -44,12 +20,12 @@
                 <div class="col-md-4 col-sm-4">
                     <div class="detail-td">
                         <p class="name-td">Edith Ugwumba</p>
-                        <p class="amt-td">Amount: $1,008.55</p>
+                        <p class="amt-td">Amount: {{trans.currency_code}} {{trans.amount}}</p>
                         <p class="tn-td">TN: EZ0003562873</p>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-3">
-                    <div class="status-td"><p>Completed</p></div>
+                    <div class="status-td"><p>{{trans.status}}</p></div>
                 </div>
                 <div class="col-md-2 col-sm-3">
                     <div class="more-td">
@@ -57,133 +33,11 @@
                         <p><a href="#">More Details</a></p>
                     </div>
                 </div>
+                
             </div>
             <hr class="hr-td"></hr>
-
-            <div class="row">
-                <div class="col-md-2 col-sm-2">
-                    <div class="avtar-icon-td">
-                        <p>EU</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-4">
-                    <div class="detail-td">
-                        <p class="name-td">Edith Ugwumba</p>
-                        <p class="amt-td">Amount: $1,008.55</p>
-                        <p class="tn-td">TN: EZ0003562873</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-3">
-                    <div class="status-td"><p>Completed</p></div>
-                </div>
-                <div class="col-md-2 col-sm-3">
-                    <div class="more-td">
-                        <p class="icon-td"><a href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></p>
-                        <p><a href="#">More Details</a></p>
-                    </div>
-                </div>
             </div>
-            <hr class="hr-td"></hr>
-
-            <div class="row">
-                <div class="col-md-2 col-sm-2">
-                    <div class="avtar-icon-td">
-                        <p>EU</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-4">
-                    <div class="detail-td">
-                        <p class="name-td">Edith Ugwumba</p>
-                        <p class="amt-td">Amount: $1,008.55</p>
-                        <p class="tn-td">TN: EZ0003562873</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-3">
-                    <div class="status-td"><p>Completed</p></div>
-                </div>
-                <div class="col-md-2 col-sm-3">
-                    <div class="more-td">
-                        <p class="icon-td"><a href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></p>
-                        <p><a href="#">More Details</a></p>
-                    </div>
-                </div>
-            </div>
-            <hr class="hr-td"></hr>
-
-            <div class="row">
-                <div class="col-md-2 col-sm-2">
-                    <div class="avtar-icon-td">
-                        <p>EU</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-4">
-                    <div class="detail-td">
-                        <p class="name-td">Edith Ugwumba</p>
-                        <p class="amt-td">Amount: $1,008.55</p>
-                        <p class="tn-td">TN: EZ0003562873</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-3">
-                    <div class="status-td"><p>Completed</p></div>
-                </div>
-                <div class="col-md-2 col-sm-3">
-                    <div class="more-td">
-                        <p class="icon-td"><a href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></p>
-                        <p><a href="#">More Details</a></p>
-                    </div>
-                </div>
-            </div>
-            <hr class="hr-td"></hr>
-
-            <div class="row">
-                <div class="col-md-2 col-sm-2">
-                    <div class="avtar-icon-td">
-                        <p>EU</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-4">
-                    <div class="detail-td">
-                        <p class="name-td">Edith Ugwumba</p>
-                        <p class="amt-td">Amount: $1,008.55</p>
-                        <p class="tn-td">TN: EZ0003562873</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-3">
-                    <div class="status-td"><p>Completed</p></div>
-                </div>
-                <div class="col-md-2 col-sm-3">
-                    <div class="more-td">
-                        <p class="icon-td"><a href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></p>
-                        <p><a href="#">More Details</a></p>
-                    </div>
-                </div>
-            </div>
-            <hr class="hr-td"></hr>
-
-            <div class="row">
-                <div class="col-md-2 col-sm-2">
-                    <div class="avtar-icon-td">
-                        <p>EU</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-4">
-                    <div class="detail-td">
-                        <p class="name-td">Edith Ugwumba</p>
-                        <p class="amt-td">Amount: $1,008.55</p>
-                        <p class="tn-td">TN: EZ0003562873</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-3">
-                    <div class="status-td"><p>Completed</p></div>
-                </div>
-                <div class="col-md-2 col-sm-3">
-                    <div class="more-td">
-                        <p class="icon-td"><a href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></p>
-                        <p><a href="#">More Details</a></p>
-                    </div>
-                </div>
-            </div>
-            <hr class="hr-td"></hr>
+           
 
         </div>	
     </div>
