@@ -17,6 +17,9 @@
                     <th> 
                         {{ trans('User') }} 
                     </th>
+                    <th> 
+                        {{ trans('Recipiant') }} 
+                    </th>
                     <th> {{ trans('Amount') }} </th>/
                     <th>{{ trans('Currency Code') }}</th>
                     <th> {{ trans('Status') }} </th>
@@ -31,7 +34,9 @@
                 {{-- */$x++;/* --}}
                 <tr>
                     <td>{{ $x }}</td>
-                    <td>{{ $item->user->first_name . " ". $item->user->last_name }}
+                    <td>{{ $item->username }}
+                    </td>
+                    <td>{{ $item->receipentname }}
                     </td>
                     <td>{{ $item->amount }}</td>
                     <td>{{ $item->currency_code }}</td>
