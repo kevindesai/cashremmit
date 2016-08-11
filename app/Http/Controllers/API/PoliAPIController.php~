@@ -32,12 +32,11 @@ class PoliAPIController extends Api {
         $trensaction->status = 'success';
         $trensaction->response = $_REQUEST['token'];
         $trensaction->save();
-	$users = \App\User::find($trensaction->user_id) ;
-$benif = \App\RecipientMaster::find($trensaction->recipient_id); 
-        $toemail = $users->email;
+
+        $toemail = $trensaction->user->email;
         $data = array(
-        'name' => $users->first_name,
-        'rec_name' => $benif->first_name . " ". $benif->last_name,
+        'name' => $trensaction->user->first_name,
+        'rec_name' => $trensaction->receptient->first_name . " ". $trensaction->receptient->last_name,
         'currency' => $trensaction->currency_code,
         'amount' => $trensaction->amount,
         );
