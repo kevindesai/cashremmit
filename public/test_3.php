@@ -1,4 +1,4 @@
-<?php
+mm<?php
 
 
 	$token = $_GET["token"];
@@ -23,5 +23,5 @@
  echo $response;
  $json = json_decode($response, true);
  
-// print_r($json);
+ print_r($json);
 ?>

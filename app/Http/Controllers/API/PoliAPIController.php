@@ -25,15 +25,38 @@ class PoliAPIController extends Api {
 
     private $_auth;
 
-    public function __construct() {
-        
+    public function getTransactionDetail($token) {
+
+        $auth = base64_encode('S6102571:4H1M9GCJ');
+        $header = array();
+        $header[] = 'Authorization: Basic ' . $auth;
+
+        $ch = curl_init("https://poliapi.apac.paywithpoli.com/api/Transaction/GetTransaction?token=" . urlencode($token));
+        //See the cURL documentation for more information: http://curl.haxx.se/docs/sslcerts.html
+        //We recommend using this bundle: https://raw.githubusercontent.com/bagder/ca-bundle/master/ca-bundle.crt
+        //curl_setopt( $ch, CURLOPT_CAINFO, "ca-bundle.crt");
+        //curl_setopt( $ch, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_POST, 0);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        return $json = json_decode($response, true);
     }
 
     public function success($id) {
         $trensaction = \App\Transactions::find($id);
         $trensaction->status = 'success';
-        $trensaction->response = $_REQUEST['token'];
+        echo $token = $_REQUEST['token'];
+        $res = array(
+            'token'=>$token,
+            'data' => $this->getTransactionDetail($token)
+        );
+        $trensaction->response = json_encode($res);
         $trensaction->save();
+        
         $toemail = $trensaction->user->email;
         $data = array(
             'name' => $trensaction->username,
@@ -50,8 +73,6 @@ class PoliAPIController extends Api {
             $message->to($data["toemail"])->subject('Cashremit Transfer successfull');
         });
 
-        echo "<pre>";
-        print_r($_REQUEST);
         $url = url('/') . '/#/polisuccess';
         return redirect($url);
     }
@@ -89,7 +110,7 @@ class PoliAPIController extends Api {
         $baseUrl = url('/');
         $inputs = $request->all();
         $beginTransaction = array(
-            'recipient_id' => $inputs["recipient_id"],
+            'recipient_id' => $inputs["recipient_id"]=21,
             'user_id' => $this->_auth->id,
             'amount' => $inputs["amount"],
             'status' => 'pending',
