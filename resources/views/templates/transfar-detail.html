@@ -14,12 +14,12 @@
             <div class="row">
                 <div class="col-md-2 col-sm-2">
                     <div class="avtar-icon-td">
-                        <p>EU</p>
+                        <p class="text-uppercase">{{ trans.receptient.first_name | limitTo:1 }}{{ trans.receptient.last_name | limitTo:1 }}</p>
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-4">
                     <div class="detail-td">
-                        <p class="name-td">Edith Ugwumba</p>
+                        <p class="name-td text-capitalize">{{trans.receptient.first_name}} {{trans.receptient.last_name}}</p>
                         <p class="amt-td">Amount: {{trans.currency_code}} {{trans.amount}}</p>
                         <p class="tn-td">TN: EZ0003562873</p>
                     </div>
