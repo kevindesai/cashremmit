@@ -40,13 +40,14 @@ $benif = \App\RecipientMaster::find($trensaction->recipient_id);
         'rec_name' => $benif->first_name . " ". $benif->last_name,
         'currency' => $trensaction->currency_code,
         'amount' => $trensaction->amount,
+"toemail"=>$toemail
         );
 
-        Mail::send('emails.successtransfer', $data, function ($message) {
+        Mail::send('emails.successtransfer', array("data"=>$data), function ($message) use ($data) {
 
             $message->from('ravi@atoatechnologies.com', 'Cash Remit');
 
-            $message->to($toemail)->subject('Cashremit Transfer successfull');
+            $message->to($data["toemail"])->subject('Cashremit Transfer successfull');
 
         });
 
