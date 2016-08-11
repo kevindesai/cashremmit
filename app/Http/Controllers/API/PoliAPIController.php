@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers\API;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -32,80 +34,80 @@ class PoliAPIController extends Api {
         $trensaction->status = 'success';
         $trensaction->response = $_REQUEST['token'];
         $trensaction->save();
-	$users = \App\User::find($trensaction->user_id) ;
-$benif = \App\RecipientMaster::find($trensaction->recipient_id); 
-        $toemail = $users->email;
+        $toemail = $trensaction->user->email;
         $data = array(
-        'name' => $users->first_name,
-        'rec_name' => $benif->first_name . " ". $benif->last_name,
-        'currency' => $trensaction->currency_code,
-        'amount' => $trensaction->amount,
-"toemail"=>$toemail
+            'name' => $trensaction->username,
+            'rec_name' => $trensaction->receipentname,
+            'currency' => $trensaction->currency_code,
+            'amount' => $trensaction->amount,
+            "toemail" => $toemail
         );
 
-        Mail::send('emails.successtransfer', array("data"=>$data), function ($message) use ($data) {
+        Mail::send('emails.successtransfer', array("data" => $data), function ($message) use ($data) {
 
             $message->from('ravi@atoatechnologies.com', 'Cash Remit');
 
             $message->to($data["toemail"])->subject('Cashremit Transfer successfull');
-
         });
 
         echo "<pre>";
         print_r($_REQUEST);
-        $url = url('/').'/#/polisuccess';
+        $url = url('/') . '/#/polisuccess';
         return redirect($url);
     }
+
     public function failure($id) {
         $trensaction = \App\Transactions::find($id);
         $trensaction->status = 'failure';
         $trensaction->response = $_REQUEST['token'];
         $trensaction->save();
-        $url = url('/').'/#/polifailure';
+        $url = url('/') . '/#/polifailure';
         return redirect($url);
     }
+
     public function cancelled($id) {
         $trensaction = \App\Transactions::find($id);
         $trensaction->status = 'cancelled';
         $trensaction->response = $_REQUEST['token'];
         $trensaction->save();
-        $url = url('/').'/#/policancelled';
+        $url = url('/') . '/#/policancelled';
         return redirect($url);
     }
+
     public function nudge($id) {
         $trensaction = \App\Transactions::find($id);
         $trensaction->status = 'nudge';
         $trensaction->response = $_REQUEST['token'];
         $trensaction->save();
-        $url = url('/').'/#/polinudge';
+        $url = url('/') . '/#/polinudge';
         return redirect($url);
     }
-    
+
     public function initiatetransaction(Request $request) {
         $this->_auth = JWTAuth::toUser(JWTAuth::getToken());
-        
+
         $baseUrl = url('/');
         $inputs = $request->all();
         $beginTransaction = array(
-            'recipient_id'=>$inputs["recipient_id"],
-            'user_id'=>$this->_auth->id,
-            'amount'=>$inputs["amount"],
-            'status'=>'pending',
-            'currency_code'=>$inputs["CurrencyCode"]
+            'recipient_id' => $inputs["recipient_id"],
+            'user_id' => $this->_auth->id,
+            'amount' => $inputs["amount"],
+            'status' => 'pending',
+            'currency_code' => $inputs["CurrencyCode"]
         );
-        
+
         $transaction = \App\Transactions::create($beginTransaction);
         $tr_id = $transaction->id;
-        
+
         $json_builder = '{
                 "Amount":"' . $inputs["amount"] . '",
                 "CurrencyCode":"' . $inputs["CurrencyCode"] . '",
                 "MerchantReference":"CustomerRef12345",
                 "MerchantHomepageURL":"' . $baseUrl . '",
-                "SuccessURL":"' . $baseUrl . '/api/v1/poli/success/'.$tr_id.'",
-                "FailureURL":"' . $baseUrl . '/api/v1/poli/failure/'.$tr_id.'",
-                "CancellationURL":"' . $baseUrl . '/api/v1/poli/cancelled/'.$tr_id.'",
-                "NotificationURL":"' . $baseUrl . '/api/v1/poli/nudge/'.$tr_id.'" 
+                "SuccessURL":"' . $baseUrl . '/api/v1/poli/success/' . $tr_id . '",
+                "FailureURL":"' . $baseUrl . '/api/v1/poli/failure/' . $tr_id . '",
+                "CancellationURL":"' . $baseUrl . '/api/v1/poli/cancelled/' . $tr_id . '",
+                "NotificationURL":"' . $baseUrl . '/api/v1/poli/nudge/' . $tr_id . '" 
               }';
 //        $json_builder = '{
 //                "Amount":"' . $inputs["amount"] . '",
@@ -148,7 +150,7 @@ $benif = \App\RecipientMaster::find($trensaction->recipient_id);
         curl_close($ch);
     }
 
-    public function getTransactions(){
+    public function getTransactions() {
         $this->_auth = JWTAuth::toUser(JWTAuth::getToken());
         $transactions = \App\Transactions::where('user_id', $this->_auth->id)->orderBy('id', 'desc')->get();
         $response = array(
@@ -165,4 +167,5 @@ $benif = \App\RecipientMaster::find($trensaction->recipient_id);
         }
         echo json_encode($response);
     }
+
 }

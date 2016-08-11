@@ -26,6 +26,16 @@ class Transactions extends Model
      * @var array
      */
     protected $fillable = ['recipient_id','user_id','amount','response','status','currency_code'];
+    protected $appends = array('receipentname','username');
+    public function getReceipentnameAttribute()
+    {
+        return $this->receptient->first_name. " ".$this->receptient->last_name;  
+    }
+    public function getUsernameAttribute()
+    {
+        return $this->user->first_name. " ".$this->user->last_name;  
+    }
+    
     public function user() {
         return $this->belongsTo('App\User','user_id');
     }
