@@ -18,7 +18,7 @@ app.controller('commonController', ['$scope', '$location', '$http', '$rootScope'
             $rootScope.isLogin = false;
         }
 
-        $scope.doLogout = function () {
+        $rootScope.doLogout = function () {
 
             localStorage.removeItem('id');
             localStorage.removeItem('email');
@@ -222,15 +222,18 @@ app.controller('SelectPaymentController', ['$scope', '$http', '$window', '$rootS
         $scope.toAmount = localStorage.getItem('ToamounT');
         $scope.globalName = localStorage.getItem('first_name');
         $scope.globalLastName = localStorage.getItem('last_name');
-
+        var discount = 0;
+        var adminfee = 0;
         $scope.initiatePoli = function () {
             //var deferred = $q.defer();
 
             var selectedbenif = localStorage.getItem('selectedBenif');
+            adminfee = localStorage.getItem("transfer_rate");
+            discount = localStorage.getItem('discount');
 
             method = "POST";
             url = $rootScope.initpoli;
-            Reqdata = {"CurrencyCode": $scope.fromCur, "amount": $scope.fromAmount, "token": $scope.userInfo.token, recipient_id: selectedbenif};
+            Reqdata = {"CurrencyCode": $scope.fromCur, "amount": $scope.fromAmount, "token": $scope.userInfo.token, recipient_id: selectedbenif,adminfee:adminfee,discount:discount};
             var response = myFactory.httpMethodCall(method, url, Reqdata);
             response.success(function (data) {
                 console.log(data);

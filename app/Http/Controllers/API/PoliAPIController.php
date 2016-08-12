@@ -114,7 +114,7 @@ class PoliAPIController extends Api {
         $beginTransaction = array(
             'recipient_id' => $inputs["recipient_id"],
             'user_id' => $this->_auth->id,
-            'amount' => $inputs["amount"],
+            'amount' => $inputs["amount"]+$inputs["adminfee"]-$inputs["discount"],
             'status' => 'pending',
             'currency_code' => $inputs["CurrencyCode"]
         );
@@ -123,7 +123,7 @@ class PoliAPIController extends Api {
         $tr_id = $transaction->id;
 
         $json_builder = '{
-                "Amount":"' . $inputs["amount"] . '",
+                "Amount":"' . $inputs["amount"]+$inputs["adminfee"]-$inputs["discount"] . '",
                 "CurrencyCode":"' . $inputs["CurrencyCode"] . '",
                 "MerchantReference":"CustomerRef12345",
                 "MerchantHomepageURL":"' . $baseUrl . '",

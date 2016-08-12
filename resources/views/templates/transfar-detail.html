@@ -7,10 +7,10 @@
                 <h3 class="td-title">Transfer Details</h3>
             </div>
             <div class="td-search">
-                <input type="text" placeholder="Search for transaction">
+                <input type="text" ng-model="benifsearch" placeholder="Search for transaction">
             </div>
             <div class="mt3"></div>
-            <div ng-repeat="trans in transfer">
+            <div ng-repeat="trans in transfer | filter:benifsearch">
             <div class="row">
                 <div class="col-md-2 col-sm-2">
                     <div class="avtar-icon-td">
