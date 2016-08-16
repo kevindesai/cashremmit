@@ -22,6 +22,14 @@ use Illuminate\Support\Facades\Hash;
 
 class UsersAPIController extends Controller {
 
+    public function checkToken(){
+        $array = array(
+            'status'=>'1',
+            'message'=>'valid token',
+        );
+        return json_encode($array);
+    }
+
     public function store(Request $request) {
         $input = $request->all();
 
