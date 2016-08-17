@@ -52,6 +52,7 @@ class UsersAPIController extends Controller {
         }
         $input = $request->all();
         $input['is_active'] = 1;
+        $input['is_verified'] = 0;
         if (isset($input['password'])) {
             $input['password'] = Hash::make($input['password']);
         }

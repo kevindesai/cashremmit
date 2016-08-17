@@ -54,6 +54,8 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin', 'namespace' 
     Route::resource('promossion', 'PromossionController');
     Route::resource('transactions', 'TransactionController');
     Route::get('rate/list', 'CountryController@rateList');
+    Route::resource('countryflag', 'CountryFlagController');
+    Route::post('uploadflag', 'CountryFlagController@uploadFlagImage');
 });
 // route to process the form
 

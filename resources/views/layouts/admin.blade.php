@@ -103,7 +103,7 @@
                                         <li><a href="{{ url('/') }}/admin/banks"><i class="fa fa-bookmark"></i><span>Banks</span></a></li>
                                         <li><a href="{{ url('/') }}/admin/transferrate"><i class="fa fa-bookmark"></i><span>Transfer Rate</span></a></li>
                                         <li><a href="{{ url('/') }}/admin/transactions"><i class="fa fa-bookmark"></i><span>Transactions</span></a></li>
-
+                                        <li><a href="{{ url('/') }}/admin/countryflag"><i class="fa fa-bookmark"></i><span>Country Flags</span></a></li>
                                     </ul>
                                 </nav>
                             </div>

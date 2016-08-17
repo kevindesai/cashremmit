@@ -140,7 +140,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        
+        Aloha\Twilio\TwilioServiceProvider::class,
         
     ],
     /*
@@ -188,5 +188,6 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'HTML' => Collective\Html\HtmlFacade::class,
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'Twilio' => Aloha\Twilio\Facades\Twilio::class,
     ],
 ];

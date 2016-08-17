@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'System' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
+    'Services_Twilio' => array($vendorDir . '/twilio/sdk'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log'),
     'Prophecy\\' => array($vendorDir . '/phpspec/prophecy/src'),
     'Net' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
@@ -24,4 +25,5 @@ return array(
     'Doctrine\\Common\\Annotations\\' => array($vendorDir . '/doctrine/annotations/lib'),
     'Crypt' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'Cron' => array($vendorDir . '/mtdowling/cron-expression/src'),
+    'Aloha\\Twilio' => array($vendorDir . '/olsgreen/twilio/src'),
 );

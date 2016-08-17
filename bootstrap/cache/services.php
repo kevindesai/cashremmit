@@ -29,6 +29,7 @@
     25 => 'App\\Providers\\AuthServiceProvider',
     26 => 'App\\Providers\\EventServiceProvider',
     27 => 'App\\Providers\\RouteServiceProvider',
+    28 => 'Aloha\\Twilio\\TwilioServiceProvider',
   ),
   'eager' => 
   array (
@@ -47,6 +48,7 @@
     12 => 'App\\Providers\\AuthServiceProvider',
     13 => 'App\\Providers\\EventServiceProvider',
     14 => 'App\\Providers\\RouteServiceProvider',
+    15 => 'Aloha\\Twilio\\TwilioServiceProvider',
   ),
   'deferred' => 
   array (

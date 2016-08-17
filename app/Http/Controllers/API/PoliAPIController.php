@@ -20,6 +20,7 @@ use Validator;
 use Exception;
 use JWTAuth;
 use Mail;
+use Aloha\Twilio\Facades\Twilio as Twilio;
 
 class PoliAPIController extends Api {
 
@@ -50,13 +51,30 @@ class PoliAPIController extends Api {
         $trensaction = \App\Transactions::find($id);
         $trensaction->status = 'success';
         $token = $_REQUEST['token'];
-        $res = array(
-            'token'=>$token,
-            'data' => $this->getTransactionDetail($token)
-        );
+//        $res = array(
+//            'token'=>$token,
+//            'data' => $this->getTransactionDetail($token)
+//        );
 //        echo "<pre>";
 //        print_r($res);
-        $trensaction->response = json_encode($res);
+
+        $getUserDetail = $trensaction->user;
+        $UserMob = $getUserDetail->mobile_no;
+        $UserName = $getUserDetail->first_name . ' ' . $getUserDetail->last_name;
+
+        $getRecipentDetail = $trensaction->receptient;
+        $RecipentMob = $getRecipentDetail->mobile_no;
+        $RecipentName = $getRecipentDetail->first_name . ' ' . $getRecipentDetail->last_name;
+
+
+        $UserMsg = "You have sent " . $trensaction->amount . " aud to " . $RecipentName . ". It will be credit to your bank account within 2 working days.Please contact support in case of any query.";
+
+        /* $getRecipentDetail = \App\RecipientMaster::find($trensaction->recipient_id);
+          $RecipentMob = $getRecipentDetail->mobile_no; */
+        $RecipentMsg = $UserName . " have sent you " . $trensaction->amount . " aud via CashRemit. This will be credit to your bank account within 2 working days.";
+
+        $trensaction->response = json_encode($this->getTransactionDetail($token));
+        $trensaction->token = $token;
         $trensaction->save();
 //        die;
         $toemail = $trensaction->user->email;
@@ -74,6 +92,8 @@ class PoliAPIController extends Api {
 
             $message->to($data["toemail"])->subject('Cashremit Transfer successfull');
         });
+        Twilio::message('+' . $UserMob, $UserMsg);
+        Twilio::message('+' . $RecipentMob, $RecipentMsg);
 
         $url = url('/') . '/#/polisuccess';
         return redirect($url);
@@ -82,7 +102,8 @@ class PoliAPIController extends Api {
     public function failure($id) {
         $trensaction = \App\Transactions::find($id);
         $trensaction->status = 'failure';
-        $trensaction->response = $_REQUEST['token'];
+        $trensaction->response = json_encode($this->getTransactionDetail($_REQUEST['token']));
+        $trensaction->token = $_REQUEST['token'];
         $trensaction->save();
         $url = url('/') . '/#/polifailure';
         return redirect($url);
@@ -91,7 +112,8 @@ class PoliAPIController extends Api {
     public function cancelled($id) {
         $trensaction = \App\Transactions::find($id);
         $trensaction->status = 'cancelled';
-        $trensaction->response = $_REQUEST['token'];
+        $trensaction->response = json_encode($this->getTransactionDetail($_REQUEST['token']));
+        $trensaction->token = $_REQUEST['token'];
         $trensaction->save();
         $url = url('/') . '/#/policancelled';
         return redirect($url);
@@ -100,7 +122,8 @@ class PoliAPIController extends Api {
     public function nudge($id) {
         $trensaction = \App\Transactions::find($id);
         $trensaction->status = 'nudge';
-        $trensaction->response = $_REQUEST['token'];
+        $trensaction->response = json_encode($this->getTransactionDetail($_REQUEST['token']));
+        $trensaction->token = $_REQUEST['token'];
         $trensaction->save();
         $url = url('/') . '/#/polinudge';
         return redirect($url);
@@ -111,19 +134,23 @@ class PoliAPIController extends Api {
 
         $baseUrl = url('/');
         $inputs = $request->all();
+        $amount = (float)$inputs["amount"] + (float)$inputs["adminfee"] - (float)$inputs["discount"];
         $beginTransaction = array(
-            'recipient_id' => $inputs["recipient_id"],
+            'recipient_id' => $inputs["recipient_id"] = 21,
             'user_id' => $this->_auth->id,
-            'amount' => $inputs["amount"]+$inputs["adminfee"]-$inputs["discount"],
+            'amount' => (float)$inputs["amount"],
+            'adminfee' => (float)$inputs["adminfee"],
+            'discount' => (float)$inputs["discount"],
             'status' => 'pending',
-            'currency_code' => $inputs["CurrencyCode"]
+            'currency_code' => $inputs["CurrencyCode"],
+            'transactionid' => 'poli'
         );
 
         $transaction = \App\Transactions::create($beginTransaction);
         $tr_id = $transaction->id;
-
+//"Amount":"' . $inputs["amount"] + $inputs["adminfee"] - $inputs["discount"] . '",
         $json_builder = '{
-                "Amount":"' . $inputs["amount"]+$inputs["adminfee"]-$inputs["discount"] . '",
+                "Amount":"' . $amount . '",                
                 "CurrencyCode":"' . $inputs["CurrencyCode"] . '",
                 "MerchantReference":"CustomerRef12345",
                 "MerchantHomepageURL":"' . $baseUrl . '",

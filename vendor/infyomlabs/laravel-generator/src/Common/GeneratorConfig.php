@@ -73,16 +73,21 @@ class GeneratorConfig
     /* Generator AddOns */
     public $addOns;
 
-    public function init(CommandData &$commandData)
+    public function init(CommandData &$commandData, $options = null)
     {
+        if (!empty($options)) {
+            self::$availableOptions = $options;
+        }
+
         $this->mName = $commandData->modelName;
 
         $this->prepareAddOns();
         $this->prepareOptions($commandData);
         $this->prepareModelNames();
         $this->preparePrefixes();
-        $this->loadNamespaces($commandData);
         $this->loadPaths();
+        $this->prepareTableName();
+        $this->loadNamespaces($commandData);
         $commandData = $this->loadDynamicVariables($commandData);
     }
 
@@ -185,8 +190,6 @@ class GeneratorConfig
         $commandData->addDynamicVariable('$NAMESPACE_REQUEST$', $this->nsRequest);
         $commandData->addDynamicVariable('$NAMESPACE_REQUEST_BASE$', $this->nsRequestBase);
 
-        $this->prepareTableName();
-
         $commandData->addDynamicVariable('$TABLE_NAME$', $this->tableName);
 
         $commandData->addDynamicVariable('$MODEL_NAME$', $this->mName);
@@ -253,13 +256,9 @@ class GeneratorConfig
         $this->mSnakePlural = Str::snake($this->mPlural);
     }
 
-    public function prepareOptions(CommandData &$commandData, $options = null)
+    public function prepareOptions(CommandData &$commandData)
     {
-        if (empty($options)) {
-            $options = self::$availableOptions;
-        }
-
-        foreach ($options as $option) {
+        foreach (self::$availableOptions as $option) {
             $this->options[$option] = $commandData->commandObj->option($option);
         }
 

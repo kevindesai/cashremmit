@@ -25,7 +25,7 @@ class Transactions extends Model
      *
      * @var array
      */
-    protected $fillable = ['recipient_id','user_id','amount','response','status','currency_code'];
+    protected $fillable = ['discount','adminfee','recipient_id','user_id','amount','response','status','currency_code','transaction_by','transactionid','token'];
     protected $appends = array('receipentname','username');
     public function getReceipentnameAttribute()
     {
