@@ -9,6 +9,7 @@
   |
  */
 Route::post('currency/convert', 'CurrencyAPIController@convert');
+Route::get('getcurrencylist', 'CurrencyAPIController@getCurrencyList');
 Route::resource('currency', 'CurrencyAPIController');
 Route::post('users/login', 'UsersAPIController@login');
 Route::resource('users', 'UsersAPIController');

@@ -27,6 +27,7 @@ app.run(function($rootScope, $location,$route,$http,myFactory) {
     $rootScope.initpoli = $rootScope.apiUrl+'api/v1/poliinit';
     $rootScope.getTxn = $rootScope.apiUrl+'api/v1/transactions';
     $rootScope.checkToken = $rootScope.apiUrl+'api/v1/checkToken'
+    $rootScope.getcurrencylist = $rootScope.apiUrl+'api/v1/getcurrencylist'
     
     $rootScope.$on('$locationChangeStart', function(ev, next, current) {
     var token = localStorage.getItem("token"); 

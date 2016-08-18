@@ -87,5 +87,27 @@ class CurrencyAPIController extends Controller {
 
         return json_encode($response);
     }
+    public function getCurrencyList(){
+        
+        //$countries = Country::where(array("currency_code"=>$inputs["currency_code"]))->get();
+        $countries = Country::orderBy('currency_code', 'asc')
+                ->groupBy('currency_code')
+                ->get();
+        if(!empty($countries)){
+            $countries = $countries->toArray();
+        $response = array(
+                'status' => '1',
+                'message' => 'data found',
+                'data' => $countries
+            );
+        
+        }else{
+            $response = array(
+            'status' => '0',
+            'message' => 'No data found'
+        );
+        }
+         return json_encode($response);
+    }
 
 }

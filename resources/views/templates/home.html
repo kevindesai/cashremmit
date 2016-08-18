@@ -7,38 +7,42 @@
                 <div class="banner-1-content">
                     <p>Check our Rate</p>
                     <div class="rate homepagelable">
+                        <div class="loaderbox">
+                            <div class="loader"></div>
+                        </div>
+                        
                         <div class="rat-inner">
                             <label for="">You want to send..</label>
                             <input type="text" ng-model="fromAmount" ng-change="convertCurFromto(fromAmount)" placeholder="1000">
-                            <currency-select
+<!--                            <currency-select
                                 search-placeholder="Search..."
                                 hide-name-selected="true"
                                 none-selected-text="Nothing selected"
                                 ng-model="fromCurDrop"
                                 ng-change="changedfromCodeHandler()"
                                 currencies="currenciesWithNames">
-                            </currency-select>
+                            </currency-select>-->
+                            <div class="dropdown currenctdropselect">
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><img ng-src="{{fromflag}}" class="flag"> {{fromCur}}
+                                </button>
+                                <ul class="dropdown-menu currencydropmenu">
+                                    <li><input type="text" ng-model="filterfromcur" class="smallinput"></li>
+                                    <li ng-repeat="currency in currencyList | filter:filterfromcur"><a href="javascript:void(0)" ng-click="selectcur(currency.currency_code,currency.logo32,'from')"><img ng-src="{{currency.logo32}}" class="flag">{{currency.currency_code}} {{currency.currency_name}}</a></li>
+                                    
+                                </ul>
+                            </div>
 
                         </div>
                         <div class="rat-inner">
                             <label for="">Recipiant will get...</label>
                             <input type="text" ng-model="toAmount" ng-change="convertCurtoFrom(toAmount)" placeholder="234,000">
                             <div class="dropdown currenctdropselect">
-                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><img src="images/country.png" class="flag"> aud
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><img ng-src="{{toflag}}" class="flag"> {{toCur}}
                                 </button>
                                 <ul class="dropdown-menu currencydropmenu">
-                                    <li><a href="#"><img src="images/country.png" class="flag"> ANU</a></li>
-                                    <li><a href="#"><img src="images/country.png" class="flag"> ANU</a></li>
-                                    <li><a href="#"><img src="images/country.png" class="flag"> ANU</a></li>
-                                    <li><a href="#"><img src="images/country.png" class="flag"> ANU</a></li>
-                                    <li><a href="#"><img src="images/country.png" class="flag"> ANU</a></li>
-                                    <li><a href="#"><img src="images/country.png" class="flag"> ANU</a></li>
-                                    <li><a href="#"><img src="images/country.png" class="flag"> ANU</a></li>
-                                    <li><a href="#"><img src="images/country.png" class="flag"> ANU</a></li>
-                                    <li><a href="#"><img src="images/country.png" class="flag"> ANU</a></li>
-                                    <li><a href="#"><img src="images/country.png" class="flag"> ANU</a></li>
-                                    <li><a href="#"><img src="images/country.png" class="flag"> ANU</a></li>
-                                    <li><a href="#"><img src="images/country.png" class="flag"> ANU</a></li>
+                                    <li><input type="text" ng-model="filtertocur" class="smallinput"></li>
+                                    <li ng-repeat="currency in currencyList | filter:filtertocur"><a href="javascript:void(0)" ng-click="selectcur(currency.currency_code,currency.logo32,'to')"><img ng-src="{{currency.logo32}}" class="flag">{{currency.currency_code}} {{currency.currency_name}}</a></li>
+                                    
                                 </ul>
                             </div>
                             <!--                            <select ng-model="toCur" ng-change="convertCurFromto(fromAmount)">
