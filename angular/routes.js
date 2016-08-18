@@ -2,7 +2,9 @@ var app = angular.module('main-App', ['ngRoute', 'angularUtils.directives.dirPag
     'facebook','directive.g+signin','tw-currency-select'
 ]);
 //$location.protocol() + "://" + $location.host();
-app.run(function($rootScope, $location,$route) { 
+app.run(function($rootScope, $location,$route,$http,myFactory) {
+    
+    
     $rootScope.baseurl = $location.absUrl();
 //    $rootScope.apiUrl = $rootScope.baseurl.replace("/#","");
     $rootScope.apiUrl = $rootScope.baseurl.split("#")[0];
@@ -24,10 +26,30 @@ app.run(function($rootScope, $location,$route) {
     $rootScope.checkPromocode = $rootScope.apiUrl+'api/v1/checkpromossion';    
     $rootScope.initpoli = $rootScope.apiUrl+'api/v1/poliinit';
     $rootScope.getTxn = $rootScope.apiUrl+'api/v1/transactions';
+    $rootScope.checkToken = $rootScope.apiUrl+'api/v1/checkToken'
     
     $rootScope.$on('$locationChangeStart', function(ev, next, current) {
+    var token = localStorage.getItem("token"); 
+    if(token != undefined || token != null){
+        var method = 'POST';
+        var url = $rootScope.checkToken;
+        var UserToken = {"token":token};
+        var response = myFactory.httpMethodCall(method, url, UserToken);
+        response.success(function(data){
+            if(data.status == -1){
+                
+                $rootScope.doLogout();
+            }
+        });
+        response.error(function(data){
+            $rootScope.doLogout();
+        });
+    }
+        
+        
     var nextPath = $location.path(),
       nextRoute = $route.routes[nextPath];
+      
     //$log.info(nextRoute);
     if (nextRoute && nextRoute.auth && localStorage.getItem("id") == null) {
       $location.path("/");

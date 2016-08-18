@@ -164,6 +164,20 @@ webkit-transition: background 0.2s ease-out, color 0.2s ease-out, border-color 0
     border-radius: 0px;
 }
 
+.currenctdropselect {
+background: none !important;
+width: 171px !important;
+float: right !important;
+margin-right: 10px;
+padding:0px !important;
+}
+.currenctdropselect > .btn{ padding: 28px 0 !important; text-transform: uppercase;font-size: 26px; color: #31708f; border:0px !important; text-align:left; padding-left:15px !important;background: url("../images/drop.png") right 26px center no-repeat rgb(216, 224, 40)!important; width:100%;border-radius: 0px !important;}
+.currenctdropselect > .btn img{ margin-top:5px;} 
+.flag{ margin-right:10px;}
+
+.currencydropmenu{ height:200px; overflow:auto;}
+.currencydropmenu li{ margin-top:10px;} 
+
 .banner-2-content{color:#fff; margin-top:140px; padding-left:30px;}
 .banner-2-content h2{font-size: 27px;padding-left: 33px;}
 .banner-2-content h3{font-size:28px; margin-bottom:15px; margin-left: 32px;}

@@ -23,20 +23,38 @@
                         <div class="rat-inner">
                             <label for="">Recipiant will get...</label>
                             <input type="text" ng-model="toAmount" ng-change="convertCurtoFrom(toAmount)" placeholder="234,000">
+                            <div class="dropdown currenctdropselect">
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><img src="images/country.png" class="flag"> aud
+                                </button>
+                                <ul class="dropdown-menu currencydropmenu">
+                                    <li><a href="#"><img src="images/country.png" class="flag"> ANU</a></li>
+                                    <li><a href="#"><img src="images/country.png" class="flag"> ANU</a></li>
+                                    <li><a href="#"><img src="images/country.png" class="flag"> ANU</a></li>
+                                    <li><a href="#"><img src="images/country.png" class="flag"> ANU</a></li>
+                                    <li><a href="#"><img src="images/country.png" class="flag"> ANU</a></li>
+                                    <li><a href="#"><img src="images/country.png" class="flag"> ANU</a></li>
+                                    <li><a href="#"><img src="images/country.png" class="flag"> ANU</a></li>
+                                    <li><a href="#"><img src="images/country.png" class="flag"> ANU</a></li>
+                                    <li><a href="#"><img src="images/country.png" class="flag"> ANU</a></li>
+                                    <li><a href="#"><img src="images/country.png" class="flag"> ANU</a></li>
+                                    <li><a href="#"><img src="images/country.png" class="flag"> ANU</a></li>
+                                    <li><a href="#"><img src="images/country.png" class="flag"> ANU</a></li>
+                                </ul>
+                            </div>
                             <!--                            <select ng-model="toCur" ng-change="convertCurFromto(fromAmount)">
                                                             <option value="AUD">aud</option>
                                                             <option value="USD">usd</option>
                                                             <option value="INR">inr</option>
                                                             <option value="NGN">ngn</option>
                                                         </select>-->
-                            <currency-select
-                                search-placeholder="Search..."
-                                hide-name-selected="true"
-                                none-selected-text="Nothing selected"
-                                ng-model="toCurDrop"
-                                ng-change="changedtoCodeHandler()"
-                                currencies="currenciesWithNames">
-                            </currency-select>
+                            <!--                            <currency-select
+                                                            search-placeholder="Search..."
+                                                            hide-name-selected="true"
+                                                            none-selected-text="Nothing selected"
+                                                            ng-model="toCurDrop"
+                                                            ng-change="changedtoCodeHandler()"
+                                                            currencies="currenciesWithNames">
+                                                        </currency-select>-->
                         </div>
                         <div class="exchangeDes">
                             <p>Our Exchange Rate {{fromCur}} {{DefaultfromAmount}} = {{toCur}} {{DefaulttoAmount}}</p>
