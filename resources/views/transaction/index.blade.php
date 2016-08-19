@@ -24,6 +24,9 @@
                     <th>{{ trans('Currency Code') }}</th>
                     <th> {{ trans('Status') }} </th>
                     <th> {{ trans('Date') }} </th>
+                    <th> 
+                     Action
+                    </th>
                     
 
                 </tr>
@@ -42,6 +45,8 @@
                     <td>{{ $item->currency_code }}</td>
                     <td>{{ $item->status }}</td>
                     <td>{{ $item->created_at }}</td>
+                    <td><a href="{{ url('/admin/transactions/' . $item->id) }}" class="btn btn-success btn-xs" title="View User"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a></td>
+                    
                 </tr>
                 @endforeach
             </tbody>

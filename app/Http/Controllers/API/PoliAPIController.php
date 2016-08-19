@@ -26,38 +26,10 @@ class PoliAPIController extends Api {
 
     private $_auth;
 
-    public function getTransactionDetail($token) {
-
-        $auth = base64_encode('S6102571:4H1M9GCJ');
-        $header = array();
-        $header[] = 'Authorization: Basic ' . $auth;
-
-        $ch = curl_init("https://poliapi.apac.paywithpoli.com/api/Transaction/GetTransaction?token=" . urlencode($token));
-        //See the cURL documentation for more information: http://curl.haxx.se/docs/sslcerts.html
-        //We recommend using this bundle: https://raw.githubusercontent.com/bagder/ca-bundle/master/ca-bundle.crt
-        //curl_setopt( $ch, CURLOPT_CAINFO, "ca-bundle.crt");
-        //curl_setopt( $ch, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_POST, 0);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $response = curl_exec($ch);
-        curl_close($ch);
-        return $json = json_decode($response, true);
-    }
-
     public function success($id) {
         $trensaction = \App\Transactions::find($id);
         $trensaction->status = 'success';
         $token = $_REQUEST['token'];
-//        $res = array(
-//            'token'=>$token,
-//            'data' => $this->getTransactionDetail($token)
-//        );
-//        echo "<pre>";
-//        print_r($res);
-
         $getUserDetail = $trensaction->user;
         $UserMob = $getUserDetail->mobile_no;
         $UserName = $getUserDetail->first_name . ' ' . $getUserDetail->last_name;
@@ -73,7 +45,7 @@ class PoliAPIController extends Api {
           $RecipentMob = $getRecipentDetail->mobile_no; */
         $RecipentMsg = $UserName . " have sent you " . $trensaction->amount . " aud via CashRemit. This will be credit to your bank account within 2 working days.";
 
-        $trensaction->response = json_encode($this->getTransactionDetail($token));
+        $trensaction->response = json_encode(\App\Transactions::getTransactionDetail($token));
         $trensaction->token = $token;
         $trensaction->save();
 //        die;
@@ -134,16 +106,16 @@ class PoliAPIController extends Api {
 
         $baseUrl = url('/');
         $inputs = $request->all();
-        $amount = (float)$inputs["amount"] + (float)$inputs["adminfee"] - (float)$inputs["discount"];
+        $amount = (float) $inputs["amount"] + (float) $inputs["adminfee"] - (float) $inputs["discount"];
         $beginTransaction = array(
-            'recipient_id' => $inputs["recipient_id"] = 21,
+            'recipient_id' => $inputs["recipient_id"],
             'user_id' => $this->_auth->id,
-            'amount' => (float)$inputs["amount"],
-            'adminfee' => (float)$inputs["adminfee"],
-            'discount' => (float)$inputs["discount"],
+            'amount' => (float) $inputs["amount"],
+            'adminfee' => (float) $inputs["adminfee"],
+            'discount' => (float) $inputs["discount"],
             'status' => 'pending',
             'currency_code' => $inputs["CurrencyCode"],
-            'transactionid' => 'poli'
+            'transaction_by' => 'poli'
         );
 
         $transaction = \App\Transactions::create($beginTransaction);

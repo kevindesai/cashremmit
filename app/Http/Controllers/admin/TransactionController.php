@@ -26,4 +26,15 @@ class TransactionController extends Controller {
         $transaction = Transactions::paginate(15);
         return view('transaction.index', compact('transaction'));
     }
+    public function show($id) {
+        $transaction = Transactions::find($id);
+        $transactionData = array();
+        if($transaction){
+            if(isset($transaction->token) && $transaction->token != ''){
+                $transactionData = Transactions::getTransactionDetail($transaction->token);
+            }
+            
+        }
+        return view('transaction.show', compact('transaction','transactionData'));
+    }
 }
