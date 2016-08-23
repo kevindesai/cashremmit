@@ -71,7 +71,7 @@ class PoliAPIController extends Api {
         } catch (Exception $e) {
             
         }
-        $url = url('/') . '/#/polisuccess?token=' .base64_encode($token);
+        $url = url('/') . '/#/polisuccess/' .base64_encode($token);
         return redirect($url);
     }
 
@@ -81,7 +81,7 @@ class PoliAPIController extends Api {
         $trensaction->response = json_encode($this->getTransactionDetail($_REQUEST['token']));
         $trensaction->token = $_REQUEST['token'];
         $trensaction->save();
-        $url = url('/') . '/#/polifailure?token=' . base64_encode($_REQUEST['token']);
+        $url = url('/') . '/#/polifailure/' . base64_encode($_REQUEST['token']);
         return redirect($url);
     }
 
@@ -91,7 +91,7 @@ class PoliAPIController extends Api {
         $trensaction->response = json_encode($this->getTransactionDetail($_REQUEST['token']));
         $trensaction->token = $_REQUEST['token'];
         $trensaction->save();
-        $url = url('/') . '/#/policancelled?token=' . base64_encode($_REQUEST['token']);
+        $url = url('/') . '/#/policancelled/' . base64_encode($_REQUEST['token']);
         return redirect($url);
     }
 
@@ -101,7 +101,7 @@ class PoliAPIController extends Api {
         $trensaction->response = json_encode($this->getTransactionDetail($_REQUEST['token']));
         $trensaction->token = $_REQUEST['token'];
         $trensaction->save();
-        $url = url('/') . '/#/polinudge?token=' . base64_encode($_REQUEST['token']);
+        $url = url('/') . '/#/polinudge/' . base64_encode($_REQUEST['token']);
         return redirect($url);
     }
 

@@ -26,8 +26,9 @@ app.run(function($rootScope, $location,$route,$http,myFactory) {
     $rootScope.checkPromocode = $rootScope.apiUrl+'api/v1/checkpromossion';    
     $rootScope.initpoli = $rootScope.apiUrl+'api/v1/poliinit';
     $rootScope.getTxn = $rootScope.apiUrl+'api/v1/transactions';
-    $rootScope.checkToken = $rootScope.apiUrl+'api/v1/checkToken'
-    $rootScope.getcurrencylist = $rootScope.apiUrl+'api/v1/getcurrencylist'
+    $rootScope.checkToken = $rootScope.apiUrl+'api/v1/checkToken';
+    $rootScope.getcurrencylist = $rootScope.apiUrl+'api/v1/getcurrencylist';
+    $rootScope.getpaymentInfo = $rootScope.apiUrl+'api/v1/transactions/get';
     
     $rootScope.$on('$locationChangeStart', function(ev, next, current) {
     var token = localStorage.getItem("token"); 
@@ -121,22 +122,22 @@ app.config(['$routeProvider',
                     controller: 'SelectPaymentController',
                     auth: true
                 }).
-                when('/polisuccess', {
+                when('/polisuccess/:politoken', {
                     templateUrl: 'resources/views/templates/payment/polisuccess.html',
                     controller: 'PoliPaymentController',
                     auth: true
                 }).
-                when('/polifailure', {
+                when('/polifailure/:politoken', {
                     templateUrl: 'resources/views/templates/payment/polifailure.html',
                     controller: 'PoliPaymentController',
                     auth: true
                 }).
-                when('/policancelled', {
+                when('/policancelled/:politoken', {
                     templateUrl: 'resources/views/templates/payment/policancelled.html',
                     controller: 'PoliPaymentController',
                     auth: true
                 }).
-                when('/polinudge', {
+                when('/polinudge/:politoken', {
                     templateUrl: 'resources/views/templates/payment/polinudge.html',
                     controller: 'PoliPaymentController',
                     auth: true

@@ -455,9 +455,22 @@ app.controller('BeneficiariesController', ['$scope', '$http', '$rootScope', 'use
             });
         }
     }]);
-app.controller('PoliPaymentController', ['$scope', '$http', '$rootScope', 'userService', 'myFactory', '$location', function ($scope, $http, $rootScope, userService, myFactory, $location) {
+app.controller('PoliPaymentController', ['$scope', '$http', '$rootScope', 'userService', 'myFactory', '$location','$routeParams', function ($scope, $http, $rootScope, userService, myFactory, $location,$routeParams) {
         userService.getDataFromSession();
         $scope.userInfo = userService.userInfo;
+        $scope.txndata={};
+        var politoken = $routeParams.politoken;
+        var paymentDetailUrl = $rootScope.getpaymentInfo+"/"+politoken+"?token="+$scope.userInfo.token;
+        var response  = myFactory.httpMethodCall('GET',paymentDetailUrl);
+        response.success(function(data){
+            if(data.status==1){
+                $scope.txndata = data.data;
+                console.log($scope.txndata);
+            }
+        });
+        response.error(function(error){
+            console.log(error);
+        });
 
     }]);
 app.directive('modalDialog', function () {
