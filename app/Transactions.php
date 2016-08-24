@@ -57,9 +57,13 @@ class Transactions extends Model {
                 'header' => "Authorization: Basic " . $auth
             )
         );
-
-        $context = stream_context_create($opts);
-        $response = file_get_contents($url, false, $context);
+        try {
+            $context = stream_context_create($opts);
+            $response = file_get_contents($url, false, $context);
+        } catch (Exception $e) {
+            $response = array();
+        }
+        
         return json_decode($response);
     }
 

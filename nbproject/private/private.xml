@@ -3,11 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp64/www/cashremmit/app/Transactions.php</file>
-            <file>file:/C:/wamp64/www/cashremmit/config/services.php</file>
-            <file>file:/C:/wamp64/www/cashremmit/database/migrations/2016_08_17_162817_update_add_discount_transactions.php</file>
-            <file>file:/C:/wamp64/www/cashremmit/config/app.php</file>
-            <file>file:/C:/wamp64/www/cashremmit/app/Http/Controllers/API/PoliAPIController.php</file>
+            <file>file:/C:/wamp/www/cashremmit/config/services.php</file>
+            <file>file:/C:/wamp/www/cashremmit/app/Http/Controllers/API/PoliAPIController.php</file>
+            <file>file:/C:/wamp/www/cashremmit/.env</file>
         </group>
     </open-files>
 </project-private>

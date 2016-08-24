@@ -58,16 +58,20 @@ class PoliAPIController extends Api {
             "toemail" => $toemail
         );
 
-        Mail::send('emails.successtransfer', array("data" => $data), function ($message) use ($data) {
+        try {
+            Mail::send('emails.successtransfer', array("data" => $data), function ($message) use ($data) {
 
-            $message->from('ravi@atoatechnologies.com', 'Cash Remit');
+                $message->from('ravi@atoatechnologies.com', 'Cash Remit');
 
-            $message->to($data["toemail"])->subject('Cashremit Transfer successfull');
-        });
-        Twilio::message('+' . $UserMob, $UserMsg);
-        Twilio::message('+' . $RecipentMob, $RecipentMsg);
+                $message->to($data["toemail"])->subject('Cashremit Transfer successfull');
+            });
 
-        $url = url('/') . '/#/polisuccess';
+            Twilio::message('+' . $UserMob, $UserMsg);
+            Twilio::message('+' . $RecipentMob, $RecipentMsg);
+        } catch (Exception $e) {
+            
+        }
+        $url = url('/') . '/#/polisuccess?token=' .base64_encode($token);
         return redirect($url);
     }
 
@@ -77,7 +81,7 @@ class PoliAPIController extends Api {
         $trensaction->response = json_encode($this->getTransactionDetail($_REQUEST['token']));
         $trensaction->token = $_REQUEST['token'];
         $trensaction->save();
-        $url = url('/') . '/#/polifailure';
+        $url = url('/') . '/#/polifailure?token=' . base64_encode($_REQUEST['token']);
         return redirect($url);
     }
 
@@ -87,7 +91,7 @@ class PoliAPIController extends Api {
         $trensaction->response = json_encode($this->getTransactionDetail($_REQUEST['token']));
         $trensaction->token = $_REQUEST['token'];
         $trensaction->save();
-        $url = url('/') . '/#/policancelled';
+        $url = url('/') . '/#/policancelled?token=' . base64_encode($_REQUEST['token']);
         return redirect($url);
     }
 
@@ -97,7 +101,7 @@ class PoliAPIController extends Api {
         $trensaction->response = json_encode($this->getTransactionDetail($_REQUEST['token']));
         $trensaction->token = $_REQUEST['token'];
         $trensaction->save();
-        $url = url('/') . '/#/polinudge';
+        $url = url('/') . '/#/polinudge?token=' . base64_encode($_REQUEST['token']);
         return redirect($url);
     }
 
@@ -152,7 +156,7 @@ class PoliAPIController extends Api {
         //See the cURL documentation for more information: http://curl.haxx.se/docs/sslcerts.html
         //We recommend using this bundle: https://raw.githubusercontent.com/bagder/ca-bundle/master/ca-bundle.crt
         curl_setopt($ch, CURLOPT_CAINFO, $publicPath . "/ca-bundle.crt");
-        curl_setopt($ch, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
+//        curl_setopt($ch, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -165,8 +169,6 @@ class PoliAPIController extends Api {
             $error_message = curl_strerror($errno);
             echo "cURL error ({$errno}):\n {$error_message}";
         } else {
-            //$resArr = json_decode($response);
-            //header('Location: '.$resArr->NavigateURL	);
             echo $response;
         }
         curl_close($ch);
@@ -190,4 +192,20 @@ class PoliAPIController extends Api {
         echo json_encode($response);
     }
 
+    public function getTransactionDetail($transactiontoken) {
+        $res = \App\Transactions::getTransactionDetail(base64_decode($transactiontoken));
+        $response = array(
+            'status' => '1',
+            'message' => 'data not found',
+            'data' => array()
+        );
+        if ($res) {
+            $response = array(
+                'status' => '1',
+                'message' => 'data found',
+                'data' => $res
+            );
+        }
+        echo json_encode($response);
+    }
 }

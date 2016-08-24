@@ -32,6 +32,8 @@ Route::group(['middleware' => 'jwt-auth'], function () {
     Route::post('checkToken', 'UsersAPIController@checkToken');
     Route::post('poliinit', 'PoliAPIController@initiatetransaction');
     Route::get('transactions', 'PoliAPIController@getTransactions');
+    Route::get('transactions/get/{transactiontoken}', 'PoliAPIController@getTransactionDetail');
 });
+
 
 
