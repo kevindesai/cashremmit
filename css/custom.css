@@ -2078,7 +2078,35 @@ img.img-responsive.app-mobile {
     position: absolute;
     color: #FFF;
 }
-
+.currenctdropselect{
+    position: initial !important;
+}
+.currencydropmenu{ height:200px; overflow:auto;    height: 200px;
+    overflow: auto;
+    right: 0 !important;
+    z-index: 10000;
+    width: 373px;
+    left: auto !important;
+}
+.currencydropmenu li{ margin-top:10px;     min-width: 280px;} 
+.rate input.smallinput{
+    width: 95%;
+    float: left;
+    height: 35px !important;
+    padding: 11px 15px;
+    margin: 5px 10px;
+    font-size: 20px;
+}
+.currenctdropselect {
+background: none !important;
+width: 171px !important;
+float: right !important;
+margin-right: 10px;
+padding:0px !important;
+}
+.currenctdropselect > .btn{ padding: 20px 0 !important; text-transform: uppercase;font-size: 26px; color: #31708f; border:0px !important; text-align:left; padding-left:15px !important;background: url("../images/drop.png") right 26px center no-repeat rgb(216, 224, 40)!important; width:100%;border-radius: 0px !important;}
+.currenctdropselect > .btn img{ margin-top:5px;} 
+.flag{ margin-right:10px;}
 
 
 
