@@ -71,8 +71,16 @@ class PoliAPIController extends Api {
         } catch (Exception $e) {
             
         }
-        $url = url('/') . '/#/polisuccess/' .base64_encode($token);
-        return redirect($url);
+        if($getUserDetail->is_active=='1')
+        {
+            $url = url('/') . '/#/polisuccess/' .base64_encode($token);
+            return redirect($url);    
+        }
+        else
+        {
+                $url = url('/') . '/#/successbutnotverified/' .base64_encode($token);
+                return redirect($url);  
+        }
     }
 
     public function failure($id) {

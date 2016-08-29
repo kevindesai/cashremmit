@@ -142,6 +142,11 @@ app.config(['$routeProvider',
                     controller: 'PoliPaymentController',
                     auth: true
                 }).
+                when('/successbutnotverified/:politoken', {
+                    templateUrl: 'resources/views/templates/payment/documentverify.html',
+                    controller: 'PoliPaymentController',
+                    auth: true
+                }).
                 otherwise({
                     redirectTo: '/'
                 });

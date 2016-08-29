@@ -97,13 +97,13 @@
                 <p>Check our Rate</p>
                 <div class="rate">
                     <div class="rat-inner">
-                        <input type="text" placeholder="Send" value="">
+                        <input type="text" placeholder="Send" ng-model="fromAmount" ng-change="convertCurFromto(fromAmount)">
                         <select>
                             <option>aud</option>
                             <select>
                                 </div>
                                 <div class="rat-inner">
-                                    <input type="text" placeholder="Recieve">
+                                    <input type="text" placeholder="Recieve" ng-model="toAmount" ng-change="convertCurtoFrom(toAmount)" >
                                     <select>
                                         <option>ngn</option>
                                         <select>
