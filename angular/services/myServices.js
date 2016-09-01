@@ -28,8 +28,12 @@ app.factory('userService', ['$rootScope', function($rootScope) {
             userData.userInfo.building_name = localStorage.getItem('building_name');
             userData.userInfo.city = localStorage.getItem('city');
             userData.userInfo.country = localStorage.getItem('country');
+            userData.userInfo.country_id = localStorage.getItem('country_id');
+            userData.userInfo.country_code = localStorage.getItem('country_code');
+            userData.userInfo.country_name = localStorage.getItem('country_name');
+            userData.userInfo.dob = localStorage.getItem('dob');
             userData.userInfo.landline_no = localStorage.getItem('landline_no');
-            userData.userInfo.mobile_no = localStorage.getItem('mobile_no ');
+            userData.userInfo.mobile_no = localStorage.getItem('mobile_no');
             userData.userInfo.post_code = localStorage.getItem('post_code');
             userData.userInfo.region = localStorage.getItem('region');
             userData.userInfo.street = localStorage.getItem('street');

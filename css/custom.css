@@ -2115,6 +2115,33 @@ padding:0px !important;
 .currenctdropselect > .btn{ padding: 24px 0 !important; text-transform: uppercase;font-size: 26px; color: #333333; border:0px !important; text-align:left; padding-left:15px !important;background: url("../images/drop.png") right 26px center no-repeat rgb(216, 224, 40)!important; width:100%;border-radius: 0px !important;}
 .currenctdropselect > .btn img{ margin-top:0px;} 
 .flag{ margin-right:10px;}
+/*-------------------------------
+Loading Amination
+-------------------------------*/
+.loaderbox{
+    position: absolute;
+    z-index: 100000;
+    /* background: #fff; */
+    width: 100%;
+    height: 100%;
+    display: none;
+    /* opacity: 0.2; */
+}
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    margin: 0px auto;
+    margin-top: 0px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 
 
 

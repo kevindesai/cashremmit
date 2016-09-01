@@ -87,7 +87,9 @@
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-10 pr0">
                         <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.country"> </p> 
-                        <input type="text" class="change-value"  ng-model="userInfo.country" ng-show="isupdate" /> 
+                        <select  class="change-value" ng-model="userInfo.country" ng-show="isupdate">
+                            <option ng-repeat="country in countryList track by $index" value="{{country.id}}">{{country.country_name}}</option>
+                        </select>
                     </div>
 
                 </div>

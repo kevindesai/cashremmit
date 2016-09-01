@@ -473,6 +473,29 @@ app.controller('PoliPaymentController', ['$scope', '$http', '$rootScope', 'userS
         });
 
     }]);
+app.controller('DocumentVerifyController', ['$scope', '$http', '$rootScope', 'userService', 'myFactory', '$location','$routeParams', function ($scope, $http, $rootScope, userService, myFactory, $location,$routeParams) {
+        userService.getDataFromSession();
+        $scope.userInfo = userService.userInfo;
+        $scope.txndata={};
+        var politoken = $routeParams.politoken;
+        var docFieldUrl = $rootScope.getDocumentFields;
+        var reqData = {"country_id":14};
+        var response  = myFactory.httpMethodCall('POST',docFieldUrl,reqData);
+        response.success(function(data){
+            console.log(data);
+            if(data.status==1){
+                $scope.docfields = data.data;
+                $scope.docName = $scope.docfields[0].name;
+                console.log($scope.docfields[0].attributes);
+            }
+        });
+        response.error(function(error){
+            console.log(error);
+        });
+        $scope.setDoc = function(docname){
+            $scope.docName = docname;
+        }
+    }]);
 app.directive('modalDialog', function () {
     return {
         restrict: 'E',

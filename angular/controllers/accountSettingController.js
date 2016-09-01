@@ -2,7 +2,27 @@ app.controller('AccountSettingController', ['$scope', '$http', '$rootScope', 'us
     function($scope, $http, $rootScope, userService, myFactory) {
         userService.getDataFromSession();
         $scope.userInfo = userService.userInfo;
+        console.log($scope.userInfo);
         $scope.isupdate = false;
+        $scope.getCountry = function () {
+            method = "GET";
+            url = $rootScope.getCountry;
+            methodData = {};
+            var response = myFactory.httpMethodCall(method, url, methodData);
+            response.success(function (data) {
+                if (data.status == 1) {
+                    $scope.countryList = data.data;
+        
+                } else {
+                    $scope.countryList = {};
+                }
+
+            });
+            response.error(function (error) {
+                console.log(error);
+            });
+        }
+        $scope.getCountry();
 
         $scope.EditClick = function() {
             $scope.isupdate = true;
