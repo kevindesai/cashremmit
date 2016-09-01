@@ -95,9 +95,9 @@ class UsersAPIController extends Controller {
                 
                 $data = $user->toArray();
                 $data['customer_id'] = User::getCustomerID($user->id);
-                $data['country_name'] = $user->countries->country_name;
-                $data['country_code'] = $user->countries->country_code;
-                $data['country_id'] = $user->countries->id;
+                $data['country_name'] = isset($user->countries->country_name) ? $user->countries->country_name : '';
+                $data['country_code'] = isset($user->countries->country_code) ? $user->countries->country_code : '';
+                $data['country_id'] = isset($user->countries->id) ? $user->countries->id : '';
 
                 $response = [
                     'status' => 1,
