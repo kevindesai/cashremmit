@@ -20,7 +20,7 @@ Route::get('bankdetail/{id}', 'CountryAPIController@getBankDetail');
 Route::post('transferrate', 'CountryAPIController@transferrate');
 Route::post('checkpromossion', 'CountryAPIController@checkPromossion');
 Route::post('getcountrybycurrency','CountryAPIController@getCountryByCurrency');
-
+Route::post('documentfield', 'DocumentVerifyController@getFields');
 
 
 //Route::get('successbutnotverified/{id}', 'DocverifyAPIController@documentverify');
@@ -36,6 +36,8 @@ Route::group(['middleware' => 'jwt-auth'], function () {
     Route::post('poliinit', 'PoliAPIController@initiatetransaction');
     Route::get('transactions', 'PoliAPIController@getTransactions');
     Route::get('transactions/get/{transactiontoken}', 'PoliAPIController@getTransactionDetail');
+    
+    
 });
 
 
