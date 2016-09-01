@@ -1,0 +1,37 @@
+<my-header></my-header>
+<div class="container mt3 mb5" >
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="sender-name">
+                <p>Sender Name : {{globalName}} {{globalLastName}}</p>
+            </div>
+            <div class="top-amount">
+                <p><span class="amt">{{toCur}} {{toAmount}}</span> <i class="fa fa-pencil" aria-hidden="true"></i></p>
+            </div>
+        </div>	
+    </div>
+    <div class="selectPayment">
+        <h2>Select Payment transfer Method</h2>
+        <div class="row">
+            <div class="col-md-4 col-sm-4 poliPay" ng-click="initiatePoli()">
+                <p>Internet Banking (Pay With POLi™)</p>
+                <img src="images/poli_logo-150x68.gif" class="img-responsive">
+                <span class="fa fa-check-square-o" aria-hidden="true"></span>
+            </div>
+            <div class="col-md-4 col-sm-4 cardPay">
+                <p>Credit Cards</p>
+                <img src="images/payment_cards-1.png" class="img-responsive">
+                <span class="fa fa-square-o" aria-hidden="true"></span> 
+            </div>
+            <div class="col-md-4 col-sm-4">
+            </div>	
+
+        </div>
+
+    </div>
+
+
+
+</div>
+<my-footer></my-footer>

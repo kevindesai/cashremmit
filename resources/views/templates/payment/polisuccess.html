@@ -1,0 +1,49 @@
+<my-header></my-header>
+
+<div class="container mt3 mb5" ng-if="userInfo.is_active == 1">
+    <div class="row">
+        <div class="col-md-offset-3 col-md-6 col-sm-6 col-sm-offset-3">
+            <div class="s-msg">
+                <img src="images/Tick-mark.png" class="img-responsive center-block">
+                <h1>Payment Successful</h1>
+                <div class="clearfix">
+                <h4>Payment Details</h4>
+                <div class="col-md-12">
+                    <table class="table table-responsive table-striped" ng-if="txndata.TransactionRefNo != undefined">
+                        <tr>
+                            <td><b>Transaction Ref</b></td>
+                            <td>{{txndata.TransactionRefNo}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Amount</b></td>
+                            <td>{{txndata.AmountPaid}} {{txndata.CurrencyCode}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Status</b></td>
+                            <td>{{txndata.TransactionStatusCode}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Time</b></td>
+                            <td>{{txndata.EstablishedDateTime}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Merchant Name</b></td>
+                            <td>{{txndata.MerchantAcctName}}</td>
+                        </tr>
+                        <tr>
+                            <td><b>Merchant Code</b></td>
+                            <td>{{txndata.MerchantReference}}</td>
+                        </tr>
+                    </table>
+                    
+                </div>
+                
+            </div>
+                <p>Transfer  will processed shortly</p>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<my-footer></my-footer>

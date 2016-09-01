@@ -1,0 +1,159 @@
+<style>
+    .dropdown{text-align:left; border-color:#95989a;}
+    .dropdown span{color:#95989a; font-size:20px;padding-left:10px;}
+    .dropdown-menu{top:15.5%; width:95%;}
+    .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus{background:#fff;}
+    .drop-list li a{color:#95989a; font-size:20px;}
+    .drop-list li a span{padding-left:10px;}
+</style>
+
+<my-header></my-header>
+<div class="container mt3 mb5">
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 ">
+            <div class="sender-name">
+                <p>Sender Name : {{globalName}} {{globalLastName}}</p>
+            </div>
+            <div class="top-amount">
+                <p><span class="amt">{{ToCur}} {{ToAmount}}</span> <i class="fa fa-pencil" aria-hidden="true"></i></p>
+            </div>
+
+            <div class="row mt5">
+                <div class="col-md-3 col-sm-3">
+                    <div class="sub-title">
+                        <p>Add New Recipient</p>
+                        <div class="new-r"><a data-toggle="modal" data-target="#myModal"><i class="fa fa-plus" aria-hidden="true"></i></a></div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9">
+                    <div class="sub-title ">
+                        <p>Choose Your Recipient</p>
+                    </div>
+                    <div class="cyr row ml0 mr0">
+                        <div class="person" ng-repeat="perdata in userBefif" ng-click="setActiveBenif(perdata, $index)" ng-if="NoBenif == 0">
+                            <div class="avtar-icon">
+                                <p>{{ perdata.first_name | limitTo:1 }}{{ perdata.last_name | limitTo:1 }}</p>
+                            </div>
+                            <p class="name actual">{{perdata.first_name}} {{perdata.last_name}}</p>
+                            <p><i class="fa fa-check" ng-show="$index == isActive"></i></p>
+                        </div>
+
+                        <div  ng-if="NoBenif == 1" class="sub-title text-center ">
+                            <p>No Beneficiary. Please add one.</p>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="row mt2">
+                        <div class="col-md-12">
+                            <div>
+                                <table class="detail-table">
+                                    <tr>
+                                        <td class="lbl"><p>Recipient Full Name:</p></td>
+                                        <td class="lbl-2"><p>{{benifData.first_name}} {{benifData.last_name}}</p></td>
+                                    <tr>
+                                    <tr>
+                                        <td class="lbl"><p>Bank:</p></td>
+                                        <td class="lbl-2"><p>{{benifData.bank_name}}</p></td>
+                                    <tr>
+                                    <tr>
+                                        <td class="lbl"><p>Account Number:</p></td>
+                                        <td class="lbl-2"><p>{{benifData.account_number}}</p></td>
+                                    <tr>
+                                    <tr>
+                                        <td class="lbl"><p>City/Town:</p></td>
+                                        <td class="lbl-2"><p>{{benifData.city_name}}</p></td>
+                                    <tr>
+                                    <tr>
+                                        <td class="lbl"><p>Mobile Number:</p></td>
+                                        <td class="lbl-2"><p>{{benifData.mobile_no}}</p></td>
+                                    <tr>
+                                    <tr>
+                                        <td class="lbl"><p>&nbsp;</p></td>
+                                        <td class="lbl-box"  ng-if="NoBenif == 0"><a href="#/selectpayment">Make Payment</a></td>
+                                    <tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>	
+    </div>
+
+
+</div>
+<!----------------------- start model --------------------------------->
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add New Recipient</h4>
+            </div>
+            <div class="modal-body">
+                <form id="formbenif" name="formbenif" novalidate >
+                    <div class="form-group" ng-class="{ 'has-error' : formbenif.country_name.$invalid && formbenif.$submitted }">
+                        <label class="form-title">Choose country</label>
+                        <select name="country_name" class="form-control" ng-model="benif.country_name" id="country_name" ng-change="getBanks(benif.country_name)" required>
+                            <option ng-repeat="country in countryList" value="{{country.id}}_{{country.country_name}}">{{country.country_name}}</option>
+                        </select>
+                        <p ng-show="formbenif.country_name.$invalid && formbenif.$submitted" class="help-block">Please select country.</p>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error' : formbenif.first_name.$invalid && formbenif.$submitted }">
+                        <label class="form-title">Recipient Detail</label>
+                        <input type="text" class="form-control" ng-model="benif.first_name" name="first_name" placeholder="First Name" ng-required="true" ng-pattern="/^[a-zA-Z]*$/">
+                        <p ng-show="formbenif.first_name.$error.required && formbenif.$submitted" class="help-block">Please enter name.</p>
+                        <p ng-show="formbenif.first_name.$error.pattern && formbenif.$submitted" class="help-block">Please enter valid name.</p>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error' : formbenif.last_name.$invalid && formbenif.$submitted }">
+                        <input type="text" class="form-control" ng-model="benif.last_name" placeholder="Last Name" name="last_name" required="required" ng-pattern="/^[a-zA-Z]*$/">
+                        <p ng-show="formbenif.last_name.$error.required && formbenif.$submitted" class="help-block">Please enter name.</p>
+                        <p ng-show="formbenif.last_name.$error.pattern && formbenif.$submitted" class="help-block">Please enter valid name.</p>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error' : formbenif.city_name.$invalid && formbenif.$submitted }">
+                        <input type="text" class="form-control" ng-model="benif.city_name" name="city_name" placeholder="City/Town" required="required" ng-pattern="/^[a-zA-Z]*$/">
+                        <p ng-show="formbenif.city_name.$error.required && formbenif.$submitted" class="help-block">Please enter city.</p>
+                        <p ng-show="formbenif.city_name.$error.pattern && formbenif.$submitted" class="help-block">Please enter valid city name.</p>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error' : formbenif.mobile_no.$invalid && formbenif.$submitted }">
+                        <input type="text" class="form-control" placeholder="Mobile Number" ng-model="benif.mobile_no" name="mobile_no" required="required">
+                        <p ng-show="formbenif.mobile_no.$error.required && formbenif.$submitted" class="help-block">Please enter mobile number.</p>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error' : formbenif.bank_name.$invalid && formbenif.$submitted }">
+                        <label class="form-title">Bank Detail</label>
+                        <select class="form-control form-select" ng-model="benif.bank_name" name="bank_name" required="required" ng-change="getBankDetails(benif.bank_name)">
+                            <option ng-repeat="Bank in Banks" value="{{Bank.id}}_{{Bank.name}}">{{Bank.name}}</option>
+
+                        </select>
+                        <p ng-show="formbenif.bank_name.$error.required && formbenif.$submitted" class="help-block">Please select bank.</p>
+                    </div>
+                    <div class="form-group" ng-class="{ 'has-error' : formbenif.account_number.$invalid && formbenif.$submitted }">
+                        <input type="text" class="form-control" placeholder="Account Number" ng-model="benif.account_number" name="account_number" required="required" number>
+                        <p ng-show="formbenif.account_number.$error.required && formbenif.$submitted" class="help-block">Please enter account number.</p>
+                    </div>
+                    <div class="form-group" ng-repeat="bankDe in BankDetails.attributes" >
+                        <input type="text" dynamic-name="bankDe.name" class="form-control" placeholder="{{bankDe.name}}" ng-model="benif.attributes[bankDe.name]"  required="required">
+                        <p ng-show="myformbenif.BankDetails.attributes[$index].name.$invalid && formbenif.$submitted" class="help-block">Please enter {{bankDe.name}}.</p>
+                    </div>
+                    
+                    <button type="submit" class="form-submit" ng-click="addbenif(benif)">Submit</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+           // $(document).ready(function () {
+           //     $("formbenif").validate();
+           // })
+</script>
+<!------------------------------ end model --------------------------------->
+<my-footer></my-footer>	

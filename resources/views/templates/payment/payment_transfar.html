@@ -1,0 +1,138 @@
+<!-- <div my-method></div> -->
+<my-header></my-header>
+<div class="container steps mt5 mb5">
+    <div class="row">
+        <div class="col-md-7 col-sm-7">
+
+
+            <div class="row second-main">
+                <div class="col-md-12 col-sm-12">
+                    <div class="second-box">
+                        <div class="row">
+                            <div class="col-md-8 pl0">
+                                <p>Tell a friend and get Transfer Bonus Code</p>
+                            </div>
+                            <div class="col-md-4 pl0 pr0">
+                                <div class="pull-right second-btn"><a href="#" class="normal2-btn yellow-fill">Tell a Friend</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5 col-sm-5 ">
+            <div class="side-bar-box">
+                <div class="sidebar-heading">
+                    <h2>Transfer calculator</h2>
+                </div>
+                <div class="sidebar-inner">
+                    <div class="rate-sidebar">
+                        <div class="rat-inner">
+                            <label for="">You want to send..</label>
+                            <input type="text" ng-model="fromAmount" ng-change="convertCurFromto(fromAmount)" >
+                            <select ng-model="fromCur" ng-change="convertCurFromto(fromAmount)">
+                                <option value="AUD">aud</option>
+                                <option value="USD">usd</option>
+                                <option value="INR">inr</option>
+                                <option value="NGN">ngn</option>
+                            </select>
+                        </div>
+                        <div class="rat-inner">
+                            <label for="">Recipiant will get...</label>
+                            <input type="text" ng-model="toAmount" ng-change="convertCurtoFrom(toAmount)" >
+                            <select ng-model="toCur" ng-change="convertCurFromto(fromAmount)">
+                                <option value="AUD">aud</option>
+                                <option value="USD">usd</option>
+                                <option value="INR">inr</option>
+                                <option value="NGN">ngn</option>
+                            </select>
+                        </div>
+                        <div class="exchangeDes">
+                            <p>Our Exchange Rate {{fromCur}} {{DefaultfromAmount}} = {{toCur}} {{DefaulttoAmount}}</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class=" mt5 row">
+        <div class="col-md-7 col-sm-7">
+            <div class="third-box">
+                <p>Recent Transfer</p>
+                <div class="search-box">
+                    <input type="text">
+                </div>
+                <div class="t-box row ml0 mr0 mt3">
+                    <div class="col-md-6  pr0">
+                        <div class="date">Date/Time: May 26 2016 : 10:20pm</div>
+                    </div>
+                    <div class="col-md-6  pl0 pr0">
+                        <p>NGN 400000 <img src="images/cros.png" class="img-responsive pull-right"></p>
+                    </div>
+                </div>
+
+                <div class="t-box row ml0 mr0 mt3 ">
+                    <div class="col-md-6 pr0">
+                        <div class="date">Date/Time: May 26 2016 : 10:20pm</div>
+                    </div>
+                    <div class="col-md-6 pl0 pr0">
+                        <p>NGN 400000 <img src="images/cros.png" class="img-responsive pull-right"></p>
+                    </div>
+                </div>
+
+                <div class="t-box row ml0 mr0 mt3">
+                    <div class="col-md-6  pr0">
+                        <div class="date">Date/Time: May 26 2016 : 10:20pm</div>
+                    </div>
+                    <div class="col-md-6  pl0 pr0">
+                        <p>NGN 400000 <img src="images/cros.png" class="img-responsive pull-right"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5 col-sm-5 ">
+            <div class="side-bar-box">
+                <div class="sidebar-heading">
+                    <h2>Payment Summary</h2>
+                </div>
+                <table class="summary">
+                    <tr>
+                        <td colspan="2" class="title-sumary"><p>Exchange rate {{DefaultfromAmount}} = {{DefaulttoAmount}}</p></td>
+                    <tr>
+                    <tr>
+                        <td class="item">Send Amount</td>
+                        <td class="item2">{{fromCur}} {{fromAmount}}</td>
+                    </tr>
+                    <tr>
+                        <td class="item">Transfer Fees</td>
+                        <td class="item2">{{fromCur}} {{transfer_rate}}</td>
+                    </tr>
+                    <tr ng-if="discount">
+                        <td class="item">Discount</td>
+                        <td class="item2">{{discount}}</td>
+                    </tr>
+                    <tr>
+                        <td class="total">Total Amount</td>
+                        <td class="total2">{{toCur}} {{toAmount}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="continue">
+                <a ng-click="goToSelectBen()">Continue</a>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+
+<my-footer></my-footer>
+
+
+
