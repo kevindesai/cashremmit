@@ -479,7 +479,7 @@ app.controller('DocumentVerifyController', ['$scope', '$http', '$rootScope', 'us
         $scope.txndata={};
         var politoken = $routeParams.politoken;
         var docFieldUrl = $rootScope.getDocumentFields;
-        var reqData = {"country_id":14};
+        var reqData = {"country_id":$scope.userInfo.country_id};
         var response  = myFactory.httpMethodCall('POST',docFieldUrl,reqData);
         response.success(function(data){
             
