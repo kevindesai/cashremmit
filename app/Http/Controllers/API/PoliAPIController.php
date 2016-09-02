@@ -149,16 +149,6 @@ class PoliAPIController extends Api {
                 "CancellationURL":"' . $baseUrl . '/api/v1/poli/cancelled/' . $tr_id . '",
                 "NotificationURL":"' . $baseUrl . '/api/v1/poli/nudge/' . $tr_id . '"
               }';
-//        $json_builder = '{
-//                "Amount":"' . $inputs["amount"] . '",
-//                "CurrencyCode":"' . $inputs["CurrencyCode"] . '",
-//                "MerchantReference":"CustomerRef12345",
-//                "MerchantHomepageURL":"' . $baseUrl . '",
-//                "SuccessURL":"' . $baseUrl . '/#/polisuccess",
-//                "FailureURL":"' . $baseUrl . '/#/polifailure",
-//                "CancellationURL":"' . $baseUrl . '/#/policancelled",
-//                "NotificationURL":"' . $baseUrl . '/#/polinudge" 
-//              }';
 
         $publicPath = public_path();
         $auth = base64_encode('S6102571:4H1M9GCJ');

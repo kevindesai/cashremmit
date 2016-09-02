@@ -30,13 +30,14 @@ Route::get('poli/cancelled/{id}', 'PoliAPIController@cancelled');
 Route::get('poli/nudge/{id}', 'PoliAPIController@nudge');
 
 
+
 Route::group(['middleware' => 'jwt-auth'], function () {
     Route::resource('recipient', 'RecipientAPIController');
     Route::post('checkToken', 'UsersAPIController@checkToken');
     Route::post('poliinit', 'PoliAPIController@initiatetransaction');
     Route::get('transactions', 'PoliAPIController@getTransactions');
     Route::get('transactions/get/{transactiontoken}', 'PoliAPIController@getTransactionDetail');
-    
+    Route::post('verifyDriverLicence', 'DocumentVerifyController@verifyDriverLicence');
     
 });
 
