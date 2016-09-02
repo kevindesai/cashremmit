@@ -1,3 +1,4 @@
+<my-header></my-header> 
 
 
 <div class="container mt3 mb5 docVerify" >
@@ -28,16 +29,69 @@
 
     <div class="row">
         <div class="col-md-12">
-        <form class="form-horizontal" role="form">
-          <fieldset ng-repeat="fields in docfields" ng-if="docName==fields.name">
+            <div class="alert alert-danger" role="alert" ng-if="UnverifyMsg">Your details can not  be verify please provide correct details.</div>   
+        <form class="form-horizontal" id="formdocVerify" role="form">
+<!--          <fieldset ng-repeat="fields in docfields" ng-if="docName==fields.name">
             <legend style=" border-bottom: 1px solid #CCC;">Please enter you verification details</legend>
             <div class="form-group" ng-repeat="formfield in fields.attributes track by $index">
                 <label class="col-sm-3 control-label" for="card-holder-name">{{formfield.name}}</label>
                   <div class="col-sm-9 MainForm" ng-if="formfield.validation!='file'">
-                      <input type="text" class="form-control" name="card-holder-name" required="required">
+                      <input type="text" ng-model="Answers[formfield.name]" class="form-control">
                 </div>
-                <div class="col-sm-9 MainForm" ng-if="formfield.validation=='file'">
-                      <input type="file" class="form-control" name="card-holder-name" required="required">
+            </div>
+         </fieldset>-->
+        <fieldset>
+            <legend style=" border-bottom: 1px solid #CCC;">Please enter you verification details</legend>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="card-holder-name">First Name</label>
+                  <div class="col-sm-9 MainForm">
+                      <input type="text" class="form-control" name="card-holder-name" ng-model="doc.FirstGivenName" required="required">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="card-holder-name">Last Name</label>
+                  <div class="col-sm-9 MainForm">
+                      <input type="text" class="form-control" name="card-holder-name" ng-model="doc.FirstSurName" required="required">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="card-holder-name">Birth Date</label>
+                  <div class="col-sm-9 MainForm">
+                      <div class="col-md-4">
+                          <input type="text" class="form-control" name="card-holder-name" placeholder="DD" ng-model="doc.DayOfBirth" required="required">
+                      </div>
+                      <div class="col-md-4">
+                          <input type="text" class="form-control" name="card-holder-name" ng-model="doc.MonthOfBirth" placeholder="MM" required="required">
+                      </div>
+                      <div class="col-md-4">
+                          <input type="text" class="form-control" name="card-holder-name" ng-model="doc.YearOfBirth" placeholder="YYYY" required="required">
+                      </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="card-holder-name">Licence Number</label>
+                  <div class="col-sm-9 MainForm">
+                      <input type="text" class="form-control" name="card-holder-name" ng-model="doc.DriverLicence.Number" required="required">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="card-holder-name">Licence State</label>
+                  <div class="col-sm-9 MainForm">
+                      <input type="text" class="form-control" name="card-holder-name" ng-model="doc.DriverLicence.State" required="required">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="card-holder-name">Exp. Date</label>
+                  <div class="col-sm-9 MainForm">
+                      <div class="col-md-4">
+                          <input type="text" class="form-control" name="card-holder-name" placeholder="DD" ng-model="doc.DriverLicence.DayOfExpiry" required="required">
+                      </div>
+                      <div class="col-md-4">
+                          <input type="text" class="form-control" name="card-holder-name" ng-model="doc.DriverLicence.MonthOfExpiry" placeholder="MM" required="required">
+                      </div>
+                      <div class="col-md-4">
+                          <input type="text" class="form-control" name="card-holder-name" ng-model="doc.DriverLicence.YearOfExpirys" placeholder="YYYY" required="required">
+                      </div>
                 </div>
             </div>
             
@@ -47,7 +101,7 @@
             <hr />
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-9">
-                    <button type="button" class="normal2-btn2 yellow-fil">Submit </button>
+                    <button type="submit" ng-click="submitdocform(doc)" class=" sybmitdocform btn normal2-btn2 yellow-fil">Submit </button>
                 </div>
             </div>
         </fieldset>
@@ -56,5 +110,5 @@
         </div>
     </div>
 </div>
-
+  
 

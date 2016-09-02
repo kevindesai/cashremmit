@@ -30,6 +30,7 @@ app.run(function($rootScope, $location,$route,$http,myFactory) {
     $rootScope.getcurrencylist = $rootScope.apiUrl+'api/v1/getcurrencylist';
     $rootScope.getpaymentInfo = $rootScope.apiUrl+'api/v1/transactions/get';
     $rootScope.getDocumentFields = $rootScope.apiUrl+'api/v1/documentfield';
+    $rootScope.verifyDriverLicence = $rootScope.apiUrl+'api/v1/verifyDriverLicence';
     
     $rootScope.$on('$locationChangeStart', function(ev, next, current) {
     var token = localStorage.getItem("token"); 
@@ -145,7 +146,7 @@ app.config(['$routeProvider',
                 }).
 				when('/successbutnotverified/:politoken', {
                     templateUrl: 'resources/views/templates/payment/documentverify.html',
-                    controller: 'PoliPaymentController',
+                    controller: 'DocumentVerifyController',
                     auth: true
                 }).
                 otherwise({

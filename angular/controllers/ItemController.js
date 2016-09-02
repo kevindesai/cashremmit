@@ -482,7 +482,7 @@ app.controller('DocumentVerifyController', ['$scope', '$http', '$rootScope', 'us
         var reqData = {"country_id":14};
         var response  = myFactory.httpMethodCall('POST',docFieldUrl,reqData);
         response.success(function(data){
-            console.log(data);
+            
             if(data.status==1){
                 $scope.docfields = data.data;
                 $scope.docName = $scope.docfields[0].name;
@@ -494,7 +494,35 @@ app.controller('DocumentVerifyController', ['$scope', '$http', '$rootScope', 'us
         });
         $scope.setDoc = function(docname){
             $scope.docName = docname;
+        };
+        $scope.submitdocform = function(doc){
+            var reqData = {"CountryCode":$scope.userInfo.country_code,
+                           "FirstGivenName":$scope.doc.FirstGivenName,
+                           "FirstSurName":$scope.doc.FirstSurName,
+                           "DayOfBirth":$scope.doc.DayOfBirth,
+                           "MonthOfBirth":$scope.doc.MonthOfBirth,
+                           "YearOfBirth" : $scope.doc.YearOfBirth,
+                           "Number":$scope.doc.DriverLicence.Number,
+                           "State":$scope.doc.DriverLicence.State,
+                           "DayOfExpiry":$scope.doc.DriverLicence.DayOfExpiry,
+                           "MonthOfExpiry":$scope.doc.DriverLicence.MonthOfExpiry,
+                           "YearOfExpiry":$scope.doc.DriverLicence.YearOfExpiry,
+                           'token':$scope.userInfo.token
+            }
+            var response  = myFactory.httpMethodCall('POST',$rootScope.verifyDriverLicence,reqData);
+        response.success(function(data){
+            if(data.status==0){
+                $scope.UnverifyMsg = true;
+            }else if(data.status==1){
+                
+            }
+            
+        });
+        response.error(function(error){
+            console.log(error);
+        });
         }
+        
     }]);
 app.directive('modalDialog', function () {
     return {
