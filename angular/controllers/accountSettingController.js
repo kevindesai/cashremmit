@@ -35,15 +35,15 @@ app.controller('AccountSettingController', ['$scope', '$http', '$rootScope', 'us
             userData._method = "PUT";
             var url = $rootScope.updateApi;
             url = url + "/" + userService.userInfo.id;
-            
+            var date = new Date(userData.dob);
+            userData.dob = date.toString('dd-MM-yy');
+            console.log(userData);
             var response = myFactory.httpMethodCall(method, url, userData);
             console.log(response);
             response.success(function(data) {
                 if (data.status == 1) {
-                    console.log("test");
                     userService.UpdateInfo(userData);
                 } else {
-                    console.log("else");
                     console.log(data);
                 }
             });

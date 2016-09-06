@@ -86,7 +86,7 @@
                         <p class="change-name">COUNTRY:</p>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-10 pr0">
-                        <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.country"> </p> 
+                        <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.country_name"> </p> 
                         <select  class="change-value" ng-model="userInfo.country" ng-show="isupdate">
                             <option ng-repeat="country in countryList track by $index" value="{{country.id}}">{{country.country_name}}</option>
                         </select>
@@ -99,8 +99,8 @@
                         <p class="change-name">Date of Birth:</p>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-10 pr0">
-                        <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.dob"> </p> 
-                        <input type="date" pattern="\d{1,2}/\d{1,2}/\d{4}" class="change-value datepicker"  ng-model="userInfo.dob" ng-show="isupdate" /> 
+                        <p class="change-value" ng-hide="isupdate" >{{userInfo.dob | date : yyyy-MM-dd }} </p> 
+                        <input type="date" class="change-value datepicker"  ng-model="userInfo.dob" ng-show="isupdate" /> 
                     </div>
 
                 </div>
@@ -111,7 +111,7 @@
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-10 pr0">
                         <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.mobile_no"> </p> 
-                        <input type="number" maxlength="10" class="change-value" ng-model="userInfo.mobile_no" ng-show="isupdate" /> 
+                        <input type="text"  class="change-value" ng-model="userInfo.mobile_no" ng-show="isupdate" /> 
                     </div>
                 </div>
 

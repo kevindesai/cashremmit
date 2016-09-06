@@ -31,6 +31,7 @@ app.run(function($rootScope, $location,$route,$http,myFactory) {
     $rootScope.getpaymentInfo = $rootScope.apiUrl+'api/v1/transactions/get';
     $rootScope.getDocumentFields = $rootScope.apiUrl+'api/v1/documentfield';
     $rootScope.verifyDriverLicence = $rootScope.apiUrl+'api/v1/verifyDriverLicence';
+    $rootScope.verifyPassPort = $rootScope.apiUrl+'api/v1/verifyPassport';
     
     $rootScope.$on('$locationChangeStart', function(ev, next, current) {
     var token = localStorage.getItem("token"); 

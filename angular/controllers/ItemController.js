@@ -492,6 +492,7 @@ app.controller('DocumentVerifyController', ['$scope', '$http', '$rootScope', 'us
         response.error(function(error){
             console.log(error);
         });
+        $scope.docName = "Driving Licence"
         $scope.setDoc = function(docname){
             $scope.docName = docname;
         };
@@ -510,6 +511,34 @@ app.controller('DocumentVerifyController', ['$scope', '$http', '$rootScope', 'us
                            'token':$scope.userInfo.token
             }
             var response  = myFactory.httpMethodCall('POST',$rootScope.verifyDriverLicence,reqData);
+        response.success(function(data){
+            if(data.status==0){
+                $scope.UnverifyMsg = true;
+            }else if(data.status==1){
+                
+            }
+            
+        });
+        response.error(function(error){
+            console.log(error);
+        });
+        }
+        $scope.submitpassportform = function(doc){
+            var reqData = {"CountryCode":$scope.userInfo.country_code,
+                           "FirstGivenName":$scope.doc.FirstGivenName,
+                           "FirstSurName":$scope.doc.FirstSurName,
+                           "DayOfBirth":$scope.doc.DayOfBirth,
+                           "MonthOfBirth":$scope.doc.MonthOfBirth,
+                           "YearOfBirth" : $scope.doc.YearOfBirth,
+                           "Number":$scope.doc.Passport.Number,
+                           "Mrz1":$scope.doc.Passport.Mrz1,
+                           "Mrz2":$scope.doc.Passport.Mrz2,
+                           "DayOfExpiry":$scope.doc.DriverLicence.DayOfExpiry,
+                           "MonthOfExpiry":$scope.doc.DriverLicence.MonthOfExpiry,
+                           "YearOfExpiry":$scope.doc.DriverLicence.YearOfExpiry,
+                           'token':$scope.userInfo.token
+            }
+            var response  = myFactory.httpMethodCall('POST',$rootScope.verifyPassPort,reqData);
         response.success(function(data){
             if(data.status==0){
                 $scope.UnverifyMsg = true;
