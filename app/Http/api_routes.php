@@ -38,6 +38,7 @@ Route::group(['middleware' => 'jwt-auth'], function () {
     Route::get('transactions', 'PoliAPIController@getTransactions');
     Route::get('transactions/get/{transactiontoken}', 'PoliAPIController@getTransactionDetail');
     Route::post('verifyDriverLicence', 'DocumentVerifyController@verifyDriverLicence');
+    Route::post('verifyPassport', 'DocumentVerifyController@verifyPassport');
     
 });
 
