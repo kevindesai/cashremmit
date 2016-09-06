@@ -497,17 +497,18 @@ app.controller('DocumentVerifyController', ['$scope', '$http', '$rootScope', 'us
             $scope.docName = docname;
         };
         $scope.submitdocform = function(doc){
+            console.log(doc);
             var reqData = {"CountryCode":$scope.userInfo.country_code,
-                           "FirstGivenName":$scope.doc.FirstGivenName,
-                           "FirstSurName":$scope.doc.FirstSurName,
-                           "DayOfBirth":$scope.doc.DayOfBirth,
-                           "MonthOfBirth":$scope.doc.MonthOfBirth,
-                           "YearOfBirth" : $scope.doc.YearOfBirth,
-                           "Number":$scope.doc.DriverLicence.Number,
-                           "State":$scope.doc.DriverLicence.State,
-                           "DayOfExpiry":$scope.doc.DriverLicence.DayOfExpiry,
-                           "MonthOfExpiry":$scope.doc.DriverLicence.MonthOfExpiry,
-                           "YearOfExpiry":$scope.doc.DriverLicence.YearOfExpiry,
+                           "FirstGivenName":doc.FirstGivenName,
+                           "FirstSurName":doc.FirstSurName,
+                           "DayOfBirth":doc.DayOfBirth,
+                           "MonthOfBirth":doc.MonthOfBirth,
+                           "YearOfBirth" : doc.YearOfBirth,
+                           "Number":doc.DriverLicence.Number,
+                           "State":doc.DriverLicence.State,
+                           "DayOfExpiry":doc.DriverLicence.DayOfExpiry,
+                           "MonthOfExpiry":doc.DriverLicence.MonthOfExpiry,
+                           "YearOfExpiry":doc.DriverLicence.YearOfExpiry,
                            'token':$scope.userInfo.token
             }
             var response  = myFactory.httpMethodCall('POST',$rootScope.verifyDriverLicence,reqData);
@@ -525,17 +526,17 @@ app.controller('DocumentVerifyController', ['$scope', '$http', '$rootScope', 'us
         }
         $scope.submitpassportform = function(doc){
             var reqData = {"CountryCode":$scope.userInfo.country_code,
-                           "FirstGivenName":$scope.doc.FirstGivenName,
-                           "FirstSurName":$scope.doc.FirstSurName,
-                           "DayOfBirth":$scope.doc.DayOfBirth,
-                           "MonthOfBirth":$scope.doc.MonthOfBirth,
-                           "YearOfBirth" : $scope.doc.YearOfBirth,
-                           "Number":$scope.doc.Passport.Number,
-                           "Mrz1":$scope.doc.Passport.Mrz1,
-                           "Mrz2":$scope.doc.Passport.Mrz2,
-                           "DayOfExpiry":$scope.doc.DriverLicence.DayOfExpiry,
-                           "MonthOfExpiry":$scope.doc.DriverLicence.MonthOfExpiry,
-                           "YearOfExpiry":$scope.doc.DriverLicence.YearOfExpiry,
+                           "FirstGivenName":doc.FirstGivenName,
+                           "FirstSurName":doc.FirstSurName,
+                           "DayOfBirth":doc.DayOfBirth,
+                           "MonthOfBirth":doc.MonthOfBirth,
+                           "YearOfBirth" :doc.YearOfBirth,
+                           "Number":doc.Passport.Number,
+                           "Mrz1":doc.Passport.Mrz1,
+                           "Mrz2":doc.Passport.Mrz2,
+                           "DayOfExpiry":doc.Passport.DayOfExpiry,
+                           "MonthOfExpiry":doc.Passport.MonthOfExpiry,
+                           "YearOfExpiry":doc.Passport.YearOfExpiry,
                            'token':$scope.userInfo.token
             }
             var response  = myFactory.httpMethodCall('POST',$rootScope.verifyPassPort,reqData);
