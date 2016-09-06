@@ -91,47 +91,32 @@ class DocumentVerifyController extends Api {
             )
         );
         $raw = json_encode($params);
+        $resp = $this->callAPI($raw);
 
-        $header = array();
-        $header[] = 'Content-Type: application/json';
-        $header[] = 'Authorization: Basic Q2FzaFJlbWl0X0RlbW9fQVBJOkFkbWluQElUMjAxNg==';
-        $publicPath = public_path();
-        $ch = curl_init("https://api.globaldatacompany.com/verifications/v1/verify");
-        curl_setopt($ch, CURLOPT_CAINFO, $publicPath . "/ca-bundle.crt");
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $raw);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $res = curl_exec($ch);
-        curl_close($ch);
-        $resp = json_decode($res);
-        
         $response = array(
-            'status'=>0
+            'status' => 0
         );
-        if($resp->Record->RecordStatus == 'match'){
+        if ($resp->Record->RecordStatus == 'match') {
             $response['status'] = 1;
             $UD = array(
-                'user_id'=>  $this->_auth->id,
-                'doc_type'=>'DriverLicence',
-                'attributes'=>  $raw
+                'user_id' => $this->_auth->id,
+                'doc_type' => 'DriverLicence',
+                'attributes' => $raw
             );
             $userDocCheck = UserDocument::where('user_id', $this->_auth->id)->first();
-            if(!$userDocCheck){
-                $userDoc = UserDocument::create($UD);;
-            }else{
+            if (!$userDocCheck) {
+                $userDoc = UserDocument::create($UD);
+                ;
+            } else {
                 $userDocCheck->update($UD);
             }
             $user = User::find($this->_auth->id);
             $user->is_verified = 1;
             $user->update();
-            
         }
         echo json_encode($response);
     }
-    
+
     public function verifyPassport(Request $request) {
         $this->_auth = JWTAuth::toUser(JWTAuth::getToken());
         $inputs = $request->all();
@@ -140,7 +125,6 @@ class DocumentVerifyController extends Api {
             'Demo' => true,
             'CleansedAddress' => true,
             'ConsentForDataSources' => array(
-                
             ),
             'CountryCode' => 'AU',
             'DataFields' => array(
@@ -171,6 +155,33 @@ class DocumentVerifyController extends Api {
         );
         $raw = json_encode($params);
 
+        $resp = $this->callAPI($raw);
+//        print_r($resp);die;
+        $response = array(
+            'status' => 0
+        );
+        if ($resp->Record->RecordStatus == 'match') {
+            $response['status'] = 1;
+            $UD = array(
+                'user_id' => $this->_auth->id,
+                'doc_type' => 'Passport',
+                'attributes' => $raw
+            );
+            $userDocCheck = UserDocument::where('user_id', $this->_auth->id)->first();
+            if (!$userDocCheck) {
+                $userDoc = UserDocument::create($UD);
+                ;
+            } else {
+                $userDocCheck->update($UD);
+            }
+            $user = User::find($this->_auth->id);
+            $user->is_verified = 1;
+            $user->update();
+        }
+        echo json_encode($response);
+    }
+
+    public function callAPI($raw) {
         $header = array();
         $header[] = 'Content-Type: application/json';
         $header[] = 'Authorization: Basic Q2FzaFJlbWl0X0RlbW9fQVBJOkFkbWluQElUMjAxNg==';
@@ -185,30 +196,7 @@ class DocumentVerifyController extends Api {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $res = curl_exec($ch);
         curl_close($ch);
-        $resp = json_decode($res);
-//        print_r($resp);die;
-        $response = array(
-            'status'=>0
-        );
-        if($resp->Record->RecordStatus == 'match'){
-            $response['status'] = 1;
-            $UD = array(
-                'user_id'=>  $this->_auth->id,
-                'doc_type'=>'Passport',
-                'attributes'=>  $raw
-            );
-            $userDocCheck = UserDocument::where('user_id', $this->_auth->id)->first();
-            if(!$userDocCheck){
-                $userDoc = UserDocument::create($UD);;
-            }else{
-                $userDocCheck->update($UD);
-            }
-            $user = User::find($this->_auth->id);
-            $user->is_verified = 1;
-            $user->update();
-            
-        }
-        echo json_encode($response);
+        return $resp = json_decode($res);
     }
 
 }
