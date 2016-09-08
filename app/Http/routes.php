@@ -54,6 +54,7 @@ Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin', 'namespace' 
     Route::resource('country', 'CountryController');
     Route::resource('promossion', 'PromossionController');
     Route::resource('transactions', 'TransactionController');
+    Route::get('makeTransaction/{id}', 'TransactionController@makeTransaction');
     Route::get('rate/list', 'CountryController@rateList');
     Route::resource('countryflag', 'CountryFlagController');
     Route::post('uploadflag', 'CountryFlagController@uploadFlagImage');

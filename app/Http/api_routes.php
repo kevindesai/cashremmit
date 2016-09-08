@@ -21,6 +21,7 @@ Route::post('transferrate', 'CountryAPIController@transferrate');
 Route::post('checkpromossion', 'CountryAPIController@checkPromossion');
 Route::post('getcountrybycurrency','CountryAPIController@getCountryByCurrency');
 Route::post('documentfield', 'DocumentVerifyController@getFields');
+Route::get('checkSwitch', 'DocumentVerifyController@checkSwitch');
 
 
 //Route::get('successbutnotverified/{id}', 'DocverifyAPIController@documentverify');

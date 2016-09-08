@@ -26,15 +26,38 @@ class TransactionController extends Controller {
         $transaction = Transactions::paginate(15);
         return view('transaction.index', compact('transaction'));
     }
+
     public function show($id) {
         $transaction = Transactions::find($id);
         $transactionData = array();
-        if($transaction){
-            if(isset($transaction->token) && $transaction->token != ''){
+        if ($transaction) {
+            if (isset($transaction->token) && $transaction->token != '') {
                 $transactionData = Transactions::getTransactionDetail($transaction->token);
             }
-            
         }
-        return view('transaction.show', compact('transaction','transactionData'));
+        return view('transaction.show', compact('transaction', 'transactionData'));
     }
+
+    public function makeTransaction($id) {
+        $transaction = Transactions::find($id);
+        $response = array(
+            'status' => '-1',
+            'message' => 'You cannot do this without success transaction.'
+        );
+        if ($transaction->status == 'success') {
+            if ($transaction->switchTransfer()) {
+                $response = array(
+                    'status' => '1',
+                    'message' => 'Transfer successful.'
+                );
+            } else {
+                $response = array(
+                    'status' => '0',
+                    'message' => 'Transaction failed'
+                );
+            }
+        }
+        echo json_encode($response);die;
+    }
+
 }

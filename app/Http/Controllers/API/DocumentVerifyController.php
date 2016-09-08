@@ -199,4 +199,63 @@ class DocumentVerifyController extends Api {
         return $resp = json_decode($res);
     }
 
+    public function checkSwitch() {
+        ini_set('soap.wsdl_cache_enabled', 0);
+        ini_set('soap.wsdl_cache_ttl', 900);
+        ini_set('default_socket_timeout', 15);
+
+        $input_xml = '
+                <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+                <FundGate>
+                    <direction>request</direction>
+                    <action>FT</action>
+                    <terminalId>20000000054</terminalId>
+                    <transaction>
+                        <pin>' . $this->encPin('0012') . '</pin>
+                        <bankCode>900</bankCode>
+                        <amount>10.0</amount>
+                        <destination>2001220212</destination>
+                        <reference>2422332324233242</reference>
+                        <endPoint>A</endPoint>
+                    </transaction>
+                </FundGate>';
+
+        $wsdl = public_path() . '/staging_doc.wsdl';
+
+        $options = array(
+            'uri' => 'http://demo.etranzact.com/FundGateWSDL/doc.wsdl',
+            'trace' => true,
+            'exceptions' => true,
+        );
+        try {
+            $soap = new \SoapClient($wsdl, $options);
+            $data = $soap->__soapCall("process", array("FundRequest" => $input_xml));
+//            $data = $soap->process(array("FundRequest"=>$input_xml));
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+        echo "<pre>";
+        print_r($data);
+//var_dump($data);
+        die;
+    }
+
+    public function pkcs5_pad($text, $blocksize) {
+        $pad = $blocksize - (strlen($text) % $blocksize);
+        return $text . str_repeat(chr($pad), $pad);
+    }
+
+    public function encPin($pin) {
+        $master_key = substr('KEd4gDNSDdMBxCGliZaC8w==', 0, 16);
+//        $master_key = 'KEd4gDNSDdMBxCGliZaC8w==';
+
+        $pin = $this->pkcs5_pad($pin, 16);
+
+        $cipher = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '', MCRYPT_MODE_CBC, '');
+        mcrypt_generic_init($cipher, $master_key, $master_key);
+        $encrypted = mcrypt_generic($cipher, $pin);
+
+        return base64_encode($encrypted);
+    }
+
 }
