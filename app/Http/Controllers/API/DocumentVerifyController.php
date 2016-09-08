@@ -204,7 +204,8 @@ class DocumentVerifyController extends Api {
         ini_set('soap.wsdl_cache_ttl', 900);
         ini_set('default_socket_timeout', 15);
 
-        $input_xml = '
+        echo "This is request<br />";
+        echo $input_xml = '
                 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
                 <FundGate>
                     <direction>request</direction>
@@ -212,7 +213,7 @@ class DocumentVerifyController extends Api {
                     <terminalId>20000000054</terminalId>
                     <transaction>
                         <pin>' . $this->encPin('0012') . '</pin>
-                        <bankCode>900</bankCode>
+                        <bankCode>033</bankCode>
                         <amount>10.0</amount>
                         <destination>2001220212</destination>
                         <reference>2422332324233242</reference>
@@ -234,6 +235,7 @@ class DocumentVerifyController extends Api {
         } catch (Exception $e) {
             die($e->getMessage());
         }
+        echo "This is response<br />";
         echo "<pre>";
         print_r($data);
 //var_dump($data);
