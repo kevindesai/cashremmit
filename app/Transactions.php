@@ -74,7 +74,7 @@ class Transactions extends Model {
         ini_set('default_socket_timeout', 15);
 
         $terminalId = '20000000054';
-        $pin = '0012';
+        $pin = $this->encPin('0012');
         $input_xml = '
                 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
                 <FundGate>
@@ -82,7 +82,7 @@ class Transactions extends Model {
                     <action>FT</action>
                     <terminalId>' . $terminalId . '</terminalId>
                     <transaction>
-                        <pin>' . $this->encPin($pin) . '</pin>
+                        <pin>' . $pin . '</pin>
                         <bankCode>' . $this->receptient->bank_code . '</bankCode>
                         <amount>' . $this->amount . '</amount>
                         <destination>' . $this->receptient->account_number . '</destination>
@@ -100,8 +100,25 @@ class Transactions extends Model {
         );
         try {
             $soap = new \SoapClient($wsdl, $options);
-            $data = $soap->__soapCall("process", array("FundRequest" => $input_xml));
+            $dataOld = $soap->__soapCall("process", array("FundRequest" => $input_xml));
             //$data = $soap->process(array("FundRequest"=>$input_xml));
+            
+            $next_input_xml = '
+                <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+                <FundGate>
+                    <direction>request</direction>
+                    <action>TR</action>
+                    <terminalId>' . $terminalId . '</terminalId>
+                    <transaction>
+                        <pin>' . $pin . '</pin>
+                        <bankCode>' . $this->receptient->bank_code . '</bankCode>
+                        <amount>' . $this->amount . '</amount>
+                        <destination>' . $this->receptient->account_number . '</destination>
+                        <reference>' . sprintf('%020d', $this->id) . '</reference>
+                        <endPoint>A</endPoint>
+                    </transaction>
+                </FundGate>';
+            $data = $soap->__soapCall("process", array("FundRequest" => $next_input_xml));
         } catch (Exception $e) {
             die($e->getMessage());
         }

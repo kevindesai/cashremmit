@@ -205,18 +205,19 @@ class DocumentVerifyController extends Api {
         ini_set('default_socket_timeout', 15);
 
         echo "This is request<br />";
-        echo $input_xml = '
-                <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+        $pin = $this->encPin('0012');
+//        $pin = '0012';
+        $input_xml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
                 <FundGate>
                     <direction>request</direction>
                     <action>FT</action>
                     <terminalId>20000000054</terminalId>
                     <transaction>
-                        <pin>' . $this->encPin('0012') . '</pin>
+                        <pin>' . $pin . '</pin>
                         <bankCode>033</bankCode>
                         <amount>10.0</amount>
                         <destination>2001220212</destination>
-                        <reference>2422332324233242</reference>
+                        <reference>24223323242332421</reference>
                         <endPoint>A</endPoint>
                     </transaction>
                 </FundGate>';
@@ -232,6 +233,26 @@ class DocumentVerifyController extends Api {
             $soap = new \SoapClient($wsdl, $options);
             $data = $soap->__soapCall("process", array("FundRequest" => $input_xml));
 //            $data = $soap->process(array("FundRequest"=>$input_xml));
+            $output_xml = '
+                <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+                <FundGate>
+                    <direction>request</direction>
+                    <action>TR</action>
+                    <terminalId>20000000054</terminalId>
+                    <transaction>
+                        <pin>' . $pin . '</pin>
+                        <bankCode>033</bankCode>
+                        <amount>10.0</amount>
+                        <destination>2001220212</destination>
+                        <reference>24223323242332421</reference>
+                        <endPoint>A</endPoint>
+                    </transaction>
+                </FundGate>';
+            
+            $soap = new \SoapClient($wsdl, $options);
+            $dataNew = $soap->__soapCall("process", array("FundRequest" => $output_xml));
+            echo "<pre>";
+            print_r($dataNew);die;
         } catch (Exception $e) {
             die($e->getMessage());
         }
