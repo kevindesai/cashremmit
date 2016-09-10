@@ -477,6 +477,23 @@ app.controller('DocumentVerifyController', ['$scope', '$http', '$rootScope', 'us
         userService.getDataFromSession();
         $scope.userInfo = userService.userInfo;
         $scope.txndata={};
+        $scope.days= 31;
+        $scope.getNumber = function(num) {
+          return new Array(num);   
+        }
+         $scope.totalyears = 150;
+        $scope.years = [];
+        var currentYear = new Date().getFullYear();
+        for (var i = currentYear; i > currentYear - $scope.totalyears; i--) {
+            $scope.years.push(i - 1);
+        }
+        
+        $scope.ExpYears = [];
+        for (var i = currentYear; i < currentYear + 50; i++) {
+            $scope.ExpYears.push(i);
+        }
+        
+       
         var politoken = $routeParams.politoken;
         var docFieldUrl = $rootScope.getDocumentFields;
         var reqData = {"country_id":$scope.userInfo.country_id};
