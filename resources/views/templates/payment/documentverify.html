@@ -31,6 +31,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="alert alert-danger" role="alert" ng-if="UnverifyMsg">Your details can not be verify please provide correct details.</div>   
+            <div class="alert alert-danger" role="alert" ng-if="nameError">Your name in account is not matching with your documents.</div>   
             <form class="form-horizontal" id="formdocVerify" role="form" ng-if="docName=='Driving Licence'">
 <!--          <fieldset ng-repeat="fields in docfields" ng-if="docName==fields.name">
             <legend style=" border-bottom: 1px solid #CCC;">Please enter you verification details</legend>

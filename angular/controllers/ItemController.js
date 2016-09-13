@@ -473,9 +473,10 @@ app.controller('PoliPaymentController', ['$scope', '$http', '$rootScope', 'userS
         });
 
     }]);
-app.controller('DocumentVerifyController', ['$scope', '$http', '$rootScope', 'userService', 'myFactory', '$location','$routeParams', function ($scope, $http, $rootScope, userService, myFactory, $location,$routeParams) {
+app.controller('DocumentVerifyController', ['$scope', '$http', '$rootScope', 'userService', 'myFactory', '$location','$routeParams','$filter', function ($scope, $http, $rootScope, userService, myFactory, $location,$routeParams,$filter) {
         userService.getDataFromSession();
         $scope.userInfo = userService.userInfo;
+        //console.log($scope.userInfo);
         $scope.txndata={};
         $scope.days= 31;
         $scope.getNumber = function(num) {
@@ -503,7 +504,7 @@ app.controller('DocumentVerifyController', ['$scope', '$http', '$rootScope', 'us
             if(data.status==1){
                 $scope.docfields = data.data;
                 $scope.docName = $scope.docfields[0].name;
-                console.log($scope.docfields[0].attributes);
+               // console.log($scope.docfields[0].attributes);
             }
         });
         response.error(function(error){
@@ -514,7 +515,12 @@ app.controller('DocumentVerifyController', ['$scope', '$http', '$rootScope', 'us
             $scope.docName = docname;
         };
         $scope.submitdocform = function(doc){
-            console.log(doc);
+            //console.log(doc);
+            
+            if($filter('uppercase')($scope.userInfo.first_name) != $filter('uppercase')(doc.FirstGivenName) || $filter('uppercase')($scope.userInfo.last_name) != $filter('uppercase')(doc.FirstSurName)){
+                $scope.nameError=true;
+                return false;
+            }
             var reqData = {"CountryCode":$scope.userInfo.country_code,
                            "FirstGivenName":doc.FirstGivenName,
                            "FirstSurName":doc.FirstSurName,
@@ -542,6 +548,10 @@ app.controller('DocumentVerifyController', ['$scope', '$http', '$rootScope', 'us
         });
         }
         $scope.submitpassportform = function(doc){
+            if($filter('uppercase')($scope.userInfo.first_name) != $filter('uppercase')(doc.FirstGivenName) || $filter('uppercase')($scope.userInfo.last_name) != $filter('uppercase')(doc.FirstSurName)){
+                $scope.nameError=true;
+                return false;
+            }
             var reqData = {"CountryCode":$scope.userInfo.country_code,
                            "FirstGivenName":doc.FirstGivenName,
                            "FirstSurName":doc.FirstSurName,
