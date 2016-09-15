@@ -3,6 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Flutterwave\Disbursement;
+use Flutterwave\Flutterwave;
+use Flutterwave\Countries;
+use Flutterwave\Currencies;
 
 class Transactions extends Model {
 
@@ -68,88 +72,126 @@ class Transactions extends Model {
     }
 
     public function switchTransfer() {
-//        print_r($this->receptient);
-        ini_set('soap.wsdl_cache_enabled', 0);
-        ini_set('soap.wsdl_cache_ttl', 900);
-        ini_set('default_socket_timeout', 15);
+        $merchantKey = "tk_Hqc328yY00"; //can be found on flutterwave dev portal
+        $apiKey = "tk_KB32cAk5E04LaHWYqRso"; //can be found on flutterwave dev portal
+        $env = "staging"; //this can be production when ready for deployment
+        Flutterwave::setMerchantCredentials($merchantKey, $apiKey, $env);
 
-        $terminalId = '20000000054';
-        $pin = $this->encPin('0012');
-        $input_xml = '
-                <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-                <FundGate>
-                    <direction>request</direction>
-                    <action>FT</action>
-                    <terminalId>' . $terminalId . '</terminalId>
-                    <transaction>
-                        <pin>' . $pin . '</pin>
-                        <bankCode>' . $this->receptient->bank_code . '</bankCode>
-                        <amount>' . $this->amount . '</amount>
-                        <destination>' . $this->receptient->account_number . '</destination>
-                        <reference>' . sprintf('%020d', $this->id) . '</reference>
-                        <endPoint>A</endPoint>
-                    </transaction>
-                </FundGate>';
+//In order to disburse funds, you need to first link the account you will disburse from
+//You can link as many accounts as you want
+        $accountno = "0690000031";
+        $result = Disbursement::link($accountno);
+//$result is an instance of ApiResponse class which has
+//methods like getResponseData(), getStatusCode(), getResponseCode(), isSuccessfulResponse()
 
-        $wsdl = public_path() . '/staging_doc.wsdl';
-
-        $options = array(
-            'uri' => 'http://demo.etranzact.com/FundGateWSDL/doc.wsdl',
-            'trace' => true,
-            'exceptions' => true,
-        );
-        try {
-            $soap = new \SoapClient($wsdl, $options);
-            $dataOld = $soap->__soapCall("process", array("FundRequest" => $input_xml));
-            //$data = $soap->process(array("FundRequest"=>$input_xml));
-            
-            $next_input_xml = '
-                <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-                <FundGate>
-                    <direction>request</direction>
-                    <action>TR</action>
-                    <terminalId>' . $terminalId . '</terminalId>
-                    <transaction>
-                        <pin>' . $pin . '</pin>
-                        <bankCode>' . $this->receptient->bank_code . '</bankCode>
-                        <amount>' . $this->amount . '</amount>
-                        <destination>' . $this->receptient->account_number . '</destination>
-                        <reference>' . sprintf('%020d', $this->id) . '</reference>
-                        <endPoint>A</endPoint>
-                    </transaction>
-                </FundGate>';
-            $data = $soap->__soapCall("process", array("FundRequest" => $next_input_xml));
-        } catch (Exception $e) {
-            die($e->getMessage());
+        if ($result->isSuccessfulResponse()) {
+//            echo("I have successfully linked an account.");
+//            echo "<br/>";
         }
-//        print_r($data);
-        if ($data->totalSuccess == '1') {
-            $this->switch_transaction_id = 'trxid';
+
+//After linking an account, you need to do double validation of that linked account
+//This is to authenticate that the account belongs to you
+        $response = $result->getResponseData();
+        $linkingRef = $response['data']['uniquereference'];
+
+//Validation Step 1
+        $otp = "1.00";
+        $otpType = "ACCOUNT_DEBIT"; //(ACCOUNT_DEBIT | PHONE_OTP)
+        $result2 = Disbursement::validate($otp, $linkingRef, $otpType);
+        $response2 = $result2->getResponseData();
+
+        if ($result2->isSuccessfulResponse()) {
+//            echo("I have passed first validation test.");
+//            echo "<br/>";
+        }
+
+//Validation Step 2
+//This will return an account token if successful
+        $otp = "12345";
+        $otpType = "PHONE_OTP"; //(ACCOUNT_DEBIT | PHONE_OTP)
+        $result3 = Disbursement::validate($otp, $linkingRef, $otpType);
+        $response3 = $result3->getResponseData();
+
+        if ($result3->isSuccessfulResponse()) {
+//            echo("I have passed second validation test.");
+//            echo "<br/>";
+        }
+
+//If Validation step 2 is successful, an account token is returned, you save the account token
+//You will need the account token each time you want to disburse funds
+        $accountToken = $response3['data']['accounttoken'];
+        $amount = $this->amount;
+
+        $uniqueRef = sprintf('%05d', $this->id) . "-" . time() . "-" . rand(1000, 99999); //This reference has to be unique
+        $senderName = "Godswill Okwara";
+        $destination = [
+            "country" => Countries::NIGERIA,
+            "currency" => Currencies::NAIRA,
+            "bankCode" => "044", //the 044 represents the bank code, you can get all bank codes using the bank API
+            "recipientAccount" => $this->receptient->account_number, //Make sure you havent added this account before
+            "recipientName" => $this->receipentname
+        ];
+        $narration = "TR/" . $this->amount . "/TO/" . $this->receipentname;
+        $result4 = Disbursement::send($accountToken, $uniqueRef, $amount, $narration, $senderName, $destination);
+        $response4 = $result4->getResponseData();
+
+        if ($result4->isSuccessfulResponse()) {
+//          $this->switch_transaction_id = 'trxid';
             $this->switch_status = 'success';
+            /*
+              $getUserDetail = $this->user;
+              $UserMob = $getUserDetail->mobile_no;
+              $UserName = $getUserDetail->first_name . ' ' . $getUserDetail->last_name;
+
+              $getRecipentDetail = $this->receptient;
+              $RecipentMob = $getRecipentDetail->mobile_no;
+              $RecipentName = $getRecipentDetail->first_name . ' ' . $getRecipentDetail->last_name;
+
+
+              $UserMsg = "You have sent " . $this->amount . " aud to " . $RecipentName . ". .Please contact support in case of any query.";
+
+              $RecipentMsg = $UserName . " have sent you " . $this->amount . " aud via CashRemit. This will be credit to your bank account within 2 working days.";
+              $toemail = $this->user->email;
+              $data = array(
+              'name' => $this->username,
+              'rec_name' => $this->receipentname,
+              'currency' => $this->currency_code,
+              'amount' => $this->amount,
+              "toemail" => $toemail
+              );
+
+              try {
+              Mail::send('emails.successtransfer', array("data" => $data), function ($message) use ($data) {
+
+              $message->from('ravi@atoatechnologies.com', 'Cash Remit');
+
+              $message->to($data["toemail"])->subject('Cashremit Transfer successfull');
+              });
+
+              Twilio::message('+' . $UserMob, $UserMsg);
+              Twilio::message('+' . $RecipentMob, $RecipentMsg);
+              } catch (Exception $e) {
+
+              } */
+            /* $getRecipentDetail = \App\RecipientMaster::find($trensaction->recipient_id);
+              $RecipentMob = $getRecipentDetail->mobile_no; */
         } else {
             $this->switch_status = 'failed';
         }
-        $this->switch_response = json_encode($data);
+        $this->switch_transaction_id = $uniqueRef;
+        $this->switch_response = json_encode($response4);
         $this->save();
-        if($data->totalSuccess){
-            return true;
-        }else{
-            return false;
+        if ($result4->isSuccessfulResponse()) {
+            return [
+                'status' => 1,
+                'data' => $response4
+            ];
+        } else {
+            return [
+                'status' => 0,
+                'data' => $response4
+            ];
         }
-    }
-
-    public function pkcs5_pad($text, $blocksize) {
-        $pad = $blocksize - (strlen($text) % $blocksize);
-        return $text . str_repeat(chr($pad), $pad);
-    }
-
-    public function encPin($pin) {
-        $master_key = substr('KEd4gDNSDdMBxCGliZaC8w==', 0, 16);
-        $pin = $this->pkcs5_pad($pin, 16);
-        $cipher = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '', MCRYPT_MODE_CBC, '');
-        mcrypt_generic_init($cipher, $master_key, $master_key);
-        $encrypted = mcrypt_generic($cipher, $pin);
-        return base64_encode($encrypted);
     }
 
 }

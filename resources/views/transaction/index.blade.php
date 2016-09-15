@@ -20,7 +20,8 @@
                     <th> {{ trans('Amount') }} </th>
                     <th>{{ trans('Currency Code') }}</th>
                     <th> {{ trans('Status') }} </th>
-                    <th> {{ trans('Switch Status') }} </th>
+                    <th> {{ trans('Doc Status') }} </th>
+                    <th class="col-md-2"> {{ trans('Ref No') }} </th>
                     <th> {{ trans('Date') }} </th>
                     <th> 
                         Action
@@ -40,14 +41,33 @@
                     <td>{{ $item->amount }}</td>
                     <td>{{ $item->currency_code }}</td>
                     <td>{{ $item->status }}</td>
-                    <td>{{ $item->switch_status }}</td>
+                    <td>
+                        <?php
+                        if ($item->user->is_verified == '1') {
+                            ?>
+                        <span class="label label-green">Verified</span>
+                            <?php
+                        } else {
+                            ?>
+                        <span class="label label-danger">Not Verified</span>
+                            <?php
+                        }
+                        ?>
+
+                    </td>
+                    <td>{{ $item->switch_transaction_id }}</td>
                     <td>{{ $item->created_at }}</td>
                     <td>
                         <a href="{{ url('/admin/transactions/' . $item->id) }}" class="btn btn-success btn-xs" title="View User"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
                         <?php
                         if ($item->status == 'success' && $item->switch_status != 'success') {
                             ?>
-                            <a href="javascript:;" class="transfer btn btn-primary" data-id="<?php echo $item->id; ?>">Transfer</a>
+                            <a href="javascript:;" class="transfer label label-primary" data-id="<?php echo $item->id; ?>">Process Payment</a>
+                            <?php
+                        }
+                        if ($item->switch_status == 'success') {
+                            ?>
+                            <span class="label label-green">Payment Completed</span>
                             <?php
                         }
                         ?>

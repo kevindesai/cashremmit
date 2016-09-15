@@ -14,7 +14,8 @@
         "infyomlabs/generator-builder": "dev-master",
         "appzcoder/crud-generator": "^1.0",
         "tymon/jwt-auth": "^0.5.9",
-        "olsgreen/twilio": "2.0.*"
+        "olsgreen/twilio": "2.0.*",
+        "flutterwave/flutterwave-php": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

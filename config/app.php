@@ -141,7 +141,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Aloha\Twilio\TwilioServiceProvider::class,
-        
     ],
     /*
       |--------------------------------------------------------------------------

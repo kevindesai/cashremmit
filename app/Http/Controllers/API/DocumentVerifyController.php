@@ -22,6 +22,11 @@ use JWTAuth;
 use Mail;
 use Aloha\Twilio\Facades\Twilio as Twilio;
 use App\UserDocument;
+use Artisaninweb\SoapWrapper\Facades\SoapWrapper;
+use Flutterwave\Disbursement;
+use Flutterwave\Flutterwave;
+use Flutterwave\Countries;
+use Flutterwave\Currencies;
 
 class DocumentVerifyController extends Api {
 
@@ -200,85 +205,75 @@ class DocumentVerifyController extends Api {
     }
 
     public function checkSwitch() {
-        ini_set('soap.wsdl_cache_enabled', 0);
-        ini_set('soap.wsdl_cache_ttl', 900);
-        ini_set('default_socket_timeout', 15);
+        $merchantKey = "tk_Hqc328yY00"; //can be found on flutterwave dev portal
+        $apiKey = "tk_KB32cAk5E04LaHWYqRso"; //can be found on flutterwave dev portal
+        $env = "staging"; //this can be production when ready for deployment
+        Flutterwave::setMerchantCredentials($merchantKey, $apiKey, $env);
 
-        echo "This is request<br />";
-        $pin = $this->encPin('0012');
-//        $pin = '0012';
-        $input_xml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-                <FundGate>
-                    <direction>request</direction>
-                    <action>FT</action>
-                    <terminalId>20000000054</terminalId>
-                    <transaction>
-                        <pin>' . $pin . '</pin>
-                        <bankCode>033</bankCode>
-                        <amount>10.0</amount>
-                        <destination>2001220212</destination>
-                        <reference>24223323242332421</reference>
-                        <endPoint>A</endPoint>
-                    </transaction>
-                </FundGate>';
+//In order to disburse funds, you need to first link the account you will disburse from
+//You can link as many accounts as you want
+        $accountno = "0690000031";
+        $result = Disbursement::link($accountno);
+//$result is an instance of ApiResponse class which has
+//methods like getResponseData(), getStatusCode(), getResponseCode(), isSuccessfulResponse()
 
-        $wsdl = public_path() . '/staging_doc.wsdl';
-
-        $options = array(
-            'uri' => 'http://demo.etranzact.com/FundGateWSDL/doc.wsdl',
-            'trace' => true,
-            'exceptions' => true,
-        );
-        try {
-            $soap = new \SoapClient($wsdl, $options);
-            $data = $soap->__soapCall("process", array("FundRequest" => $input_xml));
-//            $data = $soap->process(array("FundRequest"=>$input_xml));
-            $output_xml = '
-                <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-                <FundGate>
-                    <direction>request</direction>
-                    <action>TR</action>
-                    <terminalId>20000000054</terminalId>
-                    <transaction>
-                        <pin>' . $pin . '</pin>
-                        <bankCode>033</bankCode>
-                        <amount>10.0</amount>
-                        <destination>2001220212</destination>
-                        <reference>24223323242332421</reference>
-                        <endPoint>A</endPoint>
-                    </transaction>
-                </FundGate>';
-            
-            $soap = new \SoapClient($wsdl, $options);
-            $dataNew = $soap->__soapCall("process", array("FundRequest" => $output_xml));
-            echo "<pre>";
-            print_r($dataNew);die;
-        } catch (Exception $e) {
-            die($e->getMessage());
+        if ($result->isSuccessfulResponse()) {
+//            echo("I have successfully linked an account.");
+//            echo "<br/>";
         }
-        echo "This is response<br />";
-        echo "<pre>";
-        print_r($data);
-//var_dump($data);
-        die;
-    }
 
-    public function pkcs5_pad($text, $blocksize) {
-        $pad = $blocksize - (strlen($text) % $blocksize);
-        return $text . str_repeat(chr($pad), $pad);
-    }
+//After linking an account, you need to do double validation of that linked account
+//This is to authenticate that the account belongs to you
+        $response = $result->getResponseData();
+        $linkingRef = $response['data']['uniquereference'];
 
-    public function encPin($pin) {
-        $master_key = substr('KEd4gDNSDdMBxCGliZaC8w==', 0, 16);
-//        $master_key = 'KEd4gDNSDdMBxCGliZaC8w==';
+//Validation Step 1
+        $otp = "1.00";
+        $otpType = "ACCOUNT_DEBIT"; //(ACCOUNT_DEBIT | PHONE_OTP)
+        $result2 = Disbursement::validate($otp, $linkingRef, $otpType);
+        $response2 = $result2->getResponseData();
 
-        $pin = $this->pkcs5_pad($pin, 16);
+        if ($result2->isSuccessfulResponse()) {
+//            echo("I have passed first validation test.");
+//            echo "<br/>";
+        }
 
-        $cipher = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '', MCRYPT_MODE_CBC, '');
-        mcrypt_generic_init($cipher, $master_key, $master_key);
-        $encrypted = mcrypt_generic($cipher, $pin);
+//Validation Step 2
+//This will return an account token if successful
+        $otp = "12345";
+        $otpType = "PHONE_OTP"; //(ACCOUNT_DEBIT | PHONE_OTP)
+        $result3 = Disbursement::validate($otp, $linkingRef, $otpType);
+        $response3 = $result3->getResponseData();
 
-        return base64_encode($encrypted);
+        if ($result3->isSuccessfulResponse()) {
+//            echo("I have passed second validation test.");
+//            echo "<br/>";
+        }
+
+//If Validation step 2 is successful, an account token is returned, you save the account token
+//You will need the account token each time you want to disburse funds
+        $accountToken = $response3['data']['accounttoken'];
+        $amount = 101;
+        $uniqueRef = "23323234547871232-11"; //This reference has to be unique
+        $senderName = "Godswill Okwara";
+        $destination = [
+            "country" => Countries::NIGERIA,
+            "currency" => Currencies::NAIRA,
+            "bankCode" => "044", //the 044 represents the bank code, you can get all bank codes using the bank API
+            "recipientAccount" => "0690000028", //Make sure you havent added this account before
+            "recipientName" => "Ridwan Olalere"
+        ];
+        $narration = "Testing Sanket";
+        $result4 = Disbursement::send($accountToken, $uniqueRef, $amount, $narration, $senderName, $destination);
+        $response4 = $result4->getResponseData();
+
+        if ($result4->isSuccessfulResponse()) {
+            echo("I have successfully disbursed funds.");
+            echo "<br/>";
+            echo "<pre>";
+            print_r($result4);
+            echo "</pre>";
+        }
     }
 
 }

@@ -23,7 +23,7 @@ class TransactionController extends Controller {
     public function index() {
 //        $searchTerm = Input::get('search', '');
 //        $transferrate = TransferRate::SearchByKeyword($searchTerm)->paginate(16);
-        $transaction = Transactions::paginate(15);
+        $transaction = Transactions::where('status','<>','pending')->paginate(15);
         return view('transaction.index', compact('transaction'));
     }
 
@@ -45,19 +45,23 @@ class TransactionController extends Controller {
             'message' => 'You cannot do this without success transaction.'
         );
         if ($transaction->status == 'success') {
-            if ($transaction->switchTransfer()) {
+            $res = $transaction->switchTransfer();
+            if ($res['status'] == '1') {
                 $response = array(
                     'status' => '1',
-                    'message' => 'Transfer successful.'
+                    'message' => 'Payment successful.',
+                    'response'=>$res
                 );
             } else {
                 $response = array(
                     'status' => '0',
-                    'message' => 'Transaction failed'
+                    'message' => 'Payment failed',
+                    'response'=>$res
                 );
             }
         }
-        echo json_encode($response);die;
+        echo json_encode($response);
+        die;
     }
 
 }
