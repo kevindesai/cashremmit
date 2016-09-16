@@ -57,7 +57,8 @@ app.controller('ReportController', ['$scope', '$http', '$rootScope', 'userServic
         $scope.setActiveBenif = function (activeData, indexes) {
             $scope.isActive = indexes;
             $scope.benifData = activeData;
-            console.log($scope.benifData.id);
+//            console.log(activeData);
+            //console.log($scope.isActive);
             localStorage.setItem('selectedBenif', $scope.benifData.id);
         }
         $scope.refreshbeif = function () {
@@ -69,10 +70,11 @@ app.controller('ReportController', ['$scope', '$http', '$rootScope', 'userServic
             var methodData = {"_method": "GET", 'token': $scope.userInfo.token};
             var response = myFactory.httpMethodCall(method, url, methodData);
             response.success(function (data) {
-                console.log(data);
                 if (data.status == 1 && data.message == "data found") {
                     $scope.userBefif = data.data;
                     $scope.benifData = data.data[0];
+                    //console.log($scope.userBefif.length);
+                    $scope.setActiveBenif($scope.benifData,0);
                 } else if (data.status == -1) {
 
                     $scope.doLogout();

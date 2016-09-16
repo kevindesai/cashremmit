@@ -126,6 +126,11 @@
                         <input type="text" class="form-control" placeholder="Mobile Number" ng-model="benif.mobile_no" name="mobile_no" required="required">
                         <p ng-show="formbenif.mobile_no.$error.required && formbenif.$submitted" class="help-block">Please enter mobile number.</p>
                     </div>
+                    <div class="form-group" ng-class="{ 'has-error' : formbenif.email.$invalid && formbenif.$submitted }">
+                        <input type="email" class="form-control" placeholder="Email" ng-model="benif.email" name="email" required="required">
+                        <p ng-show="formbenif.email.$error.required && formbenif.$submitted" class="help-block">Please enter Email Address.</p>
+                        <p ng-show="formbenif.email.$invalid && formbenif.$submitted  " class="help-block">Please enter valid Email Address.</p>
+                    </div>
                     <div class="form-group" ng-class="{ 'has-error' : formbenif.bank_name.$invalid && formbenif.$submitted }">
                         <label class="form-title">Bank Detail</label>
                         <select class="form-control form-select" ng-model="benif.bank_name" name="bank_name" required="required" ng-change="getBankDetails(benif.bank_name)">
