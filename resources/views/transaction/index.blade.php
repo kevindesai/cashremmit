@@ -5,6 +5,7 @@
 <h1>Transactions</h1>
 @endsection
 @section('content')
+<div class="loader"></div>
 <div class="container table table-responsive">
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
@@ -92,17 +93,15 @@
             e.preventDefault();
             if (confirm('Are you sure ?')) {
                 var id = $(this).attr('data-id');
-//                var ajaxdata = {};
-//                ajaxdata['from'] = $('.fromVal').val();
-//                ajaxdata['to'] = $('.toVal').val();
-//                ajaxdata['amount'] = '1';
-//                ajaxdata['web'] = '1';
+
+    $('.se-pre-con').show();
                 $.ajax({
                     type: "GET",
                     url: "{{ url('/admin/makeTransaction') }}" + "/" + id,
                     dataType: 'json',
                     success: function (data) {
                         alert(data.message);
+                        $('.se-pre-con').hide();
                         if (data.status != '-1') {
                             window.location.reload();
                         }

@@ -35,6 +35,7 @@
     </head>
 
     <body class="animated-content infobar-overlay">
+<div class="se-pre-con" style="display:none;"></div>
 
         <header id="topnav" class="navbar navbar-default navbar-fixed-top" role="banner">
 

@@ -118,6 +118,17 @@ class PoliAPIController extends Api {
         $url = url('/') . '/#/polinudge/' . base64_encode($_REQUEST['token']);
         return redirect($url);
     }
+    public function currencyConvert($from,$to,$amount){
+            $data = file_get_contents("https://www.google.com/finance/converter?a=$amount&from=$from&to=$to");
+            preg_match("/<span class=bld>(.*)<\/span>/", $data, $converted);
+            
+            if (isset($converted[1]))
+                 $converted = preg_replace("/[^0-9.]/", "", $converted[1]);
+            else
+                $converted = $amount;
+
+            return number_format(round($converted, 3), 2);
+    }
 
     public function initiatetransaction(Request $request) {
         $this->_auth = JWTAuth::toUser(JWTAuth::getToken());
@@ -125,6 +136,7 @@ class PoliAPIController extends Api {
         $baseUrl = url('/');
         $inputs = $request->all();
         $amount = (float) $inputs["amount"] + (float) $inputs["adminfee"] - (float) $inputs["discount"];
+        
         $beginTransaction = array(
             'recipient_id' => $inputs["recipient_id"],
             'user_id' => $this->_auth->id,
@@ -133,7 +145,8 @@ class PoliAPIController extends Api {
             'discount' => (float) $inputs["discount"],
             'status' => 'pending',
             'currency_code' => $inputs["CurrencyCode"],
-            'transaction_by' => 'poli'
+            'transaction_by' => 'poli',
+            'transfer_amount'=>$this->currencyConvert($inputs["CurrencyCode"],'NGN',$inputs["amount"])
         );
 
         $transaction = \App\Transactions::create($beginTransaction);

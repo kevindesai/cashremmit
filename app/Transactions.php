@@ -8,6 +8,9 @@ use Flutterwave\Flutterwave;
 use Flutterwave\Countries;
 use Flutterwave\Currencies;
 
+use Mail;
+use Aloha\Twilio\Facades\Twilio as Twilio;
+
 class Transactions extends Model {
 
     /**
@@ -29,7 +32,7 @@ class Transactions extends Model {
      *
      * @var array
      */
-    protected $fillable = ['switch_transaction_id', 'switch_response', 'switch_status', 'discount', 'adminfee', 'recipient_id', 'user_id', 'amount', 'response', 'status', 'currency_code', 'transaction_by', 'transactionid', 'token'];
+    protected $fillable = ['transfer_amount','switch_transaction_id', 'switch_response', 'switch_status', 'discount', 'adminfee', 'recipient_id', 'user_id', 'amount', 'response', 'status', 'currency_code', 'transaction_by', 'transactionid', 'token'];
     protected $appends = array('receipentname', 'username');
 
     public function getReceipentnameAttribute() {
@@ -69,6 +72,17 @@ class Transactions extends Model {
         }
 
         return json_decode($response);
+    }
+
+
+
+    public function currencyConvert($from,$to,$amount){
+            $data = file_get_contents("https://www.google.com/finance/converter?a=$amount&from=$from&to=$to");
+            preg_match("/<span class=bld>(.*)<\/span>/", $data, $converted);
+            if (isset($converted[1]))
+                return $converted = preg_replace("/[^0-9.]/", "", $converted[1]);
+            else
+                return $amount;
     }
 
     public function switchTransfer() {
@@ -138,7 +152,7 @@ class Transactions extends Model {
         if ($result4->isSuccessfulResponse()) {
 //          $this->switch_transaction_id = 'trxid';
             $this->switch_status = 'success';
-            /*
+            
               $getUserDetail = $this->user;
               $UserMob = $getUserDetail->mobile_no;
               $UserName = $getUserDetail->first_name . ' ' . $getUserDetail->last_name;
@@ -148,31 +162,31 @@ class Transactions extends Model {
               $RecipentName = $getRecipentDetail->first_name . ' ' . $getRecipentDetail->last_name;
 
 
-              $UserMsg = "You have sent " . $this->amount . " aud to " . $RecipentName . ". .Please contact support in case of any query.";
+              $UserMsg = $RecipentName." have received " . $this->transfer_amount . " NGN from you ";
 
-              $RecipentMsg = $UserName . " have sent you " . $this->amount . " aud via CashRemit. This will be credit to your bank account within 2 working days.";
-              $toemail = $this->user->email;
+              $RecipentMsg = "Your account has been creadited by " . $this->transfer_amount . " NGN by ".$UserName." via CashRemit. ";
+              $toemail = $getRecipentDetail->email;
               $data = array(
               'name' => $this->username,
               'rec_name' => $this->receipentname,
-              'currency' => $this->currency_code,
-              'amount' => $this->amount,
+              'currency' => 'NGN',
+              'amount' => $this->transfer_amount,
               "toemail" => $toemail
               );
 
               try {
-              Mail::send('emails.successtransfer', array("data" => $data), function ($message) use ($data) {
+              Mail::send('emails.successPayment', array("data" => $data), function ($message) use ($data) {
 
               $message->from('ravi@atoatechnologies.com', 'Cash Remit');
 
               $message->to($data["toemail"])->subject('Cashremit Transfer successfull');
               });
 
-              Twilio::message('+' . $UserMob, $UserMsg);
-              Twilio::message('+' . $RecipentMob, $RecipentMsg);
+              // Twilio::message('+' . $UserMob, $UserMsg);
+              // Twilio::message('+' . $RecipentMob, $RecipentMsg);
               } catch (Exception $e) {
 
-              } */
+              } 
             /* $getRecipentDetail = \App\RecipientMaster::find($trensaction->recipient_id);
               $RecipentMob = $getRecipentDetail->mobile_no; */
         } else {
