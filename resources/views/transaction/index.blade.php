@@ -61,10 +61,15 @@
                     <td>
                         <a href="{{ url('/admin/transactions/' . $item->id) }}" class="btn btn-success btn-xs" title="View User"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
                         <?php
-                        if ($item->status == 'success' && $item->switch_status != 'success') {
+                        if ($item->status == 'success' && $item->switch_status != 'success' && $item->user->is_verified == '1') {
                             ?>
                             <a href="javascript:;" class="transfer label label-primary" data-id="<?php echo $item->id; ?>">Process Payment</a>
                             <?php
+                        }
+                        if($item->user->is_verified != '1' && $item->switch_status != 'success'){
+                        ?>
+                            <a href="javascript:;" class="label label-orange" >Doc. Pending</a>
+                            <?php    
                         }
                         if ($item->switch_status == 'success') {
                             ?>
