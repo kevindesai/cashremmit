@@ -23,7 +23,7 @@ class TransactionController extends Controller {
     public function index() {
 //        $searchTerm = Input::get('search', '');
 //        $transferrate = TransferRate::SearchByKeyword($searchTerm)->paginate(16);
-        $transaction = Transactions::where('status','<>','pending')->paginate(15);
+        $transaction = Transactions::where('status','<>','pending')->orderBy('id', 'DESC')->paginate(15);
         return view('transaction.index', compact('transaction'));
     }
 

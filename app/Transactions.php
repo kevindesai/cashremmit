@@ -7,7 +7,6 @@ use Flutterwave\Disbursement;
 use Flutterwave\Flutterwave;
 use Flutterwave\Countries;
 use Flutterwave\Currencies;
-
 use Mail;
 use Aloha\Twilio\Facades\Twilio as Twilio;
 
@@ -32,7 +31,7 @@ class Transactions extends Model {
      *
      * @var array
      */
-    protected $fillable = ['transfer_amount','switch_transaction_id', 'switch_response', 'switch_status', 'discount', 'adminfee', 'recipient_id', 'user_id', 'amount', 'response', 'status', 'currency_code', 'transaction_by', 'transactionid', 'token'];
+    protected $fillable = ['transfer_amount', 'switch_transaction_id', 'switch_response', 'switch_status', 'discount', 'adminfee', 'recipient_id', 'user_id', 'amount', 'response', 'status', 'currency_code', 'transaction_by', 'transactionid', 'token'];
     protected $appends = array('receipentname', 'username');
 
     public function getReceipentnameAttribute() {
@@ -74,15 +73,13 @@ class Transactions extends Model {
         return json_decode($response);
     }
 
-
-
-    public function currencyConvert($from,$to,$amount){
-            $data = file_get_contents("https://www.google.com/finance/converter?a=$amount&from=$from&to=$to");
-            preg_match("/<span class=bld>(.*)<\/span>/", $data, $converted);
-            if (isset($converted[1]))
-                return $converted = preg_replace("/[^0-9.]/", "", $converted[1]);
-            else
-                return $amount;
+    public function currencyConvert($from, $to, $amount) {
+        $data = file_get_contents("https://www.google.com/finance/converter?a=$amount&from=$from&to=$to");
+        preg_match("/<span class=bld>(.*)<\/span>/", $data, $converted);
+        if (isset($converted[1]))
+            return $converted = preg_replace("/[^0-9.]/", "", $converted[1]);
+        else
+            return $amount;
     }
 
     public function switchTransfer() {
@@ -134,7 +131,7 @@ class Transactions extends Model {
 //If Validation step 2 is successful, an account token is returned, you save the account token
 //You will need the account token each time you want to disburse funds
         $accountToken = $response3['data']['accounttoken'];
-        $amount = $this->amount;
+        $amount = $this->transfer_amount;
 
         $uniqueRef = sprintf('%05d', $this->id) . "-" . time() . "-" . rand(1000, 99999); //This reference has to be unique
         $senderName = "Godswill Okwara";
@@ -145,48 +142,52 @@ class Transactions extends Model {
             "recipientAccount" => $this->receptient->account_number, //Make sure you havent added this account before
             "recipientName" => $this->receipentname
         ];
-        $narration = "TR/" . $this->amount . "/TO/" . $this->receipentname;
+        $narration = "TR/" . $this->transfer_amount . "/TO/" . $this->receipentname;
         $result4 = Disbursement::send($accountToken, $uniqueRef, $amount, $narration, $senderName, $destination);
         $response4 = $result4->getResponseData();
 
         if ($result4->isSuccessfulResponse()) {
 //          $this->switch_transaction_id = 'trxid';
             $this->switch_status = 'success';
-            
-              $getUserDetail = $this->user;
-              $UserMob = $getUserDetail->mobile_no;
-              $UserName = $getUserDetail->first_name . ' ' . $getUserDetail->last_name;
 
-              $getRecipentDetail = $this->receptient;
-              $RecipentMob = $getRecipentDetail->mobile_no;
-              $RecipentName = $getRecipentDetail->first_name . ' ' . $getRecipentDetail->last_name;
+            $getUserDetail = $this->user;
+            $UserMob = $getUserDetail->mobile_no;
+            $UserName = $getUserDetail->first_name . ' ' . $getUserDetail->last_name;
+
+            $getRecipentDetail = $this->receptient;
+            $RecipentMob = $getRecipentDetail->mobile_no;
+            $RecipentName = $getRecipentDetail->first_name . ' ' . $getRecipentDetail->last_name;
 
 
-              $UserMsg = $RecipentName." have received " . $this->transfer_amount . " NGN from you ";
+            $UserMsg = $RecipentName . " have received " . $this->transfer_amount . " NGN from you ";
 
-              $RecipentMsg = "Your account has been creadited by " . $this->transfer_amount . " NGN by ".$UserName." via CashRemit. ";
-              $toemail = $getRecipentDetail->email;
-              $data = array(
-              'name' => $this->username,
-              'rec_name' => $this->receipentname,
-              'currency' => 'NGN',
-              'amount' => $this->transfer_amount,
-              "toemail" => $toemail
-              );
+            $RecipentMsg = "Your account has been creadited by " . $this->transfer_amount . " NGN by " . $UserName . " via CashRemit. ";
+            $toemail = $getRecipentDetail->email;
+            $data = array(
+                'name' => $this->username,
+                'rec_name' => $this->receipentname,
+                'currency' => 'NGN',
+                'amount' => $this->transfer_amount,
+                "toemail" => $toemail
+            );
 
-              try {
-              Mail::send('emails.successPayment', array("data" => $data), function ($message) use ($data) {
+            try {
+                if ($toemail != '' || $toemail != null) {
+                    Mail::send('emails.successPayment', array("data" => $data), function ($message) use ($data) {
 
-              $message->from('ravi@atoatechnologies.com', 'Cash Remit');
+                        $message->from('ravi@atoatechnologies.com', 'Cash Remit');
 
-              $message->to($data["toemail"])->subject('Cashremit Transfer successfull');
-              });
+                        $message->to($data["toemail"])->subject('Cashremit Transfer successfull');
+                    });
+                }
 
-              // Twilio::message('+' . $UserMob, $UserMsg);
-              // Twilio::message('+' . $RecipentMob, $RecipentMsg);
-              } catch (Exception $e) {
-
-              } 
+                if($UserMob)
+                 Twilio::message('+' . $UserMob, $UserMsg);
+                if($RecipentMob)
+                 Twilio::message('+' . $RecipentMob, $RecipentMsg);
+            } catch (Exception $e) {
+                
+            }
             /* $getRecipentDetail = \App\RecipientMaster::find($trensaction->recipient_id);
               $RecipentMob = $getRecipentDetail->mobile_no; */
         } else {
