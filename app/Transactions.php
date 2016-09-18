@@ -79,7 +79,7 @@ class Transactions extends Model {
         if (isset($converted[1]))
             return $converted = preg_replace("/[^0-9.]/", "", $converted[1]);
         else
-            return $amount;
+            return preg_replace("/[^0-9.]/", "", $amount);
     }
 
     public function switchTransfer() {
@@ -131,7 +131,7 @@ class Transactions extends Model {
 //If Validation step 2 is successful, an account token is returned, you save the account token
 //You will need the account token each time you want to disburse funds
         $accountToken = $response3['data']['accounttoken'];
-        $amount = $this->transfer_amount;
+        $amount = preg_replace("/[^0-9.]/", "", $this->transfer_amount);
 
         $uniqueRef = sprintf('%05d', $this->id) . "-" . time() . "-" . rand(1000, 99999); //This reference has to be unique
         $senderName = "Godswill Okwara";
