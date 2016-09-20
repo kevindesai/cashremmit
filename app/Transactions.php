@@ -159,15 +159,17 @@ class Transactions extends Model {
             $RecipentName = $getRecipentDetail->first_name . ' ' . $getRecipentDetail->last_name;
 
 
-            $UserMsg = $RecipentName . " have received " . $this->transfer_amount . " NGN from you ";
+//            $UserMsg = $RecipentName . " have received " . $this->transfer_amount . " NGN from you ";
+            $UserMsg = "Your Money Transfer of NGN " . $this->transfer_amount . " reference No: ".$uniqueRef." to Nigeria is completed Now, Thank you for using CashRemit.";
 
-            $RecipentMsg = "Your account has been creadited by " . $this->transfer_amount . " NGN by " . $UserName . " via CashRemit. ";
+            $RecipentMsg = "Your account has been creadited NGN " . $this->transfer_amount . " by " . $UserName . " via CashRemit. ";
             $toemail = $getRecipentDetail->email;
             $data = array(
                 'name' => $this->username,
                 'rec_name' => $this->receipentname,
                 'currency' => 'NGN',
                 'amount' => $this->transfer_amount,
+                'msg'=>$RecipentMsg,
                 "toemail" => $toemail
             );
 

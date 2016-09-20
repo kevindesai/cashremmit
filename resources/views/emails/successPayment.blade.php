@@ -4,7 +4,11 @@
 </tr>
 <tr>
 <td>
-	<p>Your have received <?php echo $data["currency"]; ?> <?php echo $data["amount"]; ?> from  <?php echo $data["name"]; ?>  </p>
+	<p>
+        <?php 
+        echo $data['msg'];
+        ?>
+        </p>
 </td>
 </tr>
 <tr>

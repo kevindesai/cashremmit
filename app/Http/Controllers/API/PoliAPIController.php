@@ -8,7 +8,6 @@ namespace App\Http\Controllers\API;
  * and open the template in the editor.
  */
 
-
 use App\Http\Requests;
 use App\Http\Controllers\Api;
 use Illuminate\Http\Request;
@@ -29,7 +28,7 @@ class PoliAPIController extends Api {
 
     public function success($id) {
 
-     
+
 
         $trensaction = \App\Transactions::find($id);
         $trensaction->status = 'success';
@@ -43,11 +42,12 @@ class PoliAPIController extends Api {
         $RecipentName = $getRecipentDetail->first_name . ' ' . $getRecipentDetail->last_name;
 
 
-        $UserMsg = "You have sent " . $trensaction->amount . " aud to " . $RecipentName . ". It will be credit to your bank account within 2 working days.Please contact support in case of any query.";
+//        $UserMsg = "You have sent " . $trensaction->amount . " aud to " . $RecipentName . ". It will be credit to your bank account within 2 working days.Please contact support in case of any query.";
+        $UserMsg = "You have initiated a transfer of NGN " . $trensaction->transfer_amount . " to " . $RecipentName . ", you will be notified when the payment is been processed. Thank you";
 
         /* $getRecipentDetail = \App\RecipientMaster::find($trensaction->recipient_id);
           $RecipentMob = $getRecipentDetail->mobile_no; */
-        $RecipentMsg = $UserName . " have sent you " . $trensaction->amount . " aud via CashRemit. This will be credit to your bank account within 2 working days.";
+        $RecipentMsg = $UserName . " have sent you NGN " . $trensaction->transfer_amount . " via CashRemit. This will be credit to your bank account within 2 working days.";
 
         $trensaction->response = json_encode(\App\Transactions::getTransactionDetail($token));
         $trensaction->token = $token;
@@ -59,34 +59,51 @@ class PoliAPIController extends Api {
             'rec_name' => $trensaction->receipentname,
             'currency' => $trensaction->currency_code,
             'amount' => $trensaction->amount,
+            'msg'=>$UserMsg,
             "toemail" => $toemail
         );
 
         try {
-            Mail::send('emails.successtransfer', array("data" => $data), function ($message) use ($data) {
+            if ($toemail) {
+                Mail::send('emails.successtransfer', array("data" => $data), function ($message) use ($data) {
 
-                $message->from('ravi@atoatechnologies.com', 'Cash Remit');
+                    $message->from('ravi@atoatechnologies.com', 'Cash Remit');
 
-                $message->to($data["toemail"])->subject('Cashremit Transfer successfull');
-            });
+                    $message->to($data["toemail"])->subject('Cashremit Transfer successfull');
+                });
+                
+            }
+            if ($getRecipentDetail->email) {
+                
+                $data = array();
+                $data = array(
+                    'toemail' => $getRecipentDetail->email,
+                    'msg' => $RecipentMsg
+                );
+                
+                Mail::send('emails.successtransfer1', array("data" => $data), function ($message) use ($data) {
 
-            Twilio::message('+' . $UserMob, $UserMsg);
-            Twilio::message('+' . $RecipentMob, $RecipentMsg);
+                    $message->from('ravi@atoatechnologies.com', 'Cash Remit');
+
+                    $message->to($data["toemail"])->subject('Cashremit Transfer initiated');
+                });
+                
+            }
+            if ($UserMob)
+                Twilio::message('+' . $UserMob, $UserMsg);
+            if ($RecipentMob)
+                Twilio::message('+' . $RecipentMob, $RecipentMsg);
         } catch (Exception $e) {
-            
-        }       
+            print_r($e);
+        }
 
-        if($getUserDetail->is_verified=='1')
-        {
-            $url = url('/') . '/#/polisuccess/' .base64_encode($token);
-            return redirect($url);    
+        if ($getUserDetail->is_verified == '1') {
+            $url = url('/') . '/#/polisuccess/' . base64_encode($token);
+            return redirect($url);
+        } else {
+            $url = url('/') . '/#/successbutnotverified/' . base64_encode($token);
+            return redirect($url);
         }
-        else
-        {
-                $url = url('/') . '/#/successbutnotverified/' .base64_encode($token);
-                return redirect($url);  
-        }
-        
     }
 
     public function failure($id) {
@@ -118,16 +135,17 @@ class PoliAPIController extends Api {
         $url = url('/') . '/#/polinudge/' . base64_encode($_REQUEST['token']);
         return redirect($url);
     }
-    public function currencyConvert($from,$to,$amount){
-            $data = file_get_contents("https://www.google.com/finance/converter?a=$amount&from=$from&to=$to");
-            preg_match("/<span class=bld>(.*)<\/span>/", $data, $converted);
-            
-            if (isset($converted[1]))
-                 $converted = preg_replace("/[^0-9.]/", "", $converted[1]);
-            else
-                $converted = $amount;
 
-            return number_format(round($converted, 3), 2);
+    public function currencyConvert($from, $to, $amount) {
+        $data = file_get_contents("https://www.google.com/finance/converter?a=$amount&from=$from&to=$to");
+        preg_match("/<span class=bld>(.*)<\/span>/", $data, $converted);
+
+        if (isset($converted[1]))
+            $converted = preg_replace("/[^0-9.]/", "", $converted[1]);
+        else
+            $converted = $amount;
+
+        return number_format(round($converted, 3), 2);
     }
 
     public function initiatetransaction(Request $request) {
@@ -136,7 +154,7 @@ class PoliAPIController extends Api {
         $baseUrl = url('/');
         $inputs = $request->all();
         $amount = (float) $inputs["amount"] + (float) $inputs["adminfee"] - (float) $inputs["discount"];
-        
+
         $beginTransaction = array(
             'recipient_id' => $inputs["recipient_id"],
             'user_id' => $this->_auth->id,
@@ -146,7 +164,7 @@ class PoliAPIController extends Api {
             'status' => 'pending',
             'currency_code' => $inputs["CurrencyCode"],
             'transaction_by' => 'poli',
-            'transfer_amount'=>$this->currencyConvert($inputs["CurrencyCode"],'NGN',$inputs["amount"])
+            'transfer_amount' => $this->currencyConvert($inputs["CurrencyCode"], 'NGN', $inputs["amount"])
         );
 
         $transaction = \App\Transactions::create($beginTransaction);
@@ -225,4 +243,5 @@ class PoliAPIController extends Api {
         }
         echo json_encode($response);
     }
+
 }
