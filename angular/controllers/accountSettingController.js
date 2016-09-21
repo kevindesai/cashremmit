@@ -37,18 +37,20 @@ app.controller('AccountSettingController', ['$scope', '$http', '$rootScope', 'us
             url = url + "/" + userService.userInfo.id;
             var date = new Date(userData.dob);
             userData.dob = date.toString('dd-MM-yy');
-            console.log(userData);
+            //console.log(userData);
+            delete userData.password;
+            //console.log(userData);
             var response = myFactory.httpMethodCall(method, url, userData);
-            console.log(response);
+            //console.log(response);
             response.success(function(data) {
                 if (data.status == 1) {
                     userService.UpdateInfo(userData);
                 } else {
-                    console.log(data);
+                    //console.log(data);
                 }
             });
             response.error(function(error) {
-                console.log(error);
+               // console.log(error);
             });
             $scope.isupdate = false;
         }

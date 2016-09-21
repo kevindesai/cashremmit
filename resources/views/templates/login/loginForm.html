@@ -1,14 +1,15 @@
 <form name="loginForm" novalidate>
     <ul class="mainForm_wraper opt-button"> 
-        <p>Login to Cash Remit</p>  
+        <p>Login to Cash Remit</p>
+        <div class="alert alert-danger" role="alert" ng-if="invalidusername">{{invalidMsg}}</div>
         <li class="form-wrapper">
             <div class="Reg_form" ng-class="{ 'has-error' : loginForm.email.$invalid && !loginForm.email.$pristine }">
-                <input type="email" name="email" class="" id="text1" placeholder="Email Address" ng-model="loginInfo.email">
-                <p ng-show="loginForm.email.$invalid && !loginForm.email.$pristine" class="help-block">Enter a valid email.</p>
+                <input type="email" name="email" class="" id="text1" placeholder="Email Address" ng-model="loginInfo.email" validator="required,email">
+                <!--<p ng-show="loginForm.email.$invalid " class="help-block">Enter a valid email.</p>-->
                 <!--    <p>Please input your username</p> -->
             </div>    
             <div class="Reg_form" ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine }">
-                <input type="password" name="password" class="" ng-model="loginInfo.password" required id="text2" placeholder="Password">
+                <input type="password" name="password" class="" ng-model="loginInfo.password" required id="text2" placeholder="Password" validator="required">
                 <!--   <p>Please enter your valid password</p> -->
             </div>
         </li>
@@ -26,7 +27,7 @@
         </li>
             <!-- <p class="sl-lg"><a href="">Forgot Password?</a></p> -->
         <li class="form-wrapper button-wrap">
-            <input type="submit" ng-disabled="loginForm.$invalid" ng-click="loginUser()" class="GreenBtn" value="LOG IN">
+            <input type="submit" validation-submit="loginForm" ng-click="loginUser()" class="GreenBtn" value="LOG IN">
         </li>
             <div class="sl-msg">
                 <p><i class="fa fa-lock" aria-hidden="true"></i> 100% SECURE & AUTH AUTHORISED</p>

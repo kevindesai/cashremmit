@@ -148,6 +148,7 @@ app.controller('LoginController', function ($scope, $http, $location, myFactory,
                 $location.path('/payment');
             } else if (data.status == 0) {
                 $scope.invalidusername = true;
+                $scope.invalidMsg = data.message;
             }
         });
         response.error(function (error) {

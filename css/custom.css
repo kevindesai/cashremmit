@@ -2142,6 +2142,11 @@ Loading Amination
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+.validation-invalid{
+    font-size: 10px;
+    color:#f00;
+    text-align: left !important;
+}
 
 
 
