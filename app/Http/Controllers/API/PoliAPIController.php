@@ -94,7 +94,7 @@ class PoliAPIController extends Api {
             if ($RecipentMob)
                 Twilio::message('+' . $RecipentMob, $RecipentMsg);
         } catch (Exception $e) {
-            print_r($e);
+            //print_r($e);
         }
 
         if ($getUserDetail->is_verified == '1') {
