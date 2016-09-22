@@ -177,7 +177,7 @@ class Transactions extends Model {
                 if ($toemail != '' || $toemail != null) {
                     Mail::send('emails.successPayment', array("data" => $data), function ($message) use ($data) {
 
-                        $message->from('ravi@atoatechnologies.com', 'Cash Remit');
+                        $message->from('support@cashremit.com.au', 'Cash Remit');
 
                         $message->to($data["toemail"])->subject('Cashremit Transfer successfull');
                     });
