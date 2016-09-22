@@ -67,7 +67,7 @@ class PoliAPIController extends Api {
             if ($toemail) {
                 Mail::send('emails.successtransfer', array("data" => $data), function ($message) use ($data) {
 
-                    $message->from('ravi@atoatechnologies.com', 'Cash Remit');
+                    $message->from('support@cashremit.com.au', 'Cash Remit');
 
                     $message->to($data["toemail"])->subject('Cashremit Transfer successfull');
                 });
@@ -83,7 +83,7 @@ class PoliAPIController extends Api {
                 
                 Mail::send('emails.successtransfer1', array("data" => $data), function ($message) use ($data) {
 
-                    $message->from('ravi@atoatechnologies.com', 'Cash Remit');
+                    $message->from('support@cashremit.com.au', 'Cash Remit');
 
                     $message->to($data["toemail"])->subject('Cashremit Transfer initiated');
                 });
