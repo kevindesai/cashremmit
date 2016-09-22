@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div>
-                <a class="navbar-brand" href="#/"><img src="images/Logo.png" /></a>
+                <a class="navbar-brand" href="javascript:void(0);"><img src="images/Logo.png" /></a>
             </div>
             <div class="col-md-offset-8 col-md-3 col-sm-offset-7  col-sm-3 ">
                 <p class="customer-name">{{globalName}} {{globalLastName}}</p>
@@ -10,7 +10,8 @@
             </div>
             <div class="col-md-1 col-sm-2 pl0 customerimg">
                 <img src="images/p-3.jpg" class="img-responsive img-circle customer-thumb">
-                <a ng-click='doLogout()' class="logout">logout</a>
+                <a ng-click='doLogout()' href="javascript:void(0);" class="logout">logout</a>
+                <a href="#/accountSetting" class="logout">My Account</a>
             </div>
         </div>
         <div class="row">
@@ -18,7 +19,7 @@
                 <ul class="top-btns">
                     <li><a href="#/transfarDetail" class="normal-btn white">Transfer Details</a></li>
                     <li><a href="#/beneficiaries" class="normal-btn white">Beneficiaries</a></li>
-                    <li><a href="#/accountSetting" class="normal-btn white">Accounts & Settings</a></li>
+                    <li><a href="#/payment" class="normal-btn white">Dashboard</a></li>
                     <!--<li ng-if="isLogin==true"><a class="normal-btn white" ng-click='doLogout()'>Logout</a></li>-->
 
                 </ul>

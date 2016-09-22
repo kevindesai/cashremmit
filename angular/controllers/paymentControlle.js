@@ -147,4 +147,30 @@ app.controller('PaymentController', ['$scope', '$http', '$rootScope', 'userServi
             }
         }
         
+    $scope.getTransfers = function(){
+        $scope.transfer = '';
+    userService.getDataFromSession();
+    $scope.userInfo = userService.userInfo;
+
+    method = "GET";
+    url = $rootScope.getTxn + "?token=" + $scope.userInfo.token;
+    var methodData = {};
+    var response = myFactory.httpMethodCall(method, url, methodData);
+    response.success(function (data) {
+        console.log(data);
+        if (data.status == 1) {
+            $scope.transfer = data.data;
+
+        } else if (data.status == -1) {
+
+            $scope.doLogout();
+        }
+    });
+    response.error(function (error) {
+        console.log(error);
+    });
+         
+    }    
+    $scope.getTransfers();
+        
     }]);

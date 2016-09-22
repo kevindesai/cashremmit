@@ -4,6 +4,16 @@ var app = angular.module('main-App', ['ngRoute', 'angularUtils.directives.dirPag
 //$location.protocol() + "://" + $location.host();
 app.run(function($rootScope, $location,$route,$http,myFactory) {
     
+    $rootScope.stateIsLoading = false;
+    $rootScope.$on('$routeChangeStart', function() {
+        $rootScope.stateIsLoading = true;
+    });
+    $rootScope.$on('$routeChangeSuccess', function() {
+        $rootScope.stateIsLoading = false;
+    });
+    $rootScope.$on('$routeChangeError', function() {
+        //catch error
+    });
     
     $rootScope.baseurl = $location.absUrl();
 //    $rootScope.apiUrl = $rootScope.baseurl.replace("/#","");

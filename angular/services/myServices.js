@@ -126,3 +126,8 @@ app.factory('countrylistService',['$rootScope','$http',function($rootScope,$http
         
         
 }]);
+app.filter('toDate', function() {
+    return function(stringDate) {
+        return new Date(stringDate);
+    };
+});

@@ -12,7 +12,11 @@ app.controller('AccountSettingController', ['$scope', '$http', '$rootScope', 'us
         }
         userService.getDataFromSession();
         $scope.userInfo = userService.userInfo;
-        console.log($scope.userInfo);
+        var dobarray = $scope.userInfo.dob.split('-');
+        //console.log(dobarray);
+        $scope.userInfo.DayOfBirth = dobarray[2];
+        $scope.userInfo.MonthOfBirth = dobarray[1];
+        $scope.userInfo.YearOfBirth = dobarray[0];
         $scope.isupdate = false;
         $scope.getCountry = function () {
             method = "GET";
@@ -45,9 +49,12 @@ app.controller('AccountSettingController', ['$scope', '$http', '$rootScope', 'us
             userData._method = "PUT";
             var url = $rootScope.updateApi;
             url = url + "/" + userService.userInfo.id;
-            var date = new Date(userData.dob);
-            userData.dob = date.toString('dd-MM-yy');
-            //console.log(userData);
+            userData.dob = userData.YearOfBirth+"-"+userData.MonthOfBirth+"-"+userData.DayOfBirth;
+            console.log(userData);
+            //return false;
+            delete userData.DayOfBirth;
+            delete userData.MonthOfBirth;
+            delete userData.YearOfBirth;
             delete userData.password;
             //console.log(userData);
             var response = myFactory.httpMethodCall(method, url, userData);
