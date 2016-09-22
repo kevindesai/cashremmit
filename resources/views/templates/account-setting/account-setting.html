@@ -100,7 +100,36 @@
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-10 pr0">
                         <p class="change-value" ng-hide="isupdate" >{{userInfo.dob | date : yyyy-MM-dd }} </p> 
-                        <input type="date" class="change-value datepicker"  ng-model="userInfo.dob" ng-show="isupdate" /> 
+                        <!--<input type="date" class="change-value datepicker"  ng-model="userInfo.dob" ng-show="isupdate" />-->
+                          <div class="col-md-4" ng-show="isupdate" >
+                          <label>Day</label>   
+                          <select class="form-control" id="DateOfBirth_Day" name="DateOfBirthDay" required ng-model="userInfo.DayOfBirth">
+                            <option ng-repeat="i in getNumber(days) track by $index" value="{{$index+1}}" ng-selected="$first">{{$index+1}}</option>
+                          </select>
+                      </div>
+                      <div class="col-md-4" ng-show="isupdate" >
+                          <label>Month</label>
+                          <select class="form-control" name="card-holder-name" ng-model="userInfo.MonthOfBirth" placeholder="MM" required="required">
+                              <option value="01">January</option>
+                              <option value="02">February</option>
+                              <option value="03">March</option>
+                              <option value="04">April</option>
+                              <option value="05">May</option>
+                              <option value="06">June</option>
+                              <option value="07">July</option>
+                              <option value="08">August</option>
+                              <option value="09">September</option>
+                              <option value="10">October</option>
+                              <option value="11">November</option>
+                              <option value="12">December</option>
+                          </select>
+                      </div>
+                      <div class="col-md-4" ng-show="isupdate" >
+                          <label>Year</label>
+                          <select class="form-control" id="DateOfBirth_Day" required ng-model="userInfo.YearOfBirth">
+                            <option ng-repeat="j in years track by $index" value="{{j}}">{{j}}</option>
+                          </select>
+                      </div>
                     </div>
 
                 </div>

@@ -1,5 +1,15 @@
 app.controller('AccountSettingController', ['$scope', '$http', '$rootScope', 'userService', 'myFactory',
     function($scope, $http, $rootScope, userService, myFactory) {
+        $scope.days= 31;
+        $scope.getNumber = function(num) {
+          return new Array(num);   
+        }
+         $scope.totalyears = 150;
+        $scope.years = [];
+        var currentYear = new Date().getFullYear();
+        for (var i = currentYear; i > currentYear - $scope.totalyears; i--) {
+            $scope.years.push(i - 1);
+        }
         userService.getDataFromSession();
         $scope.userInfo = userService.userInfo;
         console.log($scope.userInfo);

@@ -168,13 +168,16 @@ app.controller('LoginController', function ($scope, $http, $location, myFactory,
         response.success(function (data) {
             // success callback
             if (data.status == 1) {
-                $rootScope.userData = data.data;
-                userService.saveDataInSession(data.data);
-
-                angular.element('#myModal').modal('hide');
-                angular.element('body').removeClass('modal-open');
-                angular.element('.modal-backdrop').remove();
-                $location.path('/payment');
+//                console.log("Register");
+//                console.log(data);
+//                console.log("/Register");
+//                $rootScope.userData = data.data;
+//                userService.saveDataInSession(data.data);
+                   $scope.suceessregister = true;
+//                angular.element('#myModal').modal('hide');
+//                angular.element('body').removeClass('modal-open');
+//                angular.element('.modal-backdrop').remove();
+//                $location.path('/payment');
             } else if (data.status == 0) {
                 console.log(data.data.email);
                 $scope.registrationerrors = true;
