@@ -6,7 +6,7 @@
         <div class="col-md-12">
           <h2>CashRemit Document verification</h2>
         </div>
-        <div class="col-md-8 startVerification">
+        <div class="col-md-6 startVerification">
             <h4>Choose document Type</h4>
             <div class="dropdown">
               <button class="btn cashRemit-btn1 dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -20,10 +20,11 @@
               </ul>
             </div>
          </div>
-         <div class="col-md-4">
+         <div class="col-md-6 text-right">
            <h4>Document Sample</h4>
              <div class="spacemen">
-              <span><img src="images/WA.jpg"></span>
+              <span ng-if="docName=='Driving Licence'"><img src="images/WA.jpg"></span>
+              <span ng-if="docName=='Passport'"><img src="images/passport.png"></span>
           </div>
         </div>
     </div>

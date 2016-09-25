@@ -167,7 +167,7 @@ class UsersAPIController extends Controller {
         $user = User::findOrFail($id);
         $inputs = $request->all();
         if (isset($inputs['password'])) {
-            $inputs['password'] = base64_encode($inputs['password']);
+            $inputs['password'] = Hash::make($inputs['password']);
         }
         $user->update($inputs);
         if ($user) {

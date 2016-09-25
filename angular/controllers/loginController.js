@@ -127,7 +127,7 @@ app.controller('LoginController', function ($scope, $http, $location, myFactory,
      * login functionality
      */
     $scope.loginMember = function (SocialUserData) {
-		
+	
         var method = 'POST';
         var url = $rootScope.loginApi;
         $scope.invalidusername = false;
@@ -161,6 +161,7 @@ app.controller('LoginController', function ($scope, $http, $location, myFactory,
      * if user exists then it will return negative response
      */
     $scope.addUser = function (SocialUserData) {
+       
         $scope.registrationerrors = false;
         var method = 'POST';
         var url = $rootScope.RegitrationApi;
@@ -173,10 +174,16 @@ app.controller('LoginController', function ($scope, $http, $location, myFactory,
 //                console.log("/Register");
 //                $rootScope.userData = data.data;
 //                userService.saveDataInSession(data.data);
-                   $scope.suceessregister = true;
+                 //  $scope.suceessregister = true;
+                 var loginData = {};
+                 loginData.email = SocialUserData.email;
+                 loginData.password = SocialUserData.password;
+                 $scope.loginMember(loginData);
 //                angular.element('#myModal').modal('hide');
 //                angular.element('body').removeClass('modal-open');
 //                angular.element('.modal-backdrop').remove();
+//                
+//                
 //                $location.path('/payment');
             } else if (data.status == 0) {
                 console.log(data.data.email);

@@ -17,6 +17,8 @@ app.controller('AccountSettingController', ['$scope', '$http', '$rootScope', 'us
         $scope.userInfo.DayOfBirth = dobarray[2];
         $scope.userInfo.MonthOfBirth = dobarray[1];
         $scope.userInfo.YearOfBirth = dobarray[0];
+        $scope.userInfo.password='';
+//        console.log($scope.userInfo);
         $scope.isupdate = false;
         $scope.getCountry = function () {
             method = "GET";
@@ -57,6 +59,7 @@ app.controller('AccountSettingController', ['$scope', '$http', '$rootScope', 'us
             delete userData.YearOfBirth;
             delete userData.password;
             //console.log(userData);
+//            return false;
             var response = myFactory.httpMethodCall(method, url, userData);
             //console.log(response);
             response.success(function(data) {
@@ -70,5 +73,32 @@ app.controller('AccountSettingController', ['$scope', '$http', '$rootScope', 'us
                // console.log(error);
             });
             $scope.isupdate = false;
+        }
+        
+        /**
+         * Update Password
+         * @param {type} userData
+         * @returns {undefined}
+         */
+        
+         $scope.updatePassword = function(userData) {
+            var method = "PUT";
+            userData._method = "PUT";
+            var url = $rootScope.updateApi;
+            url = url + "/" + userService.userInfo.id;
+//            console.log(userData);
+            if(userData.password !=""){
+            var response = myFactory.httpMethodCall(method, url, userData);
+            response.success(function(data) {
+                if (data.status == 1) {
+                    userService.UpdateInfo(userData);
+                } else {
+                    //console.log(data);
+                }
+            });
+            response.error(function(error) {
+               // console.log(error);
+            });
+            }
         }
     }]);

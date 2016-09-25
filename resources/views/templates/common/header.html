@@ -9,9 +9,25 @@
                 <p class="customer-id">Customer Id : CR_{{ globalName | limitTo:1 }}{{ globalLastName | limitTo:1 }}_{{"000000" + globaluserId.slice(-6)}}</p>
             </div>
             <div class="col-md-1 col-sm-2 pl0 customerimg">
-                <img src="images/p-3.jpg" class="img-responsive img-circle customer-thumb">
-                <a ng-click='doLogout()' href="javascript:void(0);" class="logout">logout</a>
-                <a href="#/accountSetting" class="logout">My Account</a>
+                <div class="dropdown">
+                    <a href="" class="account" >
+                        <img src="images/p-3.jpg" class="img-responsive img-circle customer-thumb profile-circle">
+                    </a>
+                    <div class="submenu" style="display: none; ">
+                        <ul class="root">
+                            <li >
+                                <a href="#/accountSetting">My Account</a>
+                            </li>
+                            <li >
+                                <a ng-click='doLogout()' href="javascript:void(0);">logout</a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+
+
+
             </div>
         </div>
         <div class="row">
@@ -49,3 +65,35 @@
         </div>
     </div>
 </nav>
+<script>
+    $(document).ready(function ()
+    {
+        $(".account").click(function ()
+        {
+            var X = $(this).attr('id');
+            if (X == 1)
+            {
+                $(".submenu").hide();
+                $(this).attr('id', '0');
+            }
+            else
+            {
+                $(".submenu").show();
+                $(this).attr('id', '1');
+            }
+        });
+        $(".submenu").mouseup(function ()
+        {
+            return false
+        });
+        $(".account").mouseup(function ()
+        {
+            return false
+        });
+        $(document).mouseup(function ()
+        {
+            $(".submenu").hide();
+            $(".account").attr('id', '');
+        });
+    });
+</script>

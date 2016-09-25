@@ -84,13 +84,14 @@ class CurrencyAPIController extends Controller {
             );
         }
 //        return number_format(round($converted, 3), 2);
-
+//
         return json_encode($response);
     }
     public function getCurrencyList(){
         
         //$countries = Country::where(array("currency_code"=>$inputs["currency_code"]))->get();
         $countries = Country::orderBy('currency_code', 'asc')
+                ->where(['status'=>'1'])
                 ->groupBy('currency_code')
                 ->get();
         if(!empty($countries)){

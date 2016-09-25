@@ -66,7 +66,8 @@
                     <input type="text" ng-model="searchTxn">
                 </div>
                 <div class="t-box row ml0 mr0 mt3" ng-repeat="payment in transfer | filter:searchTxn" ng-if="payment.transfer_amount !=''">
-                    <div class="col-md-6  pr0">
+                    <div class="col-md-6  pr0 text-left">
+                        <h4 class="text-left">{{payment.receipentname}} <br /> Ref No: {{ payment.id | minLength:10 }}</h4>
                         <div class="date">Date/Time: {{'2014-09-27 03:15:42' | toDate | date: 'medium'}}</div>
                     </div>
                     <div class="col-md-6  pl0 pr0">
@@ -105,6 +106,18 @@
                     </tr>
                 </table>
             </div>
+            <div class="promo">
+                            <a href="javascript:void(0);" ng-hide="showPromoText" ng-click="showPromoText = true">Active Promo Code</a>
+                        </div>
+                        <div class="promotext" ng-if="showPromoText">
+                            <div class="form-group has-success has-feedback">
+                                <div class="input-group">
+                                    <input type="text" ng-model="promocode" class="form-control" id="inputGroupSuccess1" aria-describedby="inputGroupSuccess1Status">
+                                    <span class="input-group-addon"><a href="javascript:void(0);" ng-click="addPromocode(promocode)">Apply</a></span>
+                                </div>
+                            </div>
+                            <p class="has-error error er" ng-if="invalidPromocode">Invalid Promocode. Please try again with new code.</p>  
+                        </div>
             <div class="continue">
                 <a ng-click="goToSelectBen()">Continue</a>
             </div>
