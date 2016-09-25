@@ -7,6 +7,15 @@
 @section('content')
 <div class="loader"></div>
 <div class="container table table-responsive">
+    <form>
+
+        <div class="col-md-2 pull-right">
+            <a href="{{ url('/admin/transaction') }}" class="btn btn-primary pull-right">Reset</a>
+        </div>
+        <div class="col-md-3 pull-right">
+            <input type="text" name="search" placeholder="TXT No." value="<?php echo $searchTerm; ?>" class="form-control">
+        </div>
+    </form>
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
             <thead>
@@ -46,17 +55,17 @@
                         <?php
                         if ($item->user->is_verified == '1') {
                             ?>
-                        <span class="label label-green">Verified</span>
+                            <span class="label label-green">Verified</span>
                             <?php
                         } else {
                             ?>
-                        <span class="label label-danger">Not Verified</span>
+                            <span class="label label-danger">Not Verified</span>
                             <?php
                         }
                         ?>
 
                     </td>
-                    <td>{{ $item->switch_transaction_id }}</td>
+                    <td>{{ sprintf('%010d', $item->id) }}</td>
                     <td>{{ $item->created_at }}</td>
                     <td>
                         <a href="{{ url('/admin/transactions/' . $item->id) }}" class="btn btn-success btn-xs" title="View User"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
@@ -66,10 +75,10 @@
                             <a href="javascript:;" class="transfer label label-primary" data-id="<?php echo $item->id; ?>">Process Payment</a>
                             <?php
                         }
-                        if($item->user->is_verified != '1' && $item->switch_status != 'success'){
-                        ?>
+                        if ($item->user->is_verified != '1' && $item->switch_status != 'success') {
+                            ?>
                             <a href="javascript:;" class="label label-orange" >Doc. Pending</a>
-                            <?php    
+                            <?php
                         }
                         if ($item->switch_status == 'success') {
                             ?>
@@ -99,7 +108,7 @@
             if (confirm('Are you sure ?')) {
                 var id = $(this).attr('data-id');
 
-    $('.se-pre-con').show();
+                $('.se-pre-con').show();
                 $.ajax({
                     type: "GET",
                     url: "{{ url('/admin/makeTransaction') }}" + "/" + id,

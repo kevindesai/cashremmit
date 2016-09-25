@@ -26,12 +26,13 @@
                     <th>S.No</th>
                     <th> 
                         {{ trans('Country Name') }} 
-                        
-                        
+
+
                     </th>
                     <th> {{ trans('Country Code') }} </th>
                     <th> {{ trans('Currency Name') }} </th>
                     <th>{{ trans('Currency Code') }}</th>
+                    <th>{{ trans('Status') }}</th>
 
                 </tr>
             </thead>
@@ -47,6 +48,20 @@
                     <td>{{ $item->country_code }}</td>
                     <td>{{ $item->currency_name }}</td>
                     <td>{{ $item->currency_code }}</td>
+                    <td>
+                        <?php
+                        if ($item->status) {
+                            ?>
+                            <a href="javascript:;" class="btn-sm btn-primary change" data-id="{{ $item->id }}" data-status="0">Active</a>    
+                            <?php
+                        } else {
+                            ?>
+                            <a href="javascript:;" class="btn-sm btn-danger-alt change" data-id="{{ $item->id }}" data-status="1">Inactive</a>    
+                            <?php
+                        }
+                        ?>
+
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
@@ -55,4 +70,34 @@
     </div>
 
 </div>
+@endsection
+
+
+
+@section('script')
+<script>
+    $(document).ready(function () {
+        $('.change').click(function (e) {
+            e.preventDefault();
+            if (confirm('Are you sure ?')) {
+                var id = $(this).attr('data-id');
+                var status = $(this).attr('data-status');
+
+                $('.se-pre-con').show();
+                $.ajax({
+                    type: "GET",
+                    url: "{{ url('/admin/changeCountryStatus') }}" + "/" + id + "/" + status,
+                    dataType: 'json',
+                    success: function (data) {
+                        alert(data.message);
+                        $('.se-pre-con').hide();
+                        if (data.status == '1') {
+                            window.location.reload();
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>
 @endsection

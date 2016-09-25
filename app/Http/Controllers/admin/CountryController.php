@@ -24,7 +24,7 @@ class CountryController extends Controller {
     public function index() {
         $searchTerm = Input::get('search', '');
         $country = Country::SearchByKeyword($searchTerm)->paginate(20);
-        return view('country.index', compact('country','searchTerm'));
+        return view('country.index', compact('country', 'searchTerm'));
     }
 
     public function rateList() {
@@ -94,12 +94,28 @@ class CountryController extends Controller {
         Session::flash('flash_message', 'Rate Saved!');
         return redirect('admin/rate/list');
     }
+
     public function destroy($id) {
         Currencyrate::destroy($id);
 
         Session::flash('flash_message', 'Rate deleted!');
 
         return redirect('admin/rate/list');
+    }
+
+    public function changeStatus($id, $status) {
+        $country = Country::findOrFail($id);
+        $response = [
+            'status' => 0,
+            'message'=>'Some error occures, Try again letter.'
+        ];
+        if ($country->update(['status' => $status])) {
+            $response = [
+                'status' => 1,
+                'message'=>'Status has been changed.'
+            ];
+        }
+        echo json_encode($response);die;
     }
 
 }

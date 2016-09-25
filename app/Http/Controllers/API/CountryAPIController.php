@@ -69,7 +69,7 @@ class CountryAPIController extends Controller {
     }
 
     public function index() {
-        $country = Country::all();
+        $country = Country::where(['status'=>'1'])->get();
         $response = array(
             'status' => '0',
             'message' => 'No data found'

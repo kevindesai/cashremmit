@@ -21,10 +21,14 @@ class TransactionController extends Controller {
      * @return void
      */
     public function index() {
-//        $searchTerm = Input::get('search', '');
-//        $transferrate = TransferRate::SearchByKeyword($searchTerm)->paginate(16);
-        $transaction = Transactions::where('status','<>','pending')->orderBy('id', 'DESC')->paginate(15);
-        return view('transaction.index', compact('transaction'));
+        $searchTerm = Input::get('search', '');
+        $no = (int) $searchTerm;
+        if (trim($searchTerm) != '') {
+            $transaction = Transactions::where('status', '<>', 'pending')->where('id', 'LIKE', '%' . $no . '%')->orderBy('id', 'DESC')->paginate(15);
+        } else {
+            $transaction = Transactions::where('status', '<>', 'pending')->orderBy('id', 'DESC')->paginate(15);
+        }
+        return view('transaction.index', compact('transaction', 'searchTerm'));
     }
 
     public function show($id) {
@@ -50,13 +54,13 @@ class TransactionController extends Controller {
                 $response = array(
                     'status' => '1',
                     'message' => 'Payment successful.',
-                    'response'=>$res
+                    'response' => $res
                 );
             } else {
                 $response = array(
                     'status' => '0',
                     'message' => 'Payment failed',
-                    'response'=>$res
+                    'response' => $res
                 );
             }
         }

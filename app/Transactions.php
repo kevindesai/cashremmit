@@ -149,7 +149,7 @@ class Transactions extends Model {
         if ($result4->isSuccessfulResponse()) {
 //          $this->switch_transaction_id = 'trxid';
             $this->switch_status = 'success';
-
+            $tNo = sprintf('%010d', $this->id);
             $getUserDetail = $this->user;
             $UserMob = $getUserDetail->mobile_no;
             $UserName = $getUserDetail->first_name . ' ' . $getUserDetail->last_name;
@@ -160,9 +160,9 @@ class Transactions extends Model {
 
 
 //            $UserMsg = $RecipentName . " have received " . $this->transfer_amount . " NGN from you ";
-            $UserMsg = "Your Money Transfer of NGN " . $this->transfer_amount . " reference No: ".$uniqueRef." to Nigeria is completed Now, Thank you for using CashRemit.";
+            $UserMsg = "Your Money Transfer of NGN " . $this->transfer_amount . " reference No: ".$tNo." to Nigeria is completed Now, Thank you for using CashRemit.";
 
-            $RecipentMsg = "Your account has been creadited NGN " . $this->transfer_amount . " by " . $UserName . " via CashRemit. ";
+            $RecipentMsg = "Your account has been creadited NGN " . $this->transfer_amount . " by " . $UserName . " via CashRemit.TXT NO : ".$tNo.".";
             $toemail = $getRecipentDetail->email;
             $data = array(
                 'name' => $this->username,

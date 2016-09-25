@@ -25,7 +25,7 @@ public $timestamps = false;
      *
      * @var array
      */
-    protected $fillable = ['country_name', 'country_code', 'currency_name', 'currency_code'];
+    protected $fillable = ['country_name', 'country_code', 'currency_name', 'currency_code','status'];
     protected $appends = array('logo16', 'logo24', 'logo32', 'logo48', 'logo128');
 
     public function getLogo16Attribute() {

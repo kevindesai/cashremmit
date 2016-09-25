@@ -36,18 +36,18 @@ class PoliAPIController extends Api {
         $getUserDetail = $trensaction->user;
         $UserMob = $getUserDetail->mobile_no;
         $UserName = $getUserDetail->first_name . ' ' . $getUserDetail->last_name;
-
+        $tNo = sprintf('%010d', $trensaction->id);
         $getRecipentDetail = $trensaction->receptient;
         $RecipentMob = $getRecipentDetail->mobile_no;
         $RecipentName = $getRecipentDetail->first_name . ' ' . $getRecipentDetail->last_name;
 
 
 //        $UserMsg = "You have sent " . $trensaction->amount . " aud to " . $RecipentName . ". It will be credit to your bank account within 2 working days.Please contact support in case of any query.";
-        $UserMsg = "You have initiated a transfer of NGN " . $trensaction->transfer_amount . " to " . $RecipentName . ", you will be notified when the payment is been processed. Thank you";
+        $UserMsg = "You have initiated a transfer of NGN " . $trensaction->transfer_amount . " to " . $RecipentName . ", you will be notified when the payment is been processed . TXT NO : ".$tNo.". Thank you";
 
         /* $getRecipentDetail = \App\RecipientMaster::find($trensaction->recipient_id);
           $RecipentMob = $getRecipentDetail->mobile_no; */
-        $RecipentMsg = $UserName . " have sent you NGN " . $trensaction->transfer_amount . " via CashRemit. This will be credit to your bank account within 2 working days.";
+        $RecipentMsg = $UserName . " have sent you NGN " . $trensaction->transfer_amount . " via CashRemit. TXT NO : ".$tNo.". This will be credit to your bank account within 2 working days.";
 
         $trensaction->response = json_encode(\App\Transactions::getTransactionDetail($token));
         $trensaction->token = $token;
@@ -94,15 +94,15 @@ class PoliAPIController extends Api {
             if ($RecipentMob)
                 Twilio::message('+' . $RecipentMob, $RecipentMsg);
         } catch (Exception $e) {
-            //print_r($e);
+            // print_r($e);
         }
 
         if ($getUserDetail->is_verified == '1') {
             $url = url('/') . '/#/polisuccess/' . base64_encode($token);
-            return redirect($url);
+           return redirect($url);
         } else {
             $url = url('/') . '/#/successbutnotverified/' . base64_encode($token);
-            return redirect($url);
+           return redirect($url);
         }
     }
 
