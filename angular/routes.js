@@ -81,7 +81,8 @@ app.config(['$routeProvider',
                 when('/', {
                     templateUrl: 'resources/views/templates/home.html',
                     controller: 'AdminController',
-                    auth: false
+                    auth: false,
+                    cache:false
                     
                 }).
                 when('/payment', {

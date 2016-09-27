@@ -145,6 +145,7 @@ app.controller('LoginController', function ($scope, $http, $location, myFactory,
                 angular.element('#myModal').modal('hide');
                 angular.element('body').removeClass('modal-open');
                 angular.element('.modal-backdrop').remove();
+                angular.element('body').css('padding-right',0);
                 $location.path('/payment');
             } else if (data.status == 0) {
                 $scope.invalidusername = true;

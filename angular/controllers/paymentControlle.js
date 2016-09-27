@@ -20,7 +20,37 @@ app.controller('PaymentController', ['$scope', '$http', '$rootScope', 'userServi
             $scope.isLogin = false;
             $rootScope.isLogin = false;
         }
-        
+        $scope.currencyList = [];
+    var currencyurl = $rootScope.getcurrencylist;
+    var method = 'GET';
+    var countryList = myFactory.httpMethodCall(method, currencyurl);
+    countryList.success(function (data) {
+        if (data.status == 1) {
+            $scope.currencyList = data.data;
+            console.log($scope.currencyList);
+            var toindex = $scope.currencyList.map(function (obj) {
+                return obj.currency_code;
+            }).indexOf('NGN');
+            var fromindex = $scope.currencyList.map(function (obj) {
+                return obj.currency_code;
+            }).indexOf('AUD');
+            $scope.toflag = $scope.currencyList[toindex].logo32;
+            $scope.fromflag = $scope.currencyList[fromindex].logo32;
+        }
+    });
+    $scope.selectcur = function (cur, logo, direction) {
+        $scope.filterfromcur="";
+        $scope.filtertocur="";
+        if (direction == "to") {
+            $scope.toCur = cur;
+            $scope.toflag = logo;
+        } else {
+            $scope.fromCur = cur;
+            $scope.fromflag = logo;
+        }
+        $scope.convertCurFromto($scope.fromAmount);
+    };
+
         /*
          * update information of user
          */

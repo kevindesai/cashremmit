@@ -201,6 +201,7 @@ app.controller('TransfarDetailController', ['$scope', '$http', '$window', '$root
 
         if (data.status == 1) {
             $scope.transfer = data.data;
+            console.log($scope.transfer);
 
         } else if (data.status == -1) {
 

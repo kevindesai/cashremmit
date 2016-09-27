@@ -31,22 +31,29 @@
                         <div class="rat-inner">
                             <label for="">You want to send..</label>
                             <input type="text" ng-model="fromAmount" ng-change="convertCurFromto(fromAmount)" >
-                            <select ng-model="fromCur" ng-change="convertCurFromto(fromAmount)">
-                                <option value="AUD">aud</option>
-                                <option value="USD">usd</option>
-                                <option value="INR">inr</option>
-                                <option value="NGN">ngn</option>
-                            </select>
+                            <div class="dropdown currenctdropselect">
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><img ng-src="{{fromflag}}" class="flag"> {{fromCur}}
+                                </button>
+                                <ul class="dropdown-menu currencydropmenu">
+                                    <li><input type="text" ng-model="filterfromcur" class="smallinput"></li>
+                                    <li ng-repeat="currency in currencyList| filter:filterfromcur"><a href="javascript:void(0)" ng-click="selectcur(currency.currency_code, currency.logo32, 'from')"><img ng-src="{{currency.logo32}}" class="flag">{{currency.currency_code}} {{currency.currency_name}}</a></li>
+
+                                </ul>
+                            </div>
                         </div>
                         <div class="rat-inner">
                             <label for="">Recipiant will get...</label>
                             <input type="text" ng-model="toAmount" ng-change="convertCurtoFrom(toAmount)" >
-                            <select ng-model="toCur" ng-change="convertCurFromto(fromAmount)">
-                                <option value="AUD">aud</option>
-                                <option value="USD">usd</option>
-                                <option value="INR">inr</option>
-                                <option value="NGN">ngn</option>
-                            </select>
+                            <div class="dropdown currenctdropselect">
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><img ng-src="{{toflag}}" class="flag"> {{toCur}}
+                                </button>
+                                <ul class="dropdown-menu currencydropmenu">
+                                    <li><input type="text" ng-model="filtertocur" class="smallinput"></li>
+                                    <li ng-repeat="currency in currencyList| filter:filtertocur"><a href="javascript:void(0)" ng-click="selectcur(currency.currency_code, currency.logo32, 'to')"><img ng-src="{{currency.logo32}}" class="flag">{{currency.currency_code}} {{currency.currency_name}}</a></li>
+
+                                </ul>
+                            </div>
+
                         </div>
                         <div class="exchangeDes">
                             <p>Our Exchange Rate {{fromCur}} {{DefaultfromAmount}} = {{toCur}} {{DefaulttoAmount}}</p>
@@ -67,7 +74,8 @@
                 </div>
                 <div class="t-box row ml0 mr0 mt3" ng-repeat="payment in transfer | filter:searchTxn" ng-if="payment.transfer_amount !=''">
                     <div class="col-md-6  pr0 text-left">
-                        <h4 class="text-left">{{payment.receipentname}} <br /> Ref No: {{ payment.id | minLength:10 }}</h4>
+                        <!--<h4 class="text-left">{{payment.receipentname}} <br /> Ref No: {{ payment.id | minLength:10 }}</h4>-->
+                        <h4 class="text-left">{{payment.receipentname}} <br /> Ref No: {{ payment.response.TransactionRefNo }}</h4>
                         <div class="date">Date/Time: {{'2014-09-27 03:15:42' | toDate | date: 'medium'}}</div>
                     </div>
                     <div class="col-md-6  pl0 pr0">

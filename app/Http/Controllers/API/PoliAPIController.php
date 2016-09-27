@@ -217,6 +217,12 @@ class PoliAPIController extends Api {
             'message' => 'No data found'
         );
         $transactions = $transactions->toArray();
+        foreach($transactions as $key=>$txn){
+            
+            $transactions[$key]["response"] = json_decode($txn["response"]);
+            $transactions[$key]["switch_response"] = json_decode($txn["switch_response"]);
+            
+        }
         if (!empty($transactions)) {
             $response = array(
                 'status' => '1',
