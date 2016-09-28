@@ -61,7 +61,7 @@ class AuthController extends Controller {
         if ($this->auth->attempt($userData,true))
         {
 
-            return redirect('/admin/users');
+            return redirect('/admin/transactions');
         }
         return redirect('/admin/login')->withErrors([
             'email' => 'The credentials you entered did not match our records. Try again?',

@@ -35,7 +35,7 @@
     </head>
 
     <body class="animated-content infobar-overlay">
-<div class="se-pre-con" style="display:none;"></div>
+        <div class="se-pre-con" style="display:none;"></div>
 
         <header id="topnav" class="navbar navbar-default navbar-fixed-top" role="banner">
 
@@ -97,15 +97,25 @@
                             <div class="widget stay-on-collapse" id="widget-sidebar">
                                 <nav role="navigation" class="widget-body">
                                     <ul class="acc-menu">
-                                        <li><a href="{{ url('/') }}/admin/users"><i class="fa fa-user"></i><span>Users</span></a></li>
-                                        <li><a href="{{ url('/') }}/admin/country"><i class="fa fa-bookmark"></i><span>Country</span></a></li>
-                                        <li><a href="{{ url('/') }}/admin/rate/list"><i class="fa fa-bookmark"></i><span>Manage Rate</span></a></li>
-                                        <li><a href="{{ url('/') }}/admin/promossion"><i class="fa fa-bookmark"></i><span>Promossion</span></a></li>
-                                        <li><a href="{{ url('/') }}/admin/banks"><i class="fa fa-bookmark"></i><span>Banks</span></a></li>
-                                        <li><a href="{{ url('/') }}/admin/transferrate"><i class="fa fa-bookmark"></i><span>Transfer Rate</span></a></li>
+
                                         <li><a href="{{ url('/') }}/admin/transactions"><i class="fa fa-bookmark"></i><span>Transactions</span></a></li>
-                                        <li><a href="{{ url('/') }}/admin/countryflag"><i class="fa fa-bookmark"></i><span>Country Flags</span></a></li>
-										<li><a href="{{ url('/') }}/admin/documents"><i class="fa fa-bookmark"></i><span>Document Verification</span></a></li>
+                                        <?php
+                                        if (Auth::user()->user_type == 'admin') {
+                                            ?>
+
+                                            <li><a href="{{ url('/') }}/admin/adminusers"><i class="fa fa-user"></i><span>Admin Users</span></a></li>
+                                            <li><a href="{{ url('/') }}/admin/users"><i class="fa fa-user"></i><span>Users</span></a></li>
+                                            <li><a href="{{ url('/') }}/admin/country"><i class="fa fa-bookmark"></i><span>Country</span></a></li>
+                                            <li><a href="{{ url('/') }}/admin/rate/list"><i class="fa fa-bookmark"></i><span>Manage Rate</span></a></li>
+                                            <li><a href="{{ url('/') }}/admin/promossion"><i class="fa fa-bookmark"></i><span>Promossion</span></a></li>
+                                            <li><a href="{{ url('/') }}/admin/banks"><i class="fa fa-bookmark"></i><span>Banks</span></a></li>
+                                            <li><a href="{{ url('/') }}/admin/transferrate"><i class="fa fa-bookmark"></i><span>Transfer Rate</span></a></li>
+
+                                            <li><a href="{{ url('/') }}/admin/countryflag"><i class="fa fa-bookmark"></i><span>Country Flags</span></a></li>
+                                            <li><a href="{{ url('/') }}/admin/documents"><i class="fa fa-bookmark"></i><span>Document Verification</span></a></li>
+                                            <?php
+                                        }
+                                        ?>
                                     </ul>
                                 </nav>
                             </div>

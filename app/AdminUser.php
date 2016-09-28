@@ -29,7 +29,7 @@ class AdminUser extends Model implements Authenticatable {
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password', 'is_active', 'remember_token'];
+    protected $fillable = ['name', 'email', 'password', 'is_active', 'remember_token','user_type'];
 
     public function getRememberToken() {
         return $this->remember_token;

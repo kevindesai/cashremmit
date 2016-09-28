@@ -43,8 +43,9 @@ Route::group(['middleware' => ['web'], 'prefix' => 'admin', 'namespace' => 'admi
 });
 Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'admin', 'namespace' => 'admin'], function () {
     Route::resource('users', 'UsersController');
+    Route::resource('adminusers', 'AdminUsersController');
     Route::resource('banks', 'BanksController');
-	Route::resource('documents', 'DocumentsController');
+    Route::resource('documents', 'DocumentsController');
     Route::resource('transferrate', 'TransferRateController');
     Route::get('profile', 'UsersController@Profile');
     Route::get('profile/edit', 'UsersController@ProfileEdit');
