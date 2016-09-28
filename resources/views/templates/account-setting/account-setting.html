@@ -98,7 +98,7 @@
                     <div class="col-md-4 col-sm-4 col-xs-12">
                         <p class="change-name">Date of Birth:</p>
                     </div>
-                    <div class="col-md-6 col-sm-6 col-xs-10 pr0">
+                    <div class="col-md-6 col-sm-6 col-xs-10 pr0 bdateBox">
                         <p class="change-value" ng-hide="isupdate" >{{userInfo.dob | date : yyyy-MM-dd }} </p> 
                         <!--<input type="date" class="change-value datepicker"  ng-model="userInfo.dob" ng-show="isupdate" />-->
                           <div class="col-md-4" ng-show="isupdate" >
@@ -107,7 +107,7 @@
                             <option ng-repeat="i in getNumber(days) track by $index" value="{{$index+1 | minLength:2}}" ng-selected="$first">{{$index+1}}</option>
                           </select>
                       </div>
-                      <div class="col-md-4" ng-show="isupdate" >
+                      <div class="col-md-4 " ng-show="isupdate" >
                           <label>Month</label>
                           <select class="form-control" name="card-holder-name" ng-model="userInfo.MonthOfBirth" placeholder="MM" required="required">
                               <option value="01">January</option>

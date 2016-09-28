@@ -7,14 +7,13 @@ app.controller('AdminController', function ($scope, $http, $location, myFactory,
         if (data.status == 1) {
             $scope.currencyList = data.data;
             console.log($scope.currencyList);
-            var toindex = $scope.currencyList.map(function (obj) {
-                return obj.currency_code;
-            }).indexOf('NGN');
-            var fromindex = $scope.currencyList.map(function (obj) {
-                return obj.currency_code;
-            }).indexOf('AUD');
-            $scope.toflag = $scope.currencyList[toindex].logo32;
-            $scope.fromflag = $scope.currencyList[fromindex].logo32;
+
+            $scope.toflag = $scope.currencyList[1].logo32;
+            $scope.fromflag = $scope.currencyList[0].logo32;
+            $scope.fromCur = $scope.currencyList[0].currency_code;
+            $scope.toCur = $scope.currencyList[1].currency_code;
+            $scope.fromAmount = 1000;
+            $scope.convertCurFromto($scope.fromAmount);
         }
     });
     $scope.selectcur = function (cur, logo, direction) {
@@ -31,8 +30,7 @@ app.controller('AdminController', function ($scope, $http, $location, myFactory,
     };
 
     $scope.gotopage = "";
-    $scope.fromCur = 'AUD';
-    $scope.toCur = 'NGN';
+    
     var url = $rootScope.CurrencyApi;
     $scope.convertDefault = function (url, fromCur, ToCur, defaultfromamount) {
         $scope.DefaultfromAmount = defaultfromamount;
@@ -48,7 +46,7 @@ app.controller('AdminController', function ($scope, $http, $location, myFactory,
     $scope.convertCurFromto = function (fromAmount) {
         angular.element(".loaderbox").show();
         if (fromAmount != "0") {
-            $scope.gotopage = "#/paymentdetails";
+            $scope.gotopage = "#/payment";
         }
         var url = $rootScope.CurrencyApi;
         $scope.convertDefault(url, $scope.fromCur, $scope.toCur, 1);
@@ -68,8 +66,7 @@ app.controller('AdminController', function ($scope, $http, $location, myFactory,
 
 
     }
-    $scope.fromAmount = 1000;
-    $scope.convertCurFromto($scope.fromAmount);
+    
     $scope.convertCurtoFrom = function (toAmount) {
         angular.element(".loaderbox").show();
         if (toAmount != "0") {
