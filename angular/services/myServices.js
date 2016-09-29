@@ -39,6 +39,7 @@ app.factory('userService', ['$rootScope', function($rootScope) {
             userData.userInfo.street = localStorage.getItem('street');
             userData.userInfo.unit_no = localStorage.getItem('unit_no');
             userData.userInfo.is_active = localStorage.getItem('is_active');
+            userData.userInfo.proile = localStorage.getItem("profile");
 
             return userData.userInfo;
         }

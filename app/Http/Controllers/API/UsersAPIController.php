@@ -94,6 +94,7 @@ class UsersAPIController extends Controller {
             if ($token = JWTAuth::attempt($input)) {
                 
                 $data = $user->toArray();
+                $data["profile"] = ($data["profile"]!="")?URL('/storage/uploads/user/') . "/" . $data["profile"]:URL('/storage/uploads/user/') . "/" ."default.jpg";
                 $data['customer_id'] = User::getCustomerID($user->id);
                 $data['country_name'] = isset($user->countries->country_name) ? $user->countries->country_name : '';
                 $data['country_code'] = isset($user->countries->country_code) ? $user->countries->country_code : '';
@@ -199,6 +200,36 @@ class UsersAPIController extends Controller {
         Session::flash('flash_message', 'User deleted!');
 
         return redirect('users');
+    }
+    
+    public function profilePic(request $request){
+        $this->_auth = JWTAuth::toUser(JWTAuth::getToken());
+        $userId = $this->_auth->id;
+        
+        $fileName = $_FILES["file"]["name"];
+        $ext = pathinfo($fileName, PATHINFO_EXTENSION);
+        $fileTmpName = $_FILES["file"]["tmp_name"];
+        $newFileName = time().rand(99,999999);
+        $newName = $newFileName.'.'.$ext;
+         $destinationPath = storage_path() . '/uploads/user/';
+         if(move_uploaded_file($fileTmpName, $destinationPath.$newName)){
+             $userData = \App\User::find($userId);
+             $userData->profile = $newName;
+             $userData->save();
+             $response = array(
+               "status" => "1",
+                 "data"=>URL('/storage/uploads/user/') . "/" . $newName,
+                 "message"=>"Profile picture uploaded successfully"
+             );
+         }else{
+             $response = array(
+               "status" => "0",
+                 "data"=>"",
+                 "message"=>"Please try again."
+             );
+         }
+         return json_encode($response);
+        
     }
 
 }

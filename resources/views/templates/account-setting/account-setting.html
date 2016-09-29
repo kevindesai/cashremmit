@@ -8,7 +8,14 @@
             <div class="acs">
                 <div class="row change-pass">	
                     <div class="col-md-6 col-sm-6">
-                        <img src="images/p-3.jpg" class="img-circle chang-thumb">
+                        <img src="{{userInfo.proile}}" class="img-circle chang-thumb profileImage">
+                        <div class="hide">
+                            
+                                <input type="file" name="myfile" class="profilePic" onchange="angular.element(this).scope().uploadFile(this.files)">
+                                 <button ng-click = "uploadPro()" id="uploadBtn">upload me</button>
+                       
+                        </div> 
+                       
                         <div class="name-id">
                             <p class="change-pass-name">{{userInfo.first_name}} {{userInfo.last_name}}</p>
                             <p class="cid">Customer ID : CR_{{ userInfo.first_name | limitTo:1 }}{{ userInfo.last_name | limitTo:1 }}_{{"000000" + userInfo.last_name.id.slice(-6)}}</p>
@@ -201,3 +208,15 @@
 </div>
 
 <!------------------------------ end model --------------------------------->
+<script>
+    $(function(){
+       $(".profileImage").on('click',function(){
+           $(".profilePic").click();
+       }) ;
+      $(".profilePic").on('change',function(){
+          setTimeout(function(){
+           // $("#uploadBtn").click();
+          }, 2000);
+      })
+    });
+</script>

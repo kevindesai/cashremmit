@@ -42,6 +42,7 @@ app.run(function($rootScope, $location,$route,$http,myFactory) {
     $rootScope.getDocumentFields = $rootScope.apiUrl+'api/v1/documentfield';
     $rootScope.verifyDriverLicence = $rootScope.apiUrl+'api/v1/verifyDriverLicence';
     $rootScope.verifyPassPort = $rootScope.apiUrl+'api/v1/verifyPassport';
+    $rootScope.updateProfilePic = $rootScope.apiUrl+'api/v1/updatProPic';
     
     $rootScope.$on('$locationChangeStart', function(ev, next, current) {
     var token = localStorage.getItem("token"); 

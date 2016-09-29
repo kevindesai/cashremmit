@@ -12,6 +12,7 @@ app.controller('AccountSettingController', ['$scope', '$http', '$rootScope', 'us
         }
         userService.getDataFromSession();
         $scope.userInfo = userService.userInfo;
+        console.log($scope.userInfo);
         var dobarray = $scope.userInfo.dob.split('-');
         //console.log(dobarray);
         $scope.userInfo.DayOfBirth = dobarray[2];
@@ -100,5 +101,27 @@ app.controller('AccountSettingController', ['$scope', '$http', '$rootScope', 'us
                // console.log(error);
             });
             }
-        }
+        };
+        $scope.uploadFile = function(files){
+           //var file = $scope.myFile;
+            $scope.userInfo = userService.userInfo;
+               var uploadUrl = $rootScope.updateProfilePic;
+               var fd = new FormData();
+               fd.append('file', files[0]);
+               fd.append('token',$scope.userInfo.token);
+               $http.post(uploadUrl, fd, {
+                  transformRequest: angular.identity,
+                  headers: {'Content-Type': undefined}
+               })
+               .success(function(data){
+                   if(data.status=='1'){
+                       var imageNmae = data.data;
+                       $scope.userInfo.proile = data.data;
+                       localStorage.setItem("profile",data.data);
+                   }
+               })
+               .error(function(data){
+                   alert("Please try again");
+               });
+        };
     }]);
