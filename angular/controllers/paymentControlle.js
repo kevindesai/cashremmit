@@ -128,6 +128,18 @@ app.controller('PaymentController', ['$scope', '$http', '$rootScope', 'userServi
                 }
             });
         }
+        $scope.getBonus = function(amount,currency){
+            var BonusUrl = $rootScope.BonusUrl;
+            var reqData = {};
+            reqData.currency_code = currency;
+            reqData.amount = amount.replace(",","");
+            var BonusData  = myFactory.httpMethodCall('POST', BonusUrl, reqData);
+            BonusData.success(function(data){
+               if(data.status==1){
+                   $scope.bonus = data.transfer_rate;
+               } 
+            });
+        }
         $scope.convertCurFromto = function (fromAmount) {
 
             if (fromAmount != "0") {
@@ -139,6 +151,7 @@ app.controller('PaymentController', ['$scope', '$http', '$rootScope', 'userServi
             FromconRes.success(function (data) {
                 if (data.status == 1) {
                     $scope.toAmount = data.converted;
+                    $scope.getBonus($scope.toAmount,$scope.toCur);
                     localStorage.setItem('ToamounT', $scope.toAmount);
                 } else {
                     $scope.toAmount = '';
@@ -176,7 +189,11 @@ app.controller('PaymentController', ['$scope', '$http', '$rootScope', 'userServi
         $scope.goToSelectBen = function () {
 
             if ($scope.toAmount != undefined && $scope.fromAmount != undefined) {
-
+                if($scope.bonus != undefined){
+                    $scope.toAmount =   parseFloat($scope.toAmount) + parseFloat($scope.bonus);
+                    localStorage.setItem('ToamounT', $scope.toAmount);
+                    console.log($scope.toAmount)
+                }
                 $location.path('/paybeneficiary');
             } else {
                 return false;

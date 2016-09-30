@@ -108,9 +108,14 @@
                         <td class="item">Discount</td>
                         <td class="item2">{{discount}}</td>
                     </tr>
+                    <tr ng-if="bonus">
+                        <td class="item">Bonus</td>
+                        <td class="item2">{{bonus}}</td>
+                    </tr>
                     <tr>
                         <td class="total">Total Amount</td>
-                        <td class="total2">{{toCur}} {{toAmount}}</td>
+                        <td class="total2" ng-if="!bonus">{{toCur}} {{toAmount}}</td>
+                        <td class="total2" ng-if="bonus">{{toCur}} {{toAmount -- bonus}}</td>
                     </tr>
                 </table>
             </div>

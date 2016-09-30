@@ -236,7 +236,7 @@ app.controller('SelectPaymentController', ['$scope', '$http', '$window', '$rootS
 
             method = "POST";
             url = $rootScope.initpoli;
-            Reqdata = {"CurrencyCode": $scope.fromCur, "amount": $scope.fromAmount, "token": $scope.userInfo.token, recipient_id: selectedbenif,adminfee:adminfee,discount:discount};
+            Reqdata = {"CurrencyCode": $scope.fromCur, "amount": $scope.fromAmount,"to_cur_code":$scope.toCur,'transfer_amount':$scope.toAmount, "token": $scope.userInfo.token, recipient_id: selectedbenif,adminfee:adminfee,discount:discount};
             var response = myFactory.httpMethodCall(method, url, Reqdata);
             response.success(function (data) {
                 console.log(data);
@@ -255,6 +255,7 @@ app.controller('SelectPaymentController', ['$scope', '$http', '$window', '$rootS
 
             });
             response.error(function (error) {
+                alert("Currency Not  Supported");
                 console.log(error);
                 //  deferred.reject('ERROR');
             });

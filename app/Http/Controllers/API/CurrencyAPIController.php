@@ -69,10 +69,12 @@ class CurrencyAPIController extends Controller {
             
             if($curRate && !isset($input['web']))
                 $converted += $curRate->rate*$amount;
+//            echo round($converted, 3);
+//            exit;
             $response = array(
                 'status' => '1',
-                'original' => number_format(round($amount, 3), 2),
-                'converted' => number_format(round($converted, 3), 2),
+                'original' => number_format($amount, 2, '.', ''),
+                'converted' => number_format($converted, 2, '.', ''),
                 'message' => 'Success'
             );
         } catch (Exception $e) {

@@ -47,13 +47,13 @@ class CountryAPIController extends Controller {
                     $q->where(['country.currency_code' => $inputs['currency_code']]);
                 })->where('from', '<=', (float) $inputs['amount'])->where('to', '>=', (float) $inputs['amount'])->first();
         $response = [
-            'status' => 1,
+            'status' => 0,
             'transfer_rate' => 0
         ];
         if ($transferrate) {
             $response = [
                 'status' => 1,
-                'transfer_rate' => $transferrate->rate
+                'transfer_rate' => number_format($transferrate->rate, 2, '.', '')
             ];
         }
         return json_encode($response);

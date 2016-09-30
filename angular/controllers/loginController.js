@@ -57,6 +57,7 @@ app.controller('AdminController', function ($scope, $http, $location, myFactory,
                 localStorage.setItem('ToamounT', $scope.toAmount);
                 angular.element(".loaderbox").hide();
             } else {
+                angular.element(".loaderbox").hide();
                 $scope.toAmount = '';
             }
         });
@@ -127,6 +128,8 @@ app.controller('LoginController', function ($scope, $http, $location, myFactory,
 	
         var method = 'POST';
         var url = $rootScope.loginApi;
+        var from = SocialUserData.from;
+        delete SocialUserData.from;
         $scope.invalidusername = false;
         var response = myFactory.httpMethodCall(method, url, SocialUserData);
         response.success(function (data) {
@@ -143,7 +146,11 @@ app.controller('LoginController', function ($scope, $http, $location, myFactory,
                 angular.element('body').removeClass('modal-open');
                 angular.element('.modal-backdrop').remove();
                 angular.element('body').css('padding-right',0);
-                $location.path('/payment');
+                if(from=='register'){
+                    $location.path('/accountSetting');
+                }else{
+                    $location.path('/payment');
+                }
             } else if (data.status == 0) {
                 $scope.invalidusername = true;
                 $scope.invalidMsg = data.message;
@@ -176,6 +183,7 @@ app.controller('LoginController', function ($scope, $http, $location, myFactory,
                  var loginData = {};
                  loginData.email = SocialUserData.email;
                  loginData.password = SocialUserData.password;
+                 loginData.from='register';
                  $scope.loginMember(loginData);
 //                angular.element('#myModal').modal('hide');
 //                angular.element('body').removeClass('modal-open');
