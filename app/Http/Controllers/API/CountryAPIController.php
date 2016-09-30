@@ -20,12 +20,30 @@ use App\Currencyrate;
 use App\Bank;
 use App\TransferRate;
 use App\Promossion;
+use App\TransferBonus;
 
 class CountryAPIController extends Controller {
 
     public function transferrate(Request $request) {
         $inputs = $request->all();
         $transferrate = TransferRate::whereHas('country', function($q) use($inputs) {
+                    $q->where(['country.country_name' => $inputs['country_name'], 'country.currency_code' => $inputs['currency_code']]);
+                })->where('from', '<=', (float) $inputs['amount'])->where('to', '>=', (float) $inputs['amount'])->first();
+        $response = [
+            'status' => 1,
+            'transfer_rate' => 0
+        ];
+        if ($transferrate) {
+            $response = [
+                'status' => 1,
+                'transfer_rate' => $transferrate->rate
+            ];
+        }
+        return json_encode($response);
+    }
+    public function transferbonus(Request $request) {
+        $inputs = $request->all();
+        $transferrate = TransferBonus::whereHas('country', function($q) use($inputs) {
                     $q->where(['country.country_name' => $inputs['country_name'], 'country.currency_code' => $inputs['currency_code']]);
                 })->where('from', '<=', (float) $inputs['amount'])->where('to', '>=', (float) $inputs['amount'])->first();
         $response = [

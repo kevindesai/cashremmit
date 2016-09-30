@@ -31,7 +31,7 @@ class Transactions extends Model {
      *
      * @var array
      */
-    protected $fillable = ['transfer_amount', 'switch_transaction_id', 'switch_response', 'switch_status', 'discount', 'adminfee', 'recipient_id', 'user_id', 'amount', 'response', 'status', 'currency_code', 'transaction_by', 'transactionid', 'token'];
+    protected $fillable = ['to_cur_code','transfer_amount', 'switch_transaction_id', 'switch_response', 'switch_status', 'discount', 'adminfee', 'recipient_id', 'user_id', 'amount', 'response', 'status', 'currency_code', 'transaction_by', 'transactionid', 'token'];
     protected $appends = array('receipentname', 'username');
 
     public function getReceipentnameAttribute() {

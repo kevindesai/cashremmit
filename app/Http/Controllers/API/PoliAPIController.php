@@ -153,6 +153,24 @@ class PoliAPIController extends Api {
 
         $baseUrl = url('/');
         $inputs = $request->all();
+        $validation = Validator::make(
+                        $inputs, array(
+                    'amount' => array('required'),
+                    'recipient_id' => array('required'),
+                    'CurrencyCode' => array('required'),
+                    'transfer_amount' => array('required'),
+                    'to_cur_code' => array('required'),
+                        )
+        );
+        $data = array();
+        if ($validation->fails()) {
+            $response = array(
+                'status' => '0',
+                'data' => $validation->messages(),
+                'message' => 'Validation error'
+            );
+            return json_encode($response);
+        }
         $amount = (float) $inputs["amount"] + (float) $inputs["adminfee"] - (float) $inputs["discount"];
 
         $beginTransaction = array(
@@ -164,7 +182,8 @@ class PoliAPIController extends Api {
             'status' => 'pending',
             'currency_code' => $inputs["CurrencyCode"],
             'transaction_by' => 'poli',
-            'transfer_amount' => $this->currencyConvert($inputs["CurrencyCode"], 'NGN', $inputs["amount"])
+            'transfer_amount' => $inputs["transfer_amount"],
+            'to_cur_code' => $inputs["to_cur_code"]
         );
 
         $transaction = \App\Transactions::create($beginTransaction);

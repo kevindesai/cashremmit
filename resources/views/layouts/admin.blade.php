@@ -110,7 +110,7 @@
                                             <li><a href="{{ url('/') }}/admin/promossion"><i class="fa fa-bookmark"></i><span>Promossion</span></a></li>
                                             <li><a href="{{ url('/') }}/admin/banks"><i class="fa fa-bookmark"></i><span>Banks</span></a></li>
                                             <li><a href="{{ url('/') }}/admin/transferrate"><i class="fa fa-bookmark"></i><span>Transfer Rate</span></a></li>
-
+                                            <li><a href="{{ url('/') }}/admin/transferbonus"><i class="fa fa-bookmark"></i><span>Transfer Bonus</span></a></li>
                                             <li><a href="{{ url('/') }}/admin/countryflag"><i class="fa fa-bookmark"></i><span>Country Flags</span></a></li>
                                             <li><a href="{{ url('/') }}/admin/documents"><i class="fa fa-bookmark"></i><span>Document Verification</span></a></li>
                                             <?php

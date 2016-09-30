@@ -19,6 +19,7 @@ Route::get('country', 'CountryAPIController@index');
 Route::get('banks/{id}', 'CountryAPIController@getBanks');
 Route::get('bankdetail/{id}', 'CountryAPIController@getBankDetail');
 Route::post('transferrate', 'CountryAPIController@transferrate');
+Route::post('transferbonus', 'CountryAPIController@transferbonus');
 Route::post('checkpromossion', 'CountryAPIController@checkPromossion');
 Route::post('getcountrybycurrency','CountryAPIController@getCountryByCurrency');
 Route::post('documentfield', 'DocumentVerifyController@getFields');
