@@ -29,7 +29,7 @@
     {!! Form::label('to', trans('Country'), ['class' => 'col-sm-3 control-label']) !!}
     <div class="col-sm-6">
         <div class="form-control">
-            <?php echo $country->country_name . "(" . $country->currency_code . ")"; ?>
+            <?php echo $country->currency_code; ?>
             {!! Form::hidden('currency_code', $country->currency_code, ['class' => 'form-control', 'required'=>'required']) !!}
         </div>
     </div>

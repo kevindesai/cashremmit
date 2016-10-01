@@ -33,8 +33,8 @@ class TransferBonusController extends Controller {
      */
     public function create() {
         $country = Country::select(
-                        DB::raw("CONCAT(country_name ,'(', currency_code,')') AS country_name, id")
-                )->lists('country_name', 'id');
+                        DB::raw("currency_code AS country_name, id")
+                )->groupBy('currency_code')->lists('country_name', 'id');
 
 //                Country::lists("CONCAT(country_name , ' ',currency_code )  country_name", 'id');
         $transferbonus = [];

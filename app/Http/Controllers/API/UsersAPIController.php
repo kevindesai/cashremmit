@@ -19,13 +19,14 @@ use Validator;
 use JWTAuth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UsersAPIController extends Controller {
 
-    public function checkToken(){
+    public function checkToken() {
         $array = array(
-            'status'=>'1',
-            'message'=>'valid token',
+            'status' => '1',
+            'message' => 'valid token',
         );
         return json_encode($array);
     }
@@ -59,6 +60,19 @@ class UsersAPIController extends Controller {
         $user = User::create($input);
 
         if ($user) {
+            try {
+                Mail::send('emails.welcomeEmail', array("user" => $user), function ($message) use ($user) {
+
+                    $message->from('support@cashremit.com.au', 'Cash Remit');
+
+                    $message->to($user->email)->subject('Welcome to Cashremit');
+                });
+            } catch (Exception $e) {
+                
+            }
+
+
+
             $response = array(
                 'status' => '1',
                 'data' => $user->toArray(),
@@ -92,9 +106,9 @@ class UsersAPIController extends Controller {
         if (isset($user) && $user) {
             Config::set('auth.providers.users.table', 'users');
             if ($token = JWTAuth::attempt($input)) {
-                
+
                 $data = $user->toArray();
-                $data["profile"] = ($data["profile"]!="")?URL('/storage/uploads/user/') . "/" . $data["profile"]:URL('/storage/uploads/user/') . "/" ."default.jpg";
+                $data["profile"] = ($data["profile"] != "") ? URL('/storage/uploads/user/') . "/" . $data["profile"] : URL('/storage/uploads/user/') . "/" . "default.jpg";
                 $data['customer_id'] = User::getCustomerID($user->id);
                 $data['country_name'] = isset($user->countries->country_name) ? $user->countries->country_name : '';
                 $data['country_code'] = isset($user->countries->country_code) ? $user->countries->country_code : '';
@@ -201,35 +215,34 @@ class UsersAPIController extends Controller {
 
         return redirect('users');
     }
-    
-    public function profilePic(request $request){
+
+    public function profilePic(request $request) {
         $this->_auth = JWTAuth::toUser(JWTAuth::getToken());
         $userId = $this->_auth->id;
-        
+
         $fileName = $_FILES["file"]["name"];
         $ext = pathinfo($fileName, PATHINFO_EXTENSION);
         $fileTmpName = $_FILES["file"]["tmp_name"];
-        $newFileName = time().rand(99,999999);
-        $newName = $newFileName.'.'.$ext;
-         $destinationPath = storage_path() . '/uploads/user/';
-         if(move_uploaded_file($fileTmpName, $destinationPath.$newName)){
-             $userData = \App\User::find($userId);
-             $userData->profile = $newName;
-             $userData->save();
-             $response = array(
-               "status" => "1",
-                 "data"=>URL('/storage/uploads/user/') . "/" . $newName,
-                 "message"=>"Profile picture uploaded successfully"
-             );
-         }else{
-             $response = array(
-               "status" => "0",
-                 "data"=>"",
-                 "message"=>"Please try again."
-             );
-         }
-         return json_encode($response);
-        
+        $newFileName = time() . rand(99, 999999);
+        $newName = $newFileName . '.' . $ext;
+        $destinationPath = storage_path() . '/uploads/user/';
+        if (move_uploaded_file($fileTmpName, $destinationPath . $newName)) {
+            $userData = \App\User::find($userId);
+            $userData->profile = $newName;
+            $userData->save();
+            $response = array(
+                "status" => "1",
+                "data" => URL('/storage/uploads/user/') . "/" . $newName,
+                "message" => "Profile picture uploaded successfully"
+            );
+        } else {
+            $response = array(
+                "status" => "0",
+                "data" => "",
+                "message" => "Please try again."
+            );
+        }
+        return json_encode($response);
     }
 
 }
