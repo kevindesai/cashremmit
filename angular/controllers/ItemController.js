@@ -1,5 +1,18 @@
 app.controller('commonController', ['$scope', '$location', '$http', '$rootScope', 'userService', 'myFactory', '$window',
     function ($scope, $location, $http, $rootScope, userService, myFactory, $window) {
+        userService.getDataFromSession();
+        $scope.userInfo = userService.userInfo;
+        if ($scope.userInfo.mobile_no == ""){
+            $scope.dashboardLink ='';
+            $scope.BenifLink="";
+            $scope.transFerLink="";
+        }else{
+            $rootScope.dashboardLink ='#/payment';
+            $rootScope.BenifLink="#/beneficiaries";
+            $rootScope.transFerLink="#/transfarDetail";
+        }
+        
+        
         $scope.activeTab = 1;
         $scope.setActiveTab = function (tabToSet) {
             $scope.activeTab = tabToSet;

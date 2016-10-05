@@ -1,5 +1,5 @@
-app.controller('AccountSettingController', ['$scope', '$http', '$rootScope', 'userService', 'myFactory',
-    function($scope, $http, $rootScope, userService, myFactory) {
+app.controller('AccountSettingController', ['$scope', '$http', '$rootScope', 'userService', 'myFactory','$location','$window',
+    function($scope, $http, $rootScope, userService, myFactory,$location,$window) {
         $scope.days= 31;
         $scope.getNumber = function(num) {
           return new Array(num);   
@@ -20,7 +20,7 @@ app.controller('AccountSettingController', ['$scope', '$http', '$rootScope', 'us
         $scope.userInfo.YearOfBirth = dobarray[0];
         $scope.userInfo.password='';
 //        console.log($scope.userInfo);
-        $scope.isupdate = false;
+        $scope.isupdate = true;
         $scope.getCountry = function () {
             method = "GET";
             url = $rootScope.getCountry;
@@ -53,12 +53,17 @@ app.controller('AccountSettingController', ['$scope', '$http', '$rootScope', 'us
             var url = $rootScope.updateApi;
             url = url + "/" + userService.userInfo.id;
             userData.dob = userData.YearOfBirth+"-"+userData.MonthOfBirth+"-"+userData.DayOfBirth;
-            console.log(userData);
+            if (userData.mobile_no == '') {
+                alert ("Please enter mobile number");
+                return false;
+            }
+
             //return false;
             delete userData.DayOfBirth;
             delete userData.MonthOfBirth;
             delete userData.YearOfBirth;
             delete userData.password;
+            delete userData.profile;
             //console.log(userData);
 //            return false;
             var response = myFactory.httpMethodCall(method, url, userData);
@@ -66,6 +71,11 @@ app.controller('AccountSettingController', ['$scope', '$http', '$rootScope', 'us
             response.success(function(data) {
                 if (data.status == 1) {
                     userService.UpdateInfo(userData);
+                    userService.getDataFromSession();
+                    $scope.userInfo = userService.userInfo;
+                    $scope.apply;
+                    $window.location.reload();
+                    
                 } else {
                     //console.log(data);
                 }

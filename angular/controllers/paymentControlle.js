@@ -137,7 +137,9 @@ app.controller('PaymentController', ['$scope', '$http', '$rootScope', 'userServi
             BonusData.success(function(data){
                if(data.status==1){
                    $scope.bonus = data.transfer_rate;
-               } 
+               }else{
+                   $scope.bonus = 0;
+               }
             });
         }
         $scope.convertCurFromto = function (fromAmount) {
