@@ -1,167 +1,77 @@
  
 <my-header></my-header> 
 
-<div class="container mt3 mb5">
-
+<div class="container mt3 mb5 AcoountDetails">
     <div class="row">
         <div class="col-md-12 col-sm-12">
-            <div class="acs">
-                <div class="row change-pass">	
-                    <div class="col-md-6 col-sm-6">
-                        <img src="{{userInfo.proile}}" class="img-circle chang-thumb profileImage">
-                        <div class="hide">
-                            
-                                <input type="file" name="myfile" class="profilePic" onchange="angular.element(this).scope().uploadFile(this.files)">
-                                 <button ng-click = "uploadPro()" id="uploadBtn">upload me</button>
-                       
-                        </div> 
-                       
+          <h4> Getting Started with CashRemit
+              Please Update your Personal information to proceed</h4>
+                <div class="row change-pass">   
+                    <div class="col-md-6 col-sm-6 accountSet">
+                        <img src="images/p-3.jpg" class="img-circle chang-thumb">
                         <div class="name-id">
                             <p class="change-pass-name">{{userInfo.first_name}} {{userInfo.last_name}}</p>
                             <p class="cid">Customer ID : CR_{{ userInfo.first_name | limitTo:1 }}{{ userInfo.last_name | limitTo:1 }}_{{"000000" + userInfo.last_name.id.slice(-6)}}</p>
                         </div>
                     </div>
+                
                     <div class="col-md-6 col-sm-6 ">
                         <div class="chang-pass-btn"><a href="" class="normal-btn yellow-fill" data-toggle="modal" data-target=".update">Change Password</a></div>
                     </div>
                 </div>
-                <div class="row change-items">
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <p class="change-name">Flat/Unit No:</p>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-10 pr0">
-                        <p class="change-value" ng-hide="isupdate" ng-if="userInfo.unit_no!='0'" ng-bind="userInfo.unit_no"> </p> 
+             </div>
+
+              <form class="form-inline">
+                  <div class="form-group">
+                    <p class="change-name">Fisrt Name:</p>
+                    <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.first_name"> </p>
+                    <input type="text" class="change-value"  ng-model="userInfo.first_name" ng-show="isupdate" />
+                 </div>
+                    <div class="form-group">
+                       <p class="change-name">Last Name:</p>
+                       <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.last_name"> </p> 
+                      <input type="text" class="change-value"  ng-model="userInfo.last_name" ng-show="isupdate" />
+                    </div> 
+
+                 <div class="form-group">
+                       <p class="change-name">Email:</p>
+                        <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.email"> </p>
+                        <input type="text" class="change-value"  ng-model="userInfo.email" ng-show="isupdate" />
+                  </div>
+                    <div class="form-group">
+                        <p class="change-name">Phone N0:</p>
+                        <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.mobile_no"> </p> 
+                        <input type="text"  class="change-value" ng-model="userInfo.mobile_no" ng-show="isupdate" /> 
+                    </div> 
+
+                  <div class="form-group">
+                   <p class="change-name">Lookup address:</p>
+                     <input type="text" class="change-value" id="addresssearchbox" />
+                 </div>
+                    <div class="form-group">
+                     <p class="change-name">Street No:</p>
+                        <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.unit_no"> </p> 
                         <input type="text" class="change-value"  ng-model="userInfo.unit_no" ng-show="isupdate" />
-                    </div>
+                    </div> 
 
-                </div>
-
-                <div class="row change-items">
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <p class="change-name">Bulilding No./Name</p>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-10 pr0">
-                        <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.building_name"> </p> 
-                        <input type="text" class="change-value"  ng-model="userInfo.building_name" ng-show="isupdate" /> 
-                    </div>
-
-                </div>
-
-                <div class="row change-items">
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <p class="change-name">City or Suburb:</p>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-10 pr0">
+                  <div class="form-group">
+                      <p class="change-name">Street Name</p>
+                      <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.building_name"> </p> 
+                       <input type="text" class="change-value"  ng-model="userInfo.building_name" ng-show="isupdate" /> 
+                 </div>
+                    <div class="form-group">
+                        <p class="change-name">City:</p>
+                         <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.city"> </p> 
+                        <input type="text" class="change-value"  ng-model="userInfo.city" ng-show="isupdate" /> 
+                    </div> 
+                      <div class="form-group">
+                       <p class="change-name">Postcode:</p>
                         <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.city"> </p> 
                         <input type="text" class="change-value"  ng-model="userInfo.city" ng-show="isupdate" /> 
                     </div>
+              </form>
 
-                </div>
-
-                <div class="row change-items">
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <p class="change-name">Region:</p>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-10 pr0">
-                        <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.region"> </p> 
-                        <input type="text" class="change-value"  ng-model="userInfo.region" ng-show="isupdate" /> 
-                    </div>
-                </div>
-
-                <div class="row change-items">
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <p class="change-name">Street:</p>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-10 pr0">
-                        <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.street"> </p> 
-                        <input type="text" class="change-value" ng-model="userInfo.street" ng-show="isupdate" /> 
-                    </div>
-                </div>
-
-                <div class="row change-items">
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <p class="change-name">Postcode:</p>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-10 pr0">
-                        <p class="change-value" ng-if="userInfo.post_code!='0'" ng-hide="isupdate" ng-bind="userInfo.post_code"> </p> 
-                        <input type="text" class="change-value" maxlength="6" ng-model="userInfo.post_code" ng-show="isupdate" /> 
-                    </div>
-                </div>
-
-                <div class="row change-items">
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <p class="change-name">COUNTRY:</p>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-10 pr0">
-                        <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.country_name"> </p> 
-                        <select  class="change-value" ng-model="userInfo.country" ng-show="isupdate">
-                            <option ng-repeat="country in countryList track by $index" value="{{country.id}}">{{country.country_name}}</option>
-                        </select>
-                    </div>
-
-                </div>
-
-                <div class="row change-items">
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <p class="change-name">Date of Birth:</p>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-10 pr0 bdateBox">
-                        <p class="change-value" ng-if="userInfo.dob !='0000-00-00'" ng-hide="isupdate" >{{userInfo.dob | date : yyyy-MM-dd }} </p> 
-                        <!--<input type="date" class="change-value datepicker"  ng-model="userInfo.dob" ng-show="isupdate" />-->
-                          <div class="col-md-4" ng-show="isupdate" >
-                          <label>Day</label>   
-                          <select class="form-control" id="DateOfBirth_Day" name="DateOfBirthDay" required ng-model="userInfo.DayOfBirth">
-                            <option ng-repeat="i in getNumber(days) track by $index" value="{{$index+1 | minLength:2}}" ng-selected="$first">{{$index+1}}</option>
-                          </select>
-                      </div>
-                      <div class="col-md-4 " ng-show="isupdate" >
-                          <label>Month</label>
-                          <select class="form-control" name="card-holder-name" ng-model="userInfo.MonthOfBirth" placeholder="MM" required="required">
-                              <option value="01">January</option>
-                              <option value="02">February</option>
-                              <option value="03">March</option>
-                              <option value="04">April</option>
-                              <option value="05">May</option>
-                              <option value="06">June</option>
-                              <option value="07">July</option>
-                              <option value="08">August</option>
-                              <option value="09">September</option>
-                              <option value="10">October</option>
-                              <option value="11">November</option>
-                              <option value="12">December</option>
-                          </select>
-                      </div>
-                      <div class="col-md-4" ng-show="isupdate" >
-                          <label>Year</label>
-                          <select class="form-control" id="DateOfBirth_Day" required ng-model="userInfo.YearOfBirth">
-                            <option ng-repeat="j in years track by $index" value="{{j}}">{{j}}</option>
-                          </select>
-                      </div>
-                    </div>
-
-                </div>
-
-                <div class="row change-items">
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <p class="change-name">Mobile Phone:</p>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-10 pr0">
-                        <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.mobile_no"> </p> 
-                        <input type="text"  class="change-value" ng-model="userInfo.mobile_no" ng-show="isupdate" /> 
-                    </div>
-                </div>
-
-                <div class="row change-items">
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <p class="change-name">Phone Number:</p>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-10 pr0">
-                        <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.landline_no"> </p> 
-                        <input type="text" maxlength="10" class="change-value" ng-model="userInfo.landline_no" ng-show="isupdate" /> 
-                    </div>
-
-                </div>
-                <div class="upm-btn">
+             <div class="upm-btn">
                     <a href="" ng-click="EditClick()" class="normal-btn yellow-fill up-btn" ng-hide="isupdate">Edit Info</a> 
                 </div>
                 <div class="upm-btn">
@@ -169,7 +79,7 @@
                 </div>
             </div>
 
-        </div>	
+        </div>  
     </div>
 
 </div>
@@ -196,7 +106,7 @@
                                 </div>
                             </div>
                             <div class="upm-btn">
-                                <a  class="normal-btn yellow-fill up-btn" data-dismiss="modal" ng-click="updatePassword(userInfo)">Save</a>
+                                <a  class="normal-btn yellow-fill up-btn" data-dismiss="modal" ng-click="updateValue(userInfo)">Save</a>
                             </div>
                         </div>
                     </div>
@@ -208,15 +118,3 @@
 </div>
 
 <!------------------------------ end model --------------------------------->
-<script>
-    $(function(){
-       $(".profileImage").on('click',function(){
-           $(".profilePic").click();
-       }) ;
-      $(".profilePic").on('change',function(){
-          setTimeout(function(){
-           // $("#uploadBtn").click();
-          }, 2000);
-      })
-    });
-</script>

@@ -12,6 +12,8 @@ use Session;
 use Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Auth;
+
 
 class TransactionController extends Controller {
 
@@ -21,6 +23,7 @@ class TransactionController extends Controller {
      * @return void
      */
     public function index() {
+//        echo Auth::user()->user_type;exit;
         $searchTerm = Input::get('search', '');
         $no = (int) $searchTerm;
         if (trim($searchTerm) != '') {

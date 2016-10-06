@@ -68,7 +68,12 @@
                     <td>{{ sprintf('%010d', $item->id) }}</td>
                     <td>{{ $item->created_at }}</td>
                     <td>
-                        <a href="{{ url('/admin/transactions/' . $item->id) }}" class="btn btn-success btn-xs" title="View User"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
+                        <?php
+                            if(($item->user->is_verified == '1' && Auth::user()->user_type=="sub") || Auth::user()->user_type == 'admin'){ ?>
+                               <a href="{{ url('/admin/transactions/' . $item->id) }}" class="btn btn-success btn-xs" title="View User"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a> 
+                          <?php  }
+                        ?>
+                        
                         <?php
                         if ($item->status == 'success' && $item->switch_status != 'success' && $item->user->is_verified == '1') {
                             ?>

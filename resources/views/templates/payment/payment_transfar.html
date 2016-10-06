@@ -1,36 +1,18 @@
 <!-- <div my-method></div> -->
 <my-header></my-header>
+
 <div class="container steps mt5 mb5">
     <div class="row">
-        <div class="col-md-7 col-sm-7">
-
-
-            <div class="row second-main">
-                <div class="col-md-12 col-sm-12">
-                    <div class="second-box">
-                        <div class="row">
-                            <div class="col-md-8 pl0">
-                                <p>Tell a friend and get Transfer Bonus Code</p>
-                            </div>
-                            <div class="col-md-4 pl0 pr0">
-                                <div class="pull-right second-btn"><a href="#" class="normal2-btn yellow-fill">Tell a Friend</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-5 col-sm-5 ">
-            <div class="side-bar-box">
+        <div class="col-md-6 col-sm-6">
                 <div class="sidebar-heading">
-                    <h2>Transfer calculator</h2>
+                    <h2>How much would you like to send?</h2>
                 </div>
+              <div class="side-bar-box leftBox">
                 <div class="sidebar-inner">
-                    <div class="rate-sidebar">
+                    <div class="rate secondRate">
                         <div class="rat-inner">
                             <label for="">You want to send..</label>
-                            <input type="text" ng-model="fromAmount" ng-change="convertCurFromto(fromAmount)" >
+                            <input type="text" ng-model="fromAmount" ng-change="convertCurFromto(fromAmount)" placeholder="1000">
                             <div class="dropdown currenctdropselect">
                                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><img ng-src="{{fromflag}}" class="flag"> {{fromCur}}
                                 </button>
@@ -40,10 +22,11 @@
 
                                 </ul>
                             </div>
+
                         </div>
-                        <div class="rat-inner">
+                        <div class="rat-inner secound">
                             <label for="">Recipiant will get...</label>
-                            <input type="text" ng-model="toAmount" ng-change="convertCurtoFrom(toAmount)" >
+                            <input type="text" ng-model="toAmount" ng-change="convertCurtoFrom(toAmount)" placeholder="234,000">
                             <div class="dropdown currenctdropselect">
                                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><img ng-src="{{toflag}}" class="flag"> {{toCur}}
                                 </button>
@@ -53,9 +36,9 @@
 
                                 </ul>
                             </div>
-
+                          
                         </div>
-                        <div class="exchangeDes">
+                        <div class="exchangeDes secondCal">
                             <p>Our Exchange Rate {{fromCur}} {{DefaultfromAmount}} = {{toCur}} {{DefaulttoAmount}}</p>
 
                         </div>
@@ -63,31 +46,88 @@
                 </div>
             </div>
         </div>
+
+         <div class="col-md-6 col-sm-6">
+                <div class="sidebar-heading">
+                    <h2>Payment Summary</h2>
+                </div>
+            <div class="side-bar-box rightBox">
+                <table class="summary">
+                    <tr>
+                        <td class="item">Send Amount</td>
+                        <td class="item2">: {{fromCur}} {{fromAmount}}</td>
+                    </tr>
+                    <tr>
+                        <td class="item">Transfer Fees</td>
+                        <td class="item2"> : {{fromCur}} {{transfer_rate}}</td>
+                    </tr>
+                     <tr>
+                        <td class="item">Total Paid</td>
+                        <td class="item2"> : {{fromCur}} {{transfer_rate}}</td>
+                    </tr>
+                    <tr ng-if="discount">
+                        <td class="item">Discount</td>
+                        <td class="item2"> : {{discount}}</td>
+                    </tr>
+                    <tr ng-if="bonus">
+                        <td class="item">Transfer Bonus</td>
+                        <td class="item2"> : {{toCur}} {{bonus}}</td>
+                    </tr>
+                    <tr>
+                        <td class="total">Total Amount</td>
+                        <td class="total2" ng-if="!bonus">{{toCur}} {{toAmount}}</td>
+                        <td class="total2" ng-if="bonus">{{toCur}} {{toAmount -- bonus}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="continue">
+                <a ng-click="goToSelectBen()">Continue</a>
+                <p>By continuing you accept our Terms of Use You should also read: Product Disclosure Statement and Financial Services Guide</p>
+            </div>
+
+        </div>
     </div>
 
     <div class=" mt5 row">
-        <div class="col-md-7 col-sm-7">
+        <div class="col-md-6 col-sm-6">
             <div class="third-box">
                 <p>Recent Transfer</p>
                 <div class="search-box">
                     <input type="text" ng-model="searchTxn">
                 </div>
                 <div class="t-box row ml0 mr0 mt3" ng-repeat="payment in transfer | filter:searchTxn" ng-if="payment.transfer_amount !=''">
-                    <div class="col-md-6  pr0 text-left">
-                        <!--<h4 class="text-left">{{payment.receipentname}} <br /> Ref No: {{ payment.id | minLength:10 }}</h4>-->
-                        <h4 class="text-left">{{payment.receipentname}} <br /> Ref No: {{ payment.response.TransactionRefNo }}</h4>
-                        <div class="date">Date/Time: {{'2014-09-27 03:15:42' | toDate | date: 'medium'}}</div>
+                    <div class="col-md-6  pr0">
+                        <div class="col-md-6 pl0 pr0">
+                            <p>{{payment.receipentname}}</p>
+                        </div>
+                        <div class="date">Date/Time: {{'2014-09-27 03:15:42' | toDate | date: 'medium'}} </div>
                     </div>
                     <div class="col-md-6  pl0 pr0">
-                        <p>NGN {{payment.transfer_amount}} <img src="images/cros.png" class="img-responsive pull-right"></p>
+                        <p>NGN  {{payment.transfer_amount}} <img src="images/cros.png" class="img-responsive pull-right"></p>
                     </div>
                 </div>
 
-                
+               <!--  <div class="t-box row ml0 mr0 mt3">
+                    <div class="col-md-6 pr0">
+                        <div class="date">Date/Time: May 26 2016 : 10:20pm</div>
+                    </div>
+                    <div class="col-md-6 pl0 pr0">
+                        <p>NGN 400000 <img src="images/cros.png" class="img-responsive pull-right"></p>
+                    </div>
+                </div>
+
+                <div class="t-box row ml0 mr0 mt3">
+                    <div class="col-md-6  pr0">
+                        <div class="date">Date/Time: May 26 2016 : 10:20pm</div>
+                    </div>
+                    <div class="col-md-6  pl0 pr0">
+                        <p>NGN 400000 <img src="images/cros.png" class="img-responsive pull-right"></p>
+                    </div>
+                </div> -->
             </div>
         </div>
 
-        <div class="col-md-5 col-sm-5 ">
+       <!--  <div class="col-md-5 col-sm-5 ">
             <div class="side-bar-box">
                 <div class="sidebar-heading">
                     <h2>Payment Summary</h2>
@@ -108,34 +148,17 @@
                         <td class="item">Discount</td>
                         <td class="item2">{{discount}}</td>
                     </tr>
-                    <tr ng-if="bonus">
-                        <td class="item">Bonus</td>
-                        <td class="item2">{{bonus}}</td>
-                    </tr>
                     <tr>
                         <td class="total">Total Amount</td>
-                        <td class="total2" ng-if="!bonus">{{toCur}} {{toAmount}}</td>
-                        <td class="total2" ng-if="bonus">{{toCur}} {{toAmount -- bonus}}</td>
+                        <td class="total2">{{toCur}} {{toAmount}}</td>
                     </tr>
                 </table>
             </div>
-            <div class="promo">
-                            <a href="javascript:void(0);" ng-hide="showPromoText" ng-click="showPromoText = true">Active Promo Code</a>
-                        </div>
-                        <div class="promotext" ng-if="showPromoText">
-                            <div class="form-group has-success has-feedback">
-                                <div class="input-group">
-                                    <input type="text" ng-model="promocode" class="form-control" id="inputGroupSuccess1" aria-describedby="inputGroupSuccess1Status">
-                                    <span class="input-group-addon"><a href="javascript:void(0);" ng-click="addPromocode(promocode)">Apply</a></span>
-                                </div>
-                            </div>
-                            <p class="has-error error er" ng-if="invalidPromocode">Invalid Promocode. Please try again with new code.</p>  
-                        </div>
             <div class="continue">
                 <a ng-click="goToSelectBen()">Continue</a>
             </div>
 
-        </div>
+        </div> -->
     </div>
 
 
