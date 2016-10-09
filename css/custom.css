@@ -912,7 +912,7 @@ p {
 .dropdown.myProfilepics {
     /* padding: 15px; */
     /*border: 1px solid #111;*/
-    background: url("../images/arrow-down.png") no-repeat right 5px center;
+    /*background: url("../images/arrow-down.png") no-repeat right 5px center;*/
     width: 100%;
     position: absolute;
     z-index: 1000;
@@ -2469,4 +2469,72 @@ section.serviceCenter h4 {
 
 .AcoountDetails .form-group {
    margin-right: 10px;
+}
+/////// menu Dropdown in header //////////
+.customerimg .dropdown {
+    color: #555;
+    margin: 3px -22px 0 0;
+    width: 143px;
+    position: relative;
+    height: 17px;
+    text-align:left;
+        padding: 0px;
+    /* border: 1px solid #111; */
+    background: none;
+}
+div.submenu
+{
+    position: absolute;
+    z-index: 111;
+    width: 135px;
+    display: none;
+    margin-left: 10px;
+    padding: 0 0 5px;
+    border-radius: 6px;
+}
+.customerimg .dropdown  li a {
+    color: #555555;
+    display: block;
+    font-family: arial;
+    font-weight: bold;
+    padding: 6px 15px;
+    cursor: pointer;
+    text-decoration:none;
+    line-height: 34px;
+}
+.customerimg .profile-circle {
+        width: 60px;
+    height: 60px;
+}
+.customerimg .dropdown li a:hover{
+    background:#155FB0;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+.customerimg  a.account {
+    text-decoration: none;
+    background: url(images/arrow.png) 80px 32px no-repeat;
+    cursor:pointer;
+}
+.customerimg .root
+{
+    list-style: none;
+    font-size: 11px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+    background: #fff;
+    padding: 10px 0 10px 0;
+    border-radius: 5px 5px 5px 5px;
+    margin: 6px 0 0 0;
+}
+.customerimg .root:before {
+    content: '';
+    display: inline-block;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid #ccc;
+    border-bottom-color: #ffffff;
+    position: absolute;
+    color: #ffffff;
+    top: 0px;
+    left: 13px;
 }

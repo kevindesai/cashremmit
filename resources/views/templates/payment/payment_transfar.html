@@ -100,7 +100,7 @@
                         <div class="col-md-6 pl0 pr0">
                             <p>{{payment.receipentname}}</p>
                         </div>
-                        <div class="date">Date/Time: {{'2014-09-27 03:15:42' | toDate | date: 'medium'}} </div>
+                        <div class="date">Date/Time: {{payment.created_at | toDate | date: 'medium'}} </div>
                     </div>
                     <div class="col-md-6  pl0 pr0">
                         <p>NGN  {{payment.transfer_amount}} <img src="images/cros.png" class="img-responsive pull-right"></p>
