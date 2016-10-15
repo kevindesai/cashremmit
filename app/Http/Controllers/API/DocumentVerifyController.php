@@ -190,6 +190,7 @@ class DocumentVerifyController extends Api {
         $header = array();
         $header[] = 'Content-Type: application/json';
         $header[] = 'Authorization: Basic Q2FzaFJlbWl0X0RlbW9fQVBJOkFkbWluQElUMjAxNg==';
+        //$header[] = 'Authorization: Basic Q2FzaFJlbWl0X1BvcnRhbDpjI2tJYlIzcmYpI0g6NSMsKg==';
         $publicPath = public_path();
         $ch = curl_init("https://api.globaldatacompany.com/verifications/v1/verify");
         curl_setopt($ch, CURLOPT_CAINFO, $publicPath . "/ca-bundle.crt");

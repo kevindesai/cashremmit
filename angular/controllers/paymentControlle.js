@@ -21,7 +21,6 @@ app.controller('PaymentController', ['$scope', '$http', '$rootScope', 'userServi
             $rootScope.isLogin = false;
         }
         $scope.toCur = localStorage.getItem("ToCUR");
-        console.log($scope.toCur);
         $scope.fromCur = localStorage.getItem("FromCUR");
         $scope.fromAmount = localStorage.getItem('FromamounT');
         $scope.toAmount = localStorage.getItem('ToamounT');

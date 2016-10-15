@@ -93,7 +93,7 @@ app.controller('AdminController', function ($scope, $http, $location, myFactory,
 });
 
 app.controller('LoginController', function ($scope, $http, $location, myFactory, $rootScope, Facebook, userService) {
-
+//angular.element(".loaderbox").show();
 // tabular
 //    $rootScope.isLogin = false;
     $scope.activeTab = 1;
@@ -166,12 +166,13 @@ app.controller('LoginController', function ($scope, $http, $location, myFactory,
      * if user exists then it will return negative response
      */
     $scope.addUser = function (SocialUserData) {
-       
+       angular.element(".regloaderbox").show();
         $scope.registrationerrors = false;
         var method = 'POST';
         var url = $rootScope.RegitrationApi;
         var response = myFactory.httpMethodCall(method, url, SocialUserData);
         response.success(function (data) {
+            angular.element(".regloaderbox").hide();
             // success callback
             if (data.status == 1) {
 //                console.log("Register");

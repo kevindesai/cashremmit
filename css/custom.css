@@ -2159,7 +2159,7 @@ padding:0px !important;
 /*-------------------------------
 Loading Amination
 -------------------------------*/
-.loaderbox{
+.loaderbox,.regloaderbox{
     position: absolute;
     z-index: 100000;
     /* background: #fff; */

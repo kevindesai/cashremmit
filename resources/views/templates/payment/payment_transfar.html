@@ -100,10 +100,10 @@
                         <div class="col-md-6 pl0 pr0">
                             <p>{{payment.receipentname}}</p>
                         </div>
-                        <div class="date">Date/Time: {{payment.created_at | toDate | date: 'medium'}} </div>
+                        <div class="date">Date/Time:<br /> {{payment.created_at | toDate | date: 'dd-MMM-yyyy'}} </div>
                     </div>
                     <div class="col-md-6  pl0 pr0">
-                        <p>NGN  {{payment.transfer_amount}} <img src="images/cros.png" class="img-responsive pull-right"></p>
+                        <p>NGN  {{payment.transfer_amount + payment.adminfee + payment.discount}} <img src="images/cros.png" class="img-responsive pull-right"></p>
                     </div>
                 </div>
 

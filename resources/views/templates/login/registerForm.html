@@ -1,46 +1,49 @@
 <ul class="mainForm_wraper opt-button signup_Landing">
+    <div class="regloaderbox">
+        <div class="loader"></div>
+    </div>
     <div ng-hide="suceessregister">
-    <div class="alert alert-danger" role="alert" ng-if="registrationerrors">{{errormessage}}</div>
-    <form name="userForm" novalidate>
-        <li>
-            <p>We see you're in <strong>Australia</strong></p>
-        </li>
-        <li class="signup_form form-wrapper">
-            <!-- EMAIL -->
-            <div class="Reg_form" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }"> 
-                <input type="email" name="email" class="" placeholder="Enter your email" ng-model="formInfo.email" validator="required,email">
-                
-            </div>    
-
-            <!-- Password -->
-            <div class="Reg_form" ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine }">
-                <input type="password" name="password" class="" ng-model="formInfo.password" placeholder="Create Your Password" validator="required">
-                
-            </div>
-
-            <!-- USERNAME -->
-            <div class="Reg_form" ng-class="{ 'has-error' : userForm.first_name.$invalid && !userForm.first_name.$pristine }">
-                <input type="text" name="first_name" class="" ng-model="formInfo.first_name" placeholder="First Name" validator="required">
-                
-            </div>
-            <div class="Reg_form" ng-class="{ 'has-error' : userForm.last_name.$invalid && !userForm.last_name.$pristine }">
-                <input type="text" name="last_name" class="" ng-model="formInfo.last_name" placeholder="Last Name" validator="required" >
-                
-            </div> 
-        </li>
-        <li class="facebook_btn_05">
-            <span class="fa fa-facebook" aria-hidden="true"></span>
-            <a href="javascript:void(0);" style="font-size:14px; padding:0px 0px;" ng-click="fblogin()" class="facebookConnect button">Connect With Facebook </a>  
-        </li>
-        <li class="facebook_btn_05 ggPlus">
-            <span class="fa fa-google-plus" aria-hidden="true"></span>
-        <google-plus-signin clientid="230545741792-rocc0nj7fdv31vihh9ft7sscn6igbse6.apps.googleusercontent.com" autorender="false" customtargetid="my-custom-element">
-            <a href="javascript:void(0);" id="my-custom-element" >Google plus</a>  
+        <div class="alert alert-danger" role="alert" ng-if="registrationerrors">{{errormessage}}</div>
+        <form name="userForm" novalidate>
+            <li>
+                <p>We see you're in <strong>Australia</strong></p>
             </li>
-            <li class="form-wrapper button-wrap">
-                <input type="submit" validation-submit="userForm" ng-click="registerUser()" class="GreenBtn" value="SIGN UP"  />
+            <li class="signup_form form-wrapper">
+                <!-- EMAIL -->
+                <div class="Reg_form" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }"> 
+                    <input type="email" name="email" class="" placeholder="Enter your email" ng-model="formInfo.email" validator="required,email">
+
+                </div>    
+
+                <!-- Password -->
+                <div class="Reg_form" ng-class="{ 'has-error' : userForm.password.$invalid && !userForm.password.$pristine }">
+                    <input type="password" name="password" class="" ng-model="formInfo.password" placeholder="Create Your Password" validator="required">
+
+                </div>
+
+                <!-- USERNAME -->
+                <div class="Reg_form" ng-class="{ 'has-error' : userForm.first_name.$invalid && !userForm.first_name.$pristine }">
+                    <input type="text" name="first_name" class="" ng-model="formInfo.first_name" placeholder="First Name" validator="required">
+
+                </div>
+                <div class="Reg_form" ng-class="{ 'has-error' : userForm.last_name.$invalid && !userForm.last_name.$pristine }">
+                    <input type="text" name="last_name" class="" ng-model="formInfo.last_name" placeholder="Last Name" validator="required" >
+
+                </div> 
             </li>
-    </form>
+            <li class="facebook_btn_05">
+                <span class="fa fa-facebook" aria-hidden="true"></span>
+                <a href="javascript:void(0);" style="font-size:14px; padding:0px 0px;" ng-click="fblogin()" class="facebookConnect button">Connect With Facebook </a>  
+            </li>
+            <li class="facebook_btn_05 ggPlus">
+                <span class="fa fa-google-plus" aria-hidden="true"></span>
+            <google-plus-signin clientid="230545741792-rocc0nj7fdv31vihh9ft7sscn6igbse6.apps.googleusercontent.com" autorender="false" customtargetid="my-custom-element">
+                <a href="javascript:void(0);" id="my-custom-element" >Google plus</a>  
+                </li>
+                <li class="form-wrapper button-wrap">
+                    <input type="submit" validation-submit="userForm" ng-click="registerUser()" class="GreenBtn" value="SIGN UP"  />
+                </li>
+        </form>
     </div>
     <div ng-show="suceessregister">
         <div class="alert alert-success" role="alert">You are  registered successfully. Please login to your account.</div>
