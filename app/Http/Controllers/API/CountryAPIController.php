@@ -27,7 +27,7 @@ class CountryAPIController extends Controller {
     public function transferrate(Request $request) {
         $inputs = $request->all();
         $transferrate = TransferRate::whereHas('country', function($q) use($inputs) {
-                    $q->where(['country.country_name' => $inputs['country_name'], 'country.currency_code' => $inputs['currency_code']]);
+                    $q->where(['country.currency_code' => $inputs['currency_code']]);
                 })->where('from', '<=', (float) $inputs['amount'])->where('to', '>=', (float) $inputs['amount'])->first();
                 
         $response = [
