@@ -1,5 +1,6 @@
 app.controller('commonController', ['$scope', '$location', '$http', '$rootScope', 'userService', 'myFactory', '$window',
     function ($scope, $location, $http, $rootScope, userService, myFactory, $window) {
+        
         userService.getDataFromSession();
         $scope.userInfo = userService.userInfo;
         if ($scope.userInfo.mobile_no == ""){
@@ -428,6 +429,7 @@ app.controller('PaymentDetailsController', ['$scope', '$http', '$rootScope', 'us
     }]);
 app.controller('BeneficiariesController', ['$scope', '$http', '$rootScope', 'userService', 'myFactory', '$location',
     function ($scope, $http, $rootScope, userService, myFactory, $location) {
+       
         userService.getDataFromSession();
         $scope.userInfo = userService.userInfo;
         $scope.refreshbeif = function () {
@@ -556,7 +558,7 @@ app.controller('DocumentVerifyController', ['$scope', '$http', '$rootScope', 'us
             if(data.status==0){
                 $scope.UnverifyMsg = true;
             }else if(data.status==1){
-                
+                $scope.verifyMsg = true;
             }
             
         });

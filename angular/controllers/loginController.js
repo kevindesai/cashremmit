@@ -1,4 +1,5 @@
 app.controller('AdminController', function ($scope, $http, $location, myFactory, $rootScope, Facebook, userService, countrylistService) {
+   // $rootScope.stateIsLoading = true;
     $scope.currencyList = [];
     var currencyurl = $rootScope.getcurrencylist;
     var method = 'GET';
@@ -27,6 +28,7 @@ app.controller('AdminController', function ($scope, $http, $location, myFactory,
             $scope.fromflag = logo;
         }
         $scope.convertCurFromto($scope.fromAmount);
+        
     };
 
     $scope.gotopage = "";
@@ -56,9 +58,11 @@ app.controller('AdminController', function ($scope, $http, $location, myFactory,
                 $scope.toAmount = data.converted;
                 localStorage.setItem('ToamounT', $scope.toAmount);
                 angular.element(".loaderbox").hide();
+                 
             } else {
                 angular.element(".loaderbox").hide();
                 $scope.toAmount = '';
+                
             }
         });
         localStorage.setItem('FromamounT', fromAmount);
@@ -90,6 +94,7 @@ app.controller('AdminController', function ($scope, $http, $location, myFactory,
         localStorage.setItem('FromCUR', $scope.fromCur);
         localStorage.setItem('ToCUR', $scope.toCur);
     }
+     
 });
 
 app.controller('LoginController', function ($scope, $http, $location, myFactory, $rootScope, Facebook, userService) {
@@ -107,7 +112,7 @@ app.controller('LoginController', function ($scope, $http, $location, myFactory,
      */
     $scope.registerUser = function () {
         var data = $scope.formInfo;
-
+        data.from="register";
         //call addUser Method
         $scope.addUser(data);
     };
@@ -175,27 +180,22 @@ app.controller('LoginController', function ($scope, $http, $location, myFactory,
             angular.element(".regloaderbox").hide();
             // success callback
             if (data.status == 1) {
-//                console.log("Register");
-//                console.log(data);
-//                console.log("/Register");
-//                $rootScope.userData = data.data;
-//                userService.saveDataInSession(data.data);
-                 //  $scope.suceessregister = true;
                  var loginData = {};
                  loginData.email = SocialUserData.email;
                  loginData.password = SocialUserData.password;
                  loginData.from='register';
                  $scope.loginMember(loginData);
-//                angular.element('#myModal').modal('hide');
-//                angular.element('body').removeClass('modal-open');
-//                angular.element('.modal-backdrop').remove();
-//                
-//                
-//                $location.path('/payment');
+
             } else if (data.status == 0) {
-                console.log(data.data.email);
+               // console.log(data.data.email);
                 $scope.registrationerrors = true;
                 $scope.errormessage = data.data.email[0];
+            } else if(data.status == 2){
+                var loginData = {};
+                loginData.email = data.data.email;
+                 loginData.password = '123456';
+                 loginData.from='register';
+                 $scope.loginMember(loginData);
             }
         });
         response.error(function (error) {
@@ -267,11 +267,12 @@ app.controller('LoginController', function ($scope, $http, $location, myFactory,
         Facebook.api('/me', {locale: 'en_US', fields: 'first_name,last_name,email,gender'}, function (response) {
             $scope.user = response;
             var FB = {};
-            FB.firstName = response.first_name;
-            FB.lastName = response.last_name;
-            FB.emailAddress = response.email;
-            FB.id = response.id;
-            $scope.LoginSocialUsers(FB);
+            FB.first_name = response.first_name;
+            FB.last_name = response.last_name;
+            FB.email = response.email;
+            FB.social_id = response.id;
+            FB.from = "facebook";
+            $scope.addUser(FB);
         });
     };
 
@@ -284,14 +285,16 @@ app.controller('LoginController', function ($scope, $http, $location, myFactory,
     });
     $scope.$on('event:google-plus-signin-success', function (event, authResult) {
         // User successfully authorized the G+ App!
-        $scope.userDataGoogle = authResult.wc;
-        console.log($scope.userDataGoogle);
+       // console.log(authResult);
+        $scope.userDataGoogle = authResult.w3;
+        //console.log($scope.userDataGoogle);
         var GooData = {};
-        GooData.first_name = $scope.userDataGoogle.Za;
-        GooData.last_name = $scope.userDataGoogle.Na;
-        GooData.email = $scope.userDataGoogle.hg;
-        GooData.gmail_token_id = $scope.userDataGoogle.Ka;
-        console.log(GooData);
+        GooData.first_name = $scope.userDataGoogle.ofa;
+        GooData.last_name = $scope.userDataGoogle.wea;
+        GooData.email = $scope.userDataGoogle.U3;
+        GooData.social_id = $scope.userDataGoogle.Eea;
+        GooData.from="google";
+       // console.log(GooData);
 //        return false;
         $scope.addUser(GooData);
     });

@@ -75,7 +75,8 @@ app.run(function($rootScope, $location,$route,$http,myFactory) {
 });
 
 app.config(function(FacebookProvider){//205637772980180
-        FacebookProvider.init('1022256307853175');
+//        FacebookProvider.init('1022256307853175');
+        FacebookProvider.init('1117150145001450');
     });
 app.config(['$routeProvider',
     function($routeProvider) {

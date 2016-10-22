@@ -24,7 +24,7 @@ class User extends Model
      *
      * @var array
      */
-    protected $fillable = ['is_verified','first_name','last_name','unit_no','building_name','city','region','street','post_code','country','dob','mobile_no','landline_no','email','password','profile','remember_token','is_active'];
+    protected $fillable = ['is_verified','first_name','last_name','unit_no','building_name','city','region','street','post_code','country','dob','mobile_no','landline_no','email','password','profile','remember_token','is_active','social_id'];
     
     public function countries() {
         return $this->belongsTo('App\Country','country');

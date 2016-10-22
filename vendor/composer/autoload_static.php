@@ -421,6 +421,7 @@ class ComposerStaticInitd52074051f27ff7ca9929fe2732642a9
 
     public static $classMap = array (
         'AddProfileToUsersTable' => __DIR__ . '/../..' . '/database/migrations/2016_09_29_030236_add_profile_to_users_table.php',
+        'AddSocialIdToUsers' => __DIR__ . '/../..' . '/database/migrations/2016_10_22_015429_add_social_id_to_users.php',
         'AdminUserSeeder' => __DIR__ . '/../..' . '/database/seeds/AdminUserSeeder.php',
         'App\\Http\\Controllers\\API\\UsersAPIController' => __DIR__ . '/../..' . '/app/Http/Controllers/API/UsersAPIController.php',
         'CountryTableSeeder' => __DIR__ . '/../..' . '/database/seeds/CountryTableSeeder.php',
@@ -432,6 +433,7 @@ class ComposerStaticInitd52074051f27ff7ca9929fe2732642a9
         'CreatePromossions' => __DIR__ . '/../..' . '/database/migrations/2016_07_06_162813_create_promossions.php',
         'CreateRecipientMaster' => __DIR__ . '/../..' . '/database/migrations/2016_06_19_162812_create_recipient_master.php',
         'CreateTransactions' => __DIR__ . '/../..' . '/database/migrations/2016_08_10_162814_create_transactions.php',
+        'CreateTransferBonus' => __DIR__ . '/../..' . '/database/migrations/2016_09_29_030236_create_transfer_bonus.php',
         'CreateTransferRate' => __DIR__ . '/../..' . '/database/migrations/2016_07_23_162814_create_transfer_rate.php',
         'CreateUserDocumentsTable' => __DIR__ . '/../..' . '/database/migrations/2016_09_01_074501_create_user_documents_table.php',
         'CreateusersTable' => __DIR__ . '/../..' . '/database/migrations/2016_06_14_164027_create_users_table.php',
@@ -947,6 +949,7 @@ class ComposerStaticInitd52074051f27ff7ca9929fe2732642a9
         'UpdateAddIsVerifiedUser' => __DIR__ . '/../..' . '/database/migrations/2016_08_17_162814_update_add_is_verified_user.php',
         'UpdateAdminUserType' => __DIR__ . '/../..' . '/database/migrations/2016_09_27_162815_update_admin_user_type.php',
         'UpdateCountryStatus' => __DIR__ . '/../..' . '/database/migrations/2016_09_24_162815_update_country_status.php',
+        'UpdateToCurrencyCode' => __DIR__ . '/../..' . '/database/migrations/2016_09_29_030236_update_to_currency_code.php',
         'UpdateTransactionSwitch' => __DIR__ . '/../..' . '/database/migrations/2016_09_07_162815_update_transaction_switch.php',
         'UpdateTransactionTransferAmount' => __DIR__ . '/../..' . '/database/migrations/2016_09_15_162815_update_transaction_transfer_amount.php',
     );

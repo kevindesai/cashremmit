@@ -33,58 +33,125 @@ class UsersAPIController extends Controller {
 
     public function store(Request $request) {
         $input = $request->all();
-
-        $validation = Validator::make(
-                        $request->all(), array(
-                    'first_name' => array('required', 'alpha_dash'),
-                    'last_name' => array('required', 'alpha_dash'),
-                    'email' => array('required', 'email', 'unique:users'),
-                    'password' => array('required'),
-                        )
-        );
-        $data = array();
-        if ($validation->fails()) {
-            $response = array(
-                'status' => '0',
-                'data' => $validation->messages(),
-                'message' => 'Validation error'
+        if ($input["from"] == "register") {
+            $validation = Validator::make(
+                            $request->all(), array(
+                        'first_name' => array('required', 'alpha_dash'),
+                        'last_name' => array('required', 'alpha_dash'),
+                        'email' => array('required', 'email', 'unique:users'),
+                        'password' => array('required'),
+                            )
             );
-            return json_encode($response);
-        }
-        $input = $request->all();
-        $input['is_active'] = 1;
-        $input['is_verified'] = 0;
-        if (isset($input['password'])) {
-            $input['password'] = Hash::make($input['password']);
-        }
-        $user = User::create($input);
+            $data = array();
+            if ($validation->fails()) {
+                $response = array(
+                    'status' => '0',
+                    'data' => $validation->messages(),
+                    'message' => 'Validation error'
+                );
+                return json_encode($response);
+            }
+            $input = $request->all();
+            $input['is_active'] = 1;
+            $input['is_verified'] = 0;
+            if (isset($input['password'])) {
+                $input['password'] = Hash::make($input['password']);
+            }
+            $user = User::create($input);
 
-        if ($user) {
+            if ($user) {
+                try {
+                    Mail::send('emails.welcomeEmail', array("user" => $user), function ($message) use ($user) {
+
+                        $message->from('support@cashremit.com.au', 'Cash Remit');
+
+                        $message->to($user->email)->subject('Welcome to Cashremit');
+                    });
+                } catch (Exception $e) {
+                    
+                }
+
+
+
+                $response = array(
+                    'status' => '1',
+                    'data' => $user->toArray(),
+                    'message' => 'User registered successfully'
+                );
+            } else {
+                $response = array(
+                    'status' => '0',
+                    'data' => array(),
+                    'message' => 'Some error occurs,try again letter.'
+                );
+            }
+        } else {
+
+            $validation = Validator::make(
+                            $request->all(), array(
+                        'first_name' => array('required', 'alpha_dash'),
+                        'last_name' => array('required', 'alpha_dash'),
+                        'email' => array('required', 'email'),
+                            )
+            );
+            if ($validation->fails()) {
+                $response = array(
+                    'status' => '0',
+                    'data' => $validation->messages(),
+                    'message' => 'Validation error'
+                );
+                return json_encode($response);
+            }
             try {
-                Mail::send('emails.welcomeEmail', array("user" => $user), function ($message) use ($user) {
-
-                    $message->from('support@cashremit.com.au', 'Cash Remit');
-
-                    $message->to($user->email)->subject('Welcome to Cashremit');
-                });
+                $user = User::where('social_id', $input["social_id"])->first();
+                
             } catch (Exception $e) {
                 
             }
+            if (isset($user) && $user) {
+                $response = array(
+                     'status' => '2',
+                    'data' => $user->toArray(),
+                    'message' => 'User registered successfully'
+                );
+            } else {
+                $input['is_active'] = 1;
+                $input['is_verified'] = 0;
+                $input['password'] = 123456;
+                if (isset($input['password'])) {
+                    $input['password'] = Hash::make($input['password']);
+                }
+                $user = User::create($input);
+
+                if ($user) {
+                    try {
+                        Mail::send('emails.welcomeEmail', array("user" => $user), function ($message) use ($user) {
+
+                            $message->from('support@cashremit.com.au', 'Cash Remit');
+
+                            $message->to($user->email)->subject('Welcome to Cashremit');
+                        });
+                    } catch (Exception $e) {
+                        
+                    }
 
 
 
-            $response = array(
-                'status' => '1',
-                'data' => $user->toArray(),
-                'message' => 'User registered successfully'
-            );
-        } else {
-            $response = array(
-                'status' => '0',
-                'data' => array(),
-                'message' => 'Some error occurs,try again letter.'
-            );
+                    $response = array(
+                        'status' => '2',
+                        'data' => $user->toArray(),
+                        'message' => 'User registered successfully'
+                    );
+                } else {
+                    $response = array(
+                        'status' => '0',
+                        'data' => array(),
+                        'message' => 'Some error occurs,try again letter.'
+                    );
+                }
+            }
         }
+
         return json_encode($response);
 //        return $this->sendResponse($user->toArray(), 'User registered successfully');
     }

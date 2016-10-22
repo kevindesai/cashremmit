@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AddProfileToUsersTable' => $baseDir . '/database/migrations/2016_09_29_030236_add_profile_to_users_table.php',
+    'AddSocialIdToUsers' => $baseDir . '/database/migrations/2016_10_22_015429_add_social_id_to_users.php',
     'AdminUserSeeder' => $baseDir . '/database/seeds/AdminUserSeeder.php',
     'App\\Http\\Controllers\\API\\UsersAPIController' => $baseDir . '/app/Http/Controllers/API/UsersAPIController.php',
     'CountryTableSeeder' => $baseDir . '/database/seeds/CountryTableSeeder.php',
@@ -18,6 +19,7 @@ return array(
     'CreatePromossions' => $baseDir . '/database/migrations/2016_07_06_162813_create_promossions.php',
     'CreateRecipientMaster' => $baseDir . '/database/migrations/2016_06_19_162812_create_recipient_master.php',
     'CreateTransactions' => $baseDir . '/database/migrations/2016_08_10_162814_create_transactions.php',
+    'CreateTransferBonus' => $baseDir . '/database/migrations/2016_09_29_030236_create_transfer_bonus.php',
     'CreateTransferRate' => $baseDir . '/database/migrations/2016_07_23_162814_create_transfer_rate.php',
     'CreateUserDocumentsTable' => $baseDir . '/database/migrations/2016_09_01_074501_create_user_documents_table.php',
     'CreateusersTable' => $baseDir . '/database/migrations/2016_06_14_164027_create_users_table.php',
@@ -533,6 +535,7 @@ return array(
     'UpdateAddIsVerifiedUser' => $baseDir . '/database/migrations/2016_08_17_162814_update_add_is_verified_user.php',
     'UpdateAdminUserType' => $baseDir . '/database/migrations/2016_09_27_162815_update_admin_user_type.php',
     'UpdateCountryStatus' => $baseDir . '/database/migrations/2016_09_24_162815_update_country_status.php',
+    'UpdateToCurrencyCode' => $baseDir . '/database/migrations/2016_09_29_030236_update_to_currency_code.php',
     'UpdateTransactionSwitch' => $baseDir . '/database/migrations/2016_09_07_162815_update_transaction_switch.php',
     'UpdateTransactionTransferAmount' => $baseDir . '/database/migrations/2016_09_15_162815_update_transaction_transfer_amount.php',
 );

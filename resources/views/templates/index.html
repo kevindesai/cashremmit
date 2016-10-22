@@ -64,14 +64,9 @@
     <body ng-app="main-App">
         <!--<ng-view></ng-view>-->
         <section ng-if="!stateIsLoading" ng-view></section>
-<section ng-if="stateIsLoading"><div class="bubblingG">
-	<span id="bubblingG_1">
-	</span>
-	<span id="bubblingG_2">
-	</span>
-	<span id="bubblingG_3">
-	</span>
-</div></section>
+        <section ng-if="stateIsLoading">
+            <div class="signal"></div>
+        </section>
     <!-- Scripts -->
     
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
