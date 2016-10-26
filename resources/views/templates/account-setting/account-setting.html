@@ -21,61 +21,62 @@
                 </div>
              </div>
 
-              <form class="form-inline">
+              <form class="form-inline" name="profileForm">
                   <div class="form-group">
                     <p class="change-name">Fisrt Name:</p>
                     <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.first_name"> </p>
-                    <input type="text" class="change-value"  ng-model="userInfo.first_name" ng-show="isupdate" />
+                    <input type="text" class="change-value"  ng-model="userInfo.first_name" ng-show="isupdate" required  />
                  </div>
                     <div class="form-group">
                        <p class="change-name">Last Name:</p>
                        <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.last_name"> </p> 
-                      <input type="text" class="change-value"  ng-model="userInfo.last_name" ng-show="isupdate" />
+                      <input type="text" class="change-value"  ng-model="userInfo.last_name" ng-show="isupdate" required  />
                     </div> 
 
                  <div class="form-group">
                        <p class="change-name">Email:</p>
                         <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.email"> </p>
-                        <input type="text" class="change-value"  ng-model="userInfo.email" ng-show="isupdate" />
+                        <input type="text" class="change-value"  ng-model="userInfo.email" ng-show="isupdate" required />
                   </div>
                     <div class="form-group">
                         <p class="change-name">Phone N0:</p>
                         <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.mobile_no"> </p> 
-                        <input type="text"  class="change-value" ng-model="userInfo.mobile_no" ng-show="isupdate" /> 
+                        <input type="text"  class="change-value" ng-model="userInfo.mobile_no" ng-show="isupdate" required /> 
                     </div> 
 
                   <div class="form-group">
                    <p class="change-name">Lookup address:</p>
-                     <input type="text" class="change-value" id="addresssearchbox" />
+                     <input type="text" class="change-value" ng-model="userInfo.building_name" id="addresssearchbox" required  />
                  </div>
                     <div class="form-group">
                      <p class="change-name">Street No:</p>
                         <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.unit_no"> </p> 
-                        <input type="text" class="change-value"  ng-model="userInfo.unit_no" ng-show="isupdate" />
+                        <input type="text" class="change-value"  ng-model="userInfo.unit_no" ng-show="isupdate" required />
                     </div> 
 
                   <div class="form-group">
                       <p class="change-name">Street Name</p>
                       <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.building_name"> </p> 
-                       <input type="text" class="change-value"  ng-model="userInfo.building_name" ng-show="isupdate" /> 
+                       <input type="text" class="change-value"  ng-model="userInfo.building_name" ng-show="isupdate" required /> 
                  </div>
                     <div class="form-group">
                         <p class="change-name">City:</p>
                          <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.city"> </p> 
-                        <input type="text" class="change-value"  ng-model="userInfo.city" ng-show="isupdate" /> 
+                        <input type="text" class="change-value"  ng-model="userInfo.city" ng-show="isupdate" required  /> 
                     </div> 
                       <div class="form-group">
                        <p class="change-name">Postcode:</p>
                         <p class="change-value" ng-hide="isupdate" ng-bind="userInfo.post_code"> </p> 
-                        <input type="text" class="change-value"  ng-model="userInfo.post_code" ng-show="isupdate" /> 
+                        <input type="text" class="change-value"  ng-model="userInfo.post_code" ng-show="isupdate" required /> 
                     </div>
               </form>
 
              <div class="upm-btn">
-                    <a href="" ng-click="EditClick()" class="normal-btn yellow-fill up-btn" ng-hide="isupdate">Edit Info</a> 
+                    <!--<a href="" ng-click="EditClick()" class="normal-btn yellow-fill up-btn" ng-hide="isupdate">Edit Info</a>--> 
                 </div>
                 <div class="upm-btn">
-                    <a href="" ng-show="isupdate" class="normal-btn yellow-fill up-btn" ng-click="updateValue(userInfo)">Update Info</a>
+                    
+                    <button ng-show="isupdate" ng-disabled="profileForm.$invalid" class="normal-btn yellow-fill up-btn" ng-click="updateValue(userInfo)">Update Info</button>
                 </div>
             </div>
 

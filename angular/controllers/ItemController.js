@@ -497,6 +497,7 @@ app.controller('DocumentVerifyController', ['$scope', '$http', '$rootScope', 'us
         $scope.userInfo = userService.userInfo;
         //console.log($scope.userInfo);
         $scope.txndata={};
+        
         $scope.days= 31;
         $scope.getNumber = function(num) {
           return new Array(num);   
@@ -535,7 +536,7 @@ app.controller('DocumentVerifyController', ['$scope', '$http', '$rootScope', 'us
         };
         $scope.submitdocform = function(doc){
             //console.log(doc);
-            
+            angular.element(".loaderbox").show();
             if($filter('uppercase')($scope.userInfo.first_name) != $filter('uppercase')(doc.FirstGivenName) || $filter('uppercase')($scope.userInfo.last_name) != $filter('uppercase')(doc.FirstSurName)){
                 $scope.nameError=true;
                 return false;
@@ -555,18 +556,30 @@ app.controller('DocumentVerifyController', ['$scope', '$http', '$rootScope', 'us
             }
             var response  = myFactory.httpMethodCall('POST',$rootScope.verifyDriverLicence,reqData);
         response.success(function(data){
+            angular.element(".loaderbox").hide();
             if(data.status==0){
                 $scope.UnverifyMsg = true;
             }else if(data.status==1){
                 $scope.verifyMsg = true;
+                $scope.doc.FirstGivenName = "";
+                $scope.doc.FirstSurName = "";
+                $scope.doc.DayOfBirth = "";
+                $scope.doc.MonthOfBirth = "";
+                $scope.doc.YearOfBirth = "";
+                $scope.doc.DriverLicence.Number = "";
+                $scope.doc.DriverLicence.DayOfExpiry = "";
+                $scope.doc.DriverLicence.MonthOfExpiry = "";
+                $scope.doc.DriverLicence.YearOfExpiry = "";
             }
             
         });
         response.error(function(error){
+            angular.element(".loaderbox").hide();
             console.log(error);
         });
         }
         $scope.submitpassportform = function(doc){
+            angular.element(".loaderbox").show();
             if($filter('uppercase')($scope.userInfo.first_name) != $filter('uppercase')(doc.FirstGivenName) || $filter('uppercase')($scope.userInfo.last_name) != $filter('uppercase')(doc.FirstSurName)){
                 $scope.nameError=true;
                 return false;
@@ -587,14 +600,27 @@ app.controller('DocumentVerifyController', ['$scope', '$http', '$rootScope', 'us
             }
             var response  = myFactory.httpMethodCall('POST',$rootScope.verifyPassPort,reqData);
         response.success(function(data){
+            angular.element(".loaderbox").hide();
             if(data.status==0){
                 $scope.UnverifyMsg = true;
             }else if(data.status==1){
-                
+                $scope.verifyMsg = true;
+                $scope.doc.FirstGivenName = "";
+                $scope.doc.FirstSurName = "";
+                $scope.doc.DayOfBirth = "";
+                $scope.doc.MonthOfBirth = "";
+                $scope.doc.YearOfBirth = "";
+                $scope.doc.Passport.Number = "";
+                $scope.doc.Passport.Mrz1 = "";
+                $scope.doc.Passport.Mrz2 = "";
+                $scope.doc.Passport.DayOfExpiry = "";
+                $scope.doc.Passport.MonthOfExpiry = "";
+                $scope.doc.Passport.YearOfExpiry = "";
             }
             
         });
         response.error(function(error){
+            angular.element(".loaderbox").hide();
             console.log(error);
         });
         }

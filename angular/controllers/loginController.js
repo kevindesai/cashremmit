@@ -1,4 +1,4 @@
-app.controller('AdminController', function ($scope, $http, $location, myFactory, $rootScope, Facebook, userService, countrylistService) {
+app.controller('AdminController', function ($scope, $http, $location, myFactory, $rootScope, Facebook, userService, countrylistService,$routeParams) {
    // $rootScope.stateIsLoading = true;
     $scope.currencyList = [];
     var currencyurl = $rootScope.getcurrencylist;
@@ -94,14 +94,57 @@ app.controller('AdminController', function ($scope, $http, $location, myFactory,
         localStorage.setItem('FromCUR', $scope.fromCur);
         localStorage.setItem('ToCUR', $scope.toCur);
     }
-     
+    if($routeParams.pwdresettoken !=undefined){
+        $scope.resetToken = $routeParams.pwdresettoken;
+        angular.element("#myModalResetPwd").modal('show');
+        //console.log(resetToken);
+    }
+    $scope.callResetPassword = function(){
+        if($scope.reset.password == $scope.reset.confpassword){
+            if($scope.resetToken != undefined || $scope.resetToken !=""){
+                var arr ={};
+                arr.token = $scope.resetToken;
+                arr.password = $scope.reset.password;
+                var method = 'POST';
+                var url = $rootScope.ResetPwdApi;
+                var response = myFactory.httpMethodCall(method, url, arr);
+                response.success(function(data){
+                    if(data.status=="1"){
+                        $scope.successMsg = true;
+                        
+                    }else{
+                        $scope.somethingwentWrong= true;
+                    }
+                });
+                response.error(function(data){
+                    console.log(data);
+                });
+            }else{
+                $scope.somethingwentWrong=true;
+                return false;
+            }
+        }else{
+            $scope.sameerrMsg = true;
+            return false;
+        }
+
+    }
+    $scope.closeResetModal = function(){
+        angular.element('#myModalResetPwd').modal('hide');
+                angular.element('body').removeClass('modal-open');
+                angular.element('.modal-backdrop').remove();
+                $timeout(function(){
+                    angular.element('body').css('padding-right',"0px");
+                },500);
+    }
 });
 
-app.controller('LoginController', function ($scope, $http, $location, myFactory, $rootScope, Facebook, userService) {
+app.controller('LoginController', function ($scope, $http, $location, myFactory, $rootScope, Facebook, userService,$timeout) {
 //angular.element(".loaderbox").show();
 // tabular
 //    $rootScope.isLogin = false;
     $scope.activeTab = 1;
+    $scope.showForgot = false;
     $scope.setActiveTab = function (tabToSet) {
         $scope.activeTab = tabToSet;
     };
@@ -135,6 +178,7 @@ app.controller('LoginController', function ($scope, $http, $location, myFactory,
         var url = $rootScope.loginApi;
         var from = SocialUserData.from;
         delete SocialUserData.from;
+        
         $scope.invalidusername = false;
         var response = myFactory.httpMethodCall(method, url, SocialUserData);
         response.success(function (data) {
@@ -206,34 +250,38 @@ app.controller('LoginController', function ($scope, $http, $location, myFactory,
 
     $scope.invalidUser = false;
     $scope.hideLoginBtn = false;
-
+    $scope.hideLoginPopup = function(){
+        angular.element('#myModal').modal('hide');
+    }
+    $scope.closeforgotModal =function(){
+       
+                angular.element('#myModalForgot').modal('hide');
+                angular.element('body').removeClass('modal-open');
+                angular.element('.modal-backdrop').remove();
+                $timeout(function(){
+                    angular.element('body').css('padding-right',"0px");
+                },500);
+                
+    }
     $scope.callforgotPassword = function () {
-        //console.log($scope.forgot);
+        console.log($scope.forgot);
+       
         var arr = {};
         arr.email = $scope.forgot.email;
-        arr.birthday = $scope.forgot.bmonth + '/' + $scope.forgot.bday + '/' + $scope.forgot.byear;
-        if ($scope.forgot.email != undefined && $scope.forgot.bday != undefined && $scope.forgot.bmonth != undefined && $scope.forgot.byear != undefined) {
-            $http({
-                method: 'POST',
-                url: constant.callforgotPassword,
-                data: JSON.stringify(arr),
-            }).then(function (response) {
-                if (response.status == 200) {
-                    $scope.responsemessage = response.data.message;
-                }
-            }, function errorCallback(response) {
-                //console.log(response);
-                if (response.status == 401) {
-                    $scope.invalidbDate = true;
-                    $scope.responsemessage = response.data.message;
-                    $scope.$apply;
-                }
-                if (response.status == 404) {
-                    $scope.invalidemail = true;
-                    $scope.responsemessage = response.data.message;
-                    $scope.$apply;
-                }
-            });
+         if ($scope.forgot.email != undefined || $scope.forgot.email != "") {
+             var method = 'POST';
+        var url = $rootScope.ForgotPwdApi;
+        var response = myFactory.httpMethodCall(method, url, arr);
+        response.success(function(data){
+            if(data.status==1){
+                $scope.successMsg = true;
+            }else{
+                $scope.errorMsg=true;
+            }
+        });
+        response.error(function(data){
+            console.log(data);
+        });
         }
     }
     $scope.loginStatus = 'disconnected';

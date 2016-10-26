@@ -20,6 +20,7 @@ use JWTAuth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use \Crypt;
 
 class UsersAPIController extends Controller {
 
@@ -104,13 +105,12 @@ class UsersAPIController extends Controller {
             }
             try {
                 $user = User::where('social_id', $input["social_id"])->first();
-                
             } catch (Exception $e) {
                 
             }
             if (isset($user) && $user) {
                 $response = array(
-                     'status' => '2',
+                    'status' => '2',
                     'data' => $user->toArray(),
                     'message' => 'User registered successfully'
                 );
@@ -307,6 +307,93 @@ class UsersAPIController extends Controller {
                 "status" => "0",
                 "data" => "",
                 "message" => "Please try again."
+            );
+        }
+        return json_encode($response);
+    }
+
+    public function forgotpassword(request $request) {
+        $input = $request->all();
+        $email = isset($input['email']) ? $input['email'] : '';
+        if ($email != "") {
+            try {
+                $user = User::where('email', $email)->first();
+            } catch (Exception $e) {
+                
+            }
+            $response = [
+                'status' => 0,
+                'message' => 'Email does not exist'
+            ];
+            if (isset($user) && $user) {
+                $token = base64_encode($email.'/-/'.date("Y-m-d H:i:s"));
+                $token = Crypt::encrypt($email);
+                //echo  Crypt::decrypt($token);
+                
+                $emailLink = URL("/#/")."/forgot/".$token;
+                
+                $userData = $user->toArray();
+                
+                $data = [
+                    "user"=>$userData,
+                    "emailLink" =>$emailLink
+                ];
+                try {
+                        Mail::send('emails.forgotPwd', array("data" => $data), function ($message) use ($data) {
+
+                            $message->from('support@cashremit.com.au', 'Cash Remit');
+
+                            $message->to($data["user"]["email"])->subject('Forgot Password');
+                        });
+                    } catch (Exception $e) {
+                        
+                    }
+                $response = [
+                'status' => 1,
+                'message' => 'Email Sent Successfully.'
+            ];    
+            }
+        } else {
+            $response = array(
+                "status" => "0",
+                "data" => "",
+                "message" => "Email can not be blank"
+            );
+        }
+        return json_encode($response);
+    }
+    
+    public function resetpassword(request $request){
+        $input = $request->all();
+        $token = isset($input['token']) ? $input['token'] : '';
+        $password = isset($input['password']) ? $input['password'] : '';
+        if($token != "" && $password != ""){
+            try{
+                $email = Crypt::decrypt($token);
+                $user = User::where('email', $email)->first();
+                if($user && !empty($user)){
+                    $user->password = Hash::make($input['password']);
+                    $user->save();
+                    $response = array(
+                            "status" => "1",
+                            "data" => "",
+                            "message" => "Password changed successfully."
+                        );
+                }else{
+                    $response = array(
+                "status" => "0",
+                "data" => "",
+                "message" => "Something went wrong please try again."
+            );
+                }
+            }catch(Exception $e){
+                
+            }
+        }else{
+            $response = array(
+                "status" => "0",
+                "data" => "",
+                "message" => "Something went wrong please try again."
             );
         }
         return json_encode($response);

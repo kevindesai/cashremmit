@@ -2161,7 +2161,7 @@ Loading Amination
 -------------------------------*/
 .loaderbox,.regloaderbox{
     position: absolute;
-    z-index: 100000;
+    z-index: 99999;
     /* background: #fff; */
     width: 100%;
     height: 100%;
@@ -2565,4 +2565,14 @@ div.submenu
       transform: scale(1.2);
       opacity: 0;
     }
+}
+.forgotmodal .closeBtn{
+    position: absolute;
+    right: 0;
+}
+.forgotmodal .nav-tabs > li {
+    width: 100%;
+}
+.validation-invalid{
+    color:#f00;
 }

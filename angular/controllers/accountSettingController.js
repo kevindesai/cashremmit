@@ -36,7 +36,7 @@ app.controller('AccountSettingController', ['$scope', '$http', '$rootScope', 'us
 
             });
             response.error(function (error) {
-                console.log(error);
+               // console.log(error);
             });
         }
         $scope.getCountry();

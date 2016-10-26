@@ -12,7 +12,7 @@
                           <button type="button" style="margin-top: -7px;" class="close" data-dismiss="modal" aria-label="Close">
                             </button>
                              <div class="col-md-6 col-sm-6" style="padding:0px;">
-                              <div class="sl-tab">
+                                 <div class="sl-tab">
                                 <!-- Nav tabs -->
                                 <div class="center-sl">
                                     <ul class="nav nav-tabs" role="tablist">
@@ -37,6 +37,47 @@
 
                         </div>
                     </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade bs-example-modal-lg" id="myModalForgot" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="LoginController">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content centered">
+
+            <div class="modal-body-sl forgotmodal p-b-3">
+                <div class="container-fluid">
+                    <div class="row">
+                         <span class="fa fa-times-circle closeBtn" ng-click="closeforgotModal()" aria-hidden="true" class="close" data-dismiss="modal" aria-label="Close"></span>
+                          <button type="button" style="margin-top: -7px;" class="close" data-dismiss="modal" aria-label="Close">
+                            </button>
+                         <div class="sl-tab">
+                                <!-- Nav tabs -->
+                                <div class="center-sl">
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class ="active" role="presentation" class="active"><a href=""  role="tab" >Forgot Password</a></li>
+                                    </ul>
+                                     <form name="forgotPwdFrm" novalidate>
+                                    <ul class="mainForm_wraper opt-button Reg_form ">
+                                        <div class='alert alert-success' ng-if='successMsg'>Email sent successfully.</div>
+                                        <div class='alert alert-danger' ng-if='errorMsg' ng-hide="successMsg">Email does not exist.</div>
+                                        <li class="form-wrapper">
+                                            <input type="email" ng-model="forgot.email" placeholder="Email Address" validator="required,email">
+                                        </li>
+                                        <li class="form-wrapper button-wrap">
+                                            <input type="submit" validation-submit="forgotPwdFrm" ng-click="callforgotPassword()" class="GreenBtn" value="SUBMIT">    
+                                        </li>
+                                    </ul>
+                                   
+                                        
+                                    </form>
+                                    
+                                </div>
+                         </div>    
+                    </div>
+                    <div class="m-b-5"></div>
                 </div>
             </div>
 

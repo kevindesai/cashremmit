@@ -23,6 +23,8 @@ app.run(function($rootScope, $location,$route,$http,myFactory) {
 //    } 
     $rootScope.RegitrationApi = $rootScope.apiUrl + 'api/v1/users';
     $rootScope.loginApi = $rootScope.apiUrl + 'api/v1/users/login';
+    $rootScope.ForgotPwdApi = $rootScope.apiUrl+'api/v1/users/forgotpassword'
+    $rootScope.ResetPwdApi = $rootScope.apiUrl+'api/v1/users/resetpassword'
     $rootScope.updateApi = $rootScope.apiUrl + 'api/v1/users';
     $rootScope.CurrencyApi = $rootScope.apiUrl +'api/v1/currency/convert';
     $rootScope.addBenefiery = $rootScope.apiUrl +'api/v1/recipient';
@@ -159,11 +161,16 @@ app.config(['$routeProvider',
                     controller: 'PoliPaymentController',
                     auth: true
                 }).
-				when('/successbutnotverified/:politoken', {
+		when('/successbutnotverified/:politoken', {
                     templateUrl: 'resources/views/templates/payment/documentverify.html',
                     controller: 'DocumentVerifyController',
                     auth: true
                 }).
+                when('/forgot/:pwdresettoken', {
+                    templateUrl: 'resources/views/templates/home.html',
+                    controller: 'AdminController',
+                    auth: false
+                }).        
                 otherwise({
                     redirectTo: '/'
                 });
